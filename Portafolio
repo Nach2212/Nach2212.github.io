@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Nombre - Tu Profesión</title>
+    <title>Ignacio Aguayo - Creative Technologist</title>
     <!-- Tailwind CSS for modern styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter -->
@@ -14,30 +14,48 @@
         /* Custom styles to complement Tailwind */
         body {
             font-family: 'Inter', sans-serif;
+            /* Deep space background color */
+            background-color: #0a0f1e; 
         }
         .section-title {
-            @apply text-3xl md:text-4xl font-bold text-gray-800 mb-2;
+            @apply text-3xl md:text-4xl font-bold text-gray-100 mb-2;
         }
         .section-subtitle {
-            @apply text-lg text-gray-500 mb-12;
+            @apply text-lg text-gray-400 mb-12;
+        }
+        /* Style for the starfield canvas */
+        #starfield-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Puts it behind all other content */
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-700">
+<body class="text-gray-300">
+
+    <!-- Canvas for the starfield animation -->
+    <canvas id="starfield-canvas"></canvas>
 
     <!-- ========== HEADER / NAVBAR ========== -->
-    <header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50">
+    <header class="bg-[#0a0f1e]/80 backdrop-blur-lg shadow-sm shadow-blue-500/10 sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#inicio">
-                <img src="SinFondo2.jpg" alt="Logo del Portafolio" class="h-10">
+                <!-- 
+                    NOTA IMPORTANTE: Esta es una imagen temporal para que se vea en la vista previa.
+                    Cuando subas tu web a GitHub, debes cambiar el 'src' de vuelta a "assets/SinFondo2.jpg"
+                -->
+                <img src="https://placehold.co/120x40/0a0f1e/3b82f6?text=IA+Logo" alt="Logo del Portafolio" class="h-10">
             </a>
             <div class="hidden md:flex items-center space-x-8">
-                <a href="#sobre-mi" class="text-gray-600 hover:text-indigo-600 transition duration-300">Sobre Mí</a>
-                <a href="#proyectos" class="text-gray-600 hover:text-indigo-600 transition duration-300">Proyectos</a>
-                <a href="#contacto" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 shadow-md transition duration-300">Contáctame</a>
+                <a href="#sobre-mi" class="text-gray-300 hover:text-blue-400 transition duration-300">Sobre Mí</a>
+                <a href="#proyectos" class="text-gray-300 hover:text-blue-400 transition duration-300">Proyectos</a>
+                <a href="#contacto" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-500/20 transition duration-300">Contáctame</a>
             </div>
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden text-gray-700">
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
@@ -45,29 +63,27 @@
         </nav>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4 space-y-2">
-            <a href="#sobre-mi" class="block text-gray-600 hover:text-indigo-600 transition duration-300">Sobre Mí</a>
-            <a href="#proyectos" class="block text-gray-600 hover:text-indigo-600 transition duration-300">Proyectos</a>
-            <a href="#contacto" class="block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 shadow-md transition duration-300 mt-2">Contáctame</a>
+            <a href="#sobre-mi" class="block text-gray-300 hover:text-blue-400 transition duration-300">Sobre Mí</a>
+            <a href="#proyectos" class="block text-gray-300 hover:text-blue-400 transition duration-300">Proyectos</a>
+            <a href="#contacto" class="block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 shadow-md transition duration-300 mt-2">Contáctame</a>
         </div>
     </header>
 
-    <main class="container mx-auto px-6">
+    <main class="container mx-auto px-6 relative z-10"> <!-- Added relative z-10 to ensure content is above canvas -->
 
         <!-- ========== HERO SECTION ========== -->
         <section id="inicio" class="text-center py-24 md:py-32 flex flex-col items-center">
-            <!-- You can add your professional photo here -->
-            <!-- <img src="https://placehold.co/128x128/E2E8F0/4A5568?text=Yo" class="w-32 h-32 rounded-full mb-6 shadow-lg"> -->
-            <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
-                Hola, soy <span class="text-indigo-600">[Tu Nombre]</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4">
+                Hola, soy <span class="text-blue-400">Ignacio Aguayo</span>
             </h1>
-            <p class="text-xl md:text-2xl text-gray-500 max-w-3xl mb-8">
-                Soy [Tu Profesión Principal] y me especializo en crear [lo que haces de forma atractiva].
+            <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mb-8">
+                Creative Technologist. Construyo experiencias interactivas que conectan el mundo digital y el físico.
             </p>
             <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                <a href="#proyectos" class="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-indigo-700 shadow-lg transform hover:scale-105 transition-transform duration-300">
+                <a href="#proyectos" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-blue-700 shadow-lg shadow-blue-500/30 transform hover:scale-105 transition-all duration-300">
                     Ver mis Proyectos
                 </a>
-                <a href="#contacto" class="bg-gray-200 text-gray-800 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-300 shadow-lg transform hover:scale-105 transition-transform duration-300">
+                <a href="#contacto" class="bg-gray-700/50 text-gray-200 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-700/80 shadow-lg transform hover:scale-105 transition-all duration-300">
                     Hablemos
                 </a>
             </div>
@@ -79,18 +95,17 @@
             <p class="section-subtitle max-w-3xl mx-auto">
                 Aquí va una descripción sobre ti. Habla de tu pasión, tu enfoque profesional y qué te diferencia del resto. Sé auténtico y cercano.
             </p>
-            <div class="bg-white p-8 rounded-2xl shadow-lg max-w-4xl mx-auto text-left">
-                <h3 class="text-2xl font-bold text-gray-800 mb-6">Mis Habilidades</h3>
+            <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 p-8 rounded-2xl shadow-lg max-w-4xl mx-auto text-left">
+                <h3 class="text-2xl font-bold text-white mb-6">Mis Habilidades</h3>
                 <div class="flex flex-wrap justify-center gap-4">
-                    <!-- Add or remove skills as needed -->
-                    <span class="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full font-medium">HTML5</span>
-                    <span class="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full font-medium">CSS3 & Tailwind</span>
-                    <span class="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full font-medium">JavaScript (ES6+)</span>
-                    <span class="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full font-medium">React / Vue.js</span>
-                    <span class="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full font-medium">Node.js</span>
-                    <span class="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full font-medium">Figma</span>
-                    <span class="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full font-medium">Diseño UX/UI</span>
-                    <span class="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full font-medium">Metodologías Ágiles</span>
+                    <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">Unity 3D</span>
+                    <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">Desarrollo VR/AR</span>
+                    <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">Mobile Apps</span>
+                    <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">TouchDesigner</span>
+                    <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">UX/UI Design</span>
+                    <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">Experiencias Interactivas</span>
+                    <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">Shaders & Visuales Generativos</span>
+                    <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">Creative Coding</span>
                 </div>
             </div>
         </section>
@@ -100,53 +115,90 @@
             <h2 class="section-title">Proyectos Destacados</h2>
             <p class="section-subtitle">Una selección de mis mejores trabajos.</p>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project Card 1 (con Video) -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
-                    <!-- Reemplazamos la <img> por un <iframe> de YouTube -->
-                    <div class="aspect-w-16 aspect-h-9">
-                         <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
+                
+                <!-- Project Card 1 -->
+                <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
+                    <img src="https://placehold.co/600x400/0a0f1e/FFFFFF?text=Hand+Tracking" alt="Imagen del Proyecto 1" class="w-full h-48 object-cover">
                     <div class="p-6 text-left">
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Nombre del Proyecto 1</h3>
-                        <p class="text-gray-600 mb-4">
-                            Este proyecto se muestra con un video para demostrar su funcionalidad en vivo.
+                        <h3 class="text-xl font-bold text-white mb-2">Galería Circular Interactiva</h3>
+                        <p class="text-gray-400 mb-4">
+                            Experiencia en TouchDesigner con una galería circular controlada por hand tracking.
                         </p>
-                        <a href="proyecto1.html" class="font-semibold text-indigo-600 hover:text-indigo-800 transition-colors duration-300">Ver Detalles &rarr;</a>
+                        <a href="proyecto1.html" class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300">Ver Detalles &rarr;</a>
                     </div>
                 </div>
-                <!-- Project Card 2 (con Imagen) -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
-                    <img src="https://placehold.co/600x400/1E40AF/FFFFFF?text=Proyecto+2" alt="Imagen del Proyecto 2" class="w-full h-48 object-cover">
+
+                <!-- Project Card 2 -->
+                <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
+                    <img src="https://placehold.co/600x400/0a0f1e/FFFFFF?text=IA+Generativa" alt="Imagen del Proyecto 2" class="w-full h-48 object-cover">
                     <div class="p-6 text-left">
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Nombre del Proyecto 2</h3>
-                        <p class="text-gray-600 mb-4">
-                            Una descripción corta y concisa de lo que trata este proyecto y las tecnologías utilizadas.
+                        <h3 class="text-xl font-bold text-white mb-2">Imágenes con IA y Gestos</h3>
+                        <p class="text-gray-400 mb-4">
+                            Aplicación en TouchDesigner que genera imágenes con IA a partir de los gestos de las manos.
                         </p>
-                        <a href="proyecto2.html" class="font-semibold text-indigo-600 hover:text-indigo-800 transition-colors duration-300">Ver Detalles &rarr;</a>
+                        <a href="proyecto2.html" class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300">Ver Detalles &rarr;</a>
                     </div>
                 </div>
-                <!-- Project Card 3 (con Imagen) -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
-                    <img src="https://placehold.co/600x400/3730A3/FFFFFF?text=Proyecto+3" alt="Imagen del Proyecto 3" class="w-full h-48 object-cover">
+
+                <!-- Project Card 3 -->
+                <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
+                    <img src="https://placehold.co/600x400/0a0f1e/FFFFFF?text=Deconstrucción+3D" alt="Imagen del Proyecto 3" class="w-full h-48 object-cover">
                     <div class="p-6 text-left">
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Nombre del Proyecto 3</h3>
-                        <p class="text-gray-600 mb-4">
-                            Una descripción corta y concisa de lo que trata este proyecto y las tecnologías utilizadas.
+                        <h3 class="text-xl font-bold text-white mb-2">Deconstrucción de Objetos 3D</h3>
+                        <p class="text-gray-400 mb-4">
+                            Experiencia interactiva que deconstruye modelos 3D usando hand tracking en TouchDesigner.
                         </p>
-                        <a href="proyecto3.html" class="font-semibold text-indigo-600 hover:text-indigo-800 transition-colors duration-300">Ver Detalles &rarr;</a>
+                        <a href="proyecto3.html" class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300">Ver Detalles &rarr;</a>
                     </div>
                 </div>
+
+                <!-- Project Card 4 -->
+                <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
+                    <img src="https://placehold.co/600x400/0a0f1e/FFFFFF?text=Galería+VR" alt="Imagen del Proyecto 4" class="w-full h-48 object-cover">
+                    <div class="p-6 text-left">
+                        <h3 class="text-xl font-bold text-white mb-2">Galería VR para Fotógrafos</h3>
+                        <p class="text-gray-400 mb-4">
+                            App de galería virtual en VR para Meta Quest 2, diseñada para un evento de fotógrafos.
+                        </p>
+                        <a href="proyecto4.html" class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300">Ver Detalles &rarr;</a>
+                    </div>
+                </div>
+                
+                <!-- Project Card 5 -->
+                <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
+                    <img src="https://placehold.co/600x400/0a0f1e/FFFFFF?text=App+Bomberos" alt="Imagen del Proyecto 5" class="w-full h-48 object-cover">
+                    <div class="p-6 text-left">
+                        <h3 class="text-xl font-bold text-white mb-2">App Móvil para Bomberos</h3>
+                        <p class="text-gray-400 mb-4">
+                           Diseño de app para ubicar material y consultar procedimientos en carros bomba.
+                        </p>
+                        <a href="proyecto5.html" class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300">Ver Detalles &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 6 -->
+                <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
+                    <img src="https://placehold.co/600x400/0a0f1e/FFFFFF?text=PalCarrete" alt="Imagen del Proyecto 6" class="w-full h-48 object-cover">
+                    <div class="p-6 text-left">
+                        <h3 class="text-xl font-bold text-white mb-2">PalCarrete App</h3>
+                        <p class="text-gray-400 mb-4">
+                            Aplicación móvil para beber con sistema de retos, castigos y diferentes tarjetas de juego.
+                        </p>
+                        <a href="proyecto6.html" class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300">Ver Detalles &rarr;</a>
+                    </div>
+                </div>
+
             </div>
         </section>
 
         <!-- ========== CONTACT SECTION ========== -->
         <section id="contacto" class="py-20 text-center">
-            <div class="bg-white rounded-2xl shadow-lg p-10 max-w-3xl mx-auto">
+            <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg p-10 max-w-3xl mx-auto">
                 <h2 class="section-title">Hablemos</h2>
                 <p class="section-subtitle">
                     ¿Tienes un proyecto en mente o una oportunidad para mí? ¡No dudes en contactarme!
                 </p>
-                <a href="mailto:tuemail@dominio.com" class="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-indigo-700 shadow-lg transform hover:scale-105 transition-transform duration-300 inline-block">
+                <a href="mailto:tuemail@dominio.com" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-blue-700 shadow-lg shadow-blue-500/30 transform hover:scale-105 transition-all duration-300 inline-block">
                     Enviar un Correo
                 </a>
             </div>
@@ -155,26 +207,190 @@
     </main>
 
     <!-- ========== FOOTER ========== -->
-    <footer class="bg-gray-800 text-white mt-20">
+    <footer class="bg-gray-900/50 mt-20">
         <div class="container mx-auto px-6 py-8 text-center">
-            <p>&copy; 2025 [Tu Nombre]. Todos los derechos reservados.</p>
-            <!-- Opcional: añade enlaces a redes sociales aquí -->
-            <!-- <div class="flex justify-center space-x-4 mt-4">
-                <a href="#" class="hover:text-indigo-400">LinkedIn</a>
-                <a href="#" class="hover:text-indigo-400">GitHub</a>
-                <a href="#" class="hover:text-indigo-400">Twitter</a>
-            </div> -->
+            <p>&copy; 2025 Ignacio Aguayo. Todos los derechos reservados.</p>
         </div>
     </footer>
 
     <script>
-        // Simple script for mobile menu toggle
+        // Mobile menu toggle script
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+        // --- INTERACTIVE STARFIELD BACKGROUND SCRIPT ---
+        const canvas = document.getElementById('starfield-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let stars;
+        let shootingStars = [];
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let mouse = {
+            x: undefined,
+            y: undefined,
+            radius: 150
+        };
+
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = event.x;
+            mouse.y = event.y;
         });
+        
+        window.addEventListener('mouseout', () => {
+            mouse.x = undefined;
+            mouse.y = undefined;
+        });
+
+        class Star {
+            constructor(x, y, speedX, speedY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.speedX = speedX;
+                this.speedY = speedY;
+                this.size = size;
+                this.color = color;
+                this.baseX = this.x;
+                this.baseY = this.y;
+                this.density = (Math.random() * 30) + 1;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fill();
+            }
+            update() {
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < mouse.radius) {
+                    let forceDirectionX = dx / distance;
+                    let forceDirectionY = dy / distance;
+                    let maxDistance = mouse.radius;
+                    let force = (maxDistance - distance) / maxDistance;
+                    let directionX = forceDirectionX * force * this.density;
+                    let directionY = forceDirectionY * force * this.density;
+                    
+                    this.x -= directionX;
+                    this.y -= directionY;
+                } else {
+                    if (this.x !== this.baseX) {
+                        let dx = this.x - this.baseX;
+                        this.x -= dx/10;
+                    }
+                     if (this.y !== this.baseY) {
+                        let dy = this.y - this.baseY;
+                        this.y -= dy/10;
+                    }
+                }
+
+                // Move stars
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                // Boundary check (parallax effect)
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+
+                this.draw();
+            }
+        }
+
+        class ShootingStar {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = 0;
+                this.len = (Math.random() * 80) + 10;
+                this.speed = (Math.random() * 10) + 6;
+                this.size = (Math.random() * 1) + 0.5;
+                // Set a delay for the next appearance
+                this.waitTime = new Date().getTime() + (Math.random() * 6000) + 1000;
+                this.active = false;
+            }
+
+            update() {
+                if (this.active) {
+                    this.x += this.speed;
+                    this.y += this.speed * 0.5; // Angled descent
+
+                    if (this.x > canvas.width || this.y > canvas.height) {
+                        this.reset(); // Reset when it goes off-screen
+                    } else {
+                        this.draw();
+                    }
+                } else {
+                    if (new Date().getTime() > this.waitTime) {
+                        this.active = true;
+                    }
+                }
+            }
+
+            draw() {
+                const grad = ctx.createLinearGradient(this.x, this.y, this.x - this.len, this.y - (this.len * 0.5));
+                grad.addColorStop(0, `rgba(255, 255, 255, ${this.size})`);
+                grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                
+                ctx.strokeStyle = grad;
+                ctx.lineWidth = this.size;
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x - this.len, this.y - (this.len * 0.5));
+                ctx.stroke();
+            }
+        }
+
+
+        function init() {
+            stars = [];
+            let numberOfStars = (canvas.height * canvas.width) / 5000;
+            for (let i = 0; i < numberOfStars; i++) {
+                let size = Math.random() * 1.5 + 0.5;
+                let x = Math.random() * canvas.width;
+                let y = Math.random() * canvas.height;
+                let speedX = (Math.random() * 0.2) - 0.1;
+                let speedY = (Math.random() * 0.2) - 0.1;
+                let color = 'rgba(59, 130, 246, ' + (Math.random() * 0.7 + 0.3) + ')'; // Blue-500 with random opacity
+                stars.push(new Star(x, y, speedX, speedY, size, color));
+            }
+            
+            shootingStars = [];
+            for (let i = 0; i < 3; i++) { // Create 3 shooting stars that will appear at random intervals
+                shootingStars.push(new ShootingStar());
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < stars.length; i++) {
+                stars[i].update();
+            }
+            
+            for (let i = 0; i < shootingStars.length; i++) {
+                shootingStars[i].update();
+            }
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            init();
+        });
+
+        init();
+        animate();
     </script>
 
 </body>
