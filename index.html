@@ -14,19 +14,16 @@
         /* Custom styles to complement Tailwind */
         body {
             font-family: 'Inter', sans-serif;
-            /* Deep space background color */
             background-color: #0a0f1e; 
         }
-        /* Style for the starfield canvas */
         #starfield-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Puts it behind all other content */
+            z-index: -1;
         }
-        /* Supernova core styles */
         #supernova-core {
             transform: translate(-50%, -50%);
             background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,204,153,1) 35%, rgba(255,153,51,1) 60%, rgba(255,255,255,0) 100%);
@@ -37,6 +34,40 @@
             0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; }
             50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
             100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; }
+        }
+        
+        #modal-body {
+             /* Stronger, more noticeable gradient */
+             background-image: radial-gradient(ellipse at 50% 0%, rgba(45, 59, 99, 0.9) 0%, transparent 80%);
+        }
+        
+        /* Custom Scrollbar for Modal */
+        #modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        #modal-content::-webkit-scrollbar-track {
+            background: #1e293b; /* slate-800 */
+        }
+        #modal-content::-webkit-scrollbar-thumb {
+            background: #3b82f6; /* blue-500 */
+            border-radius: 4px;
+        }
+        #modal-content::-webkit-scrollbar-thumb:hover {
+            background: #2563eb; /* blue-600 */
+        }
+
+        /* Video container for correct aspect ratio */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
@@ -81,7 +112,8 @@
             <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mb-8">
                 Creative Technologist. Construyo experiencias interactivas que conectan el mundo digital y el físico.
             </p>
-            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+
+            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-8">
                 <a href="#proyectos" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-blue-700 shadow-lg shadow-blue-500/30 transform hover:scale-105 transition-all duration-300">
                     Ver mis Proyectos
                 </a>
@@ -97,7 +129,6 @@
                 <div class="flex flex-col md:flex-row items-center gap-12">
                     <!-- GIF Character -->
                     <div class="w-full md:w-1/3 flex-shrink-0">
-                        <!-- Recuerda convertir tu personaje a un GIF con fondo transparente y guardarlo como 'personaje_saludando.gif' en tu carpeta 'assets' -->
                         <img src="assets/personaje_saludando.gif" alt="Personaje saludando" class="w-full max-w-xs mx-auto">
                     </div>
                     <!-- About Me Text -->
@@ -140,7 +171,16 @@
                         <p class="text-gray-400 mb-4">
                             Experiencia en TouchDesigner con una galería circular controlada por hand tracking.
                         </p>
-                        <a href="projects/proyecto1.html" class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300">Ver Detalles &rarr;</a>
+                        <button class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300" 
+                                data-modal-trigger 
+                                data-title="Galería Circular Interactiva" 
+                                data-subtitle="Navegación Inmersiva con TouchDesigner" 
+                                data-video-id="13Ajb89Q01Q"
+                                data-challenge="El desafío fue crear una forma innovadora de presentar imágenes, buscando una experiencia que superara la visualización estática y fomentara una interacción más profunda."
+                                data-process="Para lograr una interacción intuitiva, opté por el hand tracking como método de control. El principal reto técnico fue combinar la galería esférica con la precisión del seguimiento de manos, lo que requirió un diseño gestual cuidadoso y optimización para asegurar una experiencia fluida."
+                                data-tech='["TouchDesigner", "Hand Tracking", "Visuales Generativos"]'>
+                            Ver Detalles &rarr;
+                        </button>
                     </div>
                 </div>
 
@@ -152,7 +192,7 @@
                         <p class="text-gray-400 mb-4">
                             Aplicación en TouchDesigner que genera imágenes con IA a partir de los gestos de las manos.
                         </p>
-                        <a href="projects/proyecto2.html" class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300">Ver Detalles &rarr;</a>
+                        <button class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300" data-modal-trigger>Ver Detalles &rarr;</button>
                     </div>
                 </div>
 
@@ -164,7 +204,7 @@
                         <p class="text-gray-400 mb-4">
                             Experiencia interactiva que deconstruye modelos 3D usando hand tracking en TouchDesigner.
                         </p>
-                        <a href="projects/proyecto3.html" class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300">Ver Detalles &rarr;</a>
+                        <button class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300" data-modal-trigger>Ver Detalles &rarr;</button>
                     </div>
                 </div>
 
@@ -176,7 +216,7 @@
                         <p class="text-gray-400 mb-4">
                             App de galería virtual en VR para Meta Quest 2, diseñada para un evento de fotógrafos.
                         </p>
-                        <a href="projects/proyecto4.html" class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300">Ver Detalles &rarr;</a>
+                        <button class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300" data-modal-trigger>Ver Detalles &rarr;</button>
                     </div>
                 </div>
                 
@@ -188,7 +228,7 @@
                         <p class="text-gray-400 mb-4">
                            Diseño de app para ubicar material y consultar procedimientos en carros bomba.
                         </p>
-                        <a href="projects/proyecto5.html" class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300">Ver Detalles &rarr;</a>
+                        <button class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300" data-modal-trigger>Ver Detalles &rarr;</button>
                     </div>
                 </div>
 
@@ -200,7 +240,7 @@
                         <p class="text-gray-400 mb-4">
                             Aplicación móvil para beber con sistema de retos, castigos y diferentes tarjetas de juego.
                         </p>
-                        <a href="projects/proyecto6.html" class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300">Ver Detalles &rarr;</a>
+                        <button class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300" data-modal-trigger>Ver Detalles &rarr;</button>
                     </div>
                 </div>
 
@@ -234,6 +274,54 @@
         </div>
     </footer>
 
+    <!-- ========== PROJECT MODAL ========== -->
+    <div id="project-modal" class="fixed inset-0 bg-black bg-opacity-70 z-[100] flex justify-center items-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div id="modal-content" class="relative bg-[#0d1323] border border-blue-500/20 rounded-2xl shadow-lg w-full max-w-6xl max-h-[90vh] overflow-y-auto transform scale-95 transition-all duration-300">
+            <!-- Close Button -->
+            <button id="modal-close-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-transform duration-200 transform hover:scale-110 z-10">
+                <div class="bg-gray-800/50 rounded-full p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </div>
+            </button>
+            
+            <!-- Modal Body -->
+            <div id="modal-body">
+                 <div class="p-8">
+                    <!-- Project Title -->
+                    <h1 id="modal-title" class="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-2 text-center mt-8"></h1>
+                    <p id="modal-subtitle" class="text-lg text-blue-400 mb-8 text-center"></p>
+
+                    <!-- Project Media (Video) -->
+                    <div class="video-container rounded-lg overflow-hidden mb-8">
+                        <iframe id="modal-video" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+
+                    <div class="px-4 sm:px-8">
+                        <!-- Project Details -->
+                        <div class="grid md:grid-cols-3 gap-8 text-lg">
+                            <div class="md:col-span-1">
+                                <h2 class="text-2xl font-bold text-white mb-4">El Desafío</h2>
+                                <p id="modal-challenge" class="text-gray-400 text-justify"></p>
+                            </div>
+                            <div class="md:col-span-2">
+                                <h2 class="text-2xl font-bold text-white mb-4">Mi Proceso</h2>
+                                <p id="modal-process" class="text-gray-400 text-justify"></p>
+                            </div>
+                        </div>
+
+                        <!-- Technologies Used -->
+                        <div class="mt-12 bg-gray-800/50 p-6 rounded-xl">
+                            <h3 class="text-xl font-bold text-white mb-4 text-center">Tecnologías Utilizadas</h3>
+                            <div id="modal-tech" class="flex flex-wrap justify-center gap-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Supernova and Reset Elements -->
     <div id="supernova-core" class="hidden fixed top-1/2 left-1/2 w-8 h-8 rounded-full z-[200]"></div>
     <div id="reset-overlay" class="hidden fixed inset-0 bg-white z-[250] flex justify-center items-center flex-col opacity-0 transition-opacity duration-1000">
@@ -252,151 +340,161 @@
 
         // --- INTERACTIVE STARFIELD BACKGROUND SCRIPT ---
         const canvas = document.getElementById('starfield-canvas');
-        const ctx = canvas.getContext('2d');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
 
-        let stars;
-        let shootingStars = [];
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        let mouse = {
-            x: undefined,
-            y: undefined,
-            radius: 150
-        };
-
-        window.addEventListener('mousemove', (event) => {
-            mouse.x = event.x;
-            mouse.y = event.y;
-        });
-        
-        window.addEventListener('mouseout', () => {
-            mouse.x = undefined;
-            mouse.y = undefined;
-        });
-
-        class Star {
-            constructor(x, y, speedX, speedY, size, color) {
-                this.x = x;
-                this.y = y;
-                this.speedX = speedX;
-                this.speedY = speedY;
-                this.size = size;
-                this.color = color;
-                this.baseX = this.x;
-                this.baseY = this.y;
-                this.density = (Math.random() * 30) + 1;
-            }
-            draw() {
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.closePath();
-                ctx.fill();
-            }
-            update() {
-                let dx = mouse.x - this.x;
-                let dy = mouse.y - this.y;
-                let distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < mouse.radius) {
-                    let forceDirectionX = dx / distance;
-                    let forceDirectionY = dy / distance;
-                    let maxDistance = mouse.radius;
-                    let force = (maxDistance - distance) / maxDistance;
-                    let directionX = forceDirectionX * force * this.density;
-                    let directionY = forceDirectionY * force * this.density;
-                    
-                    this.x -= directionX;
-                    this.y -= directionY;
-                } else {
-                    if (this.x !== this.baseX) {
-                        let dx = this.x - this.baseX;
-                        this.x -= dx/10;
-                    }
-                     if (this.y !== this.baseY) {
-                        let dy = this.y - this.baseY;
-                        this.y -= dy/10;
-                    }
-                }
-
-                this.x += this.speedX;
-                this.y += this.speedY;
-                
-                if (this.x > canvas.width) this.x = 0;
-                if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0;
-                if (this.y < 0) this.y = canvas.height;
-
-                this.draw();
-            }
-        }
-
-        class ShootingStar {
-            constructor() { this.reset(); }
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = 0;
-                this.len = (Math.random() * 80) + 10;
-                this.speed = (Math.random() * 10) + 6;
-                this.size = (Math.random() * 1) + 0.5;
-                this.waitTime = new Date().getTime() + (Math.random() * 6000) + 1000;
-                this.active = false;
-            }
-            update() {
-                if (this.active) {
-                    this.x += this.speed;
-                    this.y += this.speed * 0.5;
-                    if (this.x > canvas.width || this.y > canvas.height) { this.reset(); } 
-                    else { this.draw(); }
-                } else {
-                    if (new Date().getTime() > this.waitTime) { this.active = true; }
-                }
-            }
-            draw() {
-                const grad = ctx.createLinearGradient(this.x, this.y, this.x - this.len, this.y - (this.len * 0.5));
-                grad.addColorStop(0, `rgba(255, 255, 255, ${this.size})`);
-                grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
-                ctx.strokeStyle = grad;
-                ctx.lineWidth = this.size;
-                ctx.beginPath();
-                ctx.moveTo(this.x, this.y);
-                ctx.lineTo(this.x - this.len, this.y - (this.len * 0.5));
-                ctx.stroke();
-            }
-        }
-
-        function init() {
-            stars = [];
-            let numberOfStars = (canvas.height * canvas.width) / 5000;
-            for (let i = 0; i < numberOfStars; i++) {
-                let size = Math.random() * 1.5 + 0.5;
-                let x = Math.random() * canvas.width;
-                let y = Math.random() * canvas.height;
-                let speedX = (Math.random() * 0.2) - 0.1;
-                let speedY = (Math.random() * 0.2) - 0.1;
-                let color = 'rgba(59, 130, 246, ' + (Math.random() * 0.7 + 0.3) + ')';
-                stars.push(new Star(x, y, speedX, speedY, size, color));
-            }
-            shootingStars = [];
-            for (let i = 0; i < 3; i++) { shootingStars.push(new ShootingStar()); }
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            stars.forEach(s => s.update());
-            shootingStars.forEach(ss => ss.update());
-        }
-
-        window.addEventListener('resize', () => {
+            let stars;
+            let shootingStars = [];
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            init();
+
+            let mouse = { x: undefined, y: undefined, radius: 150 };
+
+            window.addEventListener('mousemove', (event) => { mouse.x = event.x; mouse.y = event.y; });
+            window.addEventListener('mouseout', () => { mouse.x = undefined; mouse.y = undefined; });
+
+            class Star {
+                constructor(x, y, speedX, speedY, size, color) {
+                    this.x = x; this.y = y; this.speedX = speedX; this.speedY = speedY; this.size = size; this.color = color;
+                    this.baseX = this.x; this.baseY = this.y; this.density = (Math.random() * 30) + 1;
+                }
+                draw() {
+                    ctx.fillStyle = this.color; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.closePath(); ctx.fill();
+                }
+                update() {
+                    let dx = mouse.x - this.x; let dy = mouse.y - this.y; let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius) {
+                        let forceDirectionX = dx / distance; let forceDirectionY = dy / distance; let maxDistance = mouse.radius;
+                        let force = (maxDistance - distance) / maxDistance;
+                        let directionX = forceDirectionX * force * this.density; let directionY = forceDirectionY * force * this.density;
+                        this.x -= directionX; this.y -= directionY;
+                    } else {
+                        if (this.x !== this.baseX) { let dx = this.x - this.baseX; this.x -= dx/10; }
+                        if (this.y !== this.baseY) { let dy = this.y - this.baseY; this.y -= dy/10; }
+                    }
+                    this.x += this.speedX; this.y += this.speedY;
+                    if (this.x > canvas.width) this.x = 0; if (this.x < 0) this.x = canvas.width;
+                    if (this.y > canvas.height) this.y = 0; if (this.y < 0) this.y = canvas.height;
+                    this.draw();
+                }
+            }
+
+            class ShootingStar {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * canvas.width; this.y = 0; this.len = (Math.random() * 80) + 10; this.speed = (Math.random() * 10) + 6;
+                    this.size = (Math.random() * 1) + 0.5; this.waitTime = new Date().getTime() + (Math.random() * 6000) + 1000; this.active = false;
+                }
+                update() {
+                    if (this.active) {
+                        this.x += this.speed; this.y += this.speed * 0.5;
+                        if (this.x > canvas.width || this.y > canvas.height) { this.reset(); } else { this.draw(); }
+                    } else { if (new Date().getTime() > this.waitTime) { this.active = true; } }
+                }
+                draw() {
+                    const grad = ctx.createLinearGradient(this.x, this.y, this.x - this.len, this.y - (this.len * 0.5));
+                    grad.addColorStop(0, `rgba(255, 255, 255, ${this.size})`); grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                    ctx.strokeStyle = grad; ctx.lineWidth = this.size; ctx.beginPath(); ctx.moveTo(this.x, this.y);
+                    ctx.lineTo(this.x - this.len, this.y - (this.len * 0.5)); ctx.stroke();
+                }
+            }
+
+            function init() {
+                stars = []; let numberOfStars = (canvas.height * canvas.width) / 5000;
+                for (let i = 0; i < numberOfStars; i++) {
+                    let size = Math.random() * 1.5 + 0.5; let x = Math.random() * canvas.width; let y = Math.random() * canvas.height;
+                    let speedX = (Math.random() * 0.2) - 0.1; let speedY = (Math.random() * 0.2) - 0.1;
+                    let color = 'rgba(59, 130, 246, ' + (Math.random() * 0.7 + 0.3) + ')';
+                    stars.push(new Star(x, y, speedX, speedY, size, color));
+                }
+                shootingStars = []; for (let i = 0; i < 3; i++) { shootingStars.push(new ShootingStar()); }
+            }
+
+            function animate() {
+                requestAnimationFrame(animate); 
+                if (ctx) {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    stars.forEach(s => s.update()); 
+                    shootingStars.forEach(ss => ss.update());
+                }
+            }
+
+            window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
+            init(); animate();
+        }
+
+        // --- PROJECT MODAL SCRIPT ---
+        const modalTriggers = document.querySelectorAll('[data-modal-trigger]');
+        const modal = document.getElementById('project-modal');
+        const modalContent = document.getElementById('modal-content');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+
+        const modalElements = {
+            title: document.getElementById('modal-title'),
+            subtitle: document.getElementById('modal-subtitle'),
+            video: document.getElementById('modal-video'),
+            challenge: document.getElementById('modal-challenge'),
+            process: document.getElementById('modal-process'),
+            tech: document.getElementById('modal-tech'),
+        };
+        
+        function openModal(data) {
+            modalElements.title.textContent = data.title || 'Título del Proyecto';
+            modalElements.subtitle.textContent = data.subtitle || '';
+            modalElements.video.src = data.videoId ? `https://www.youtube.com/embed/${data.videoId}` : '';
+            modalElements.challenge.textContent = data.challenge || 'No hay descripción disponible.';
+            modalElements.process.textContent = data.process || 'No hay descripción disponible.';
+            
+            modalElements.tech.innerHTML = '';
+            if (data.tech) {
+                try {
+                    const techArray = JSON.parse(data.tech.replace(/'/g, '"'));
+                    techArray.forEach(techName => {
+                        const techTag = document.createElement('span');
+                        techTag.className = 'bg-blue-900/50 text-blue-300 px-3 py-1 rounded-full font-medium text-sm';
+                        techTag.textContent = techName;
+                        modalElements.tech.appendChild(techTag);
+                    });
+                } catch(e) {
+                    console.error("Could not parse tech data: ", e, data.tech);
+                }
+            }
+
+            modal.classList.remove('pointer-events-none');
+            modal.classList.remove('opacity-0');
+            modalContent.classList.remove('scale-95');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('pointer-events-none');
+                modalElements.video.src = ''; // Detiene el video al cerrar
+                document.body.style.overflow = '';
+            }, 300); // Wait for transition to finish
+        }
+
+        modalTriggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const data = trigger.dataset;
+                openModal(data);
+            });
         });
 
-        init();
-        animate();
+        modalCloseBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('pointer-events-none')) {
+                closeModal();
+            }
+        });
+
 
         // --- SUPERNOVA DESTRUCTION SCRIPT ---
         const destroyBtn = document.getElementById('destroy-btn');
@@ -405,28 +503,21 @@
         const resetBtn = document.getElementById('reset-btn');
 
         destroyBtn.addEventListener('click', () => {
-            // 0. Disable scroll and hide the button
             document.body.style.overflow = 'hidden';
             destroyBtn.style.display = 'none';
-
-            // 1. Show the supernova core
             supernovaCore.classList.remove('hidden');
             
-            // 2. Select all elements to be destroyed
             const elementsToDestroy = Array.from(document.querySelectorAll('header, main > section'));
             const viewportCenterX = window.innerWidth / 2;
             const viewportCenterY = window.innerHeight / 2;
 
-            // 3. Start pushing elements away
             elementsToDestroy.forEach((el, index) => {
                 const rect = el.getBoundingClientRect();
                 const elCenterX = rect.left + rect.width / 2;
                 const elCenterY = rect.top + rect.height / 2;
-
                 const deltaX = elCenterX - viewportCenterX;
                 const deltaY = elCenterY - viewportCenterY;
-                
-                const moveX = deltaX * 3; // Push them further away
+                const moveX = deltaX * 3;
                 const moveY = deltaY * 3;
                 const rotation = (Math.random() - 0.5) * 360;
 
@@ -441,7 +532,6 @@
             
             const totalAnimationTime = (elementsToDestroy.length - 1) * 100 + 1500;
 
-            // 4. After a delay, trigger the final explosion
             setTimeout(() => {
                 const finalSize = Math.max(window.innerWidth, window.innerHeight) * 3;
                 supernovaCore.style.transition = 'all 0.5s ease-in';
@@ -452,7 +542,6 @@
                 document.body.style.backgroundColor = '#ffffff';
             }, totalAnimationTime - 500);
 
-            // 5. After explosion, show reset screen
             setTimeout(() => {
                 resetOverlay.classList.remove('hidden');
                 setTimeout(() => {
@@ -462,16 +551,12 @@
         });
 
         resetBtn.addEventListener('click', () => {
-            // Fade out to black before reloading for a smoother transition
             resetOverlay.style.transition = 'opacity 0.5s ease-out';
             resetOverlay.style.opacity = '0';
-            setTimeout(() => {
-                location.reload();
-            }, 500);
+            setTimeout(() => { location.reload(); }, 500);
         });
     </script>
 
 </body>
 </html>
-
 
