@@ -49,7 +49,7 @@
     <header class="bg-[#0a0f1e]/80 backdrop-blur-lg shadow-sm shadow-blue-500/10 sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#inicio">
-                 <img src="assets/Logo.png" alt="Logo del Portafolio" class="h-10 rounded-full">
+                 <img src="assets/Logo.png" alt="Logo del Portafolio" class="h-24 rounded-full">
             </a>
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#sobre-mi" class="text-gray-300 hover:text-blue-400 transition duration-300">Sobre Mí</a>
@@ -92,13 +92,25 @@
         </section>
 
         <!-- ========== ABOUT ME SECTION ========== -->
-        <section id="sobre-mi" class="py-20 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-100 mb-2">Sobre Mí</h2>
-            <p id="bio-paragraph" class="text-lg text-gray-400 mb-12 max-w-3xl mx-auto">
-                Soy un tecnólogo creativo apasionado por la intersección del arte y el código. Mi enfoque es la creación de experiencias inmersivas e interactivas que desafían la percepción y conectan con las personas a un nivel más profundo.
-            </p>
-            <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 p-8 rounded-2xl shadow-lg max-w-4xl mx-auto text-left">
-                <h3 class="text-2xl font-bold text-white mb-6">Mis Habilidades</h3>
+        <section id="sobre-mi" class="py-20">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <!-- GIF Character -->
+                <div class="w-full md:w-1/3 flex-shrink-0">
+                    <!-- Recuerda convertir tu personaje a un GIF con fondo transparente y guardarlo como 'personaje_saludando.gif' en tu carpeta 'assets' -->
+                    <img src="assets/personaje_saludando.gif" alt="Personaje saludando" class="w-full max-w-xs mx-auto">
+                </div>
+                <!-- About Me Text -->
+                <div class="w-full md:w-2/3 text-center md:text-left">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-100 mb-4">Sobre Mí</h2>
+                    <p id="bio-paragraph" class="text-lg text-gray-400 max-w-3xl">
+                        Soy un tecnólogo creativo apasionado por la intersección del arte y el código. Mi enfoque es la creación de experiencias inmersivas e interactivas que desafían la percepción y conectan con las personas a un nivel más profundo.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 p-8 rounded-2xl shadow-lg max-w-4xl mx-auto text-left mt-20">
+                <h3 class="text-2xl font-bold text-white mb-6 text-center">Mis Habilidades</h3>
                 <div id="skills-list" class="flex flex-wrap justify-center gap-4">
                     <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">Unity 3D</span>
                     <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">Desarrollo VR/AR</span>
@@ -120,7 +132,7 @@
                 
                 <!-- Project Card 1 -->
                 <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
-                    <img src="assets/GaleriaCircular.png" alt="Imagen del Proyecto Galería Circular Interactiva" class="w-full h-48 object-cover">
+                    <img src="assets/GaleriaCircular.png" alt="Imagen del Proyecto Galería Circular Interactiva" class="w-full h-48 object-contain">
                     <div class="p-6 text-left">
                         <h3 class="text-xl font-bold text-white mb-2">Galería Circular Interactiva</h3>
                         <p class="text-gray-400 mb-4">
@@ -132,7 +144,7 @@
 
                 <!-- Project Card 2 -->
                 <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
-                    <img src="assets/IaGenerativaManos.png" alt="Imagen del Proyecto IA Generativa" class="w-full h-48 object-cover">
+                    <img src="assets/IaGenerativaManos.png" alt="Imagen del Proyecto IA Generativa" class="w-full h-48 object-contain">
                     <div class="p-6 text-left">
                         <h3 class="text-xl font-bold text-white mb-2">Imágenes con IA y Gestos</h3>
                         <p class="text-gray-400 mb-4">
@@ -144,7 +156,7 @@
 
                 <!-- Project Card 3 -->
                 <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
-                    <img src="assets/Deconstruccion.png" alt="Imagen del Proyecto Deconstrucción 3D" class="w-full h-48 object-cover">
+                    <img src="assets/Deconstruccion.png" alt="Imagen del Proyecto Deconstrucción 3D" class="w-full h-48 object-contain">
                     <div class="p-6 text-left">
                         <h3 class="text-xl font-bold text-white mb-2">Deconstrucción de Objetos 3D</h3>
                         <p class="text-gray-400 mb-4">
@@ -156,7 +168,7 @@
 
                 <!-- Project Card 4 -->
                 <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
-                    <img src="assets/galeriavr.png" alt="Imagen del Proyecto Galería VR" class="w-full h-48 object-cover">
+                    <img src="assets/galeriavr.png" alt="Imagen del Proyecto Galería VR" class="w-full h-48 object-contain">
                     <div class="p-6 text-left">
                         <h3 class="text-xl font-bold text-white mb-2">Galería VR para Fotógrafos</h3>
                         <p class="text-gray-400 mb-4">
@@ -168,7 +180,7 @@
                 
                 <!-- Project Card 5 -->
                 <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
-                    <img src="assets/Bomberos.png" alt="Imagen del Proyecto App Bomberos" class="w-full h-48 object-cover">
+                    <img src="assets/Bomberos.png" alt="Imagen del Proyecto App Bomberos" class="w-full h-48 object-contain">
                     <div class="p-6 text-left">
                         <h3 class="text-xl font-bold text-white mb-2">App Móvil para Bomberos</h3>
                         <p class="text-gray-400 mb-4">
@@ -180,7 +192,7 @@
 
                 <!-- Project Card 6 -->
                 <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
-                    <img src="assets/PalCarrete.png" alt="Imagen del Proyecto PalCarrete App" class="w-full h-48 object-cover">
+                    <img src="assets/PalCarrete.png" alt="Imagen del Proyecto PalCarrete App" class="w-full h-48 object-contain">
                     <div class="p-6 text-left">
                         <h3 class="text-xl font-bold text-white mb-2">PalCarrete App</h3>
                         <p class="text-gray-400 mb-4">
@@ -200,7 +212,7 @@
                 <p class="text-lg text-gray-400 mb-12">
                     ¿Tienes un proyecto en mente o una oportunidad para mí? ¡No dudes en contactarme!
                 </p>
-                <a href="mailto:tuemail@dominio.com" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-blue-700 shadow-lg shadow-blue-500/30 transform hover:scale-105 transition-all duration-300 inline-block">
+                <a href="mailto:i.aguayo2212@gmail.com" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-blue-700 shadow-lg shadow-blue-500/30 transform hover:scale-105 transition-all duration-300 inline-block">
                     Enviar un Correo
                 </a>
             </div>
