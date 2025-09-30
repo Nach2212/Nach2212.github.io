@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ignacio Aguayo - Creative Technologist</title>
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to complement Tailwind */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Deep space background color */
+            background-color: #0a0f1e; 
+        }
+        /* Style for the starfield canvas */
+        #starfield-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Puts it behind all other content */
+        }
+        /* Supernova core styles */
+        #supernova-core {
+            transform: translate(-50%, -50%);
+            background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,204,153,1) 35%, rgba(255,153,51,1) 60%, rgba(255,255,255,0) 100%);
+            box-shadow: 0 0 50px 20px #fff, 0 0 100px 60px #f0f, 0 0 150px 100px #0ff;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; }
+        }
+    </style>
+</head>
+<body class="text-gray-300">
+
+    <!-- Canvas for the starfield animation -->
+    <canvas id="starfield-canvas"></canvas>
+
+    <!-- ========== HEADER / NAVBAR ========== -->
+    <header class="bg-[#0a0f1e]/80 backdrop-blur-lg shadow-sm shadow-blue-500/10 sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#inicio">
+                 <img src="https://placehold.co/120x40/0a0f1e/3b82f6?text=IA+Logo" alt="Logo del Portafolio" class="h-10">
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#sobre-mi" class="text-gray-300 hover:text-blue-400 transition duration-300">Sobre Mí</a>
+                <a href="#proyectos" class="text-gray-300 hover:text-blue-400 transition duration-300">Proyectos</a>
+                <a href="#contacto" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-500/20 transition duration-300">Contáctame</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4 space-y-2">
+            <a href="#sobre-mi" class="block text-gray-300 hover:text-blue-400 transition duration-300">Sobre Mí</a>
+            <a href="#proyectos" class="block text-gray-300 hover:text-blue-400 transition duration-300">Proyectos</a>
+            <a href="#contacto" class="block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 shadow-md transition duration-300 mt-2">Contáctame</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 relative z-10">
+
+        <!-- ========== HERO SECTION ========== -->
+        <section id="inicio" class="text-center py-24 md:py-32 flex flex-col items-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4">
+                Hola, soy <span class="text-blue-400">Ignacio Aguayo</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mb-8">
+                Creative Technologist. Construyo experiencias interactivas que conectan el mundo digital y el físico.
+            </p>
+            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#proyectos" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-blue-700 shadow-lg shadow-blue-500/30 transform hover:scale-105 transition-all duration-300">
+                    Ver mis Proyectos
+                </a>
+                <a href="#contacto" class="bg-gray-700/50 text-gray-200 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-700/80 shadow-lg transform hover:scale-105 transition-all duration-300">
+                    Hablemos
+                </a>
+            </div>
+        </section>
+
+        <!-- ========== ABOUT ME SECTION ========== -->
+        <section id="sobre-mi" class="py-20 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-100 mb-2">Sobre Mí</h2>
+            <p id="bio-paragraph" class="text-lg text-gray-400 mb-12 max-w-3xl mx-auto">
+                Soy un tecnólogo creativo apasionado por la intersección del arte y el código. Mi enfoque es la creación de experiencias inmersivas e interactivas que desafían la percepción y conectan con las personas a un nivel más profundo.
+            </p>
+            <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 p-8 rounded-2xl shadow-lg max-w-4xl mx-auto text-left">
+                <h3 class="text-2xl font-bold text-white mb-6">Mis Habilidades</h3>
+                <div id="skills-list" class="flex flex-wrap justify-center gap-4">
+                    <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">Unity 3D</span>
+                    <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">Desarrollo VR/AR</span>
+                    <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">Mobile Apps</span>
+                    <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">TouchDesigner</span>
+                    <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">UX/UI Design</span>
+                    <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">Experiencias Interactivas</span>
+                    <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">Shaders & Visuales Generativos</span>
+                    <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">Creative Coding</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== PROJECTS SECTION ========== -->
+        <section id="proyectos" class="py-20 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-100 mb-2">Proyectos Destacados</h2>
+            <p class="text-lg text-gray-400 mb-12">Una selección de mis mejores trabajos.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project Card 1 -->
+                <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
+                    <img src="https://placehold.co/600x400/0a0f1e/FFFFFF?text=Hand+Tracking" alt="Imagen del Proyecto 1" class="w-full h-48 object-cover">
+                    <div class="p-6 text-left">
+                        <h3 class="text-xl font-bold text-white mb-2">Galería Circular Interactiva</h3>
+                        <p class="text-gray-400 mb-4">
+                            Experiencia en TouchDesigner con una galería circular controlada por hand tracking.
+                        </p>
+                        <a href="proyecto1.html" class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300">Ver Detalles &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
+                    <img src="https://placehold.co/600x400/0a0f1e/FFFFFF?text=IA+Generativa" alt="Imagen del Proyecto 2" class="w-full h-48 object-cover">
+                    <div class="p-6 text-left">
+                        <h3 class="text-xl font-bold text-white mb-2">Imágenes con IA y Gestos</h3>
+                        <p class="text-gray-400 mb-4">
+                            Aplicación en TouchDesigner que genera imágenes con IA a partir de los gestos de las manos.
+                        </p>
+                        <a href="proyecto2.html" class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300">Ver Detalles &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
+                    <img src="https://placehold.co/600x400/0a0f1e/FFFFFF?text=Deconstrucción+3D" alt="Imagen del Proyecto 3" class="w-full h-48 object-cover">
+                    <div class="p-6 text-left">
+                        <h3 class="text-xl font-bold text-white mb-2">Deconstrucción de Objetos 3D</h3>
+                        <p class="text-gray-400 mb-4">
+                            Experiencia interactiva que deconstruye modelos 3D usando hand tracking en TouchDesigner.
+                        </p>
+                        <a href="proyecto3.html" class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300">Ver Detalles &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 4 -->
+                <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
+                    <img src="https://placehold.co/600x400/0a0f1e/FFFFFF?text=Galería+VR" alt="Imagen del Proyecto 4" class="w-full h-48 object-cover">
+                    <div class="p-6 text-left">
+                        <h3 class="text-xl font-bold text-white mb-2">Galería VR para Fotógrafos</h3>
+                        <p class="text-gray-400 mb-4">
+                            App de galería virtual en VR para Meta Quest 2, diseñada para un evento de fotógrafos.
+                        </p>
+                        <a href="proyecto4.html" class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300">Ver Detalles &rarr;</a>
+                    </div>
+                </div>
+                
+                <!-- Project Card 5 -->
+                <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
+                    <img src="https://placehold.co/600x400/0a0f1e/FFFFFF?text=App+Bomberos" alt="Imagen del Proyecto 5" class="w-full h-48 object-cover">
+                    <div class="p-6 text-left">
+                        <h3 class="text-xl font-bold text-white mb-2">App Móvil para Bomberos</h3>
+                        <p class="text-gray-400 mb-4">
+                           Diseño de app para ubicar material y consultar procedimientos en carros bomba.
+                        </p>
+                        <a href="proyecto5.html" class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300">Ver Detalles &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 6 -->
+                <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
+                    <img src="https://placehold.co/600x400/0a0f1e/FFFFFF?text=PalCarrete" alt="Imagen del Proyecto 6" class="w-full h-48 object-cover">
+                    <div class="p-6 text-left">
+                        <h3 class="text-xl font-bold text-white mb-2">PalCarrete App</h3>
+                        <p class="text-gray-400 mb-4">
+                            Aplicación móvil para beber con sistema de retos, castigos y diferentes tarjetas de juego.
+                        </p>
+                        <a href="proyecto6.html" class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300">Ver Detalles &rarr;</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========== CONTACT SECTION ========== -->
+        <section id="contacto" class="py-20 text-center">
+            <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg p-10 max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-100 mb-2">Hablemos</h2>
+                <p class="text-lg text-gray-400 mb-12">
+                    ¿Tienes un proyecto en mente o una oportunidad para mí? ¡No dudes en contactarme!
+                </p>
+                <a href="mailto:tuemail@dominio.com" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-blue-700 shadow-lg shadow-blue-500/30 transform hover:scale-105 transition-all duration-300 inline-block">
+                    Enviar un Correo
+                </a>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-gray-900/50 mt-20">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p>&copy; 2025 Ignacio Aguayo. Todos los derechos reservados.</p>
+            <div class="mt-8">
+                <button id="destroy-btn" class="bg-red-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-800 shadow-lg shadow-red-500/30 transform hover:scale-105 transition-all duration-300">
+                    ¡Destruir Página!
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Supernova and Reset Elements -->
+    <div id="supernova-core" class="hidden fixed top-1/2 left-1/2 w-8 h-8 rounded-full z-[200]"></div>
+    <div id="reset-overlay" class="hidden fixed inset-0 bg-white z-[250] flex justify-center items-center flex-col opacity-0 transition-opacity duration-1000">
+        <h2 class="text-4xl text-gray-800 mb-8 text-center px-4">¿Qué has hecho? ¡Mi portafolio!</h2>
+        <button id="reset-btn" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-blue-700">
+            Explorar de Nuevo
+        </button>
+    </div>
+
+
+    <script>
+        // --- Mobile menu toggle script ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+        // --- INTERACTIVE STARFIELD BACKGROUND SCRIPT ---
+        const canvas = document.getElementById('starfield-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let stars;
+        let shootingStars = [];
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let mouse = {
+            x: undefined,
+            y: undefined,
+            radius: 150
+        };
+
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+        
+        window.addEventListener('mouseout', () => {
+            mouse.x = undefined;
+            mouse.y = undefined;
+        });
+
+        class Star {
+            constructor(x, y, speedX, speedY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.speedX = speedX;
+                this.speedY = speedY;
+                this.size = size;
+                this.color = color;
+                this.baseX = this.x;
+                this.baseY = this.y;
+                this.density = (Math.random() * 30) + 1;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fill();
+            }
+            update() {
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < mouse.radius) {
+                    let forceDirectionX = dx / distance;
+                    let forceDirectionY = dy / distance;
+                    let maxDistance = mouse.radius;
+                    let force = (maxDistance - distance) / maxDistance;
+                    let directionX = forceDirectionX * force * this.density;
+                    let directionY = forceDirectionY * force * this.density;
+                    
+                    this.x -= directionX;
+                    this.y -= directionY;
+                } else {
+                    if (this.x !== this.baseX) {
+                        let dx = this.x - this.baseX;
+                        this.x -= dx/10;
+                    }
+                     if (this.y !== this.baseY) {
+                        let dy = this.y - this.baseY;
+                        this.y -= dy/10;
+                    }
+                }
+
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+
+                this.draw();
+            }
+        }
+
+        class ShootingStar {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = 0;
+                this.len = (Math.random() * 80) + 10;
+                this.speed = (Math.random() * 10) + 6;
+                this.size = (Math.random() * 1) + 0.5;
+                this.waitTime = new Date().getTime() + (Math.random() * 6000) + 1000;
+                this.active = false;
+            }
+            update() {
+                if (this.active) {
+                    this.x += this.speed;
+                    this.y += this.speed * 0.5;
+                    if (this.x > canvas.width || this.y > canvas.height) { this.reset(); } 
+                    else { this.draw(); }
+                } else {
+                    if (new Date().getTime() > this.waitTime) { this.active = true; }
+                }
+            }
+            draw() {
+                const grad = ctx.createLinearGradient(this.x, this.y, this.x - this.len, this.y - (this.len * 0.5));
+                grad.addColorStop(0, `rgba(255, 255, 255, ${this.size})`);
+                grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                ctx.strokeStyle = grad;
+                ctx.lineWidth = this.size;
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x - this.len, this.y - (this.len * 0.5));
+                ctx.stroke();
+            }
+        }
+
+        function init() {
+            stars = [];
+            let numberOfStars = (canvas.height * canvas.width) / 5000;
+            for (let i = 0; i < numberOfStars; i++) {
+                let size = Math.random() * 1.5 + 0.5;
+                let x = Math.random() * canvas.width;
+                let y = Math.random() * canvas.height;
+                let speedX = (Math.random() * 0.2) - 0.1;
+                let speedY = (Math.random() * 0.2) - 0.1;
+                let color = 'rgba(59, 130, 246, ' + (Math.random() * 0.7 + 0.3) + ')';
+                stars.push(new Star(x, y, speedX, speedY, size, color));
+            }
+            shootingStars = [];
+            for (let i = 0; i < 3; i++) { shootingStars.push(new ShootingStar()); }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(s => s.update());
+            shootingStars.forEach(ss => ss.update());
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            init();
+        });
+
+        init();
+        animate();
+
+        // --- SUPERNOVA DESTRUCTION SCRIPT ---
+        const destroyBtn = document.getElementById('destroy-btn');
+        const supernovaCore = document.getElementById('supernova-core');
+        const resetOverlay = document.getElementById('reset-overlay');
+        const resetBtn = document.getElementById('reset-btn');
+
+        destroyBtn.addEventListener('click', () => {
+            // 0. Disable scroll and hide the button
+            document.body.style.overflow = 'hidden';
+            destroyBtn.style.display = 'none';
+
+            // 1. Show the supernova core
+            supernovaCore.classList.remove('hidden');
+            
+            // 2. Select all elements to be destroyed
+            const elementsToDestroy = Array.from(document.querySelectorAll('header, main > section'));
+            const viewportCenterX = window.innerWidth / 2;
+            const viewportCenterY = window.innerHeight / 2;
+
+            // 3. Start pushing elements away
+            elementsToDestroy.forEach((el, index) => {
+                const rect = el.getBoundingClientRect();
+                const elCenterX = rect.left + rect.width / 2;
+                const elCenterY = rect.top + rect.height / 2;
+
+                const deltaX = elCenterX - viewportCenterX;
+                const deltaY = elCenterY - viewportCenterY;
+                
+                const moveX = deltaX * 3; // Push them further away
+                const moveY = deltaY * 3;
+                const rotation = (Math.random() - 0.5) * 360;
+
+                el.style.transition = `all 1.5s ease-in-out ${index * 100}ms`;
+                el.style.transformOrigin = 'center center';
+                
+                setTimeout(() => {
+                    el.style.transform = `translateX(${moveX}px) translateY(${moveY}px) scale(0.5) rotate(${rotation}deg)`;
+                    el.style.opacity = '0';
+                }, 50);
+            });
+            
+            const totalAnimationTime = (elementsToDestroy.length - 1) * 100 + 1500;
+
+            // 4. After a delay, trigger the final explosion
+            setTimeout(() => {
+                const finalSize = Math.max(window.innerWidth, window.innerHeight) * 3;
+                supernovaCore.style.transition = 'all 0.5s ease-in';
+                supernovaCore.style.width = `${finalSize}px`;
+                supernovaCore.style.height = `${finalSize}px`;
+                supernovaCore.style.opacity = '0';
+                document.body.style.transition = 'background-color 0.5s ease-in';
+                document.body.style.backgroundColor = '#ffffff';
+            }, totalAnimationTime - 500);
+
+            // 5. After explosion, show reset screen
+            setTimeout(() => {
+                resetOverlay.classList.remove('hidden');
+                setTimeout(() => {
+                    resetOverlay.style.opacity = '1';
+                }, 10);
+            }, totalAnimationTime); 
+        });
+
+        resetBtn.addEventListener('click', () => {
+            // Fade out to black before reloading for a smoother transition
+            resetOverlay.style.transition = 'opacity 0.5s ease-out';
+            resetOverlay.style.opacity = '0';
+            setTimeout(() => {
+                location.reload();
+            }, 500);
+        });
+    </script>
+
+</body>
+</html>
+
