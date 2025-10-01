@@ -207,14 +207,14 @@
                 <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 p-8 rounded-2xl shadow-lg text-left mt-20">
                     <h3 class="text-2xl font-bold text-white mb-6 text-center" data-lang-key="skillsTitle">Mis Habilidades</h3>
                     <div id="skills-list" class="flex flex-wrap justify-center gap-4">
-                        <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">Unity</span>
-                        <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">Desarrollo VR/AR</span>
-                        <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">Mobile Apps</span>
-                        <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">TouchDesigner</span>
-                        <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">UX/UI Design</span>
-                        <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">Experiencias Interactivas</span>
-                        <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">Shaders & Visuales Generativos</span>
-                        <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium">Creative Coding</span>
+                        <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium" data-lang-key="skillUnity">Unity</span>
+                        <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium" data-lang-key="skillVrAr">Desarrollo VR/AR</span>
+                        <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium" data-lang-key="skillMobile">Mobile Apps</span>
+                        <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium" data-lang-key="skillTouchdesigner">TouchDesigner</span>
+                        <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium" data-lang-key="skillUiUx">UX/UI Design</span>
+                        <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium" data-lang-key="skillInteractive">Experiencias Interactivas</span>
+                        <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium" data-lang-key="skillShaders">Shaders & Visuales Generativos</span>
+                        <span class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full font-medium" data-lang-key="skillCreativeCoding">Creative Coding</span>
                     </div>
                 </div>
             </div>
@@ -487,6 +487,14 @@
                 aboutBio: "Soy un tecnólogo creativo apasionado por la intersección del arte y el código. Mi enfoque es la creación de experiencias inmersivas e interactivas que desafían la percepción y conectan con las personas a un nivel más profundo.",
                 // Skills
                 skillsTitle: "Mis Habilidades",
+                skillUnity: "Unity",
+                skillVrAr: "Desarrollo VR/AR",
+                skillMobile: "Mobile Apps",
+                skillTouchdesigner: "TouchDesigner",
+                skillUiUx: "UX/UI Design",
+                skillInteractive: "Experiencias Interactivas",
+                skillShaders: "Shaders & Visuales Generativos",
+                skillCreativeCoding: "Creative Coding",
                 // Projects
                 projectsTitle: "Proyectos Destacados",
                 projectsSubtitle: "Una selección de mis mejores trabajos.",
@@ -563,6 +571,14 @@
                 aboutBio: "I am a creative technologist passionate about the intersection of art and code. My focus is on creating immersive and interactive experiences that challenge perception and connect with people on a deeper level.",
                 // Skills
                 skillsTitle: "My Skills",
+                skillUnity: "Unity",
+                skillVrAr: "VR/AR Development",
+                skillMobile: "Mobile Apps",
+                skillTouchdesigner: "TouchDesigner",
+                skillUiUx: "UX/UI Design",
+                skillInteractive: "Interactive Experiences",
+                skillShaders: "Shaders & Generative Visuals",
+                skillCreativeCoding: "Creative Coding",
                 // Projects
                 projectsTitle: "Featured Projects",
                 projectsSubtitle: "A selection of my best work.",
@@ -661,14 +677,14 @@
         mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
         // --- INTERACTIVE STARFIELD BACKGROUND SCRIPT ---
-        const starfieldCanvas = document.getElementById('starfield-canvas');
-        if (starfieldCanvas) {
-            const ctx = starfieldCanvas.getContext('2d');
+        const canvas = document.getElementById('starfield-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
 
             let stars;
             let shootingStars = [];
-            starfieldCanvas.width = window.innerWidth;
-            starfieldCanvas.height = window.innerHeight;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
 
             let mouse = { x: undefined, y: undefined, radius: 150 };
 
@@ -695,8 +711,8 @@
                         if (this.y !== this.baseY) { let dy = this.y - this.baseY; this.y -= dy/10; }
                     }
                     this.x += this.speedX; this.y += this.speedY;
-                    if (this.x > starfieldCanvas.width) this.x = 0; if (this.x < 0) this.x = starfieldCanvas.width;
-                    if (this.y > starfieldCanvas.height) this.y = 0; if (this.y < 0) this.y = starfieldCanvas.height;
+                    if (this.x > canvas.width) this.x = 0; if (this.x < 0) this.x = canvas.width;
+                    if (this.y > canvas.height) this.y = 0; if (this.y < 0) this.y = canvas.height;
                     this.draw();
                 }
             }
@@ -704,13 +720,13 @@
             class ShootingStar {
                 constructor() { this.reset(); }
                 reset() {
-                    this.x = Math.random() * starfieldCanvas.width; this.y = 0; this.len = (Math.random() * 80) + 10; this.speed = (Math.random() * 10) + 6;
+                    this.x = Math.random() * canvas.width; this.y = 0; this.len = (Math.random() * 80) + 10; this.speed = (Math.random() * 10) + 6;
                     this.size = (Math.random() * 1) + 0.5; this.waitTime = new Date().getTime() + (Math.random() * 6000) + 1000; this.active = false;
                 }
                 update() {
                     if (this.active) {
                         this.x += this.speed; this.y += this.speed * 0.5;
-                        if (this.x > starfieldCanvas.width || this.y > starfieldCanvas.height) { this.reset(); } else { this.draw(); }
+                        if (this.x > canvas.width || this.y > canvas.height) { this.reset(); } else { this.draw(); }
                     } else { if (new Date().getTime() > this.waitTime) { this.active = true; } }
                 }
                 draw() {
@@ -722,9 +738,9 @@
             }
 
             function init() {
-                stars = []; let numberOfStars = (starfieldCanvas.height * starfieldCanvas.width) / 5000;
+                stars = []; let numberOfStars = (canvas.height * canvas.width) / 5000;
                 for (let i = 0; i < numberOfStars; i++) {
-                    let size = Math.random() * 1.5 + 0.5; let x = Math.random() * starfieldCanvas.width; let y = Math.random() * starfieldCanvas.height;
+                    let size = Math.random() * 1.5 + 0.5; let x = Math.random() * canvas.width; let y = Math.random() * canvas.height;
                     let speedX = (Math.random() * 0.2) - 0.1; let speedY = (Math.random() * 0.2) - 0.1;
                     let color = 'rgba(59, 130, 246, ' + (Math.random() * 0.7 + 0.3) + ')';
                     stars.push(new Star(x, y, speedX, speedY, size, color));
@@ -735,17 +751,13 @@
             function animate() {
                 requestAnimationFrame(animate); 
                 if (ctx) {
-                    ctx.clearRect(0, 0, starfieldCanvas.width, starfieldCanvas.height);
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
                     stars.forEach(s => s.update()); 
                     shootingStars.forEach(ss => ss.update());
                 }
             }
 
-            window.addEventListener('resize', () => { 
-                starfieldCanvas.width = window.innerWidth; 
-                starfieldCanvas.height = window.innerHeight; 
-                init(); 
-            });
+            window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
             init(); animate();
         }
 
