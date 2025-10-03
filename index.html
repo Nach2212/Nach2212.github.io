@@ -122,10 +122,9 @@
         .lang-toggle:checked + .lang-toggle-label:before {
             transform: translateX(24px);
         }
-
     </style>
 </head>
-<body class="text-gray-300">
+<body class="text-gray-300 opacity-0">
 
     <!-- Canvas for the starfield animation -->
     <canvas id="starfield-canvas"></canvas>
@@ -227,148 +226,148 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
                 <!-- Project Card 1 -->
-                <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
+                <button class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group text-left w-full"
+                        data-modal-trigger 
+                        data-lang-key-prefix="p1m"
+                        data-title="Galería Circular Interactiva" 
+                        data-subtitle="Navegación Inmersiva con TouchDesigner" 
+                        data-video-id="13Ajb89Q01Q"
+                        data-challenge="El desafío fue crear una forma innovadora de presentar imágenes, buscando una experiencia que superara la visualización estática y fomentara una interacción más profunda."
+                        data-process="Para lograr una interacción intuitiva, opté por el hand tracking como método de control. El principal reto técnico fue combinar la galería esférica con la precisión del seguimiento de manos, lo que requirió un diseño gestual cuidadoso y optimización para asegurar una experiencia fluida."
+                        data-tech='["TouchDesigner", "Hand Tracking", "Visuales Generativos"]'>
                     <div class="w-full h-48 flex items-center justify-center bg-slate-900/50">
                         <img src="assets/GaleriaCircular.png" alt="Imagen del Proyecto Galería Circular Interactiva" class="max-w-full max-h-full object-contain">
                     </div>
-                    <div class="p-6 text-left">
+                    <div class="p-6">
                         <h3 class="text-xl font-bold text-white mb-2" data-lang-key="p1Title">Galería Circular Interactiva</h3>
                         <p class="text-gray-400 mb-4" data-lang-key="p1Desc">
                             Experiencia en TouchDesigner con una galería circular controlada por hand tracking.
                         </p>
-                        <button class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300" 
-                                data-modal-trigger 
-                                data-lang-key-prefix="p1m"
-                                data-title="Galería Circular Interactiva" 
-                                data-subtitle="Navegación Inmersiva con TouchDesigner" 
-                                data-video-id="13Ajb89Q01Q"
-                                data-challenge="El desafío fue crear una forma innovadora de presentar imágenes, buscando una experiencia que superara la visualización estática y fomentara una interacción más profunda."
-                                data-process="Para lograr una interacción intuitiva, opté por el hand tracking como método de control. El principal reto técnico fue combinar la galería esférica con la precisión del seguimiento de manos, lo que requirió un diseño gestual cuidadoso y optimización para asegurar una experiencia fluida."
-                                data-tech='["TouchDesigner", "Hand Tracking", "Visuales Generativos"]'>
+                        <div class="font-semibold text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
                             <span data-lang-key="pBtnDetails">Ver Detalles</span> &rarr;
-                        </button>
+                        </div>
                     </div>
-                </div>
+                </button>
 
                 <!-- Project Card 2 -->
-                <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
+                <button class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group text-left w-full"
+                        data-modal-trigger
+                        data-lang-key-prefix="p2m"
+                        data-title="Armonías Gestuales: IA Visual Interactiva"
+                        data-subtitle="Creación de Contenido con Gestos y Algoritmos"
+                        data-video-id="cLHNCb-TEV8"
+                        data-challenge="El reto era desarrollar una experiencia que permitiera generar visuales a través del movimiento de las manos, fusionando la expresión física con la generación algorítmica de imágenes."
+                        data-process="Implementé el seguimiento de manos en tiempo real a través de TouchDesigner para capturar y traducir los movimientos a parámetros que alimentaran una red neuronal generativa. El principal desafío fue optimizar la respuesta de la IA para que las imágenes se generaran de forma fluida y coherente con la intención gestual."
+                        data-tech='["TouchDesigner", "Inteligencia Artificial", "Hand Tracking", "Visuales Generativos"]'>
                     <div class="w-full h-48 flex items-center justify-center bg-slate-900/50">
                         <img src="assets/IaGenerativaManos.png" alt="Imagen del Proyecto IA Generativa" class="max-w-full max-h-full object-contain">
                     </div>
-                    <div class="p-6 text-left">
+                    <div class="p-6">
                         <h3 class="text-xl font-bold text-white mb-2" data-lang-key="p2Title">Armonías Gestuales: IA Visual Interactiva</h3>
                         <p class="text-gray-400 mb-4" data-lang-key="p2Desc">
                             Aplicación en TouchDesigner que genera imágenes con IA a partir de los gestos de las manos.
                         </p>
-                        <button class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300" 
-                                data-modal-trigger
-                                data-lang-key-prefix="p2m"
-                                data-title="Armonías Gestuales: IA Visual Interactiva"
-                                data-subtitle="Creación de Contenido con Gestos y Algoritmos"
-                                data-video-id="cLHNCb-TEV8"
-                                data-challenge="El reto era desarrollar una experiencia que permitiera generar visuales a través del movimiento de las manos, fusionando la expresión física con la generación algorítmica de imágenes."
-                                data-process="Implementé el seguimiento de manos en tiempo real a través de TouchDesigner para capturar y traducir los movimientos a parámetros que alimentaran una red neuronal generativa. El principal desafío fue optimizar la respuesta de la IA para que las imágenes se generaran de forma fluida y coherente con la intención gestual."
-                                data-tech='["TouchDesigner", "Inteligencia Artificial", "Hand Tracking", "Visuales Generativos"]'>
+                        <div class="font-semibold text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
                             <span data-lang-key="pBtnDetails">Ver Detalles</span> &rarr;
-                        </button>
+                        </div>
                     </div>
-                </div>
+                </button>
 
                 <!-- Project Card 3 -->
-                <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
+                 <button class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group text-left w-full"
+                        data-modal-trigger
+                        data-lang-key-prefix="p3m"
+                        data-title="Deconstrucción 3D Interactiva"
+                        data-subtitle="Exhibición y Manipulación de Modelos 3D con Gestos"
+                        data-video-id="3derrG_z0mo"
+                        data-challenge="El principal desafío fue crear una forma innovadora y atractiva de exhibir modelos 3D, permitiendo a los usuarios interactuar con ellos de manera divertida y significativa, como controlando su deconstrucción o cambiando los modelos con las manos."
+                        data-process="Desarrollé esta experiencia en TouchDesigner, enfocándome en la integración del hand tracking para una manipulación intuitiva. Lo más complejo fue diseñar los algoritmos de deconstrucción y el sistema de reconocimiento gestual que permitiera a los usuarios controlar los modelos 3D en tiempo real, ofreciendo una interacción fluida y reactiva con los objetos virtuales."
+                        data-tech='["TouchDesigner", "Hand Tracking", "Diseño 3D", "Visuales Generativos"]'>
                     <div class="w-full h-48 flex items-center justify-center bg-slate-900/50">
                         <img src="assets/Deconstruccion.png" alt="Imagen del Proyecto Deconstrucción 3D" class="max-w-full max-h-full object-contain">
                     </div>
-                    <div class="p-6 text-left">
+                    <div class="p-6">
                         <h3 class="text-xl font-bold text-white mb-2" data-lang-key="p3Title">Deconstrucción 3D Interactiva</h3>
                         <p class="text-gray-400 mb-4" data-lang-key="p3Desc">
                             Experiencia interactiva que deconstruye modelos 3D usando hand tracking en TouchDesigner.
                         </p>
-                        <button class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300" 
-                                data-modal-trigger
-                                data-lang-key-prefix="p3m"
-                                data-title="Deconstrucción 3D Interactiva"
-                                data-subtitle="Exhibición y Manipulación de Modelos 3D con Gestos"
-                                data-video-id="3derrG_z0mo"
-                                data-challenge="El principal desafío fue crear una forma innovadora y atractiva de exhibir modelos 3D, permitiendo a los usuarios interactuar con ellos de manera divertida y significativa, como controlando su deconstrucción o cambiando los modelos con las manos."
-                                data-process="Desarrollé esta experiencia en TouchDesigner, enfocándome en la integración del hand tracking para una manipulación intuitiva. Lo más complejo fue diseñar los algoritmos de deconstrucción y el sistema de reconocimiento gestual que permitiera a los usuarios controlar los modelos 3D en tiempo real, ofreciendo una interacción fluida y reactiva con los objetos virtuales."
-                                data-tech='["TouchDesigner", "Hand Tracking", "Diseño 3D", "Visuales Generativos"]'>
+                       <div class="font-semibold text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
                            <span data-lang-key="pBtnDetails">Ver Detalles</span> &rarr;
-                        </button>
+                        </div>
                     </div>
-                </div>
+                </button>
 
                 <!-- Project Card 4 -->
-                <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
+                <button class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group text-left w-full"
+                        data-modal-trigger
+                        data-lang-key-prefix="p4m"
+                        data-title="Galería VR para Fotógrafos"
+                        data-subtitle="Exhibición Virtual Inmersiva en Concepción"
+                        data-video-id="X7vD2CPHX5M"
+                        data-challenge="El reto era diseñar una galería virtual inmersiva para un evento de fotógrafos en Concepción, que permitiera exhibir sus obras de una manera innovadora y envolvente utilizando la realidad virtual."
+                        data-process="Trabajé en Unity, diseñando la arquitectura virtual de la galería y la disposición de los cuadros. La decoración y la ambientación se realizaron a medida según los requerimientos del evento, buscando crear un espacio que realzara las obras fotográficas. La implementación se optimizó para funcionar fluidamente en dispositivos Meta Quest 2."
+                        data-tech='["Unity", "Desarrollo VR", "Meta Quest 2", "Diseño 3D", "UI/UX VR"]'>
                     <div class="w-full h-48 flex items-center justify-center bg-slate-900/50">
                         <img src="assets/galeriavr.png" alt="Imagen del Proyecto Galería VR" class="max-w-full max-h-full object-contain">
                     </div>
-                    <div class="p-6 text-left">
+                    <div class="p-6">
                         <h3 class="text-xl font-bold text-white mb-2" data-lang-key="p4Title">Galería VR para Fotógrafos</h3>
                         <p class="text-gray-400 mb-4" data-lang-key="p4Desc">
                             App de galería virtual en VR para Meta Quest 2, diseñada para un evento de fotógrafos.
                         </p>
-                        <button class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300" 
-                                data-modal-trigger
-                                data-lang-key-prefix="p4m"
-                                data-title="Galería VR para Fotógrafos"
-                                data-subtitle="Exhibición Virtual Inmersiva en Concepción"
-                                data-video-id="X7vD2CPHX5M"
-                                data-challenge="El reto era diseñar una galería virtual inmersiva para un evento de fotógrafos en Concepción, que permitiera exhibir sus obras de una manera innovadora y envolvente utilizando la realidad virtual."
-                                data-process="Trabajé en Unity, diseñando la arquitectura virtual de la galería y la disposición de los cuadros. La decoración y la ambientación se realizaron a medida según los requerimientos del evento, buscando crear un espacio que realzara las obras fotográficas. La implementación se optimizó para funcionar fluidamente en dispositivos Meta Quest 2."
-                                data-tech='["Unity", "Desarrollo VR", "Meta Quest 2", "Diseño 3D", "UI/UX VR"]'>
+                        <div class="font-semibold text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
                             <span data-lang-key="pBtnDetails">Ver Detalles</span> &rarr;
-                        </button>
+                        </div>
                     </div>
-                </div>
+                </button>
                 
                 <!-- Project Card 5 -->
-                <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
+                <button class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group text-left w-full"
+                        data-modal-trigger
+                        data-lang-key-prefix="p5m"
+                        data-title="App Móvil para Bomberos"
+                        data-subtitle="Herramienta de Entrenamiento para Emergencias"
+                        data-video-id="7icD6LN7ihA"
+                        data-challenge="El principal desafío fue crear una herramienta de entrenamiento digital para bomberos, que les permitiera aprender y repasar la ubicación del material en el carro bomba, así como consultar procedimientos vitales, de una forma cómoda e intuitiva."
+                        data-process="Desarrollé la aplicación en Unity, enfocándome en la creación de modelos 3D detallados de las herramientas y el carro. La interfaz fue diseñada como una herramienta de estudio eficaz, con un sistema de navegación optimizado para el aprendizaje y la consulta rápida de procedimientos clave, como el manual IFTA, fortaleciendo así su preparación para emergencias reales."
+                        data-tech='["Unity", "C#", "Mobile Development", "Diseño UI/UX", "Modelado 3D"]'>
                     <div class="w-full h-48 flex items-center justify-center bg-slate-900/50">
                         <img src="assets/Bomberos.png" alt="Imagen del Proyecto App Bomberos" class="max-w-full max-h-full object-contain">
                     </div>
-                    <div class="p-6 text-left">
+                    <div class="p-6">
                         <h3 class="text-xl font-bold text-white mb-2" data-lang-key="p5Title">App Móvil para Bomberos</h3>
                         <p class="text-gray-400 mb-4" data-lang-key="p5Desc">
                            Diseño de app para ubicar material y consultar procedimientos en carros bomba.
                         </p>
-                        <button class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300" 
-                                data-modal-trigger
-                                data-lang-key-prefix="p5m"
-                                data-title="App Móvil para Bomberos"
-                                data-subtitle="Herramienta de Entrenamiento para Emergencias"
-                                data-video-id="7icD6LN7ihA"
-                                data-challenge="El principal desafío fue crear una herramienta de entrenamiento digital para bomberos, que les permitiera aprender y repasar la ubicación del material en el carro bomba, así como consultar procedimientos vitales, de una forma cómoda e intuitiva."
-                                data-process="Desarrollé la aplicación en Unity, enfocándome en la creación de modelos 3D detallados de las herramientas y el carro. La interfaz fue diseñada como una herramienta de estudio eficaz, con un sistema de navegación optimizado para el aprendizaje y la consulta rápida de procedimientos clave, como el manual IFTA, fortaleciendo así su preparación para emergencias reales."
-                                data-tech='["Unity", "C#", "Mobile Development", "Diseño UI/UX", "Modelado 3D"]'>
+                        <div class="font-semibold text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
                             <span data-lang-key="pBtnDetails">Ver Detalles</span> &rarr;
-                        </button>
+                        </div>
                     </div>
-                </div>
+                </button>
 
                 <!-- Project Card 6 -->
-                <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group">
+                <button class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group text-left w-full"
+                        data-modal-trigger
+                        data-lang-key-prefix="p6m"
+                        data-title="PalCarrete App"
+                        data-subtitle="Juego Móvil Dinámico para Eventos Sociales"
+                        data-video-id="VuBYKSHcFio"
+                        data-challenge="El reto fue desarrollar un juego de beber móvil que fuera gratuito, entretenido y que ofreciera una experiencia dinámica para evitar la monotonía, a diferencia de otras opciones existentes en el mercado."
+                        data-process="El desarrollo se centró en Unity. Lo más complejo fue diseñar e implementar el sistema de jugadores y la asignación aleatoria y justa de cartas. Se creó una arquitectura modular para los retos, permitiendo su dinamismo y el cambio constante del orden de aparición para asegurar la rejugabilidad."
+                        data-tech='["Unity", "C#", "Mobile Development", "Game Design"]'>
                     <div class="w-full h-48 flex items-center justify-center bg-slate-900/50">
                         <img src="assets/PalCarrete.png" alt="Imagen del Proyecto PalCarrete App" class="max-w-full max-h-full object-contain">
                     </div>
-                    <div class="p-6 text-left">
+                    <div class="p-6">
                         <h3 class="text-xl font-bold text-white mb-2" data-lang-key="p6Title">PalCarrete App</h3>
                         <p class="text-gray-400 mb-4" data-lang-key="p6Desc">
                             Aplicación móvil para beber con sistema de retos, castigos y diferentes tarjetas de juego.
                         </p>
-                        <button class="font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300" 
-                                data-modal-trigger
-                                data-lang-key-prefix="p6m"
-                                data-title="PalCarrete App"
-                                data-subtitle="Juego Móvil Dinámico para Eventos Sociales"
-                                data-video-id="VuBYKSHcFio"
-                                data-challenge="El reto fue desarrollar un juego de beber móvil que fuera gratuito, entretenido y que ofreciera una experiencia dinámica para evitar la monotonía, a diferencia de otras opciones existentes en el mercado."
-                                data-process="El desarrollo se centró en Unity. Lo más complejo fue diseñar e implementar el sistema de jugadores y la asignación aleatoria y justa de cartas. Se creó una arquitectura modular para los retos, permitiendo su dinamismo y el cambio constante del orden de aparición para asegurar la rejugabilidad."
-                                data-tech='["Unity", "C#", "Mobile Development", "Game Design"]'>
+                        <div class="font-semibold text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
                             <span data-lang-key="pBtnDetails">Ver Detalles</span> &rarr;
-                        </button>
+                        </div>
                     </div>
-                </div>
+                </button>
 
             </div>
         </section>
@@ -909,10 +908,61 @@
         });
 
         resetBtn.addEventListener('click', () => {
+            sessionStorage.setItem('isRecreating', 'true');
             resetOverlay.style.transition = 'opacity 0.5s ease-out';
             resetOverlay.style.opacity = '0';
-            setTimeout(() => { location.reload(); }, 500);
+            setTimeout(() => {
+                location.reload();
+            }, 500);
         });
+
+        // Initial page load animation
+        window.addEventListener('load', () => {
+            if (sessionStorage.getItem('isRecreating') === 'true') {
+                sessionStorage.removeItem('isRecreating');
+                
+                const bigBangOverlay = document.createElement('div');
+                bigBangOverlay.style.position = 'fixed';
+                bigBangOverlay.style.inset = '0';
+                bigBangOverlay.style.background = 'black';
+                bigBangOverlay.style.zIndex = '9999';
+                document.body.appendChild(bigBangOverlay);
+
+                const singularity = document.createElement('div');
+                singularity.style.position = 'fixed';
+                singularity.style.top = '50%';
+                singularity.style.left = '50%';
+                singularity.style.width = '1px';
+                singularity.style.height = '1px';
+                singularity.style.background = 'white';
+                singularity.style.borderRadius = '50%';
+                singularity.style.transform = 'translate(-50%, -50%)';
+                singularity.style.transition = 'all 0.5s ease-in';
+                bigBangOverlay.appendChild(singularity);
+                
+                setTimeout(() => {
+                    const size = Math.max(window.innerWidth, window.innerHeight) * 3;
+                    singularity.style.width = `${size}px`;
+                    singularity.style.height = `${size}px`;
+                }, 50);
+
+                setTimeout(() => {
+                    bigBangOverlay.style.transition = 'opacity 1s ease-out';
+                    bigBangOverlay.style.opacity = '0';
+                    document.body.style.transition = 'opacity 1s ease-in';
+                    document.body.style.opacity = '1';
+                }, 550);
+
+                setTimeout(() => {
+                    bigBangOverlay.remove();
+                }, 1550);
+
+            } else {
+                document.body.style.transition = 'opacity 1s ease-in';
+                document.body.style.opacity = '1';
+            }
+        });
+
     </script>
 
 </body>
