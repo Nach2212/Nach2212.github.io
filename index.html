@@ -122,6 +122,21 @@
         .lang-toggle:checked + .lang-toggle-label:before {
             transform: translateX(24px);
         }
+
+        /* (NEW) Custom Scrollbar for Project List */
+        #more-projects-list::-webkit-scrollbar {
+            width: 8px;
+        }
+        #more-projects-list::-webkit-scrollbar-track {
+            background: #111827; /* gray-900 */
+        }
+        #more-projects-list::-webkit-scrollbar-thumb {
+            background: #1e3a8a; /* blue-800 */
+            border-radius: 4px;
+        }
+        #more-projects-list::-webkit-scrollbar-thumb:hover {
+            background: #1d4ed8; /* blue-700 */
+        }
     </style>
 </head>
 <body class="text-gray-300 opacity-0">
@@ -134,7 +149,8 @@
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-6">
                 <a href="#inicio">
-                     <img src="assets/Logo.png" alt="Logo del Portafolio" class="h-24 rounded-full">
+                     <!-- (CHANGED) Placeholder image -->
+                    <img src="https://placehold.co/96x96/0a0f1e/3b82f6?text=IA" alt="Logo del Portafolio" class="h-24 rounded-full">
                 </a>
                 <!-- Language Toggle -->
                 <div class="hidden md:flex items-center space-x-2">
@@ -189,9 +205,9 @@
         <section id="sobre-mi" class="py-20">
             <div class="max-w-4xl mx-auto">
                 <div class="flex flex-col md:flex-row items-center gap-12">
-                    <!-- GIF Character -->
+                    <!-- GIF Character (CHANGED) Placeholder image -->
                     <div class="w-full md:w-1/3 flex-shrink-0">
-                        <img src="assets/personaje_saludando.gif" alt="Personaje saludando" class="w-full max-w-xs mx-auto">
+                        <img src="https://placehold.co/400x400/0a0f1e/ffffff?text=GIF+Personaje" alt="Personaje saludando" class="w-full max-w-xs mx-auto">
                     </div>
                     <!-- About Me Text -->
                     <div class="w-full md:w-2/3 text-center md:text-left">
@@ -236,7 +252,8 @@
                         data-process="Para lograr una interacción intuitiva, opté por el hand tracking como método de control. El principal reto técnico fue combinar la galería esférica con la precisión del seguimiento de manos, lo que requirió un diseño gestual cuidadoso y optimización para asegurar una experiencia fluida."
                         data-tech='["TouchDesigner", "Hand Tracking", "Visuales Generativos"]'>
                     <div class="w-full h-48 flex items-center justify-center bg-slate-900/50">
-                        <img src="assets/GaleriaCircular.png" alt="Imagen del Proyecto Galería Circular Interactiva" class="max-w-full max-h-full object-contain">
+                         <!-- (CHANGED) Placeholder image -->
+                        <img src="https://placehold.co/400x192/1e293b/ffffff?text=Galería+Circular" alt="Imagen del Proyecto Galería Circular Interactiva" class="max-w-full max-h-full object-contain">
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-white mb-2" data-lang-key="p1Title">Galería Circular Interactiva</h3>
@@ -260,7 +277,8 @@
                         data-process="Implementé el seguimiento de manos en tiempo real a través de TouchDesigner para capturar y traducir los movimientos a parámetros que alimentaran una red neuronal generativa. El principal desafío fue optimizar la respuesta de la IA para que las imágenes se generaran de forma fluida y coherente con la intención gestual."
                         data-tech='["TouchDesigner", "Inteligencia Artificial", "Hand Tracking", "Visuales Generativos"]'>
                     <div class="w-full h-48 flex items-center justify-center bg-slate-900/50">
-                        <img src="assets/IaGenerativaManos.png" alt="Imagen del Proyecto IA Generativa" class="max-w-full max-h-full object-contain">
+                        <!-- (CHANGED) Placeholder image -->
+                        <img src="https://placehold.co/400x192/1e293b/ffffff?text=IA+Generativa" alt="Imagen del Proyecto IA Generativa" class="max-w-full max-h-full object-contain">
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-white mb-2" data-lang-key="p2Title">Armonías Gestuales: IA Visual Interactiva</h3>
@@ -284,7 +302,8 @@
                         data-process="Desarrollé esta experiencia en TouchDesigner, enfocándome en la integración del hand tracking para una manipulación intuitiva. Lo más complejo fue diseñar los algoritmos de deconstrucción y el sistema de reconocimiento gestual que permitiera a los usuarios controlar los modelos 3D en tiempo real, ofreciendo una interacción fluida y reactiva con los objetos virtuales."
                         data-tech='["TouchDesigner", "Hand Tracking", "Diseño 3D", "Visuales Generativos"]'>
                     <div class="w-full h-48 flex items-center justify-center bg-slate-900/50">
-                        <img src="assets/Deconstruccion.png" alt="Imagen del Proyecto Deconstrucción 3D" class="max-w-full max-h-full object-contain">
+                        <!-- (CHANGED) Placeholder image -->
+                        <img src="https://placehold.co/400x192/1e293b/ffffff?text=Deconstrucción+3D" alt="Imagen del Proyecto Deconstrucción 3D" class="max-w-full max-h-full object-contain">
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-white mb-2" data-lang-key="p3Title">Deconstrucción 3D Interactiva</h3>
@@ -293,7 +312,7 @@
                         </p>
                        <div class="font-semibold text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
                            <span data-lang-key="pBtnDetails">Ver Detalles</span> &rarr;
-                        </div>
+                       </div>
                     </div>
                 </button>
 
@@ -308,7 +327,8 @@
                         data-process="Trabajé en Unity, diseñando la arquitectura virtual de la galería y la disposición de los cuadros. La decoración y la ambientación se realizaron a medida según los requerimientos del evento, buscando crear un espacio que realzara las obras fotográficas. La implementación se optimizó para funcionar fluidamente en dispositivos Meta Quest 2."
                         data-tech='["Unity", "Desarrollo VR", "Meta Quest 2", "Diseño 3D", "UI/UX VR"]'>
                     <div class="w-full h-48 flex items-center justify-center bg-slate-900/50">
-                        <img src="assets/galeriavr.png" alt="Imagen del Proyecto Galería VR" class="max-w-full max-h-full object-contain">
+                        <!-- (CHANGED) Placeholder image -->
+                        <img src="https://placehold.co/400x192/1e293b/ffffff?text=Galería+VR" alt="Imagen del Proyecto Galería VR" class="max-w-full max-h-full object-contain">
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-white mb-2" data-lang-key="p4Title">Galería VR para Fotógrafos</h3>
@@ -332,12 +352,13 @@
                         data-process="Desarrollé la aplicación en Unity, enfocándome en la creación de modelos 3D detallados de las herramientas y el carro. La interfaz fue diseñada como una herramienta de estudio eficaz, con un sistema de navegación optimizado para el aprendizaje y la consulta rápida de procedimientos clave, como el manual IFTA, fortaleciendo así su preparación para emergencias reales."
                         data-tech='["Unity", "C#", "Mobile Development", "Diseño UI/UX", "Modelado 3D"]'>
                     <div class="w-full h-48 flex items-center justify-center bg-slate-900/50">
-                        <img src="assets/Bomberos.png" alt="Imagen del Proyecto App Bomberos" class="max-w-full max-h-full object-contain">
+                        <!-- (CHANGED) Placeholder image -->
+                        <img src="https://placehold.co/400x192/1e293b/ffffff?text=App+Bomberos" alt="Imagen del Proyecto App Bomberos" class="max-w-full max-h-full object-contain">
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-white mb-2" data-lang-key="p5Title">App Móvil para Bomberos</h3>
                         <p class="text-gray-400 mb-4" data-lang-key="p5Desc">
-                           Diseño de app para ubicar material y consultar procedimientos en carros bomba.
+                            Diseño de app para ubicar material y consultar procedimientos en carros bomba.
                         </p>
                         <div class="font-semibold text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
                             <span data-lang-key="pBtnDetails">Ver Detalles</span> &rarr;
@@ -356,7 +377,8 @@
                         data-process="El desarrollo se centró en Unity. Lo más complejo fue diseñar e implementar el sistema de jugadores y la asignación aleatoria y justa de cartas. Se creó una arquitectura modular para los retos, permitiendo su dinamismo y el cambio constante del orden de aparición para asegurar la rejugabilidad."
                         data-tech='["Unity", "C#", "Mobile Development", "Game Design"]'>
                     <div class="w-full h-48 flex items-center justify-center bg-slate-900/50">
-                        <img src="assets/PalCarrete.png" alt="Imagen del Proyecto PalCarrete App" class="max-w-full max-h-full object-contain">
+                        <!-- (CHANGED) Placeholder image -->
+                        <img src="https://placehold.co/400x192/1e293b/ffffff?text=PalCarrete+App" alt="Imagen del Proyecto PalCarrete App" class="max-w-full max-h-full object-contain">
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-white mb-2" data-lang-key="p6Title">PalCarrete App</h3>
@@ -371,6 +393,51 @@
 
             </div>
         </section>
+
+        <!-- ========== MÁS PROYECTOS SECTION ========== -->
+        <section id="mas-proyectos" class="py-20">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-100 mb-2 text-center" data-lang-key="moreProjectsTitle">Más Proyectos</h2>
+            <p class="text-lg text-gray-400 mb-12 text-center" data-lang-key="moreProjectsSubtitle">Otros trabajos y exploraciones creativas.</p>
+
+            <!-- Filter Buttons -->
+            <div id="filter-buttons-more" class="flex flex-wrap justify-center gap-4 mb-8">
+                <button class="filter-btn-more bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold transition-colors duration-300" data-category="all">Todos</button>
+                <button class="filter-btn-more bg-gray-700/50 text-gray-200 hover:bg-gray-700/80 px-5 py-2 rounded-lg font-semibold transition-colors duration-300" data-category="touchdesigner" data-lang-key="moreProjectsCategoryTD">TouchDesigner</button>
+                <button class="filter-btn-more bg-gray-700/50 text-gray-200 hover:bg-gray-700/80 px-5 py-2 rounded-lg font-semibold transition-colors duration-300" data-category="unity" data-lang-key="moreProjectsCategoryUnity">Unity</button>
+                <!-- (CHANGED) Button text updated -->
+                <button class="filter-btn-more bg-gray-700/50 text-gray-200 hover:bg-gray-700/80 px-5 py-2 rounded-lg font-semibold transition-colors duration-300" data-category="3d" data-lang-key="moreProjectsCategory3D">Modelado</button>
+                <button class="filter-btn-more bg-gray-700/50 text-gray-200 hover:bg-gray-700/80 px-5 py-2 rounded-lg font-semibold transition-colors duration-300" data-category="animacion" data-lang-key="moreProjectsCategoryAnim">Animación</button>
+            </div>
+
+            <div class="bg-gray-800/50 backdrop-blur-sm border border-blue-500/10 rounded-2xl shadow-lg overflow-hidden lg:grid lg:grid-cols-3 gap-0">
+                
+                <!-- Columna Izquierda: Lista de Proyectos -->
+                <div id="more-projects-list" class="lg:col-span-1 h-96 lg:h-[600px] overflow-y-auto border-r border-blue-500/10">
+                    <!-- Los proyectos se cargan aquí por JS -->
+                </div>
+
+                <!-- Columna Derecha: Detalle del Proyecto -->
+                <div class="lg:col-span-2 p-8 h-[600px] flex flex-col">
+                    <!-- Placeholder -->
+                    <div id="detail-placeholder" class="flex-grow flex flex-col justify-center items-center text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-blue-700 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        <h3 class="text-2xl font-bold text-white" data-lang-key="moreProjectsSelect">Selecciona un proyecto de la lista para ver los detalles.</h3>
+                    </div>
+                    
+                    <!-- Content (hidden by default) -->
+                    <div id="detail-content" class="hidden flex-grow flex flex-col">
+                        <h3 id="detail-title" class="text-3xl font-bold text-white mb-4"></h3>
+                        <div class="video-container rounded-lg overflow-hidden mb-6">
+                            <iframe id="detail-video" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <p id="detail-desc" class="text-lg text-gray-400"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
         <!-- ========== CONTACT SECTION ========== -->
         <section id="contacto" class="py-20 text-center">
@@ -420,17 +487,17 @@
             <!-- Modal Body -->
             <div id="modal-body">
                  <div class="p-8">
-                    <!-- Project Title -->
+                     <!-- Project Title -->
                     <h1 id="modal-title" class="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-2 text-center mt-8"></h1>
                     <p id="modal-subtitle" class="text-lg text-blue-400 mb-8 text-center"></p>
 
-                    <!-- Project Media (Video) -->
+                     <!-- Project Media (Video) -->
                     <div class="video-container rounded-lg overflow-hidden mb-8">
                         <iframe id="modal-video" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
 
                     <div class="px-4 sm:px-8">
-                        <!-- Project Details -->
+                         <!-- Project Details -->
                         <div class="grid md:grid-cols-3 gap-8 text-lg">
                             <div class="md:col-span-1">
                                 <h2 class="text-2xl font-bold text-white mb-4" data-lang-key="modalChallenge">El Desafío</h2>
@@ -442,7 +509,7 @@
                             </div>
                         </div>
 
-                        <!-- Technologies Used -->
+                         <!-- Technologies Used -->
                         <div class="mt-12 bg-gray-800/50 p-6 rounded-xl">
                             <h3 class="text-xl font-bold text-white mb-4 text-center" data-lang-key="modalTech">Tecnologías Utilizadas</h3>
                             <div id="modal-tech" class="flex flex-wrap justify-center gap-3"></div>
@@ -538,6 +605,24 @@
                 p6mSubtitle: "Juego Móvil Dinámico para Eventos Sociales",
                 p6mChallenge: "El reto fue desarrollar un juego de beber móvil que fuera gratuito, entretenido y que ofreciera una experiencia dinámica para evitar la monotonía, a diferencia de otras opciones existentes en el mercado.",
                 p6mProcess: "El desarrollo se centró en Unity. Lo más complejo fue diseñar e implementar el sistema de jugadores y la asignación aleatoria y justa de cartas. Se creó una arquitectura modular para los retos, permitiendo su dinamismo y el cambio constante del orden de aparición para asegurar la rejugabilidad.",
+                // More Projects
+                moreProjectsTitle: "Más Proyectos",
+                moreProjectsSubtitle: "Otros trabajos y exploraciones creativas.",
+                moreProjectsSelect: "Selecciona un proyecto de la lista para ver los detalles.",
+                moreProjectsCategoryTD: "TouchDesigner",
+                moreProjectsCategoryUnity: "Unity",
+                // (CHANGED) Translation updated
+                moreProjectsCategory3D: "Modelado",
+                moreProjectsCategoryAnim: "Animación",
+                mp: [ 
+                    { id: 'mp1', cat: 'touchdesigner', title: 'Partículas Interactivas', desc: 'Exploración de sistemas de partículas interactivas que reaccionan al movimiento.', video: 'BrF5mKbddZE' }, 
+                    { id: 'mp2', cat: 'touchdesigner', title: 'Texto Interactivo', desc: 'Efectos de texto generativos que responden a estímulos en tiempo real.', video: 'd-ucKBghC5s' }, 
+                    { id: 'mp3', cat: 'touchdesigner', title: 'Revelación de Imagen Interactiva', desc: 'Técnica para revelar imágenes de forma dinámica utilizando la interacción del usuario.', video: 'D4bLje0H558' },
+                    { id: 'mp4', cat: 'unity', title: 'Fragnesia VR', desc: 'Prototipo de juego de terror inmersivo para Realidad Virtual, enfocado en la atmósfera y el sonido.', video: 'PLvrUPV4Qsg' },
+                    { id: 'mp5', cat: 'unity', title: 'Cuna de Prat AR', desc: 'Reconstrucción arquitectónica virtual de la "Cuna de Prat" en Talcahuano usando Realidad Aumentada.', video: 'SoqMsK8s3WQ' },
+                    { id: 'mp6', cat: '3d', title: 'Espada de Aatrox', desc: 'Diseño y modelado 3D high-poly de la espada del personaje Aatrox (League of Legends).', video: 'Ixkim4BBWHE' },
+                    { id: 'mp8', cat: 'animacion', title: 'Poema Visual: Eterno Retorno', desc: 'Cortometraje de animación 3D basado en conceptos filosóficos y estéticas surreales.', video: 'y-mD6fsNElw' }
+                ],
                 // Contact
                 contactTitle: "Hablemos",
                 contactSubtitle: "¿Tienes un proyecto en mente o una oportunidad para mí? ¡No dudes en contactarme!",
@@ -622,6 +707,24 @@
                 p6mSubtitle: "Dynamic Mobile Game for Social Events",
                 p6mChallenge: "The challenge was to develop a mobile drinking game that was free, entertaining, and offered a dynamic experience to avoid monotony, unlike other options on the market.",
                 p6mProcess: "Development was centered in Unity. The most complex part was designing and implementing the player system and the random and fair card assignment. A modular architecture was created for the challenges, allowing for dynamism and a constantly changing order of appearance to ensure replayability.",
+                // More Projects
+                moreProjectsTitle: "More Projects",
+                moreProjectsSubtitle: "Other works and creative explorations.",
+                moreProjectsSelect: "Select a project from the list to see the details.",
+                moreProjectsCategoryTD: "TouchDesigner",
+                moreProjectsCategoryUnity: "Unity",
+                // (CHANGED) Translation updated
+                moreProjectsCategory3D: "3D Modeling",
+                moreProjectsCategoryAnim: "Animation",
+                mp: [ 
+                    { id: 'mp1', cat: 'touchdesigner', title: 'Interactive Particles', desc: 'Exploration of interactive particle systems that react to movement.', video: 'BrF5mKbddZE' }, 
+                    { id: 'mp2', cat: 'touchdesigner', title: 'Interactive Text', desc: 'Generative text effects that respond to real-time stimuli.', video: 'd-ucKBghC5s' }, 
+                    { id: 'mp3', cat: 'touchdesigner', title: 'Interactive Image Reveal', desc: 'Technique for dynamically revealing images using user interaction.', video: 'D4bLje0H558' },
+                    { id: 'mp4', cat: 'unity', title: 'Fragnesia VR', desc: 'Immersive VR horror game prototype, focusing on atmosphere and sound.', video: 'PLvrUPV4Qsg' },
+                    { id: 'mp5', cat: 'unity', title: 'Cuna de Prat AR', desc: 'Virtual architectural reconstruction of "Cuna de Prat" in Talcahuano using Augmented Reality.', video: 'SoqMsK8s3WQ' },
+                    { id: 'mp6', cat: '3d', title: 'Aatrox\'s Sword', desc: 'High-poly 3D design and modeling of the Aatrox (League of Legends) character\'s sword.', video: 'Ixkim4BBWHE' },
+                    { id: 'mp8', cat: 'animacion', title: 'Visual Poem: Eternal Return', desc: '3D animation short film based on philosophical concepts and surreal aesthetics.', video: 'y-mD6fsNElw' }
+                ],
                 // Contact
                 contactTitle: "Let's Talk",
                 contactSubtitle: "Have a project in mind or an opportunity for me? Don't hesitate to get in touch!",
@@ -636,9 +739,85 @@
             }
         };
 
-        const langToggle = document.getElementById('lang-toggle');
-        let currentLang = 'es';
+        // --- (MOVED UP) MORE PROJECTS MASTER-DETAIL SCRIPT ---
+        const projectListContainer = document.getElementById('more-projects-list');
+        const detailPlaceholder = document.getElementById('detail-placeholder');
+        const detailContent = document.getElementById('detail-content');
+        const detailTitle = document.getElementById('detail-title');
+        const detailDesc = document.getElementById('detail-desc');
+        const detailVideo = document.getElementById('detail-video');
+        let currentActiveProjectItem = null;
 
+        // (NEW) Helper function to reset detail view
+        function resetDetailView() {
+            if (detailPlaceholder) detailPlaceholder.classList.remove('hidden');
+            if (detailContent) detailContent.classList.add('hidden');
+            if (detailVideo) detailVideo.src = '';
+            if (currentActiveProjectItem) {
+                 currentActiveProjectItem.classList.remove('bg-blue-800', 'text-white');
+                 currentActiveProjectItem.classList.add('text-gray-300', 'hover:bg-blue-900/50');
+            }
+            currentActiveProjectItem = null;
+        }
+
+        // (RESTORED) The missing function
+        function setupMoreProjects(lang) {
+            if (!projectListContainer) return;
+
+            const projectData = translations[lang].mp;
+            let listHTML = '';
+            
+            projectData.forEach(project => {
+                listHTML += `
+                    <button class="more-project-item w-full text-left p-4 text-gray-300 hover:bg-blue-900/50 transition-colors duration-200" 
+                            data-project-id="${project.id}" 
+                            data-category="${project.cat}">
+                        ${project.title}
+                    </button>
+                `;
+            });
+            projectListContainer.innerHTML = listHTML;
+
+            // Add click listeners
+            const projectItems = projectListContainer.querySelectorAll('.more-project-item');
+            projectItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const projectId = item.dataset.projectId;
+                    const project = translations[lang].mp.find(p => p.id === projectId);
+                    
+                    if (project) {
+                        if (detailPlaceholder) detailPlaceholder.classList.add('hidden');
+                        if (detailContent) detailContent.classList.remove('hidden');
+                        
+                        if (detailTitle) detailTitle.textContent = project.title;
+                        if (detailDesc) detailDesc.textContent = project.desc;
+                        // (FIXED) Corrected video URL, checking for 'shorts'
+                        let videoSrc = '';
+                        if (project.video.includes('shorts')) {
+                            const videoId = project.video.split('/').pop(); // Get ID from shorts URL
+                            videoSrc = `https://www.youtube.com/embed/${videoId}`;
+                        } else {
+                            const videoId = project.video.split('v=').pop().split('&')[0]; // Get ID from watch URL
+                            videoSrc = `https://www.youtube.com/embed/${videoId}`;
+                        }
+                        if (detailVideo) detailVideo.src = videoSrc;
+                        
+                        if (currentActiveProjectItem) {
+                             currentActiveProjectItem.classList.remove('bg-blue-800', 'text-white');
+                             currentActiveProjectItem.classList.add('text-gray-300', 'hover:bg-blue-900/50');
+                        }
+                        item.classList.add('bg-blue-800', 'text-white');
+                        item.classList.remove('text-gray-300', 'hover:bg-blue-900/50');
+                        currentActiveProjectItem = item;
+                    }
+                });
+            });
+
+            // Reset detail view if language is switched
+            resetDetailView();
+        }
+
+        // (MODIFIED) Combined the two duplicate switchLanguage functions
         function switchLanguage(lang) {
             document.documentElement.lang = lang;
             const elements = document.querySelectorAll('[data-lang-key]');
@@ -648,6 +827,7 @@
                     el.innerHTML = translations[lang][key];
                 }
             });
+
             // Update modal data attributes
             const modalTriggers = document.querySelectorAll('[data-modal-trigger]');
             modalTriggers.forEach(trigger => {
@@ -659,16 +839,53 @@
                     trigger.dataset.process = translations[lang][`${prefix}Process`] || trigger.dataset.process;
                 }
             });
-             langToggle.checked = lang === 'es';
+            langToggle.checked = lang === 'es';
+            
+            // This is where the error was. setupMoreProjects must be defined.
+            setupMoreProjects(lang); 
         }
 
+        const langToggle = document.getElementById('lang-toggle');
         langToggle.addEventListener('change', () => {
             currentLang = langToggle.checked ? 'es' : 'en';
             switchLanguage(currentLang);
         });
 
         // Set initial language
-        switchLanguage('es');
+        let currentLang = 'es';
+        switchLanguage('es'); // This call failed
+
+        // --- (NEW) MORE PROJECTS FILTER SCRIPT ---
+        const filterButtonsMore = document.querySelectorAll('#filter-buttons-more .filter-btn-more');
+        
+        if (filterButtonsMore.length > 0 && projectListContainer) {
+            filterButtonsMore.forEach(button => {
+                button.addEventListener('click', () => {
+                    const category = button.dataset.category;
+                    
+                    // Update button styles
+                    filterButtonsMore.forEach(btn => {
+                        btn.classList.remove('bg-blue-600', 'text-white');
+                        btn.classList.add('bg-gray-700/50', 'text-gray-200', 'hover:bg-gray-700/80');
+                    });
+                    button.classList.add('bg-blue-600', 'text-white');
+                    button.classList.remove('bg-gray-700/50', 'text-gray-200', 'hover:bg-gray-700/80');
+
+                    // Filter list
+                    const projectItems = projectListContainer.querySelectorAll('.more-project-item');
+                    projectItems.forEach(item => {
+                        if (category === 'all' || item.dataset.category === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+
+                    // Reset detail view
+                    resetDetailView();
+                });
+            });
+        }
 
         // --- Mobile menu toggle script ---
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
