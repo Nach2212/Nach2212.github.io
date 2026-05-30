@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ignacio Aguayo - Creative Technologist</title>
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        cyber: {
+                            dark: '#030712',
+                            darker: '#02050c',
+                            blue: '#3b82f6',
+                            purple: '#c084fc',
+                            pink: '#ec4899',
+                            slate: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Inter & Space Grotesk -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to complement Tailwind */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #030712; 
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        /* Scroll Reveal Utility Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            will-change: opacity, transform;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #starfield-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        #supernova-core {
+            transform: translate(-50%, -50%);
+            background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,204,153,1) 35%, rgba(255,153,51,1) 60%, rgba(255,255,255,0) 100%);
+            box-shadow: 0 0 50px 20px #fff, 0 0 100px 60px #f0f, 0 0 150px 100px #0ff;
+            animation: pulse 1.5s infinite ease-in-out;
+            will-change: transform, opacity;
+        }
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; }
+        }
+        
+        #modal-body {
+             background-image: radial-gradient(ellipse at 50% 0%, rgba(30, 41, 59, 0.9) 0%, transparent 80%);
+        }
+        
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #030712; }
+        ::-webkit-scrollbar-thumb { background-color: #1e293b; border-radius: 10px; border: 2px solid #030712; }
+        ::-webkit-scrollbar-thumb:hover { background-color: #3b82f6; }
+
+        #modal-content::-webkit-scrollbar-track, #more-projects-detail-content::-webkit-scrollbar-track { background: #0f172a; }
+        #more-projects-list::-webkit-scrollbar-track { background: #030712; }
+
+        /* Video containers */
+        .video-container {
+            position: relative; width: 100%; padding-top: 56.25%;
+        }
+        .mp-video-container {
+             position: relative; width: 100%; padding-top: 45%; 
+        }
+        .video-container iframe, .mp-video-container iframe {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 0.75rem;
+        }
+
+        /* Nav link hover effect */
+        .nav-link { position: relative; padding-bottom: 4px; }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 0; height: 2px; background-color: #3b82f6; transition: width 0.3s ease-in-out;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        /* Language Toggle Switch */
+        .lang-toggle-label { width: 50px; height: 26px; }
+        .lang-toggle-label:before {
+            content: ''; position: absolute; width: 22px; height: 22px; border-radius: 50%;
+            top: 2px; left: 2px; background: white; transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+        .lang-toggle:checked + .lang-toggle-label:before { transform: translateX(24px); }
+    </style>
+</head>
+<body class="text-gray-300 opacity-0 transition-opacity duration-1000">
+
+    <!-- Canvas for the starfield animation -->
+    <canvas id="starfield-canvas"></canvas>
+
+    <!-- ========== HEADER / NAVBAR ========== -->
+    <header class="bg-cyber-dark/80 backdrop-blur-md border-b border-slate-900/60 sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-6">
+                <a href="#inicio" aria-label="Volver al inicio">
+                     <img src="assets/Logo.png" alt="" class="h-12 md:h-16 rounded-full hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='https://placehold.co/96x96/0a0f1e/3b82f6?text=IA';">
+                </a>
+                <!-- Language Toggle -->
+                <div class="hidden md:flex items-center space-x-2">
+                    <span class="font-semibold text-xs text-gray-500 tracking-wider" data-lang-key="langEN">EN</span>
+                    <input type="checkbox" id="lang-toggle" class="lang-toggle hidden" aria-label="Cambiar idioma">
+                    <label for="lang-toggle" class="lang-toggle-label relative bg-slate-800 rounded-full cursor-pointer shadow-inner border border-slate-700/50"></label>
+                    <span class="font-semibold text-xs text-gray-300 tracking-wider" data-lang-key="langES">ES</span>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#sobre-mi" class="nav-link text-sm font-medium tracking-wide text-gray-300 hover:text-white transition duration-300" data-lang-key="navAbout">Sobre Mí</a>
+                <a href="#servicios" class="nav-link text-sm font-medium tracking-wide text-gray-300 hover:text-white transition duration-300" data-lang-key="navServices">Servicios</a>
+                <a href="#proyectos" class="nav-link text-sm font-medium tracking-wide text-gray-300 hover:text-white transition duration-300" data-lang-key="navProjects">Proyectos</a>
+                <a href="#contacto" class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold tracking-wide px-5 py-2.5 rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 transition-all duration-300" data-lang-key="navContact">Contáctame</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white transition-colors" aria-label="Abrir menú">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-6 space-y-4 bg-cyber-dark/95 backdrop-blur-xl border-b border-slate-800/80 absolute w-full left-0">
+            <div class="flex items-center space-x-2 mb-4">
+                <span class="font-semibold text-xs text-gray-400" data-lang-key="langEN">EN</span>
+                <input type="checkbox" id="lang-toggle-mobile" class="lang-toggle hidden">
+                <label for="lang-toggle-mobile" class="lang-toggle-label relative bg-slate-800 rounded-full cursor-pointer" onclick="document.getElementById('lang-toggle').click()"></label>
+                <span class="font-semibold text-xs text-gray-200" data-lang-key="langES">ES</span>
+            </div>
+            <a href="#sobre-mi" class="block text-gray-300 hover:text-white text-base font-semibold transition duration-300" data-lang-key="navAboutMobile">Sobre Mí</a>
+            <a href="#servicios" class="block text-gray-300 hover:text-white text-base font-semibold transition duration-300" data-lang-key="navServicesMobile">Servicios</a>
+            <a href="#proyectos" class="block text-gray-300 hover:text-white text-base font-semibold transition duration-300" data-lang-key="navProjectsMobile">Proyectos</a>
+            <a href="#contacto" class="block bg-blue-600 text-white px-4 py-3 rounded-xl text-center font-semibold hover:bg-blue-500 shadow-md transition duration-300 mt-4" data-lang-key="navContactMobile">Contáctame</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 relative z-10">
+
+        <!-- ========== HERO SECTION ========== -->
+        <section id="inicio" class="text-center min-h-[85vh] flex flex-col justify-center items-center reveal active relative">
+            <div class="absolute -z-10 w-[70vw] h-[40vh] md:w-[600px] md:h-[600px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+            <div class="absolute -z-10 w-[50vw] h-[30vh] md:w-[400px] md:h-[400px] bg-purple-500/5 rounded-full blur-[100px] translate-x-12 translate-y-12 pointer-events-none"></div>
+            
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6 tracking-tight" data-lang-key="heroTitle">
+                Hola, soy <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">Ignacio Aguayo</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-400 max-w-2xl mb-12 leading-relaxed font-light" data-lang-key="heroSubtitle">
+                Creative Technologist. Construyo experiencias interactivas que conectan el mundo digital y el físico.
+            </p>
+
+            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-2">
+                <a href="#proyectos" class="bg-blue-600 text-white px-8 py-3.5 rounded-xl font-bold text-base hover:bg-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.2)] hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] transform hover:-translate-y-1 transition-all duration-300" data-lang-key="heroBtnProjects">
+                    Ver mis Proyectos
+                </a>
+                <a href="#contacto" class="bg-slate-900/60 backdrop-blur border border-slate-800 text-gray-200 px-8 py-3.5 rounded-xl font-bold text-base hover:bg-slate-800 hover:text-white shadow-lg transform hover:-translate-y-1 transition-all duration-300" data-lang-key="heroBtnContact">
+                    Hablemos
+                </a>
+            </div>
+        </section>
+
+        <!-- ========== ABOUT ME SECTION ========== -->
+        <section id="sobre-mi" class="py-24 reveal">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+                    <!-- GIF Character -->
+                    <div class="w-full md:w-1/3 flex-shrink-0 relative group">
+                        <div class="absolute inset-0 bg-blue-500/20 blur-2xl rounded-full group-hover:bg-blue-500/30 transition-colors duration-500"></div>
+                        <img src="assets/personaje_saludando.gif" alt="" class="w-full max-w-xs mx-auto relative z-10 transform group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/320x320/0a0f1e/3b82f6?text=GIF';">
+                    </div>
+                    <!-- About Me Text -->
+                    <div class="w-full md:w-2/3 text-center md:text-left">
+                        <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight" data-lang-key="aboutTitle">Sobre Mí</h2>
+                        <p id="bio-paragraph" class="text-lg text-gray-400 leading-relaxed" data-lang-key="aboutBio">
+                            Soy un tecnólogo creativo radicado en Concepción, Chile, apasionado por la intersección del arte y el código. Mi enfoque es la creación de experiencias inmersivas e interactivas que desafían la percepción y conectan con las personas a un nivel más profundo.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-8 md:p-10 rounded-3xl shadow-xl text-left mt-24">
+                    <h3 class="text-2xl font-bold text-white mb-8 text-center" data-lang-key="skillsTitle">Mis Habilidades</h3>
+                    <div id="skills-list" class="flex flex-wrap justify-center gap-3 md:gap-4">
+                        <span class="bg-blue-950/30 border border-blue-500/20 text-blue-300 px-5 py-2 rounded-xl font-medium hover:bg-blue-950/60 transition-colors" data-lang-key="skillUnity">Unity</span>
+                        <span class="bg-blue-950/30 border border-blue-500/20 text-blue-300 px-5 py-2 rounded-xl font-medium hover:bg-blue-950/60 transition-colors" data-lang-key="skillVrAr">Desarrollo VR/AR</span>
+                        <span class="bg-blue-950/30 border border-blue-500/20 text-blue-300 px-5 py-2 rounded-xl font-medium hover:bg-blue-950/60 transition-colors" data-lang-key="skillMobile">Mobile Apps</span>
+                        <span class="bg-blue-950/30 border border-blue-500/20 text-blue-300 px-5 py-2 rounded-xl font-medium hover:bg-blue-950/60 transition-colors" data-lang-key="skillTouchdesigner">TouchDesigner</span>
+                        <span class="bg-slate-800/50 border border-slate-700/50 text-slate-300 px-5 py-2 rounded-xl font-medium hover:bg-slate-800 transition-colors" data-lang-key="skillUiUx">UX/UI Design</span>
+                        <span class="bg-slate-800/50 border border-slate-700/50 text-slate-300 px-5 py-2 rounded-xl font-medium hover:bg-slate-800 transition-colors" data-lang-key="skillInteractive">Experiencias Interactivas</span>
+                        <span class="bg-slate-800/50 border border-slate-700/50 text-slate-300 px-5 py-2 rounded-xl font-medium hover:bg-slate-800 transition-colors" data-lang-key="skillShaders">Shaders & Generativos</span>
+                        <span class="bg-slate-800/50 border border-slate-700/50 text-slate-300 px-5 py-2 rounded-xl font-medium hover:bg-slate-800 transition-colors" data-lang-key="skillCreativeCoding">Creative Coding</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== SERVICES SECTION ========== -->
+        <section id="servicios" class="py-24 reveal">
+            <div class="max-w-5xl mx-auto text-center">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight" data-lang-key="servicesTitle">Servicios Creativos</h2>
+                <p class="text-lg text-gray-400 mb-16 max-w-2xl mx-auto" data-lang-key="servicesSubtitle">Soluciones interactivas a medida que conectan el arte digital con el espacio físico.</p>
+                
+                <div class="grid md:grid-cols-2 gap-8 text-left">
+                    <!-- Service 1 -->
+                    <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-8 rounded-3xl hover:border-blue-500/30 transition-all duration-300 shadow-xl group">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-900/20 flex items-center justify-center mb-6 border border-blue-500/20 group-hover:scale-110 transition-transform">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors" data-lang-key="srv1Title">Instalaciones Interactivas</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed" data-lang-key="srv1Desc">
+                            Desarrollo en TouchDesigner para mapping proyectado, visuales reactivos en vivo, integración de sensores corporales y espaciales (Kinect, hand tracking) para museos, marcas y eventos.
+                        </p>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-8 rounded-3xl hover:border-purple-500/30 transition-all duration-300 shadow-xl group">
+                        <div class="w-12 h-12 rounded-2xl bg-purple-900/20 flex items-center justify-center mb-6 border border-purple-500/20 group-hover:scale-110 transition-transform">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors" data-lang-key="srv2Title">Desarrollo VR/AR inmersivo</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed" data-lang-key="srv2Desc">
+                            Aplicaciones de Realidad Virtual y Aumentada en Unity para Meta Quest y dispositivos móviles. Simuladores interactivos, recorridos virtuales en 3D y juegos experimentales para capacitación y marketing.
+                        </p>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-8 rounded-3xl hover:border-pink-500/30 transition-all duration-300 shadow-xl group">
+                        <div class="w-12 h-12 rounded-2xl bg-pink-900/20 flex items-center justify-center mb-6 border border-pink-500/20 group-hover:scale-110 transition-transform">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-pink-400 transition-colors" data-lang-key="srv3Title">Aplicaciones Móviles e Interactivas</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed" data-lang-key="srv3Desc">
+                            Diseño y programación de aplicaciones móviles de alto rendimiento en Unity o desarrollo nativo. Integración de lógicas gamificadas, manuales interactivos 3D y juegos multijugador locales.
+                        </p>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-8 rounded-3xl hover:border-emerald-500/30 transition-all duration-300 shadow-xl group">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-900/20 flex items-center justify-center mb-6 border border-emerald-500/20 group-hover:scale-110 transition-transform">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors" data-lang-key="srv4Title">Modelado y Animación 3D</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed" data-lang-key="srv4Desc">
+                            Modelado de assets optimizados para tiempo real, animaciones personalizadas en After Effects o Blender, y deconstrucción procedural de objetos 3D.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== PROJECTS SECTION ========== -->
+        <section id="proyectos" class="py-24 text-center reveal">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight" data-lang-key="projectsTitle">Proyectos Destacados</h2>
+            <p class="text-lg text-gray-400 mb-16" data-lang-key="projectsSubtitle">Una selección de mis mejores trabajos y exploraciones.</p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+                
+                <!-- Project Card 1 -->
+                <button class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-3xl shadow-xl overflow-hidden transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-500/40 transition-all duration-300 group w-full flex flex-col h-full text-left"
+                        data-modal-trigger 
+                        data-lang-key-prefix="p1m"
+                        data-title="Galería Circular Interactiva" 
+                        data-subtitle="Navegación Inmersiva con TouchDesigner" 
+                        data-video-id="13Ajb89Q01Q"
+                        data-challenge="El desafío fue crear una forma innovadora de presentar imágenes, buscando una experiencia que superara la visualización estática y fomentara una interacción más profunda."
+                        data-process="Para lograr una interacción intuitiva, opté por el hand tracking como método de control. El principal reto técnico fue combinar la galería esférica con la precisión del seguimiento de manos, lo que requirió un diseño gestual cuidadoso y optimización para asegurar una experiencia fluida."
+                        data-tech='["TouchDesigner", "Hand Tracking", "Visuales Generativos"]'>
+                    <div class="w-full h-52 relative overflow-hidden bg-slate-900">
+                        <span class="bg-blue-600/80 backdrop-blur border border-blue-400/20 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg absolute top-4 left-4 z-20 shadow-lg">TouchDesigner</span>
+                        <img src="assets/GaleriaCircular.png" alt="" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+1';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 opacity-80"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow bg-slate-950/20">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors" data-lang-key="p1Title">Galería Circular Interactiva</h3>
+                        <p class="text-gray-400 mb-6 flex-grow text-sm leading-relaxed" data-lang-key="p1Desc">
+                            Experiencia en TouchDesigner con una galería circular controlada por hand tracking espacial.
+                        </p>
+                        <div class="font-bold text-blue-500 group-hover:text-blue-300 transition-colors duration-300 flex items-center gap-2 mt-auto text-sm">
+                            <span data-lang-key="pBtnDetails">Ver Detalles</span> 
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                        </div>
+                    </div>
+                </button>
+
+                <!-- Project Card 2 -->
+                <button class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-3xl shadow-xl overflow-hidden transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-500/40 transition-all duration-300 group w-full flex flex-col h-full text-left"
+                        data-modal-trigger
+                        data-lang-key-prefix="p2m"
+                        data-title="Armonías Gestuales: IA Visual Interactiva"
+                        data-subtitle="Creación de Contenido con Gestos y Algoritmos"
+                        data-video-id="cLHNCb-TEV8"
+                        data-challenge="El reto era desarrollar una experiencia que permitiera generar visuales a través del movimiento de las manos, fusionando la expresión física con la generación algorítmica de imágenes."
+                        data-process="Implementé el seguimiento de manos en tiempo real a través de TouchDesigner para capturar y traducir los movimientos a parámetros que alimentaran una red neuronal generativa. El principal desafío fue optimizar la respuesta de la IA para que las imágenes se generaran de forma fluida y coherente con la intención gestual."
+                        data-tech='["TouchDesigner", "Inteligencia Artificial", "Hand Tracking"]'>
+                    <div class="w-full h-52 relative overflow-hidden bg-slate-900">
+                        <span class="bg-purple-600/80 backdrop-blur border border-purple-400/20 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg absolute top-4 left-4 z-20 shadow-lg">TouchDesigner / IA</span>
+                        <img src="assets/IaGenerativaManos.png" alt="" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+2';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 opacity-80"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow bg-slate-950/20">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors" data-lang-key="p2Title">Armonías Gestuales: IA Visual</h3>
+                        <p class="text-gray-400 mb-6 flex-grow text-sm leading-relaxed" data-lang-key="p2Desc">
+                            Aplicación en TouchDesigner que genera imágenes con Inteligencia Artificial a partir de gestos.
+                        </p>
+                        <div class="font-bold text-blue-500 group-hover:text-blue-300 transition-colors duration-300 flex items-center gap-2 mt-auto text-sm">
+                            <span data-lang-key="pBtnDetails">Ver Detalles</span> 
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                        </div>
+                    </div>
+                </button>
+                                         <!-- Project Card 3 -->
+                 <button class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-3xl shadow-xl overflow-hidden transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-500/40 transition-all duration-300 group w-full flex flex-col h-full text-left"
+                        data-modal-trigger
+                        data-lang-key-prefix="p3m"
+                        data-title="Deconstrucción 3D Interactiva"
+                        data-subtitle="Exhibición y Manipulación de Modelos 3D con Gestos"
+                        data-video-id="3derrG_z0mo"
+                        data-challenge="El principal desafío fue crear una forma innovadora y atractiva de exhibir modelos 3D, permitiendo a los usuarios interactuar con ellos de manera divertida y significativa, como controlando su deconstrucción o cambiando los modelos con las manos."
+                        data-process="Desarrollé esta experiencia en TouchDesigner, enfocándome en la integración del hand tracking para una manipulación intuitiva. Lo más complejo fue diseñar los algoritmos de deconstrucción y el sistema de reconocimiento gestual que permitiera a los usuarios controlar los modelos 3D en tiempo real, ofreciendo una interacción fluida y reactiva con los objetos virtuales."
+                        data-tech='["TouchDesigner", "Hand Tracking", "Diseño 3D"]'>
+                    <div class="w-full h-52 relative overflow-hidden bg-slate-900">
+                        <span class="bg-blue-600/80 backdrop-blur border border-blue-400/20 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg absolute top-4 left-4 z-20 shadow-lg">TouchDesigner / 3D</span>
+                        <img src="assets/Deconstruccion.png" alt="" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+3';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 opacity-80"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow bg-slate-950/20">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors" data-lang-key="p3Title">Deconstrucción 3D Interactiva</h3>
+                        <p class="text-gray-400 mb-6 flex-grow text-sm leading-relaxed" data-lang-key="p3Desc">
+                            Experiencia interactiva que deconstruye modelos 3D en tiempo real usando hand tracking.
+                        </p>
+                       <div class="font-bold text-blue-500 group-hover:text-blue-300 transition-colors duration-300 flex items-center gap-2 mt-auto text-sm">
+                           <span data-lang-key="pBtnDetails">Ver Detalles</span> 
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                       </div>
+                    </div>
+                </button>
+
+                <!-- Project Card 4 -->
+                <button class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-3xl shadow-xl overflow-hidden transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-500/40 transition-all duration-300 group w-full flex flex-col h-full text-left"
+                        data-modal-trigger
+                        data-lang-key-prefix="p4m"
+                        data-title="Galería VR para Fotógrafos"
+                        data-subtitle="Exhibición Virtual Inmersiva en Concepción"
+                        data-video-id="X7vD2CPHX5M"
+                        data-challenge="El reto era diseñar una galería virtual inmersiva para un evento de fotógrafos en Concepción, que permitiera exhibir sus obras de una manera innovadora y envolvente utilizando la realidad virtual."
+                        data-process="Trabajé en Unity, diseñando la arquitectura virtual de la galería y la disposición de los cuadros. La decoración y la ambientación se realizaron a medida según los requerimientos del evento, buscando crear un espacio que realzara las obras fotográficas. La implementación se optimizó para funcionar fluidamente en dispositivos Meta Quest 2."
+                        data-tech='["Unity", "Meta Quest 2", "Diseño 3D"]'>
+                    <div class="w-full h-52 relative overflow-hidden bg-slate-900">
+                        <span class="bg-indigo-600/80 backdrop-blur border border-indigo-400/20 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg absolute top-4 left-4 z-20 shadow-lg">Unity / VR</span>
+                        <img src="assets/galeriavr.png" alt="" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+4';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 opacity-80"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow bg-slate-950/20">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors" data-lang-key="p4Title">Galería VR Fotográfica</h3>
+                        <p class="text-gray-400 mb-6 flex-grow text-sm leading-relaxed" data-lang-key="p4Desc">
+                            App de galería virtual inmersiva en VR para Meta Quest 2, diseñada para eventos.
+                        </p>
+                        <div class="font-bold text-blue-500 group-hover:text-blue-300 transition-colors duration-300 flex items-center gap-2 mt-auto text-sm">
+                            <span data-lang-key="pBtnDetails">Ver Detalles</span> 
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                        </div>
+                    </div>
+                </button>
+                  <!-- Project Card 5 -->
+                <button class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-3xl shadow-xl overflow-hidden transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-500/40 transition-all duration-300 group w-full flex flex-col h-full text-left"
+                        data-modal-trigger
+                        data-lang-key-prefix="p5m"
+                        data-title="App Móvil para Bomberos"
+                        data-subtitle="Herramienta de Entrenamiento para Emergencias"
+                        data-video-id="7icD6LN7ihA"
+                        data-challenge="El principal desafío fue crear una herramienta de entrenamiento digital para bomberos, que les permitiera aprender y repasar la ubicación del material en el carro bomba, así como consultar procedimientos vitales, de una forma cómoda e intuitiva."
+                        data-process="Desarrollé la aplicación en Unity, enfocándose en la creación de modelos 3D detallados de las herramientas y el carro. La interfaz fue diseñada como una herramienta de estudio eficaz, con un sistema de navegación optimizado para el aprendizaje y la consulta rápida de procedimientos clave, como el manual IFTA, fortaleciendo así su preparación para emergencias reales."
+                        data-tech='["Unity", "Mobile Development", "Modelado 3D"]'>
+                    <div class="w-full h-52 relative overflow-hidden bg-slate-900">
+                        <span class="bg-emerald-600/80 backdrop-blur border border-emerald-400/20 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg absolute top-4 left-4 z-20 shadow-lg">Unity / Mobile</span>
+                        <img src="assets/Bomberos.png" alt="" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+5';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 opacity-80"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow bg-slate-950/20">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors" data-lang-key="p5Title">App Móvil para Bomberos</h3>
+                        <p class="text-gray-400 mb-6 flex-grow text-sm leading-relaxed" data-lang-key="p5Desc">
+                            Diseño de app móvil para ubicar material y consultar procedimientos en carros bomba.
+                        </p>
+                        <div class="font-bold text-blue-500 group-hover:text-blue-300 transition-colors duration-300 flex items-center gap-2 mt-auto text-sm">
+                            <span data-lang-key="pBtnDetails">Ver Detalles</span> 
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                        </div>
+                    </div>
+                </button>
+
+                <!-- Project Card 6 -->
+                <button class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-3xl shadow-xl overflow-hidden transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-500/40 transition-all duration-300 group w-full flex flex-col h-full text-left"
+                        data-modal-trigger
+                        data-lang-key-prefix="p6m"
+                        data-title="PalCarrete App"
+                        data-subtitle="Juego Móvil Dinámico para Eventos Sociales"
+                        data-video-id="VuBYKSHcFio"
+                        data-challenge="El reto fue desarrollar un juego de beber móvil que fuera gratuito, entretenido y que ofreciera una experiencia dinámica para evitar la monotonía, a diferencia de otras opciones existentes en el mercado."
+                        data-process="El desarrollo se centró en Unity. Lo más complejo fue diseñar e implementar el sistema de jugadores y la asignación aleatoria y justa de cartas. Se creó una arquitectura modular para los retos, permitiendo su dinamismo y el cambio constante del orden de aparición para asegurar la rejugabilidad."
+                        data-tech='["Unity", "Mobile Dev", "Game Design"]'>
+                    <div class="w-full h-52 relative overflow-hidden bg-slate-900">
+                        <span class="bg-emerald-600/80 backdrop-blur border border-emerald-400/20 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg absolute top-4 left-4 z-20 shadow-lg font-display">Unity / Mobile</span>
+                        <img src="assets/PalCarrete.png" alt="" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+6';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 opacity-80"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow bg-slate-950/20">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors" data-lang-key="p6Title">PalCarrete App</h3>
+                        <p class="text-gray-400 mb-6 flex-grow text-sm leading-relaxed" data-lang-key="p6Desc">
+                            Aplicación móvil lúdica con sistema dinámico de retos, castigos y tarjetas.
+                        </p>
+                        <div class="font-bold text-blue-500 group-hover:text-blue-300 transition-colors duration-300 flex items-center gap-2 mt-auto text-sm">
+                            <span data-lang-key="pBtnDetails">Ver Detalles</span> 
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                        </div>
+                    </div>
+                </button>
+            </div>
+        </section>
+        
+        <!-- ========== MORE PROJECTS SECTION ========== -->
+        <section id="mas-proyectos" class="py-24 reveal">
+            <h2 class="text-3xl md:text-5xl font-bold text-white mb-4 text-center tracking-tight" data-lang-key="mpTitle">Más Proyectos</h2>
+            <p class="text-lg text-gray-400 mb-12 text-center" data-lang-key="mpSubtitle">Otros trabajos y exploraciones creativas.</p>
+            
+            <!-- Filters -->
+            <div class="flex justify-center flex-wrap gap-3 mb-10">
+                <button class="mp-filter-btn bg-blue-600 border border-blue-500/30 text-white px-6 py-2.5 rounded-xl font-semibold shadow-md transition-all duration-300 transform hover:scale-105" data-filter="all" data-lang-key="mpFilterAll">Todos</button>
+                <button class="mp-filter-btn bg-slate-900/60 border border-slate-800/80 text-gray-400 hover:bg-slate-800/80 hover:text-white px-6 py-2.5 rounded-xl font-medium transition-all duration-300" data-filter="touchdesigner" data-lang-key="mpFilterTouch">TouchDesigner</button>
+                <button class="mp-filter-btn bg-slate-900/60 border border-slate-800/80 text-gray-400 hover:bg-slate-800/80 hover:text-white px-6 py-2.5 rounded-xl font-medium transition-all duration-300" data-filter="unity" data-lang-key="mpFilterUnity">Unity</button>
+                <button class="mp-filter-btn bg-slate-900/60 border border-slate-800/80 text-gray-400 hover:bg-slate-800/80 hover:text-white px-6 py-2.5 rounded-xl font-medium transition-all duration-300" data-filter="modelado" data-lang-key="mpFilterModelado">Modelado</button>
+                <button class="mp-filter-btn bg-slate-900/60 border border-slate-800/80 text-gray-400 hover:bg-slate-800/80 hover:text-white px-6 py-2.5 rounded-xl font-medium transition-all duration-300" data-filter="animacion" data-lang-key="mpFilterAnimacion">Animación</button>
+            </div>
+
+            <!-- Master-Detail Layout -->
+            <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-3xl shadow-xl overflow-hidden min-h-[600px] flex flex-col md:flex-row relative">
+                <!-- Master (List) -->
+                <div id="more-projects-list" class="w-full md:w-1/3 border-b md:border-b-0 md:border-r border-slate-800/60 overflow-y-auto max-h-[350px] md:max-h-[600px] scroll-smooth">
+                    <!-- Project items will be injected by JS -->
+                </div>
+                
+                <!-- Detail (Content) -->
+                <div class="w-full md:w-2/3 p-6 md:p-10 flex flex-col min-h-[450px] bg-gradient-to-br from-slate-900/10 to-[#030712]/50">
+                    <div id="more-projects-detail" class="flex-grow flex flex-col">
+                        <!-- Initial Message -->
+                        <div id="mp-initial-message" class="m-auto text-center flex flex-col items-center">
+                            <div class="w-16 h-16 bg-blue-900/20 border border-blue-500/20 rounded-2xl flex items-center justify-center mb-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-2" data-lang-key="mpSelectTitle">Selecciona un proyecto</h3>
+                            <p class="text-gray-400 text-base max-w-sm" data-lang-key="mpSelectDesc">Elige un proyecto de la lista a la izquierda para ver su demostración.</p>
+                        </div>
+                        
+                        <!-- Content (hidden by default) -->
+                        <div id="mp-content" class="hidden flex-grow flex-col animate-[fadeIn_0.5s_ease-out]">
+                            <h3 id="mp-title" class="text-3xl font-extrabold text-white mb-6 tracking-tight"></h3>
+                            <div class="mp-video-container rounded-2xl overflow-hidden shadow-2xl mb-6 ring-1 ring-white/10">
+                                <iframe id="mp-video" src="" title="Video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div id="more-projects-detail-content" class="flex-grow overflow-y-auto pr-4">
+                                <p id="mp-description" class="text-lg text-gray-300 leading-relaxed"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========== CONTACT SECTION ========== -->
+        <section id="contacto" class="py-24 text-center reveal">
+            <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-3xl shadow-xl p-10 md:p-16 max-w-4xl mx-auto relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-transparent pointer-events-none"></div>
+                
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight relative z-10" data-lang-key="contactTitle">Hablemos</h2>
+                <p class="text-lg text-gray-400 mb-10 relative z-10 max-w-2xl mx-auto" data-lang-key="contactSubtitle">
+                    ¿Tienes un proyecto en mente o una oportunidad para mí? ¡No dudes en contactarme!
+                </p>
+                <div class="relative max-w-xl mx-auto z-10 flex flex-col gap-4">
+                    <div class="bg-slate-950/80 border border-slate-800/80 rounded-2xl flex flex-col sm:flex-row items-center justify-between p-3 gap-3 shadow-inner group focus-within:border-blue-500/50 transition-colors duration-300">
+                        <p id="email-text" class="text-gray-300 text-base md:text-lg px-4 truncate font-mono select-all">i.aguayo2212@gmail.com</p>
+                        
+                        <div class="flex gap-2 w-full sm:w-auto">
+                            <!-- Copy button -->
+                            <button id="copy-email-btn" class="flex-1 sm:flex-none bg-slate-800/80 border border-slate-700 hover:bg-slate-755 text-white px-5 py-3 rounded-xl font-semibold transition-colors shadow-md flex items-center justify-center gap-2" aria-label="Copiar correo">
+                                <span data-lang-key="contactBtnCopy">Copiar</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                            </button>
+                            <!-- Send email button -->
+                            <a href="mailto:i.aguayo2212@gmail.com" class="flex-1 sm:flex-none bg-blue-600 hover:bg-blue-500 text-white px-5 py-3 rounded-xl font-bold transition-colors shadow-md flex items-center justify-center gap-2" aria-label="Enviar correo">
+                                <span data-lang-key="contactBtnSend">Escribir</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div id="copy-feedback" class="absolute -bottom-12 left-1/2 -translate-x-1/2 bg-emerald-500 text-white text-xs px-4 py-1.5 rounded-full opacity-0 transition-all duration-300 shadow-lg font-medium flex items-center gap-2" data-lang-key="contactCopyFeedback">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                        ¡Copiado!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-cyber-darker border-t border-slate-900 mt-20 relative z-10">
+        <div class="container mx-auto px-6 py-10 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p class="text-gray-500 text-sm" data-lang-key="footerRights">&copy; 2026 Ignacio Aguayo. Todos los derechos reservados.</p>
+            <div class="">
+                <button id="destroy-btn" class="bg-red-950/20 text-red-500 border border-red-500/20 px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-red-900/40 hover:text-red-400 transition-all duration-300 flex items-center gap-2" data-lang-key="footerBtnDestroy">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                    ¡Destruir Página!
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== PROJECT MODAL ========== -->
+    <div id="project-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex justify-center items-center p-4 md:p-6 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div id="modal-content" class="relative bg-[#070c1b]/95 border border-slate-850 shadow-2xl rounded-3xl w-full max-w-5xl max-h-[90vh] overflow-y-auto transform scale-95 transition-all duration-300">
+            <!-- Close Button -->
+            <button id="modal-close-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-transform duration-200 transform hover:scale-110 z-20" aria-label="Cerrar ventana">
+                <div class="bg-black/55 backdrop-blur rounded-full p-2 border border-white/10 hover:bg-red-500/80 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </div>
+            </button>
+            
+            <!-- Modal Body -->
+            <div id="modal-body" class="p-6 md:p-10 relative">
+                 <div class="relative z-10">
+                    <!-- Project Title -->
+                    <h1 id="modal-title" class="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-2 text-center mt-4"></h1>
+                    <p id="modal-subtitle" class="text-base md:text-lg text-blue-400 mb-8 text-center font-medium"></p>
+ 
+                    <!-- Project Media (Video) -->
+                    <div class="video-container rounded-2xl overflow-hidden mb-10 shadow-2xl ring-1 ring-white/10">
+                        <iframe id="modal-video" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+ 
+                    <div class="px-2 sm:px-4">
+                        <!-- Project Details -->
+                        <div class="grid md:grid-cols-3 gap-8 text-base md:text-lg">
+                            <div class="md:col-span-1 bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-6 rounded-3xl">
+                                <h2 class="text-xl md:text-2xl font-bold text-white mb-4 flex items-center gap-2" data-lang-key="modalChallenge">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                                    El Desafío
+                               </h2>
+                                <p id="modal-challenge" class="text-gray-300 leading-relaxed text-sm md:text-base"></p>
+                            </div>
+                            <div class="md:col-span-2 bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-6 rounded-3xl">
+                                <h2 class="text-xl md:text-2xl font-bold text-white mb-4 flex items-center gap-2" data-lang-key="modalProcess">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
+                                    Mi Proceso
+                                </h2>
+                                <p id="modal-process" class="text-gray-300 leading-relaxed text-sm md:text-base"></p>
+                            </div>
+                        </div>
+ 
+                        <!-- Technologies Used -->
+                        <div class="mt-12 text-center">
+                            <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4" data-lang-key="modalTech">Tecnologías Utilizadas</h3>
+                            <div id="modal-tech" class="flex flex-wrap justify-center gap-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supernova and Reset Elements -->
+    <div id="supernova-core" class="hidden fixed top-1/2 left-1/2 w-8 h-8 rounded-full z-[200]"></div>
+    <div id="reset-overlay" class="hidden fixed inset-0 bg-white z-[250] flex justify-center items-center flex-col opacity-0 transition-opacity duration-1000">
+        <h2 class="text-5xl font-black text-gray-900 mb-8 text-center px-4 tracking-tighter" data-lang-key="resetTitle">¿Qué has hecho? ¡Mi portafolio! :c</h2>
+        <button id="reset-btn" class="bg-blue-600 text-white px-10 py-4 rounded-xl font-bold text-xl hover:bg-blue-700 shadow-2xl hover:scale-105 transition-all duration-300" data-lang-key="resetBtn">
+            Reconstruir Sistema
+        </button>
+    </div>
+
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+
+    <script>
+        // --- SCROLL REVEAL (NEW) ---
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                        var elementVisible = 100; // Trigger point
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Trigger once to show initial elements
+        setTimeout(reveal, 100);
+
+        // --- TRANSLATION SCRIPT ---
+        const translations = {
+            es: {
+                navAbout: "Sobre Mí", navServices: "Servicios", navProjects: "Proyectos", navContact: "Contáctame",
+                navAboutMobile: "Sobre Mí", navServicesMobile: "Servicios", navProjectsMobile: "Proyectos", navContactMobile: "Contáctame",
+                langEN: "EN", langES: "ES",
+                
+                heroTitle: 'Hola, soy <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">Ignacio Aguayo</span>',
+                heroSubtitle: "Creative Technologist. Construyo experiencias interactivas que conectan el mundo digital y el físico.",
+                heroBtnProjects: "Ver mis Proyectos", heroBtnContact: "Hablemos",
+                
+                aboutTitle: "Sobre Mí",
+                aboutBio: "Soy un tecnólogo creativo radicado en Concepción, Chile, apasionado por la intersección del arte y el código. Mi enfoque es la creación de experiencias inmersivas e interactivas que desafían la percepción y conectan con las personas a un nivel más profundo.",
+                
+                servicesTitle: "Servicios Creativos",
+                servicesSubtitle: "Soluciones interactivas a medida que conectan el arte digital con el espacio físico.",
+                srv1Title: "Instalaciones Interactivas",
+                srv1Desc: "Desarrollo en TouchDesigner para mapping proyectado, visuales reactivos en vivo, integración de sensores corporales y espaciales (Kinect, hand tracking) para museos, marcas y eventos.",
+                srv2Title: "Desarrollo VR/AR inmersivo",
+                srv2Desc: "Aplicaciones de Realidad Virtual y Aumentada en Unity para Meta Quest y dispositivos móviles. Simuladores interactivos, recorridos virtuales en 3D y juegos experimentales para capacitación y marketing.",
+                srv3Title: "Aplicaciones Móviles e Interactivas",
+                srv3Desc: "Diseño y programación de aplicaciones móviles de alto rendimiento en Unity o desarrollo nativo. Integración de lógicas gamificadas, manuales interactivos 3D y juegos multijugador locales.",
+                srv4Title: "Modelado y Animación 3D",
+                srv4Desc: "Modelado de assets optimizados para tiempo real, animaciones personalizadas en After Effects o Blender, y deconstrucción procedural de objetos 3D.",
+                
+                skillsTitle: "Mis Habilidades", skillUnity: "Unity", skillVrAr: "Desarrollo VR/AR", skillMobile: "Mobile Apps", skillTouchdesigner: "TouchDesigner", skillUiUx: "UX/UI Design", skillInteractive: "Experiencias Interactivas", skillShaders: "Shaders & Visuales Generativos", skillCreativeCoding: "Creative Coding",
+                
+                projectsTitle: "Proyectos Destacados", projectsSubtitle: "Una selección de mis mejores trabajos.", pBtnDetails: "Ver Detalles",
+                p1Title: "Galería Circular Interactiva", p1Desc: "Experiencia en TouchDesigner con una galería circular controlada por hand tracking espacial.",
+                p2Title: "Armonías Gestuales: IA Visual", p2Desc: "Aplicación en TouchDesigner que genera imágenes con Inteligencia Artificial a partir de gestos.",
+                p3Title: "Deconstrucción 3D Interactiva", p3Desc: "Experiencia interactiva que deconstruye modelos 3D en tiempo real usando hand tracking.",
+                p4Title: "Galería VR Fotográfica", p4Desc: "App de galería virtual inmersiva en VR para Meta Quest 2, diseñada para eventos.",
+                p5Title: "App Móvil para Bomberos", p5Desc: "Diseño de app móvil para ubicar material y consultar procedimientos en carros bomba.",
+                p6Title: "PalCarrete App", p6Desc: "Aplicación móvil lúdica con sistema dinámico de retos, castigos y tarjetas.",
+                
+                modalChallenge: "El Desafío", modalProcess: "Mi Proceso", modalTech: "Tecnologías Utilizadas",
+                p1mTitle: "Galería Circular Interactiva", p1mSubtitle: "Navegación Inmersiva con TouchDesigner", p1mChallenge: "El desafío fue crear una forma innovadora de presentar imágenes, buscando una experiencia que superara la visualización estática y fomentara una interacción más profunda.", p1mProcess: "Para lograr una interacción intuitiva, opté por el hand tracking como método de control. El principal reto técnico fue combinar la galería esférica con la precisión del seguimiento de manos, lo que requirió un diseño gestual cuidadoso y optimización para asegurar una experiencia fluida.",
+                p2mTitle: "Armonías Gestuales: IA Visual Interactiva", p2mSubtitle: "Creación de Contenido con Gestos y Algoritmos", p2mChallenge: "El reto era desarrollar una experiencia que permitiera generar visuales a través del movimiento de las manos, fusionando la expresión física con la generación algorítmica de imágenes.", p2mProcess: "Implementé el seguimiento de manos en tiempo real a través de TouchDesigner para capturar y traducir los movimientos a parámetros que alimentaran una red neuronal generativa. El principal desafío fue optimizar la respuesta de la IA para que las imágenes se generaran de forma fluida y coherente con la intención gestual.",
+                p3mTitle: "Deconstrucción 3D Interactiva", p3mSubtitle: "Exhibición y Manipulación de Modelos 3D con Gestos", p3mChallenge: "El principal desafío fue crear una forma innovadora y atractiva de exhibir modelos 3D, permitiendo a los usuarios interactuar con ellos de manera divertida y significativa, como controlando su deconstrucción o cambiando los modelos con las manos.", p3mProcess: "Desarrollé esta experiencia en TouchDesigner, enfocándose en la integración del hand tracking para una manipulación intuitiva. Lo más complejo fue diseñar los algoritmos de deconstrucción y el sistema de reconocimiento gestual que permitiera a los usuarios controlar los modelos 3D en tiempo real, ofreciendo una interacción fluida y reactiva con los objetos virtuales.",
+                p4mTitle: "Galería VR para Fotógrafos", p4mSubtitle: "Exhibición Virtual Inmersiva en Concepción", p4mChallenge: "El reto era diseñar una galería virtual inmersiva para un evento de fotógrafos en Concepción, que permitiera exhibir sus obras de una manera innovadora y envolvente utilizando la realidad virtual.", p4mProcess: "Trabajé en Unity, diseñando la arquitectura virtual de la galería y la disposición de los cuadros. La decoración y la ambientación se realizaron a medida según los requerimientos del evento, buscando crear un espacio que realzara las obras fotográficas. La implementación se optimizó para funcionar fluidamente en dispositivos Meta Quest 2.",
+                p5mTitle: "App Móvil para Bomberos", p5mSubtitle: "Herramienta de Entrenamiento para Emergencias", p5mChallenge: "El principal desafío fue crear una herramienta de entrenamiento digital para bomberos, que les permitiera aprender y repasar la ubicación del material en el carro bomba, así como consultar procedimientos vitales, de una forma cómoda e intuitiva.", p5mProcess: "Desarrollé la aplicación en Unity, enfocándose en la creación de modelos 3D detallados de las herramientas y el carro. La interfaz fue diseñada como una herramienta de estudio eficaz, con un sistema de navegación optimizado para el aprendizaje y la consulta rápida de procedimientos clave, como el manual IFTA, fortaleciendo así su preparación para emergencias reales.",
+                p6mTitle: "PalCarrete App", p6mSubtitle: "Juego Móvil Dinámico para Eventos Sociales", p6mChallenge: "El reto fue desarrollar un juego de beber móvil que fuera gratuito, entretenido y que ofreciera una experiencia dinámica para evitar la monotonía, a diferencia de otras opciones existentes en el mercado.", p6mProcess: "El desarrollo se centró en Unity. Lo más complejo fue diseñar e implementar el sistema de jugadores y la asignación aleatoria y justa de cartas. Se creó una arquitectura modular para los retos, permitiendo su dinamismo y el cambio constante del orden de aparición para asegurar la rejugabilidad.",
+                
+                mpTitle: "Más Proyectos", mpSubtitle: "Otros trabajos y exploraciones creativas.", mpFilterAll: "Todos", mpFilterTouch: "TouchDesigner", mpFilterUnity: "Unity", mpFilterModelado: "Modelado", mpFilterAnimacion: "Animación", mpSelectTitle: "Selecciona un proyecto", mpSelectDesc: "Elige un proyecto de la lista a la izquierda para ver su demostración.",
+                mp: {
+                    mp1: { title: "Partículas Interactivas", desc: "Exploración de sistemas de partículas en TouchDesigner respondiento a la interacción.", category: "touchdesigner", videoId: "BrF5mKbddZE" },
+                    mp2: { title: "Texto Interactivo", desc: "Visuales generativas creando tipografía que reacciona en tiempo real.", category: "touchdesigner", videoId: "d-ucKBghC5s" },
+                    mp3: { title: "Revelación de Imagen Interactiva", desc: "Efecto de shader que revela una imagen basado en el movimiento.", category: "touchdesigner", videoId: "D4bLje0H558" },
+                    mp4: { title: "Fragnesia VR", desc: "Juego de terror psicológico en Realidad Virtual desarrollado en Unity.", category: "unity", videoId: "PLvrUPV4Qsg" },
+                    mp5: { title: "Cuna de Prat AR", desc: "Simulación histórica de la Casa Prat en Realidad Aumentada para dispositivos móviles.", category: "unity", videoId: "SoqMsK8s3WQ" },
+                    mp6: { title: "Espada de Aatrox", desc: "Modelado 3D de alta fidelidad y texturizado de la espada del personaje 'Aatrox'.", category: "modelado", videoId: "Ixkim4BBWHE" },
+                    mp7: { title: "Poema Visual: Eterno Retorno", desc: "Corto de animación 3D basado en un poema, explorando conceptos de repetición.", category: "animacion", videoId: "y-mD6fsNElw" },
+                },
+                
+                contactTitle: "Hablemos", contactSubtitle: "¿Tienes un proyecto en mente o una oportunidad para mí? ¡No dudes en contactarme!", contactBtnCopy: "Copiar", contactBtnSend: "Escribir", contactCopyFeedback: "¡Copiado!",
+                footerRights: "&copy; 2026 Ignacio Aguayo. Todos los derechos reservados.", footerBtnDestroy: "¡Destruir Página!",
+                resetTitle: "¿Qué has hecho? ¡Mi portafolio! :c", resetBtn: "Reconstruir Sistema"
+            },
+            en: {
+                navAbout: "About Me", navServices: "Services", navProjects: "Projects", navContact: "Contact Me",
+                navAboutMobile: "About Me", navServicesMobile: "Services", navProjectsMobile: "Projects", navContactMobile: "Contact Me",
+                langEN: "EN", langES: "ES",
+                
+                heroTitle: 'Hi, I\'m <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">Ignacio Aguayo</span>',
+                heroSubtitle: "Creative Technologist. I build interactive experiences that connect the digital and physical worlds.",
+                heroBtnProjects: "View My Projects", heroBtnContact: "Let's Talk",
+                
+                aboutTitle: "About Me",
+                aboutBio: "I am a creative technologist based in Concepción, Chile, passionate about the intersection of art and code. My focus is on creating immersive and interactive experiences that challenge perception and connect with people on a deeper level.",
+                
+                servicesTitle: "Creative Services",
+                servicesSubtitle: "Custom interactive solutions connecting digital art with physical spaces.",
+                srv1Title: "Interactive Installations",
+                srv1Desc: "TouchDesigner development for projection mapping, live reactive visuals, body and spatial sensor integration (Kinect, hand tracking) for museums, brands, and events.",
+                srv2Title: "Immersive VR/AR Development",
+                srv2Desc: "Virtual and Augmented Reality applications in Unity for Meta Quest and mobile devices. Interactive simulators, 3D virtual walkthroughs, and experimental games for training and marketing.",
+                srv3Title: "Mobile & Interactive Apps",
+                srv3Desc: "Design and programming of high-performance mobile apps in Unity or native development. Integration of gamified logic, 3D interactive manuals, and local multiplayer games.",
+                srv4Title: "3D Modeling & Animation",
+                srv4Desc: "Modeling of real-time optimized assets, custom animations in After Effects or Blender, and procedural 3D deconstruction.",
+                
+                skillsTitle: "My Skills", skillUnity: "Unity", skillVrAr: "VR/AR Development", skillMobile: "Mobile Apps", skillTouchdesigner: "TouchDesigner", skillUiUx: "UX/UI Design", skillInteractive: "Interactive Experiences", skillShaders: "Shaders & Generative Visuals", skillCreativeCoding: "Creative Coding",
+                
+                projectsTitle: "Featured Projects", projectsSubtitle: "A selection of my best work.", pBtnDetails: "View Details",
+                p1Title: "Interactive Circular Gallery", p1Desc: "A TouchDesigner experience with a circular gallery controlled by spatial hand tracking.",
+                p2Title: "Gestural Harmonies: Visual AI", p2Desc: "A TouchDesigner application that generates images with AI based on hand gestures.",
+                p3Title: "Interactive 3D Deconstruction", p3Desc: "An interactive experience that deconstructs 3D models using hand tracking in real-time.",
+                p4Title: "VR Photo Gallery", p4Desc: "A virtual immersive gallery app in VR for Meta Quest 2, designed for events.",
+                p5Title: "Mobile App for Firefighters", p5Desc: "Mobile app designed to locate equipment and consult procedures on fire trucks.",
+                p6Title: "PalCarrete App", p6Desc: "A mobile drinking game with a dynamic system of challenges, punishments, and cards.",
+                
+                modalChallenge: "The Challenge", modalProcess: "My Process", modalTech: "Technologies Used",
+                p1mTitle: "Interactive Circular Gallery", p1mSubtitle: "Immersive Navigation with TouchDesigner", p1mChallenge: "The challenge was to create an innovative way to present images, seeking an experience that went beyond static viewing and fostered deeper user interaction.", p1mProcess: "To achieve intuitive interaction, I chose hand tracking as the control method. The main technical challenge was combining the spherical gallery with the precision of hand tracking, which required careful gestural design and optimization for a fluid experience.",
+                p2mTitle: "Gestural Harmonies: Interactive Visual AI", p2mSubtitle: "Content Creation with Gestures and Algorithms", p2mChallenge: "The challenge was to develop an experience that allowed users to generate visuals through hand movements, merging physical expression with algorithmic image generation.", p2mProcess: "I implemented real-time hand tracking via TouchDesigner to capture and translate movements into parameters that fed a generative neural network. The main challenge was optimizing the AI's response time to ensure images were generated smoothly and coherently with the user's gestural intent.",
+                p3mTitle: "Interactive 3D Deconstruction", p3mSubtitle: "Exhibition and Manipulation of 3D Models with Gestures", p3mChallenge: "The main challenge was to create an innovative and engaging way to display 3D models, allowing users to interact with them in a fun and meaningful way, such as controlling their deconstruction or changing models with their hands.", p3mProcess: "I developed this experience in TouchDesigner, focusing on integrating hand tracking for intuitive manipulation. The most complex part was designing the deconstruction algorithms and the gesture recognition system that allowed users to control the 3D models in real-time, providing a fluid and reactive interaction with the virtual objects.",
+                p4mTitle: "VR Gallery for Photographers", p4mSubtitle: "Immersive Virtual Exhibition in Concepción", p4mChallenge: "The challenge was to design an immersive virtual gallery for a photographers' event in Concepción, allowing them to exhibit their work in an innovative and engaging way using virtual reality.", p4mProcess: "I worked in Unity, designing the gallery's virtual architecture and the layout of the artworks. The decoration and atmosphere were customized according to the event's requirements, aiming to create a space that enhanced the photographic works. The implementation was optimized to run smoothly on Meta Quest 2 devices.",
+                p5mTitle: "Mobile App for Firefighters", p5mSubtitle: "Emergency Training Tool", p5mChallenge: "The main challenge was to create a digital training tool for firefighters that would allow them to learn and review the location of equipment on the fire truck, as well as consult vital procedures, in a comfortable and intuitive way.", p5mProcess: "I developed the application in Unity, focusing on creating detailed 3D models of the tools and the fire truck. The user interface was designed as an effective study tool, with a navigation system optimized for learning and quick reference of key procedures, such as the IFTA manual, thereby strengthening their preparation for real emergencies.",
+                p6mTitle: "PalCarrete App", p6mSubtitle: "Dynamic Mobile Game for Social Events", p6mChallenge: "The challenge was to develop a mobile drinking game that was free, entertaining, and offered a dynamic experience to avoid monotony, unlike other options on the market.", p6mProcess: "Development was centered in Unity. The most complex part was designing and implementing the player system and the random and fair card assignment. A modular architecture was created for the challenges, allowing for dynamism and a constantly changing order of appearance to ensure replayability.",
+                
+                mpTitle: "More Projects", mpSubtitle: "Other works and creative explorations.", mpFilterAll: "All", mpFilterTouch: "TouchDesigner", mpFilterUnity: "Unity", mpFilterModelado: "3D Modeling", mpFilterAnimation: "Animation", mpSelectTitle: "Select a project", mpSelectDesc: "Choose a project from the left list to see the demonstration.",
+                mp: {
+                    mp1: { title: "Interactive Particles", desc: "Exploration of particle systems in TouchDesigner responding to interaction.", category: "touchdesigner", videoId: "BrF5mKbddZE" },
+                    mp2: { title: "Interactive Text", desc: "Generative visuals creating typography that reacts in real-time.", category: "touchdesigner", videoId: "d-ucKBghC5s" },
+                    mp3: { title: "Interactive Image Reveal", desc: "Shader effect that reveals an image based on movement.", category: "touchdesigner", videoId: "D4bLje0H558" },
+                    mp4: { title: "Fragnesia VR", desc: "Psychological horror game in Virtual Reality developed in Unity.", category: "unity", videoId: "PLvrUPV4Qsg" },
+                    mp5: { title: "Cuna de Prat AR", desc: "Historical simulation of 'Casa Prat' in Augmented Reality for mobile devices.", category: "unity", videoId: "SoqMsK8s3WQ" },
+                    mp6: { title: "Aatrox's Sword", desc: "High-fidelity 3D modeling and texturing of the 'Aatrox' character's sword.", category: "modelado", videoId: "Ixkim4BBWHE" },
+                    mp7: { title: "Visual Poem: Eterno Retorno", desc: "3D animation short based on a poem, exploring concepts of repetition.", category: "animacion", videoId: "y-mD6fsNElw" },
+                },
+                contactTitle: "Let's Talk", contactSubtitle: "Got a project in mind or an opportunity for me? Don't hesitate to reach out!", contactBtnCopy: "Copy", contactBtnSend: "Email", contactCopyFeedback: "Copied!",
+                footerRights: "&copy; 2026 Ignacio Aguayo. All rights reserved.", footerBtnDestroy: "Destroy Page!",
+                resetTitle: "What have you done? My portfolio! :c", resetBtn: "Rebuild System"
+            }
+        };
+
+        const langToggle = document.getElementById('lang-toggle');
+        const langToggleMobile = document.getElementById('lang-toggle-mobile');
+        let currentLang = 'es';
+
+        // --- MORE PROJECTS SCRIPT ---
+        const projectListContainer = document.getElementById('more-projects-list');
+        const initialMessage = document.getElementById('mp-initial-message');
+        const contentContainer = document.getElementById('mp-content');
+        const titleEl = document.getElementById('mp-title');
+        const videoEl = document.getElementById('mp-video');
+        const descriptionEl = document.getElementById('mp-description');
+        const filterButtons = document.querySelectorAll('.mp-filter-btn');
+        let projectItems = [];
+
+        function showProjectDetails(projectId) {
+            const projectData = translations[currentLang].mp[projectId];
+            if (!projectData) return;
+
+            titleEl.textContent = projectData.title;
+            descriptionEl.textContent = projectData.desc;
+            videoEl.src = `https://www.youtube.com/embed/${projectData.videoId}`;
+
+            initialMessage.classList.add('hidden');
+            contentContainer.classList.remove('hidden');
+            contentContainer.classList.add('flex');
+            
+            projectItems.forEach(item => {
+                if (item.dataset.projectId === projectId) {
+                    item.classList.add('bg-blue-600/10', 'border-l-4', 'border-blue-500', 'text-white');
+                    item.classList.remove('text-gray-400', 'hover:bg-slate-800/20');
+                } else {
+                    item.classList.remove('bg-blue-600/10', 'border-l-4', 'border-blue-500', 'text-white');
+                    item.classList.add('text-gray-400', 'hover:bg-slate-800/20');
+                }
+            });
+        }
+        
+        function filterProjects(filter) {
+            initialMessage.classList.remove('hidden');
+            contentContainer.classList.add('hidden');
+            contentContainer.classList.remove('flex');
+            videoEl.src = "";
+
+            filterButtons.forEach(btn => {
+                if (btn.dataset.filter === filter) {
+                    btn.classList.add('bg-blue-600', 'text-white', 'border-blue-500/30', 'shadow-md', 'shadow-blue-500/20');
+                    btn.classList.remove('bg-slate-900/60', 'text-gray-400', 'hover:bg-slate-800/80');
+                } else {
+                    btn.classList.remove('bg-blue-600', 'text-white', 'border-blue-500/30', 'shadow-md', 'shadow-blue-500/20');
+                    btn.classList.add('bg-slate-900/60', 'text-gray-400', 'hover:bg-slate-800/80');
+                }
+            });
+            
+            projectItems.forEach(item => {
+                const category = item.dataset.category;
+                if (filter === 'all' || category === filter) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function setupMoreProjects(lang) {
+            projectListContainer.innerHTML = ''; 
+            projectItems = []; 
+            const projects = translations[lang].mp;
+
+            for (const id in projects) {
+                const project = projects[id];
+                const item = document.createElement('button');
+                item.className = 'block w-full text-left px-6 py-4 border-b border-slate-800/60 text-gray-400 font-medium hover:bg-slate-800/20 transition-all duration-200';
+                item.textContent = project.title;
+                item.dataset.projectId = id;
+                item.dataset.category = project.category;
+                
+                item.addEventListener('click', () => {
+                    showProjectDetails(id);
+                });
+                
+                projectListContainer.appendChild(item);
+                projectItems.push(item);
+            }
+            
+            filterButtons.forEach(btn => {
+                btn.onclick = () => filterProjects(btn.dataset.filter);
+            });
+            filterProjects('all');
+        }
+
+        function switchLanguage(lang) {
+            document.documentElement.lang = lang;
+            const elements = document.querySelectorAll('[data-lang-key]');
+            elements.forEach(el => {
+                const key = el.dataset.langKey;
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+            const modalTriggers = document.querySelectorAll('[data-modal-trigger]');
+            modalTriggers.forEach(trigger => {
+                const prefix = trigger.dataset.langKeyPrefix;
+                if (prefix) {
+                    trigger.dataset.title = translations[lang][`${prefix}Title`] || trigger.dataset.title;
+                    trigger.dataset.subtitle = translations[lang][`${prefix}Subtitle`] || trigger.dataset.subtitle;
+                    trigger.dataset.challenge = translations[lang][`${prefix}Challenge`] || trigger.dataset.challenge;
+                    trigger.dataset.process = translations[lang][`${prefix}Process`] || trigger.dataset.process;
+                }
+            });
+            
+            setupMoreProjects(lang);
+            langToggle.checked = lang === 'es';
+            langToggleMobile.checked = lang === 'es';
+        }
+
+        langToggle.addEventListener('change', () => {
+            currentLang = langToggle.checked ? 'es' : 'en';
+            switchLanguage(currentLang);
+        });
+
+        switchLanguage('es');
+
+        // --- MOBILE MENU ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // --- OPTIMIZED CANVAS SCRIPT ---
+        const canvas = document.getElementById('starfield-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let stars = [];
+            let shootingStars = [];
+            let animationFrameId;
+
+            // Debounce resize
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    initCanvas();
+                }, 200);
+            });
+
+            let mouse = { x: undefined, y: undefined, radius: 120 };
+            window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
+            window.addEventListener('mouseout', () => { mouse.x = undefined; mouse.y = undefined; });
+
+            class Star {
+                constructor(x, y, speedX, speedY, size, color) {
+                    this.x = x; this.y = y; this.speedX = speedX; this.speedY = speedY; this.size = size; this.color = color;
+                    this.baseX = x; this.baseY = y; this.density = (Math.random() * 20) + 1;
+                }
+                draw() {
+                    ctx.fillStyle = this.color; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+                }
+                update() {
+                    let dx = mouse.x - this.x; let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < mouse.radius) {
+                        let force = (mouse.radius - distance) / mouse.radius;
+                        this.x -= (dx / distance) * force * this.density;
+                        this.y -= (dy / distance) * force * this.density;
+                    } else {
+                        if (this.x !== this.baseX) this.x -= (this.x - this.baseX) * 0.05;
+                        if (this.y !== this.baseY) this.y -= (this.y - this.baseY) * 0.05;
+                    }
+                    this.x += this.speedX; this.y += this.speedY;
+                    if (this.x > canvas.width) { this.x = 0; this.baseX = 0; }
+                    if (this.x < 0) { this.x = canvas.width; this.baseX = canvas.width; }
+                    if (this.y > canvas.height) { this.y = 0; this.baseY = 0; }
+                    if (this.y < 0) { this.y = canvas.height; this.baseY = canvas.height; }
+                    this.draw();
+                }
+            }
+
+            class ShootingStar {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * canvas.width; this.y = 0; this.len = (Math.random() * 60) + 10;
+                    this.speed = (Math.random() * 8) + 4; this.size = (Math.random() * 1) + 0.5;
+                    this.waitTime = Date.now() + (Math.random() * 6000) + 1000; this.active = false;
+                }
+                update() {
+                    if (this.active) {
+                        this.x += this.speed; this.y += this.speed * 0.5;
+                        if (this.x > canvas.width || this.y > canvas.height) this.reset(); else this.draw();
+                    } else {
+                        if (Date.now() > this.waitTime) this.active = true;
+                    }
+                }
+                draw() {
+                    const grad = ctx.createLinearGradient(this.x, this.y, this.x - this.len, this.y - (this.len * 0.5));
+                    grad.addColorStop(0, `rgba(255, 255, 255, ${this.size})`); grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                    ctx.strokeStyle = grad; ctx.lineWidth = this.size; ctx.beginPath();
+                    ctx.moveTo(this.x, this.y); ctx.lineTo(this.x - this.len, this.y - (this.len * 0.5)); ctx.stroke();
+                }
+            }
+
+            function initCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                stars = []; shootingStars = [];
+                let numStars = (canvas.height * canvas.width) / 12000; // Optimal density for constellations
+                for (let i = 0; i < numStars; i++) {
+                    stars.push(new Star(Math.random() * canvas.width, Math.random() * canvas.height, (Math.random() * 0.2) - 0.1, (Math.random() * 0.2) - 0.1, Math.random() * 1.5 + 0.5, 'rgba(59, 130, 246, ' + (Math.random() * 0.6 + 0.2) + ')'));
+                }
+                for (let i = 0; i < 2; i++) shootingStars.push(new ShootingStar()); // Reduced for better perf
+            }
+
+            function animateCanvas() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for(let i=0; i<stars.length; i++) stars[i].update();
+                for(let i=0; i<shootingStars.length; i++) shootingStars[i].update();
+                
+                // Draw constellation links
+                for (let i = 0; i < stars.length; i++) {
+                    for (let j = i + 1; j < stars.length; j++) {
+                        let dx = stars[i].x - stars[j].x;
+                        let dy = stars[i].y - stars[j].y;
+                        let distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < 85) {
+                            let alpha = (1 - (distance / 85)) * 0.12;
+                            ctx.strokeStyle = `rgba(59, 130, 246, ${alpha})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.beginPath();
+                            ctx.moveTo(stars[i].x, stars[i].y);
+                            ctx.lineTo(stars[j].x, stars[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                animationFrameId = requestAnimationFrame(animateCanvas); 
+            }
+            initCanvas(); animateCanvas();
+        }
+
+        // --- MODAL SCRIPT ---
+        const modalTriggers = document.querySelectorAll('[data-modal-trigger]');
+        const modal = document.getElementById('project-modal');
+        const modalContent = document.getElementById('modal-content');
+        
+        function openModal(trigger) {
+            const data = trigger.dataset;
+            document.getElementById('modal-title').textContent = data.title;
+            document.getElementById('modal-subtitle').textContent = data.subtitle;
+            document.getElementById('modal-video').src = data.videoId ? `https://www.youtube.com/embed/${data.videoId}` : '';
+            document.getElementById('modal-challenge').textContent = data.challenge;
+            document.getElementById('modal-process').textContent = data.process;
+            
+            const techContainer = document.getElementById('modal-tech');
+            techContainer.innerHTML = '';
+            if (data.tech) {
+                JSON.parse(data.tech.replace(/'/g, '"')).forEach(tech => {
+                    const el = document.createElement('span');
+                    el.className = 'bg-slate-900/60 border border-slate-800/80 text-gray-300 px-4 py-1.5 rounded-xl text-xs font-semibold shadow-inner font-display';
+                    el.textContent = tech;
+                    techContainer.appendChild(el);
+                });
+            }
+
+            modal.classList.remove('pointer-events-none', 'opacity-0');
+            modalContent.classList.remove('scale-95');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                document.getElementById('modal-video').src = '';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        modalTriggers.forEach(t => t.addEventListener('click', () => openModal(t)));
+        document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+        // --- COPY EMAIL SCRIPT ---
+        document.getElementById('copy-email-btn').addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText("i.aguayo2212@gmail.com");
+                const feedback = document.getElementById('copy-feedback');
+                feedback.classList.remove('opacity-0');
+                feedback.classList.add('-translate-y-2');
+                setTimeout(() => { 
+                    feedback.classList.add('opacity-0'); 
+                    feedback.classList.remove('-translate-y-2');
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy', err);
+            }
+        });
+
+        // --- SUPERNOVA EASTER EGG ---
+        document.getElementById('destroy-btn').addEventListener('click', () => {
+            document.body.style.overflow = 'hidden';
+            document.getElementById('destroy-btn').style.display = 'none';
+            const core = document.getElementById('supernova-core');
+            core.classList.remove('hidden');
+            
+            const els = document.querySelectorAll('header, main > section');
+            const vCX = window.innerWidth / 2;
+            const vCY = window.innerHeight / 2;
+
+            els.forEach((el, i) => {
+                const rect = el.getBoundingClientRect();
+                const mX = (rect.left + rect.width / 2 - vCX) * 3;
+                const mY = (rect.top + rect.height / 2 - vCY) * 3;
+                
+                el.style.transition = `all 1.5s ease-in-out ${i * 100}ms`;
+                el.style.transformOrigin = 'center center';
+                setTimeout(() => {
+                    el.style.transform = `translateX(${mX}px) translateY(${mY}px) scale(0.5) rotate(${(Math.random()-0.5)*360}deg)`;
+                    el.style.opacity = '0';
+                }, 50);
+            });
+            
+            const animTime = els.length * 100 + 1500;
+
+            setTimeout(() => {
+                core.style.transition = 'all 0.5s ease-in';
+                core.style.width = `${Math.max(window.innerWidth, window.innerHeight) * 3}px`;
+                core.style.height = core.style.width;
+                core.style.opacity = '0';
+                document.body.style.transition = 'background-color 0.5s ease-in';
+                document.body.style.backgroundColor = '#ffffff';
+            }, animTime - 500);
+
+            setTimeout(() => {
+                const overlay = document.getElementById('reset-overlay');
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.style.opacity = '1', 10);
+            }, animTime); 
+        });
+
+        document.getElementById('reset-btn').addEventListener('click', () => {
+            sessionStorage.setItem('isRecreating', 'true');
+            location.reload();
+        });
+
+        // Initial Load
+        window.addEventListener('load', () => {
+            if (sessionStorage.getItem('isRecreating') === 'true') {
+                sessionStorage.removeItem('isRecreating');
+                const bb = document.createElement('div');
+                bb.style.cssText = 'position:fixed;inset:0;background:black;z-index:9999';
+                document.body.appendChild(bb);
+                
+                const s = document.createElement('div');
+                s.style.cssText = 'position:fixed;top:50%;left:50%;width:1px;height:1px;background:white;border-radius:50%;transform:translate(-50%,-50%);transition:all 0.5s ease-in';
+                bb.appendChild(s);
+                
+                setTimeout(() => {
+                    s.style.width = s.style.height = `${Math.max(window.innerWidth, window.innerHeight) * 3}px`;
+                }, 50);
+
+                setTimeout(() => {
+                    bb.style.transition = 'opacity 1s ease-out';
+                    bb.style.opacity = '0';
+                    document.body.classList.remove('opacity-0');
+                }, 550);
+
+                setTimeout(() => bb.remove(), 1550);
+            } else {
+                document.body.classList.remove('opacity-0');
+            }
+        });
+    </script>
+</body>
+</html>
+
