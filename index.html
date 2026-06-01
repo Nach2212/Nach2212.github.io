@@ -188,23 +188,25 @@
             <div class="absolute -z-10 w-[70vw] h-[40vh] md:w-[600px] md:h-[600px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none"></div>
             <div class="absolute -z-10 w-[50vw] h-[30vh] md:w-[400px] md:h-[400px] bg-purple-500/5 rounded-full blur-[100px] translate-x-12 translate-y-12 pointer-events-none"></div>
             
-            <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6 tracking-tight" data-lang-key="heroTitle">
-                Hola, soy <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">Ignacio Aguayo</span>
-            </h1>
-            <p class="text-lg md:text-xl text-gray-400 max-w-2xl mb-12 leading-relaxed font-light" data-lang-key="heroSubtitle">
-                Creative Technologist. Construyo experiencias interactivas que conectan el mundo digital y el físico.
-            </p>
+            <div id="hero-content-wrapper" class="flex flex-col items-center justify-center w-full transition-all duration-[1200ms] ease-out filter blur-md scale-95 opacity-0">
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6 tracking-tight" data-lang-key="heroTitle">
+                    Hola, soy <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">Ignacio Aguayo</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 max-w-2xl mb-12 leading-relaxed font-light" data-lang-key="heroSubtitle">
+                    Creative Technologist. Construyo experiencias interactivas que conectan el mundo digital y el físico.
+                </p>
 
-            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-2">
-                <a href="#proyectos" class="bg-blue-600 text-white px-8 py-3.5 rounded-xl font-bold text-base hover:bg-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.2)] hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] transform hover:-translate-y-1 transition-all duration-300" data-lang-key="heroBtnProjects">
-                    Ver mis Proyectos
-                </a>
-                <a href="ar/index.html" class="bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 text-white px-8 py-3.5 rounded-xl font-bold text-base hover:opacity-90 shadow-[0_0_20px_rgba(168,85,247,0.3)] hover:shadow-[0_0_30px_rgba(168,85,247,0.5)] transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2" data-lang-key="heroBtnAR">
-                    Tarjeta AR ⚡
-                </a>
-                <a href="#contacto" class="bg-slate-900/60 backdrop-blur border border-slate-800 text-gray-200 px-8 py-3.5 rounded-xl font-bold text-base hover:bg-slate-800 hover:text-white shadow-lg transform hover:-translate-y-1 transition-all duration-300" data-lang-key="heroBtnContact">
-                    Hablemos
-                </a>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-2 justify-center">
+                    <a href="#proyectos" class="bg-blue-600 text-white px-8 py-3.5 rounded-xl font-bold text-base hover:bg-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.2)] hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] transform hover:-translate-y-1 transition-all duration-300" data-lang-key="heroBtnProjects">
+                        Ver mis Proyectos
+                    </a>
+                    <a href="ar/index.html" class="bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 text-white px-8 py-3.5 rounded-xl font-bold text-base hover:opacity-90 shadow-[0_0_20px_rgba(168,85,247,0.3)] hover:shadow-[0_0_30px_rgba(168,85,247,0.5)] transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2" data-lang-key="heroBtnAR">
+                        Tarjeta AR ⚡
+                    </a>
+                    <a href="#contacto" class="bg-slate-900/60 backdrop-blur border border-slate-800 text-gray-200 px-8 py-3.5 rounded-xl font-bold text-base hover:bg-slate-800 hover:text-white shadow-lg transform hover:-translate-y-1 transition-all duration-300" data-lang-key="heroBtnContact">
+                        Hablemos
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -1072,6 +1074,12 @@
 
         // --- OPTIMIZED CANVAS SCRIPT ---
         const canvas = document.getElementById('starfield-canvas');
+        let giantMeteor = null;
+        let glowActive = false;
+        let glowOpacity = 0;
+        let glowRadius = 0;
+        let maxGlowRadius = 0;
+
         if (canvas) {
             const ctx = canvas.getContext('2d');
             let stars = [];
@@ -1090,6 +1098,109 @@
             let mouse = { x: undefined, y: undefined, radius: 120 };
             window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
             window.addEventListener('mouseout', () => { mouse.x = undefined; mouse.y = undefined; });
+
+            class GiantMeteor {
+                constructor(canvas) {
+                    this.canvas = canvas;
+                    this.reset();
+                }
+                reset() {
+                    const sizeFactor = Math.max(this.canvas.width, this.canvas.height);
+                    // Start far top-left off-screen
+                    this.x = -sizeFactor * 0.3;
+                    this.y = -sizeFactor * 0.3;
+                    
+                    // Path parameters (diagonal: top-left to bottom-right)
+                    this.speed = sizeFactor / 60; // Cross in ~60 frames (1s)
+                    const angle = Math.PI / 6; // 30-degree path
+                    this.speedX = Math.cos(angle) * this.speed;
+                    this.speedY = Math.sin(angle) * this.speed;
+                    
+                    this.tailLength = sizeFactor * 0.45;
+                    this.active = false;
+                    this.hasTriggeredText = false;
+                }
+                start() {
+                    this.active = true;
+                }
+                update(ctx, onCenterPass) {
+                    if (!this.active) return;
+
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+
+                    // Trigger the text reveal when the head crosses screen center
+                    if (!this.hasTriggeredText && this.x >= this.canvas.width / 2) {
+                        this.hasTriggeredText = true;
+                        if (onCenterPass) onCenterPass();
+                    }
+
+                    // Check bounds to terminate the animation
+                    if (this.x - this.tailLength > this.canvas.width || this.y - this.tailLength > this.canvas.height) {
+                        this.active = false;
+                    }
+
+                    this.draw(ctx);
+                }
+                draw(ctx) {
+                    const angle = Math.atan2(this.speedY, this.speedX);
+                    const tailX = this.x - Math.cos(angle) * this.tailLength;
+                    const tailY = this.y - Math.sin(angle) * this.tailLength;
+
+                    // Tail gradient
+                    const grad = ctx.createLinearGradient(this.x, this.y, tailX, tailY);
+                    grad.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
+                    grad.addColorStop(0.1, 'rgba(0, 243, 255, 0.85)'); // Cyan glow
+                    grad.addColorStop(0.35, 'rgba(59, 130, 246, 0.5)'); // Blue glow
+                    grad.addColorStop(0.7, 'rgba(99, 102, 241, 0.15)'); // Indigo glow
+                    grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+                    ctx.lineCap = 'round';
+
+                    // Outer soft glow tail
+                    ctx.strokeStyle = grad;
+                    ctx.lineWidth = 14;
+                    ctx.beginPath();
+                    ctx.moveTo(this.x, this.y);
+                    ctx.lineTo(tailX, tailY);
+                    ctx.stroke();
+
+                    // Inner bright tail
+                    ctx.lineWidth = 6;
+                    ctx.beginPath();
+                    ctx.moveTo(this.x, this.y);
+                    ctx.lineTo(tailX, tailY);
+                    ctx.stroke();
+
+                    // Core white line
+                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+                    ctx.lineWidth = 2.5;
+                    ctx.beginPath();
+                    ctx.moveTo(this.x, this.y);
+                    ctx.lineTo(this.x - Math.cos(angle) * (this.tailLength * 0.15), this.y - Math.sin(angle) * (this.tailLength * 0.15));
+                    ctx.stroke();
+
+                    // Head outer glow
+                    const outerGlow = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, 35);
+                    outerGlow.addColorStop(0, 'rgba(0, 243, 255, 0.45)');
+                    outerGlow.addColorStop(0.5, 'rgba(59, 130, 246, 0.2)');
+                    outerGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+                    ctx.fillStyle = outerGlow;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, 35, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Head inner core
+                    const innerGlow = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, 9);
+                    innerGlow.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
+                    innerGlow.addColorStop(0.7, 'rgba(0, 243, 255, 0.8)');
+                    innerGlow.addColorStop(1, 'rgba(0, 243, 255, 0)');
+                    ctx.fillStyle = innerGlow;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, 9, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
 
             class Star {
                 constructor(x, y, speedX, speedY, size, color) {
@@ -1152,12 +1263,15 @@
                     stars.push(new Star(Math.random() * canvas.width, Math.random() * canvas.height, (Math.random() * 0.2) - 0.1, (Math.random() * 0.2) - 0.1, Math.random() * 1.5 + 0.5, 'rgba(59, 130, 246, ' + (Math.random() * 0.6 + 0.2) + ')'));
                 }
                 for (let i = 0; i < 2; i++) shootingStars.push(new ShootingStar()); // Reduced for better perf
+                
+                // Initialize the giant meteor welcome effect
+                giantMeteor = new GiantMeteor(canvas);
+                maxGlowRadius = Math.max(canvas.width, canvas.height) * 0.6;
             }
 
             function animateCanvas() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 for(let i=0; i<stars.length; i++) stars[i].update();
-                for(let i=0; i<shootingStars.length; i++) shootingStars[i].update();
                 
                 // Draw constellation links
                 for (let i = 0; i < stars.length; i++) {
@@ -1176,6 +1290,51 @@
                         }
                     }
                 }
+                
+                for(let i=0; i<shootingStars.length; i++) shootingStars[i].update();
+
+                // Update and draw the welcome giant meteor
+                if (giantMeteor && giantMeteor.active) {
+                    giantMeteor.update(ctx, () => {
+                        // Meteor is passing center - activate radial ambient glow
+                        glowActive = true;
+                        glowOpacity = 1.0;
+                        glowRadius = 150; // Initial radius for central bloom
+                        
+                        // Sincronizar revelación del Hero (quitar blur, scale, opacity)
+                        const heroWrapper = document.getElementById('hero-content-wrapper');
+                        if (heroWrapper) {
+                            heroWrapper.classList.remove('blur-md', 'scale-95', 'opacity-0');
+                            heroWrapper.classList.add('blur-none', 'scale-100', 'opacity-100');
+                        }
+                    });
+                }
+
+                // Render the radial ambient glow centered on the screen
+                if (glowActive) {
+                    const centerX = canvas.width / 2;
+                    const centerY = canvas.height / 2;
+
+                    const radGlow = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, glowRadius);
+                    radGlow.addColorStop(0, `rgba(59, 130, 246, ${glowOpacity * 0.28})`);
+                    radGlow.addColorStop(0.4, `rgba(99, 102, 241, ${glowOpacity * 0.1})`);
+                    radGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+                    ctx.fillStyle = radGlow;
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, glowRadius, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Expand and fade out the glow
+                    glowRadius += (maxGlowRadius - glowRadius) * 0.055;
+                    glowOpacity -= 0.016; // Fades out in ~62 frames (approx 1s)
+
+                    if (glowOpacity <= 0) {
+                        glowActive = false;
+                        glowOpacity = 0;
+                    }
+                }
+
                 animationFrameId = requestAnimationFrame(animateCanvas); 
             }
             initCanvas(); animateCanvas();
@@ -1321,6 +1480,15 @@
             location.reload();
         });
 
+        // Function to trigger welcome animation (giant meteor crossing)
+        function triggerWelcomeAnimation() {
+            setTimeout(() => {
+                if (giantMeteor) {
+                    giantMeteor.start();
+                }
+            }, 300);
+        }
+
         // Initial Load
         window.addEventListener('load', () => {
             if (sessionStorage.getItem('isRecreating') === 'true') {
@@ -1341,11 +1509,13 @@
                     bb.style.transition = 'opacity 1s ease-out';
                     bb.style.opacity = '0';
                     document.body.classList.remove('opacity-0');
+                    triggerWelcomeAnimation();
                 }, 550);
 
                 setTimeout(() => bb.remove(), 1550);
             } else {
                 document.body.classList.remove('opacity-0');
+                triggerWelcomeAnimation();
             }
         });
     </script>
