@@ -1111,7 +1111,7 @@
                     this.y = -sizeFactor * 0.3;
                     
                     // Path parameters (diagonal: top-left to bottom-right)
-                    this.speed = sizeFactor / 60; // Cross in ~60 frames (1s)
+                    this.speed = sizeFactor / 110; // Cross in ~110 frames (1.8s)
                     const angle = Math.PI / 6; // 30-degree path
                     this.speedX = Math.cos(angle) * this.speed;
                     this.speedY = Math.sin(angle) * this.speed;
@@ -1326,8 +1326,8 @@
                     ctx.fill();
 
                     // Expand and fade out the glow
-                    glowRadius += (maxGlowRadius - glowRadius) * 0.055;
-                    glowOpacity -= 0.016; // Fades out in ~62 frames (approx 1s)
+                    glowRadius += (maxGlowRadius - glowRadius) * 0.038; // Slower expansion
+                    glowOpacity -= 0.011; // Fades out in ~90 frames (approx 1.5s)
 
                     if (glowOpacity <= 0) {
                         glowActive = false;
