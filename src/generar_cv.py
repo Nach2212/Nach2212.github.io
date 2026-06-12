@@ -162,6 +162,19 @@ for title, tech, desc in projects:
 
 y -= 3 * mm
 
+# ---------- Formación ----------
+section("Formación")
+c.setFillColor(DARK)
+c.setFont("Helvetica-Bold", 11)
+c.drawString(LM, y, "Animación Digital")
+c.setFillColor(PURPLE)
+c.setFont("Helvetica-Bold", 8.5)
+c.drawString(LM + c.stringWidth("Animación Digital", "Helvetica-Bold", 11) + 3 * mm, y,
+             "2022 – presente · 4º año")
+y -= 5.2 * mm
+para("Universidad San Sebastián, Concepción.", size=9.4, leading=4.8)
+y -= 5 * mm
+
 # ---------- Más allá del código ----------
 section("Más Allá del Código")
 bullet("Bombero Voluntario.", "Compromiso con la comunidad y trabajo en equipo bajo presión.")
