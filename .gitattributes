@@ -1,0 +1,10 @@
+* text=auto
+*.pdf binary
+*.png binary
+*.jpg binary
+*.gif binary
+*.mp4 binary
+*.mind binary
+*.wasm binary
+*.data binary
+*.unityweb binary

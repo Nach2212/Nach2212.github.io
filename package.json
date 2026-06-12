@@ -1,0 +1,14 @@
+{
+  "name": "nach2212.github.io",
+  "version": "2.0.0",
+  "description": "Portafolio de Ignacio Aguayo - Creative Technologist",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -c tailwind.config.js -i src/input.css -o css/styles.css --minify",
+    "watch:css": "tailwindcss -c tailwind.config.js -i src/input.css -o css/styles.css --watch",
+    "serve": "http-server . -p 8080 -c-1"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

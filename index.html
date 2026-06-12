@@ -10,126 +10,14 @@
     <meta property="og:image" content="https://nach2212.github.io/assets/Logo.png">
     <meta property="og:url" content="https://nach2212.github.io">
     <link rel="icon" href="assets/Logo.png" type="image/png">
-    <!-- Tailwind CSS for modern styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Space Grotesk', 'sans-serif'],
-                    },
-                    colors: {
-                        cyber: {
-                            dark: '#030712',
-                            darker: '#02050c',
-                            blue: '#3b82f6',
-                            purple: '#c084fc',
-                            pink: '#ec4899',
-                            slate: '#0f172a',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <meta name="theme-color" content="#030712">
+    <meta property="og:type" content="website">
+    <!-- Tailwind CSS compilado (ver src/input.css + tailwind.config.js) -->
+    <link rel="stylesheet" href="css/styles.css">
     <!-- Google Fonts: Inter & Space Grotesk -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* Custom styles to complement Tailwind */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #030712; 
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, .font-display {
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        
-        /* Scroll Reveal Utility Classes */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-            will-change: opacity, transform;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        #starfield-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-        #supernova-core {
-            transform: translate(-50%, -50%);
-            background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,204,153,1) 35%, rgba(255,153,51,1) 60%, rgba(255,255,255,0) 100%);
-            box-shadow: 0 0 50px 20px #fff, 0 0 100px 60px #f0f, 0 0 150px 100px #0ff;
-            animation: pulse 1.5s infinite ease-in-out;
-            will-change: transform, opacity;
-        }
-        @keyframes pulse {
-            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; }
-            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; }
-        }
-        
-        #modal-body {
-             background-image: radial-gradient(ellipse at 50% 0%, rgba(30, 41, 59, 0.9) 0%, transparent 80%);
-        }
-        
-        /* Custom Scrollbars */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #030712; }
-        ::-webkit-scrollbar-thumb { background-color: #1e293b; border-radius: 10px; border: 2px solid #030712; }
-        ::-webkit-scrollbar-thumb:hover { background-color: #3b82f6; }
-
-        #modal-content::-webkit-scrollbar-track, #more-projects-detail-content::-webkit-scrollbar-track { background: #0f172a; }
-        #more-projects-list::-webkit-scrollbar-track { background: #030712; }
-
-        /* Video containers */
-        .video-container {
-            position: relative; width: 100%; padding-top: 56.25%;
-        }
-        .mp-video-container {
-             position: relative; width: 100%; padding-top: 45%; 
-        }
-        .video-container iframe, .mp-video-container iframe {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 0.75rem;
-        }
-
-        /* Nav link hover effect */
-        .nav-link { position: relative; padding-bottom: 4px; }
-        .nav-link::after {
-            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-            width: 0; height: 2px; background-color: #3b82f6; transition: width 0.3s ease-in-out;
-        }
-        .nav-link:hover::after { width: 100%; }
-
-        /* Language Toggle Switch */
-        .lang-toggle-label { width: 50px; height: 26px; }
-        .lang-toggle-label:before {
-            content: ''; position: absolute; width: 22px; height: 22px; border-radius: 50%;
-            top: 2px; left: 2px; background: white; transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-        }
-        .lang-toggle:checked + .lang-toggle-label:before { transform: translateX(24px); }
-
-        /* Custom scrollbar for horizontal image gallery */
-        .scrollbar-thin::-webkit-scrollbar { height: 6px; }
-        .scrollbar-thin::-webkit-scrollbar-track { background: #0f172a; border-radius: 10px; }
-        .scrollbar-thin::-webkit-scrollbar-thumb { background-color: #1e293b; border-radius: 10px; }
-        .scrollbar-thin::-webkit-scrollbar-thumb:hover { background-color: #3b82f6; }
-    </style>
 </head>
 <body class="text-gray-300 opacity-0 transition-opacity duration-1000">
 
@@ -217,7 +105,7 @@
                     <!-- GIF Character -->
                     <div class="w-full md:w-1/3 flex-shrink-0 relative group">
                         <div class="absolute inset-0 bg-blue-500/20 blur-2xl rounded-full group-hover:bg-blue-500/30 transition-colors duration-500"></div>
-                        <img src="assets/personaje_saludando.gif" alt="" class="w-full max-w-xs mx-auto relative z-10 transform group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/320x320/0a0f1e/3b82f6?text=GIF';">
+                        <img src="assets/personaje_saludando.gif" alt="Personaje 3D de Ignacio saludando" class="w-full max-w-xs mx-auto relative z-10 transform group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/320x320/0a0f1e/3b82f6?text=GIF';">
                     </div>
                     <!-- About Me Text -->
                     <div class="w-full md:w-2/3 text-center md:text-left">
@@ -332,7 +220,7 @@
                         data-tech='["TouchDesigner", "Hand Tracking", "Visuales Generativos"]'>
                     <div class="w-full h-52 relative overflow-hidden bg-slate-900">
                         <span class="bg-blue-600/80 backdrop-blur border border-blue-400/20 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg absolute top-4 left-4 z-20 shadow-lg">TouchDesigner</span>
-                        <img src="assets/GaleriaCircular.png" alt="" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+1';">
+                        <img src="assets/GaleriaCircular.png" alt="Galería circular interactiva en TouchDesigner" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+1';">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 opacity-80"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow bg-slate-950/20">
@@ -359,7 +247,7 @@
                         data-tech='["TouchDesigner", "Inteligencia Artificial", "Hand Tracking"]'>
                     <div class="w-full h-52 relative overflow-hidden bg-slate-900">
                         <span class="bg-purple-600/80 backdrop-blur border border-purple-400/20 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg absolute top-4 left-4 z-20 shadow-lg">TouchDesigner / IA</span>
-                        <img src="assets/IaGenerativaManos.png" alt="" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+2';">
+                        <img src="assets/IaGenerativaManos.png" alt="Visuales generados con IA a partir de gestos de manos" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+2';">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 opacity-80"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow bg-slate-950/20">
@@ -385,7 +273,7 @@
                         data-tech='["TouchDesigner", "Hand Tracking", "Diseño 3D"]'>
                     <div class="w-full h-52 relative overflow-hidden bg-slate-900">
                         <span class="bg-blue-600/80 backdrop-blur border border-blue-400/20 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg absolute top-4 left-4 z-20 shadow-lg">TouchDesigner / 3D</span>
-                        <img src="assets/Deconstruccion.png" alt="" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+3';">
+                        <img src="assets/Deconstruccion.png" alt="Deconstrucción 3D interactiva con hand tracking" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+3';">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 opacity-80"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow bg-slate-950/20">
@@ -412,7 +300,7 @@
                         data-tech='["Unity", "Meta Quest 2", "Diseño 3D"]'>
                     <div class="w-full h-52 relative overflow-hidden bg-slate-900">
                         <span class="bg-indigo-600/80 backdrop-blur border border-indigo-400/20 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg absolute top-4 left-4 z-20 shadow-lg">Unity / VR</span>
-                        <img src="assets/galeriavr.png" alt="" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+4';">
+                        <img src="assets/galeriavr.png" alt="Galería VR para fotógrafos en Meta Quest 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+4';">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 opacity-80"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow bg-slate-950/20">
@@ -438,7 +326,7 @@
                         data-tech='["Unity", "Mobile Development", "Modelado 3D"]'>
                     <div class="w-full h-52 relative overflow-hidden bg-slate-900">
                         <span class="bg-emerald-600/80 backdrop-blur border border-emerald-400/20 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg absolute top-4 left-4 z-20 shadow-lg">Unity / Mobile</span>
-                        <img src="assets/Bomberos.png" alt="" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+5';">
+                        <img src="assets/Bomberos.png" alt="App móvil de entrenamiento para bomberos" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+5';">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 opacity-80"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow bg-slate-950/20">
@@ -465,7 +353,7 @@
                         data-tech='["Unity", "Mobile Dev", "Game Design"]'>
                     <div class="w-full h-52 relative overflow-hidden bg-slate-900">
                         <span class="bg-emerald-600/80 backdrop-blur border border-emerald-400/20 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg absolute top-4 left-4 z-20 shadow-lg font-display">Unity / Mobile</span>
-                        <img src="assets/PalCarrete.png" alt="" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+6';">
+                        <img src="assets/PalCarrete.png" alt="Aplicación móvil PalCarrete" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+6';">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 opacity-80"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow bg-slate-950/20">
@@ -562,6 +450,18 @@
                             </a>
                         </div>
                     </div>
+
+                    <!-- GitHub + CV -->
+                    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                        <a href="https://github.com/Nach2212" target="_blank" rel="noopener" class="flex-1 bg-slate-900/60 backdrop-blur border border-slate-800 hover:border-slate-600 text-gray-200 hover:text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-md flex items-center justify-center gap-2" aria-label="Perfil de GitHub">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                            <span data-lang-key="contactBtnGitHub">Ver mi GitHub</span>
+                        </a>
+                        <a href="assets/cv/CV_Ignacio_Aguayo.pdf" download class="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:opacity-90 text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 shadow-md shadow-purple-500/20 flex items-center justify-center gap-2" aria-label="Descargar currículum en PDF">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                            <span data-lang-key="contactBtnCV">Descargar CV</span>
+                        </a>
+                    </div>
                     <div id="copy-feedback" class="absolute -bottom-12 left-1/2 -translate-x-1/2 bg-emerald-500 text-white text-xs px-4 py-1.5 rounded-full opacity-0 transition-all duration-300 shadow-lg font-medium flex items-center gap-2" data-lang-key="contactCopyFeedback">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                         ¡Copiado!
@@ -575,7 +475,15 @@
     <!-- ========== FOOTER ========== -->
     <footer class="bg-cyber-darker border-t border-slate-900 mt-20 relative z-10">
         <div class="container mx-auto px-6 py-10 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p class="text-gray-500 text-sm" data-lang-key="footerRights">&copy; 2026 Ignacio Aguayo. Todos los derechos reservados.</p>
+            <div class="flex items-center gap-4">
+                <p class="text-gray-500 text-sm" data-lang-key="footerRights">&copy; 2026 Ignacio Aguayo. Todos los derechos reservados.</p>
+                <a href="https://github.com/Nach2212" target="_blank" rel="noopener" class="text-gray-500 hover:text-white transition-colors" aria-label="GitHub de Ignacio Aguayo">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                </a>
+                <a href="mailto:i.aguayo2212@gmail.com" class="text-gray-500 hover:text-white transition-colors" aria-label="Enviar correo a Ignacio Aguayo">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                </a>
+            </div>
             <div class="">
                 <button id="destroy-btn" class="bg-red-950/20 text-red-500 border border-red-500/20 px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-red-900/40 hover:text-red-400 transition-all duration-300 flex items-center gap-2" data-lang-key="footerBtnDestroy">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
@@ -720,805 +628,9 @@
         </button>
     </div>
 
-    <style>
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
 
-    <script>
-        // --- SCROLL REVEAL (NEW) ---
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100; // Trigger point
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
-            }
-        }
-        window.addEventListener("scroll", reveal);
-        // Trigger once to show initial elements
-        setTimeout(reveal, 100);
-
-        // --- TRANSLATION SCRIPT ---
-        const translations = {
-            es: {
-                navAbout: "Sobre Mí", navServices: "Servicios", navProjects: "Proyectos", navContact: "Contáctame", navAR: "Tarjeta AR ⚡",
-                navAboutMobile: "Sobre Mí", navServicesMobile: "Servicios", navProjectsMobile: "Proyectos", navContactMobile: "Contáctame", navARMobile: "Tarjeta AR ⚡",
-                langEN: "EN", langES: "ES",
-                heroBtnAR: "Tarjeta AR ⚡",
-                
-                heroTitle: 'Hola, soy <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">Ignacio Aguayo</span>',
-                heroSubtitle: "Creative Technologist. Construyo experiencias interactivas que conectan el mundo digital y el físico.",
-                heroBtnProjects: "Ver mis Proyectos", heroBtnContact: "Hablemos",
-                
-                aboutTitle: "Sobre Mí",
-                aboutBio: "Soy un tecnólogo creativo radicado en Concepción, Chile, apasionado por la intersección del arte y el código. Mi enfoque es la creación de experiencias inmersivas e interactivas que desafían la percepción y conectan con las personas a un nivel más profundo.",
-                aboutBtnPersonalText: "Más allá del código... ⚡",
-                
-                persTitle: "Más Allá del Código",
-                persSubtitle: "Las pasiones que construyen mi disciplina y compromiso",
-                persCard1Title: "<span class='text-red-500'>🚒</span> Bombero Voluntario",
-                persCard1Desc: "El servicio como bombero voluntario representa mi compromiso con la comunidad, el trabajo en equipo bajo presión extrema y la resiliencia en situaciones críticas.",
-                persCard2Title: "<span class='text-blue-500'>🏃</span> Running & Disciplina",
-                persCard2Desc: "El running me enseña perseverancia, constancia y superación. Correr largas distancias entrena la mente para no rendirse y perseguir metas grandes y ambiciosas paso a paso.",
-                persCard3Title: "<span class='text-emerald-500'>🏔️</span> Trekking & Naturaleza",
-                persCard3Desc: "Explorar senderos y subir cumbres me conecta con la naturaleza. Me enseña adaptabilidad ante entornos cambiantes y me ayuda a mantener la claridad mental y el equilibrio.",
-                
-                servicesTitle: "Servicios Creativos",
-                servicesSubtitle: "Soluciones interactivas a medida que conectan el arte digital con el espacio físico.",
-                srv1Title: "Instalaciones Interactivas",
-                srv1Desc: "Desarrollo en TouchDesigner para mapping proyectado, visuales reactivos en vivo, integración de sensores corporales y espaciales (Kinect, hand tracking) para museos, marcas y eventos.",
-                srv2Title: "Desarrollo VR/AR inmersivo",
-                srv2Desc: "Aplicaciones de Realidad Virtual y Aumentada en Unity para Meta Quest y dispositivos móviles. Simuladores interactivos, recorridos virtuales en 3D y juegos experimentales para capacitación y marketing.",
-                srv3Title: "Aplicaciones Móviles e Interactivas",
-                srv3Desc: "Diseño y programación de aplicaciones móviles de alto rendimiento en Unity o desarrollo nativo. Integración de lógicas gamificadas, manuales interactivos 3D y juegos multijugador locales.",
-                srv4Title: "Modelado y Animación 3D",
-                srv4Desc: "Modelado de assets optimizados para tiempo real, animaciones personalizadas en After Effects o Blender, y deconstrucción procedural de objetos 3D.",
-                
-                skillsTitle: "Mis Habilidades", skillUnity: "Unity", skillVrAr: "Desarrollo VR/AR", skillMobile: "Mobile Apps", skillTouchdesigner: "TouchDesigner", skillUiUx: "UX/UI Design", skillInteractive: "Experiencias Interactivas", skillShaders: "Shaders & Visuales Generativos", skillCreativeCoding: "Creative Coding",
-                
-                projectsTitle: "Proyectos Destacados", projectsSubtitle: "Una selección de mis mejores trabajos.", pBtnDetails: "Ver Detalles",
-                p1Title: "Galería Circular Interactiva", p1Desc: "Experiencia en TouchDesigner con una galería circular controlada por hand tracking espacial.",
-                p2Title: "Armonías Gestuales: IA Visual", p2Desc: "Aplicación en TouchDesigner que genera imágenes con Inteligencia Artificial a partir de gestos.",
-                p3Title: "Deconstrucción 3D Interactiva", p3Desc: "Experiencia interactiva que deconstruye modelos 3D en tiempo real usando hand tracking.",
-                p4Title: "Galería VR Fotográfica", p4Desc: "App de galería virtual inmersiva en VR para Meta Quest 2, diseñada para eventos.",
-                p5Title: "App Móvil para Bomberos", p5Desc: "Diseño de app móvil para ubicar material y consultar procedimientos en carros bomba.",
-                p6Title: "PalCarrete App", p6Desc: "Aplicación móvil lúdica con sistema dinámico de retos, castigos y tarjetas.",
-                
-                modalChallenge: "El Desafío", modalProcess: "Mi Proceso", modalTech: "Tecnologías Utilizadas",
-                p1mTitle: "Galería Circular Interactiva", p1mSubtitle: "Navegación Inmersiva con TouchDesigner", p1mChallenge: "El desafío fue crear una forma innovadora de presentar imágenes, buscando una experiencia que superara la visualización estática y fomentara una interacción más profunda.", p1mProcess: "Para lograr una interacción intuitiva, opté por el hand tracking como método de control. El principal reto técnico fue combinar la galería esférica con la precisión del seguimiento de manos, lo que requirió un diseño gestual cuidadoso y optimización para asegurar una experiencia fluida.",
-                p2mTitle: "Armonías Gestuales: IA Visual Interactiva", p2mSubtitle: "Creación de Contenido con Gestos y Algoritmos", p2mChallenge: "El reto era desarrollar una experiencia que permitiera generar visuales a través del movimiento de las manos, fusionando la expresión física con la generación algorítmica de imágenes.", p2mProcess: "Implementé el seguimiento de manos en tiempo real a través de TouchDesigner para capturar y traducir los movimientos a parámetros que alimentaran una red neuronal generativa. El principal desafío fue optimizar la respuesta de la IA para que las imágenes se generaran de forma fluida y coherente con la intención gestual.",
-                p3mTitle: "Deconstrucción 3D Interactiva", p3mSubtitle: "Exhibición y Manipulación de Modelos 3D con Gestos", p3mChallenge: "El principal desafío fue crear una forma innovadora y atractiva de exhibir modelos 3D, permitiendo a los usuarios interactuar con ellos de manera divertida y significativa, como controlando su deconstrucción o cambiando los modelos con las manos.", p3mProcess: "Desarrollé esta experiencia en TouchDesigner, enfocándose en la integración del hand tracking para una manipulación intuitiva. Lo más complejo fue diseñar los algoritmos de deconstrucción y el sistema de reconocimiento gestual que permitiera a los usuarios controlar los modelos 3D en tiempo real, ofreciendo una interacción fluida y reactiva con los objetos virtuales.",
-                p4mTitle: "Galería VR para Fotógrafos", p4mSubtitle: "Exhibición Virtual Inmersiva en Concepción", p4mChallenge: "El reto era diseñar una galería virtual inmersiva para un evento de fotógrafos en Concepción, que permitiera exhibir sus obras de una manera innovadora y envolvente utilizando la realidad virtual.", p4mProcess: "Trabajé en Unity, diseñando la arquitectura virtual de la galería y la disposición de los cuadros. La decoración y la ambientación se realizaron a medida según los requerimientos del evento, buscando crear un espacio que realzara las obras fotográficas. La implementación se optimizó para funcionar fluidamente en dispositivos Meta Quest 2.",
-                p5mTitle: "App Móvil para Bomberos", p5mSubtitle: "Herramienta de Entrenamiento para Emergencias", p5mChallenge: "El principal desafío fue crear una herramienta de entrenamiento digital para bomberos, que les permitiera aprender y repasar la ubicación del material en el carro bomba, así como consultar procedimientos vitales, de una forma cómoda e intuitiva.", p5mProcess: "Desarrollé la aplicación en Unity, enfocándose en la creación de modelos 3D detallados de las herramientas y el carro. La interfaz fue diseñada como una herramienta de estudio eficaz, con un sistema de navegación optimizado para el aprendizaje y la consulta rápida de procedimientos clave, como el manual IFTA, fortaleciendo así su preparación para emergencias reales.",
-                p6mTitle: "PalCarrete App", p6mSubtitle: "Juego Móvil Dinámico para Eventos Sociales", p6mChallenge: "El reto fue desarrollar un juego de beber móvil que fuera gratuito, entretenido y que ofreciera una experiencia dinámica para evitar la monotonía, a diferencia de otras opciones existentes en el mercado.", p6mProcess: "El desarrollo se centró en Unity. Lo más complejo fue diseñar e implementar el sistema de jugadores y la asignación aleatoria y justa de cartas. Se creó una arquitectura modular para los retos, permitiendo su dinamismo y el cambio constante del orden de aparición para asegurar la rejugabilidad.",
-                
-                mpTitle: "Más Proyectos & Eventos", mpSubtitle: "Otros trabajos, eventos y exploraciones creativas.", mpFilterAll: "Todos", mpFilterTouch: "TouchDesigner", mpFilterUnity: "Unity", mpFilterModelado: "Modelado", mpFilterAnimacion: "Animación", mpFilterEventos: "Eventos", mpSelectTitle: "Selecciona un proyecto o evento", mpSelectDesc: "Elige un ítem de la lista a la izquierda para ver su demostración.",
-                mp: {
-                    mp1: { title: "Partículas Interactivas", desc: "Exploración de sistemas de partículas en TouchDesigner respondiento a la interacción.", category: "touchdesigner", videoId: "BrF5mKbddZE" },
-                    mp2: { title: "Texto Interactivo", desc: "Visuales generativas creando tipografía que reacciona en tiempo real.", category: "touchdesigner", videoId: "d-ucKBghC5s" },
-                    mp3: { title: "Revelación de Imagen Interactiva", desc: "Efecto de shader que revela una imagen basado en el movimiento.", category: "touchdesigner", videoId: "D4bLje0H558" },
-                    mp4: { title: "Fragnesia VR", desc: "Juego de terror psicológico en Realidad Virtual desarrollado en Unity.", category: "unity", videoId: "PLvrUPV4Qsg" },
-                    mp5: { title: "Cuna de Prat AR", desc: "Simulación histórica de la Casa Prat en Realidad Aumentada para dispositivos móviles.", category: "unity", videoId: "SoqMsK8s3WQ" },
-                    mp6: { title: "Espada de Aatrox", desc: "Modelado 3D de alta fidelidad y texturizado de la espada del personaje 'Aatrox'.", category: "modelado", videoId: "Ixkim4BBWHE" },
-                    mp7: { title: "Poema Visual: Eterno Retorno", desc: "Corto de animación 3D basado en un poema, explorando conceptos de repetición.", category: "animacion", videoId: "y-mD6fsNElw" },
-                    mp8: { title: "REC: Obstáculos en Tiempo Real", desc: "Diseño y desarrollo de una experiencia interactiva en Unity con body tracking corporal expuesta en el stand de la Universidad San Sebastián en el festival REC (Rock en Conce). Los usuarios debían esquivar obstáculos físicos mediante movimientos corporales.", category: "eventos", images: ["assets/eventos/rec_1.jpg", "assets/eventos/rec_2.jpg"] },
-                    mp9: { title: "Exhibición VR - Biblioteca Municipal", desc: "Instalación y soporte de una galería virtual inmersiva en Meta Quest 2 para la comunidad de fotógrafos de Concepción (Afoconce), realizada en la Biblioteca Municipal. Permitió a los asistentes interactuar con las obras en un entorno tridimensional.", category: "eventos", images: ["assets/eventos/afoconce_1.jpg", "assets/eventos/afoconce_2.jpg", "assets/eventos/afoconce_3.jpg"] },
-                    mp10: { title: "Taller: Anima tu dibujo con IA", desc: "Ayudante técnico y facilitador en actividades de co-creación infantil. Los niños realizaban dibujos analógicos en papel que luego eran procesados con la IA de Google para animar los personajes y subidos a Spatial para su visualización interactiva en entornos VR.", category: "eventos", images: ["assets/eventos/animacion_1.jpg", "assets/eventos/animacion_2.jpg"] },
-                    mp11: { title: "Taller: Chocolate (IA & 3D Reconstrucción)", desc: "Facilitador en actividades creativas basadas en inteligencia artificial generativa 3D. El flujo consistió en plasmar ideas de los niños en papel, procesarlas con Gemini para generar bocetos 3D, reconstruir la malla con Tripo 3D y cargarlas en Oculus VR a través de Sketchfab.", category: "eventos", images: ["assets/eventos/chocolate_1.jpg", "assets/eventos/chocolate_2.jpg", "assets/eventos/chocolate_3.jpg", "assets/eventos/chocolate_4.jpg", "assets/eventos/chocolate_5.jpg"] }
-                },
-                
-                contactTitle: "Hablemos", contactSubtitle: "¿Tienes un proyecto en mente o una oportunidad para mí? ¡No dudes en contactarme!", contactBtnCopy: "Copiar", contactBtnSend: "Escribir", contactCopyFeedback: "¡Copiado!",
-                footerRights: "&copy; 2026 Ignacio Aguayo. Todos los derechos reservados.", footerBtnDestroy: "¡Destruir Página!",
-                resetTitle: "¿Qué has hecho? ¡Mi portafolio! :c", resetBtn: "Reconstruir Sistema"
-            },
-            en: {
-                navAbout: "About Me", navServices: "Services", navProjects: "Projects", navContact: "Contact Me", navAR: "AR Card ⚡",
-                navAboutMobile: "About Me", navServicesMobile: "Services", navProjectsMobile: "Projects", navContactMobile: "Contact Me", navARMobile: "AR Card ⚡",
-                langEN: "EN", langES: "ES",
-                heroBtnAR: "AR Card ⚡",
-                
-                heroTitle: 'Hi, I\'m <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">Ignacio Aguayo</span>',
-                heroSubtitle: "Creative Technologist. I build interactive experiences that connect the digital and physical worlds.",
-                heroBtnProjects: "View My Projects", heroBtnContact: "Let's Talk",
-                
-                aboutTitle: "About Me",
-                aboutBio: "I am a creative technologist based in Concepción, Chile, passionate about the intersection of art and code. My focus is on creating immersive and interactive experiences that challenge perception and connect with people on a deeper level.",
-                aboutBtnPersonalText: "Beyond the code... ⚡",
-                
-                persTitle: "Beyond the Code",
-                persSubtitle: "Passions that build my discipline and commitment",
-                persCard1Title: "<span class='text-red-500'>🚒</span> Volunteer Firefighter",
-                persCard1Desc: "Serving as a volunteer firefighter represents my commitment to the community, teamwork under extreme pressure, and resilience in critical situations.",
-                persCard2Title: "<span class='text-blue-500'>🏃</span> Running & Discipline",
-                persCard2Desc: "Running teaches me perseverance, consistency, and self-improvement. Long-distance running trains the mind to persist and chase large, ambitious goals step by step.",
-                persCard3Title: "<span class='text-emerald-500'>🏔️</span> Trekking & Nature",
-                persCard3Desc: "Exploring trails and climbing peaks connects me with nature. It teaches adaptability to changing environments and helps maintain mental clarity and balance.",
-                
-                servicesTitle: "Creative Services",
-                servicesSubtitle: "Custom interactive solutions connecting digital art with physical spaces.",
-                srv1Title: "Interactive Installations",
-                srv1Desc: "TouchDesigner development for projection mapping, live reactive visuals, body and spatial sensor integration (Kinect, hand tracking) for museums, brands, and events.",
-                srv2Title: "Immersive VR/AR Development",
-                srv2Desc: "Virtual and Augmented Reality applications in Unity for Meta Quest and mobile devices. Interactive simulators, 3D virtual walkthroughs, and experimental games for training and marketing.",
-                srv3Title: "Mobile & Interactive Apps",
-                srv3Desc: "Design and programming of high-performance mobile apps in Unity or native development. Integration of gamified logic, 3D interactive manuals, and local multiplayer games.",
-                srv4Title: "3D Modeling & Animation",
-                srv4Desc: "Modeling of real-time optimized assets, custom animations in After Effects or Blender, and procedural 3D deconstruction.",
-                
-                skillsTitle: "My Skills", skillUnity: "Unity", skillVrAr: "VR/AR Development", skillMobile: "Mobile Apps", skillTouchdesigner: "TouchDesigner", skillUiUx: "UX/UI Design", skillInteractive: "Interactive Experiences", skillShaders: "Shaders & Generative Visuals", skillCreativeCoding: "Creative Coding",
-                
-                projectsTitle: "Featured Projects", projectsSubtitle: "A selection of my best work.", pBtnDetails: "View Details",
-                p1Title: "Interactive Circular Gallery", p1Desc: "A TouchDesigner experience with a circular gallery controlled by spatial hand tracking.",
-                p2Title: "Gestural Harmonies: Visual AI", p2Desc: "A TouchDesigner application that generates images with AI based on hand gestures.",
-                p3Title: "Interactive 3D Deconstruction", p3Desc: "An interactive experience that deconstructs 3D models using hand tracking in real-time.",
-                p4Title: "VR Photo Gallery", p4Desc: "A virtual immersive gallery app in VR for Meta Quest 2, designed for events.",
-                p5Title: "Mobile App for Firefighters", p5Desc: "Mobile app designed to locate equipment and consult procedures on fire trucks.",
-                p6Title: "PalCarrete App", p6Desc: "A mobile drinking game with a dynamic system of challenges, punishments, and cards.",
-                
-                modalChallenge: "The Challenge", modalProcess: "My Process", modalTech: "Technologies Used",
-                p1mTitle: "Interactive Circular Gallery", p1mSubtitle: "Immersive Navigation with TouchDesigner", p1mChallenge: "The challenge was to create an innovative way to present images, seeking an experience that went beyond static viewing and fostered deeper user interaction.", p1mProcess: "To achieve intuitive interaction, I chose hand tracking as the control method. The main technical challenge was combining the spherical gallery with the precision of hand tracking, which required careful gestural design and optimization for a fluid experience.",
-                p2mTitle: "Gestural Harmonies: Interactive Visual AI", p2mSubtitle: "Content Creation with Gestures and Algorithms", p2mChallenge: "The challenge was to develop an experience that allowed users to generate visuals through hand movements, merging physical expression with algorithmic image generation.", p2mProcess: "I implemented real-time hand tracking via TouchDesigner to capture and translate movements into parameters that fed a generative neural network. The main challenge was optimizing the AI's response time to ensure images were generated smoothly and coherently with the user's gestural intent.",
-                p3mTitle: "Interactive 3D Deconstruction", p3mSubtitle: "Exhibition and Manipulation of 3D Models with Gestures", p3mChallenge: "The main challenge was to create an innovative and engaging way to display 3D models, allowing users to interact with them in a fun and meaningful way, such as controlling their deconstruction or changing models with their hands.", p3mProcess: "I developed this experience in TouchDesigner, focusing on integrating hand tracking for intuitive manipulation. The most complex part was designing the deconstruction algorithms and the gesture recognition system that allowed users to control the 3D models in real-time, providing a fluid and reactive interaction with the virtual objects.",
-                p4mTitle: "VR Gallery for Photographers", p4mSubtitle: "Immersive Virtual Exhibition in Concepción", p4mChallenge: "The challenge was to design an immersive virtual gallery for a photographers' event in Concepción, allowing them to exhibit their work in an innovative and engaging way using virtual reality.", p4mProcess: "I worked in Unity, designing the gallery's virtual architecture and the layout of the artworks. The decoration and atmosphere were customized according to the event's requirements, aiming to create a space that enhanced the photographic works. The implementation was optimized to run smoothly on Meta Quest 2 devices.",
-                p5mTitle: "Mobile App for Firefighters", p5mSubtitle: "Emergency Training Tool", p5mChallenge: "The main challenge was to create a digital training tool for firefighters that would allow them to learn and review the location of equipment on the fire truck, as well as consult vital procedures, in a comfortable and intuitive way.", p5mProcess: "I developed the application in Unity, focusing on creating detailed 3D models of the tools and the fire truck. The user interface was designed as an effective study tool, with a navigation system optimized for learning and quick reference of key procedures, such as the IFTA manual, thereby strengthening their preparation for real emergencies.",
-                p6mTitle: "PalCarrete App", p6mSubtitle: "Dynamic Mobile Game for Social Events", p6mChallenge: "The challenge was to develop a mobile drinking game that was free, entertaining, and offered a dynamic experience to avoid monotony, unlike other options on the market.", p6mProcess: "Development was centered in Unity. The most complex part was designing and implementing the player system and the random and fair card assignment. A modular architecture was created for the challenges, allowing for dynamism and a constantly changing order of appearance to ensure replayability.",
-                
-                mpTitle: "More Projects & Events", mpSubtitle: "Other works, events, and creative explorations.", mpFilterAll: "All", mpFilterTouch: "TouchDesigner", mpFilterUnity: "Unity", mpFilterModelado: "3D Modeling", mpFilterAnimation: "Animation", mpFilterEventos: "Events", mpSelectTitle: "Select a project or event", mpSelectDesc: "Choose an item from the left list to see the demonstration.",
-                mp: {
-                    mp1: { title: "Interactive Particles", desc: "Exploration of particle systems in TouchDesigner responding to interaction.", category: "touchdesigner", videoId: "BrF5mKbddZE" },
-                    mp2: { title: "Interactive Text", desc: "Generative visuals creating typography that reacts in real-time.", category: "touchdesigner", videoId: "d-ucKBghC5s" },
-                    mp3: { title: "Interactive Image Reveal", desc: "Shader effect that reveals an image based on movement.", category: "touchdesigner", videoId: "D4bLje0H558" },
-                    mp4: { title: "Fragnesia VR", desc: "Psychological horror game in Virtual Reality developed in Unity.", category: "unity", videoId: "PLvrUPV4Qsg" },
-                    mp5: { title: "Cuna de Prat AR", desc: "Historical simulation of 'Casa Prat' in Augmented Reality for mobile devices.", category: "unity", videoId: "SoqMsK8s3WQ" },
-                    mp6: { title: "Aatrox's Sword", desc: "High-fidelity 3D modeling and texturing of the 'Aatrox' character's sword.", category: "modelado", videoId: "Ixkim4BBWHE" },
-                    mp7: { title: "Visual Poem: Eterno Retorno", desc: "3D animation short based on a poem, exploring concepts of repetition.", category: "animacion", videoId: "y-mD6fsNElw" },
-                    mp8: { title: "REC: Real-time Obstacles", desc: "Design and development of an interactive body-tracking experience in Unity, exhibited at the Universidad San Sebastián stand during the REC festival. Users dodged physical obstacles in real-time using body movements.", category: "eventos", images: ["assets/eventos/rec_1.jpg", "assets/eventos/rec_2.jpg"] },
-                    mp9: { title: "VR Exhibition - Municipal Library", desc: "Installation and support of an immersive virtual gallery on Meta Quest 2 for the Concepción photographer community (Afoconce), hosted at the Municipal Library. It allowed attendees to interact with the works in a 3D space.", category: "eventos", images: ["assets/eventos/afoconce_1.jpg", "assets/eventos/afoconce_2.jpg", "assets/eventos/afoconce_3.jpg"] },
-                    mp10: { title: "Workshop: Animate your drawing with AI", desc: "Technical assistant and facilitator in children's co-creation activities. Kids made analog drawings on paper that were processed with Google AI to animate the characters, then uploaded to Spatial for interactive viewing in VR.", category: "eventos", images: ["assets/eventos/animacion_1.jpg", "assets/eventos/animacion_2.jpg"] },
-                    mp11: { title: "Workshop: Chocolate (AI & 3D Reconstruction)", desc: "Facilitator in creative activities based on generative 3D AI. The workflow involved putting children's ideas on paper, processing them with Gemini for 3D sketching, reconstructing the mesh with Tripo 3D, and uploading to Sketchfab to view them in Oculus VR headsets.", category: "eventos", images: ["assets/eventos/chocolate_1.jpg", "assets/eventos/chocolate_2.jpg", "assets/eventos/chocolate_3.jpg", "assets/eventos/chocolate_4.jpg", "assets/eventos/chocolate_5.jpg"] }
-                },
-                contactTitle: "Let's Talk", contactSubtitle: "Got a project in mind or an opportunity for me? Don't hesitate to reach out!", contactBtnCopy: "Copy", contactBtnSend: "Email", contactCopyFeedback: "Copied!",
-                footerRights: "&copy; 2026 Ignacio Aguayo. All rights reserved.", footerBtnDestroy: "Destroy Page!",
-                resetTitle: "What have you done? My portfolio! :c", resetBtn: "Rebuild System"
-            }
-        };
-
-        const langToggle = document.getElementById('lang-toggle');
-        const langToggleMobile = document.getElementById('lang-toggle-mobile');
-        let currentLang = 'es';
-
-        // --- MORE PROJECTS SCRIPT ---
-        const projectListContainer = document.getElementById('more-projects-list');
-        const initialMessage = document.getElementById('mp-initial-message');
-        const contentContainer = document.getElementById('mp-content');
-        const titleEl = document.getElementById('mp-title');
-        const videoEl = document.getElementById('mp-video');
-        const descriptionEl = document.getElementById('mp-description');
-        const filterButtons = document.querySelectorAll('.mp-filter-btn');
-        let projectItems = [];
-
-        function showProjectDetails(projectId) {
-            const projectData = translations[currentLang].mp[projectId];
-            if (!projectData) return;
-
-            titleEl.textContent = projectData.title;
-            descriptionEl.textContent = projectData.desc;
-            
-            const localVideoEl = document.getElementById('mp-local-video');
-            const imageCarouselEl = document.getElementById('mp-image-carousel');
-            
-            // Ocultar todos primero
-            videoEl.classList.add('hidden');
-            videoEl.src = "";
-            if (localVideoEl) {
-                localVideoEl.classList.add('hidden');
-                localVideoEl.src = "";
-            }
-            if (imageCarouselEl) {
-                imageCarouselEl.classList.add('hidden');
-                imageCarouselEl.innerHTML = "";
-            }
-
-            if (projectData.videoId) {
-                videoEl.classList.remove('hidden');
-                videoEl.src = `https://www.youtube.com/embed/${projectData.videoId}`;
-            } else if (projectData.localVideo) {
-                if (localVideoEl) {
-                    localVideoEl.classList.remove('hidden');
-                    localVideoEl.src = projectData.localVideo;
-                    localVideoEl.load();
-                }
-            } else if (projectData.images && projectData.images.length > 0) {
-                if (imageCarouselEl) {
-                    imageCarouselEl.classList.remove('hidden');
-                    const wrapper = document.createElement('div');
-                    wrapper.className = 'w-full h-full flex gap-3 overflow-x-auto snap-x scrollbar-thin p-1';
-                    
-                    projectData.images.forEach(imgSrc => {
-                        const img = document.createElement('img');
-                        img.src = imgSrc;
-                        img.className = 'h-full object-contain bg-slate-950/60 rounded-xl snap-center flex-shrink-0 border border-slate-800 shadow-md';
-                        img.alt = projectData.title;
-                        wrapper.appendChild(img);
-                    });
-                    imageCarouselEl.appendChild(wrapper);
-                }
-            }
-
-            initialMessage.classList.add('hidden');
-            contentContainer.classList.remove('hidden');
-            contentContainer.classList.add('flex');
-            
-            projectItems.forEach(item => {
-                if (item.dataset.projectId === projectId) {
-                    item.classList.add('bg-blue-600/10', 'border-l-4', 'border-blue-500', 'text-white');
-                    item.classList.remove('text-gray-400', 'hover:bg-slate-800/20');
-                } else {
-                    item.classList.remove('bg-blue-600/10', 'border-l-4', 'border-blue-500', 'text-white');
-                    item.classList.add('text-gray-400', 'hover:bg-slate-800/20');
-                }
-            });
-        }
-        
-        function filterProjects(filter) {
-            initialMessage.classList.remove('hidden');
-            contentContainer.classList.add('hidden');
-            contentContainer.classList.remove('flex');
-            videoEl.src = "";
-            videoEl.classList.add('hidden');
-            const localVideoEl = document.getElementById('mp-local-video');
-            if (localVideoEl) {
-                localVideoEl.src = "";
-                localVideoEl.classList.add('hidden');
-            }
-            const imageCarouselEl = document.getElementById('mp-image-carousel');
-            if (imageCarouselEl) {
-                imageCarouselEl.innerHTML = "";
-                imageCarouselEl.classList.add('hidden');
-            }
-
-            filterButtons.forEach(btn => {
-                if (btn.dataset.filter === filter) {
-                    btn.classList.add('bg-blue-600', 'text-white', 'border-blue-500/30', 'shadow-md', 'shadow-blue-500/20');
-                    btn.classList.remove('bg-slate-900/60', 'text-gray-400', 'hover:bg-slate-800/80');
-                } else {
-                    btn.classList.remove('bg-blue-600', 'text-white', 'border-blue-500/30', 'shadow-md', 'shadow-blue-500/20');
-                    btn.classList.add('bg-slate-900/60', 'text-gray-400', 'hover:bg-slate-800/80');
-                }
-            });
-            
-            projectItems.forEach(item => {
-                const category = item.dataset.category;
-                if (filter === 'all' || category === filter) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
-
-        function setupMoreProjects(lang) {
-            projectListContainer.innerHTML = ''; 
-            projectItems = []; 
-            const projects = translations[lang].mp;
-
-            for (const id in projects) {
-                const project = projects[id];
-                const item = document.createElement('button');
-                item.className = 'block w-full text-left px-6 py-4 border-b border-slate-800/60 text-gray-400 font-medium hover:bg-slate-800/20 transition-all duration-200';
-                item.textContent = project.title;
-                item.dataset.projectId = id;
-                item.dataset.category = project.category;
-                
-                item.addEventListener('click', () => {
-                    showProjectDetails(id);
-                });
-                
-                projectListContainer.appendChild(item);
-                projectItems.push(item);
-            }
-            
-            filterButtons.forEach(btn => {
-                btn.onclick = () => filterProjects(btn.dataset.filter);
-            });
-            filterProjects('all');
-        }
-
-        function switchLanguage(lang) {
-            document.documentElement.lang = lang;
-            const elements = document.querySelectorAll('[data-lang-key]');
-            elements.forEach(el => {
-                const key = el.dataset.langKey;
-                if (translations[lang][key]) {
-                    el.innerHTML = translations[lang][key];
-                }
-            });
-            const modalTriggers = document.querySelectorAll('[data-modal-trigger]');
-            modalTriggers.forEach(trigger => {
-                const prefix = trigger.dataset.langKeyPrefix;
-                if (prefix) {
-                    trigger.dataset.title = translations[lang][`${prefix}Title`] || trigger.dataset.title;
-                    trigger.dataset.subtitle = translations[lang][`${prefix}Subtitle`] || trigger.dataset.subtitle;
-                    trigger.dataset.challenge = translations[lang][`${prefix}Challenge`] || trigger.dataset.challenge;
-                    trigger.dataset.process = translations[lang][`${prefix}Process`] || trigger.dataset.process;
-                }
-            });
-            
-            setupMoreProjects(lang);
-            langToggle.checked = lang === 'es';
-            langToggleMobile.checked = lang === 'es';
-        }
-
-        langToggle.addEventListener('change', () => {
-            currentLang = langToggle.checked ? 'es' : 'en';
-            switchLanguage(currentLang);
-        });
-
-        switchLanguage('es');
-
-        // --- MOBILE MENU ---
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-        });
-
-        // --- OPTIMIZED CANVAS SCRIPT ---
-        const canvas = document.getElementById('starfield-canvas');
-        let giantMeteor = null;
-        let glowActive = false;
-        let glowOpacity = 0;
-        let glowRadius = 0;
-        let maxGlowRadius = 0;
-
-        if (canvas) {
-            const ctx = canvas.getContext('2d');
-            let stars = [];
-            let shootingStars = [];
-            let animationFrameId;
-
-            // Debounce resize
-            let resizeTimeout;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(() => {
-                    initCanvas();
-                }, 200);
-            });
-
-            let mouse = { x: undefined, y: undefined, radius: 120 };
-            window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
-            window.addEventListener('mouseout', () => { mouse.x = undefined; mouse.y = undefined; });
-
-            class GiantMeteor {
-                constructor(canvas) {
-                    this.canvas = canvas;
-                    this.reset();
-                }
-                reset() {
-                    const sizeFactor = Math.max(this.canvas.width, this.canvas.height);
-                    // Start far top-left off-screen
-                    this.x = -sizeFactor * 0.3;
-                    this.y = -sizeFactor * 0.3;
-                    
-                    // Path parameters (diagonal: top-left to bottom-right)
-                    this.speed = sizeFactor / 110; // Cross in ~110 frames (1.8s)
-                    const angle = Math.PI / 6; // 30-degree path
-                    this.speedX = Math.cos(angle) * this.speed;
-                    this.speedY = Math.sin(angle) * this.speed;
-                    
-                    this.tailLength = sizeFactor * 0.45;
-                    this.active = false;
-                    this.hasTriggeredText = false;
-                }
-                start() {
-                    this.active = true;
-                }
-                update(ctx, onCenterPass) {
-                    if (!this.active) return;
-
-                    this.x += this.speedX;
-                    this.y += this.speedY;
-
-                    // Trigger the text reveal when the head crosses screen center
-                    if (!this.hasTriggeredText && this.x >= this.canvas.width / 2) {
-                        this.hasTriggeredText = true;
-                        if (onCenterPass) onCenterPass();
-                    }
-
-                    // Check bounds to terminate the animation
-                    if (this.x - this.tailLength > this.canvas.width || this.y - this.tailLength > this.canvas.height) {
-                        this.active = false;
-                    }
-
-                    this.draw(ctx);
-                }
-                draw(ctx) {
-                    const angle = Math.atan2(this.speedY, this.speedX);
-                    const tailX = this.x - Math.cos(angle) * this.tailLength;
-                    const tailY = this.y - Math.sin(angle) * this.tailLength;
-
-                    // Tail gradient
-                    const grad = ctx.createLinearGradient(this.x, this.y, tailX, tailY);
-                    grad.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
-                    grad.addColorStop(0.1, 'rgba(0, 243, 255, 0.85)'); // Cyan glow
-                    grad.addColorStop(0.35, 'rgba(59, 130, 246, 0.5)'); // Blue glow
-                    grad.addColorStop(0.7, 'rgba(99, 102, 241, 0.15)'); // Indigo glow
-                    grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
-
-                    ctx.lineCap = 'round';
-
-                    // Outer soft glow tail
-                    ctx.strokeStyle = grad;
-                    ctx.lineWidth = 14;
-                    ctx.beginPath();
-                    ctx.moveTo(this.x, this.y);
-                    ctx.lineTo(tailX, tailY);
-                    ctx.stroke();
-
-                    // Inner bright tail
-                    ctx.lineWidth = 6;
-                    ctx.beginPath();
-                    ctx.moveTo(this.x, this.y);
-                    ctx.lineTo(tailX, tailY);
-                    ctx.stroke();
-
-                    // Core white line
-                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
-                    ctx.lineWidth = 2.5;
-                    ctx.beginPath();
-                    ctx.moveTo(this.x, this.y);
-                    ctx.lineTo(this.x - Math.cos(angle) * (this.tailLength * 0.15), this.y - Math.sin(angle) * (this.tailLength * 0.15));
-                    ctx.stroke();
-
-                    // Head outer glow
-                    const outerGlow = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, 35);
-                    outerGlow.addColorStop(0, 'rgba(0, 243, 255, 0.45)');
-                    outerGlow.addColorStop(0.5, 'rgba(59, 130, 246, 0.2)');
-                    outerGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
-                    ctx.fillStyle = outerGlow;
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, 35, 0, Math.PI * 2);
-                    ctx.fill();
-
-                    // Head inner core
-                    const innerGlow = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, 9);
-                    innerGlow.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
-                    innerGlow.addColorStop(0.7, 'rgba(0, 243, 255, 0.8)');
-                    innerGlow.addColorStop(1, 'rgba(0, 243, 255, 0)');
-                    ctx.fillStyle = innerGlow;
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, 9, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            }
-
-            class Star {
-                constructor(x, y, speedX, speedY, size, color) {
-                    this.x = x; this.y = y; this.speedX = speedX; this.speedY = speedY; this.size = size; this.color = color;
-                    this.baseX = x; this.baseY = y; this.density = (Math.random() * 20) + 1;
-                }
-                draw() {
-                    ctx.fillStyle = this.color; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
-                }
-                update() {
-                    let dx = mouse.x - this.x; let dy = mouse.y - this.y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < mouse.radius) {
-                        let force = (mouse.radius - distance) / mouse.radius;
-                        this.x -= (dx / distance) * force * this.density;
-                        this.y -= (dy / distance) * force * this.density;
-                    } else {
-                        if (this.x !== this.baseX) this.x -= (this.x - this.baseX) * 0.05;
-                        if (this.y !== this.baseY) this.y -= (this.y - this.baseY) * 0.05;
-                    }
-                    this.x += this.speedX; this.y += this.speedY;
-                    if (this.x > canvas.width) { this.x = 0; this.baseX = 0; }
-                    if (this.x < 0) { this.x = canvas.width; this.baseX = canvas.width; }
-                    if (this.y > canvas.height) { this.y = 0; this.baseY = 0; }
-                    if (this.y < 0) { this.y = canvas.height; this.baseY = canvas.height; }
-                    this.draw();
-                }
-            }
-
-            class ShootingStar {
-                constructor() { this.reset(); }
-                reset() {
-                    this.x = Math.random() * canvas.width; this.y = 0; this.len = (Math.random() * 60) + 10;
-                    this.speed = (Math.random() * 8) + 4; this.size = (Math.random() * 1) + 0.5;
-                    this.waitTime = Date.now() + (Math.random() * 6000) + 1000; this.active = false;
-                }
-                update() {
-                    if (this.active) {
-                        this.x += this.speed; this.y += this.speed * 0.5;
-                        if (this.x > canvas.width || this.y > canvas.height) this.reset(); else this.draw();
-                    } else {
-                        if (Date.now() > this.waitTime) this.active = true;
-                    }
-                }
-                draw() {
-                    const grad = ctx.createLinearGradient(this.x, this.y, this.x - this.len, this.y - (this.len * 0.5));
-                    grad.addColorStop(0, `rgba(255, 255, 255, ${this.size})`); grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
-                    ctx.strokeStyle = grad; ctx.lineWidth = this.size; ctx.beginPath();
-                    ctx.moveTo(this.x, this.y); ctx.lineTo(this.x - this.len, this.y - (this.len * 0.5)); ctx.stroke();
-                }
-            }
-
-            function initCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-                stars = []; shootingStars = [];
-                let numStars = (canvas.height * canvas.width) / 12000; // Optimal density for constellations
-                for (let i = 0; i < numStars; i++) {
-                    stars.push(new Star(Math.random() * canvas.width, Math.random() * canvas.height, (Math.random() * 0.2) - 0.1, (Math.random() * 0.2) - 0.1, Math.random() * 1.5 + 0.5, 'rgba(59, 130, 246, ' + (Math.random() * 0.6 + 0.2) + ')'));
-                }
-                for (let i = 0; i < 2; i++) shootingStars.push(new ShootingStar()); // Reduced for better perf
-                
-                // Initialize the giant meteor welcome effect
-                giantMeteor = new GiantMeteor(canvas);
-                maxGlowRadius = Math.max(canvas.width, canvas.height) * 0.6;
-            }
-
-            function animateCanvas() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                for(let i=0; i<stars.length; i++) stars[i].update();
-                
-                // Draw constellation links
-                for (let i = 0; i < stars.length; i++) {
-                    for (let j = i + 1; j < stars.length; j++) {
-                        let dx = stars[i].x - stars[j].x;
-                        let dy = stars[i].y - stars[j].y;
-                        let distance = Math.sqrt(dx * dx + dy * dy);
-                        if (distance < 85) {
-                            let alpha = (1 - (distance / 85)) * 0.12;
-                            ctx.strokeStyle = `rgba(59, 130, 246, ${alpha})`;
-                            ctx.lineWidth = 0.5;
-                            ctx.beginPath();
-                            ctx.moveTo(stars[i].x, stars[i].y);
-                            ctx.lineTo(stars[j].x, stars[j].y);
-                            ctx.stroke();
-                        }
-                    }
-                }
-                
-                for(let i=0; i<shootingStars.length; i++) shootingStars[i].update();
-
-                // Update and draw the welcome giant meteor
-                if (giantMeteor && giantMeteor.active) {
-                    giantMeteor.update(ctx, () => {
-                        // Meteor is passing center - activate radial ambient glow
-                        glowActive = true;
-                        glowOpacity = 1.0;
-                        glowRadius = 150; // Initial radius for central bloom
-                        
-                        // Sincronizar revelación del Hero (quitar blur, scale, opacity)
-                        const heroWrapper = document.getElementById('hero-content-wrapper');
-                        if (heroWrapper) {
-                            heroWrapper.classList.remove('blur-md', 'scale-95', 'opacity-0');
-                            heroWrapper.classList.add('blur-none', 'scale-100', 'opacity-100');
-                        }
-                    });
-                }
-
-                // Render the radial ambient glow centered on the screen
-                if (glowActive) {
-                    const centerX = canvas.width / 2;
-                    const centerY = canvas.height / 2;
-
-                    const radGlow = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, glowRadius);
-                    radGlow.addColorStop(0, `rgba(59, 130, 246, ${glowOpacity * 0.28})`);
-                    radGlow.addColorStop(0.4, `rgba(99, 102, 241, ${glowOpacity * 0.1})`);
-                    radGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
-
-                    ctx.fillStyle = radGlow;
-                    ctx.beginPath();
-                    ctx.arc(centerX, centerY, glowRadius, 0, Math.PI * 2);
-                    ctx.fill();
-
-                    // Expand and fade out the glow
-                    glowRadius += (maxGlowRadius - glowRadius) * 0.038; // Slower expansion
-                    glowOpacity -= 0.011; // Fades out in ~90 frames (approx 1.5s)
-
-                    if (glowOpacity <= 0) {
-                        glowActive = false;
-                        glowOpacity = 0;
-                    }
-                }
-
-                animationFrameId = requestAnimationFrame(animateCanvas); 
-            }
-            initCanvas(); animateCanvas();
-        }
-
-        // --- MODAL SCRIPT ---
-        const modalTriggers = document.querySelectorAll('[data-modal-trigger]');
-        const modal = document.getElementById('project-modal');
-        const modalContent = document.getElementById('modal-content');
-        
-        function openModal(trigger) {
-            const data = trigger.dataset;
-            document.getElementById('modal-title').textContent = data.title;
-            document.getElementById('modal-subtitle').textContent = data.subtitle;
-            document.getElementById('modal-video').src = data.videoId ? `https://www.youtube.com/embed/${data.videoId}` : '';
-            document.getElementById('modal-challenge').textContent = data.challenge;
-            document.getElementById('modal-process').textContent = data.process;
-            
-            const techContainer = document.getElementById('modal-tech');
-            techContainer.innerHTML = '';
-            if (data.tech) {
-                JSON.parse(data.tech.replace(/'/g, '"')).forEach(tech => {
-                    const el = document.createElement('span');
-                    el.className = 'bg-slate-900/60 border border-slate-800/80 text-gray-300 px-4 py-1.5 rounded-xl text-xs font-semibold shadow-inner font-display';
-                    el.textContent = tech;
-                    techContainer.appendChild(el);
-                });
-            }
-
-            modal.classList.remove('pointer-events-none', 'opacity-0');
-            modalContent.classList.remove('scale-95');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            modalContent.classList.add('scale-95');
-            setTimeout(() => {
-                document.getElementById('modal-video').src = '';
-                document.body.style.overflow = '';
-            }, 300);
-        }
-
-        modalTriggers.forEach(t => t.addEventListener('click', () => openModal(t)));
-        document.getElementById('modal-close-btn').addEventListener('click', closeModal);
-        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-
-        // --- PERSONAL MODAL SCRIPT ---
-        const personalModal = document.getElementById('personal-modal');
-        const personalModalContent = document.getElementById('personal-modal-content');
-        const openPersonalBtn = document.getElementById('open-personal-btn');
-        const closePersonalBtn = document.getElementById('personal-modal-close-btn');
-
-        function openPersonalModal() {
-            personalModal.classList.remove('pointer-events-none', 'opacity-0');
-            personalModalContent.classList.remove('scale-95');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closePersonalModal() {
-            personalModal.classList.add('opacity-0', 'pointer-events-none');
-            personalModalContent.classList.add('scale-95');
-            setTimeout(() => {
-                document.body.style.overflow = '';
-            }, 300);
-        }
-
-        if (openPersonalBtn) {
-            openPersonalBtn.addEventListener('click', openPersonalModal);
-        }
-        if (closePersonalBtn) {
-            closePersonalBtn.addEventListener('click', closePersonalModal);
-        }
-        personalModal.addEventListener('click', e => { if (e.target === personalModal) closePersonalModal(); });
-
-        document.addEventListener('keydown', e => { 
-            if (e.key === 'Escape') {
-                closeModal();
-                closePersonalModal();
-            }
-        });
-
-        // --- COPY EMAIL SCRIPT ---
-        document.getElementById('copy-email-btn').addEventListener('click', async () => {
-            try {
-                await navigator.clipboard.writeText("i.aguayo2212@gmail.com");
-                const feedback = document.getElementById('copy-feedback');
-                feedback.classList.remove('opacity-0');
-                feedback.classList.add('-translate-y-2');
-                setTimeout(() => { 
-                    feedback.classList.add('opacity-0'); 
-                    feedback.classList.remove('-translate-y-2');
-                }, 2000);
-            } catch (err) {
-                console.error('Failed to copy', err);
-            }
-        });
-
-        // --- SUPERNOVA EASTER EGG ---
-        document.getElementById('destroy-btn').addEventListener('click', () => {
-            document.body.style.overflow = 'hidden';
-            document.getElementById('destroy-btn').style.display = 'none';
-            const core = document.getElementById('supernova-core');
-            core.classList.remove('hidden');
-            
-            const els = document.querySelectorAll('header, main > section');
-            const vCX = window.innerWidth / 2;
-            const vCY = window.innerHeight / 2;
-
-            els.forEach((el, i) => {
-                const rect = el.getBoundingClientRect();
-                const mX = (rect.left + rect.width / 2 - vCX) * 3;
-                const mY = (rect.top + rect.height / 2 - vCY) * 3;
-                
-                el.style.transition = `all 1.5s ease-in-out ${i * 100}ms`;
-                el.style.transformOrigin = 'center center';
-                setTimeout(() => {
-                    el.style.transform = `translateX(${mX}px) translateY(${mY}px) scale(0.5) rotate(${(Math.random()-0.5)*360}deg)`;
-                    el.style.opacity = '0';
-                }, 50);
-            });
-            
-            const animTime = els.length * 100 + 1500;
-
-            setTimeout(() => {
-                core.style.transition = 'all 0.5s ease-in';
-                core.style.width = `${Math.max(window.innerWidth, window.innerHeight) * 3}px`;
-                core.style.height = core.style.width;
-                core.style.opacity = '0';
-                document.body.style.transition = 'background-color 0.5s ease-in';
-                document.body.style.backgroundColor = '#ffffff';
-            }, animTime - 500);
-
-            setTimeout(() => {
-                const overlay = document.getElementById('reset-overlay');
-                overlay.classList.remove('hidden');
-                setTimeout(() => overlay.style.opacity = '1', 10);
-            }, animTime); 
-        });
-
-        document.getElementById('reset-btn').addEventListener('click', () => {
-            sessionStorage.setItem('isRecreating', 'true');
-            location.reload();
-        });
-
-        // Function to trigger welcome animation (giant meteor crossing)
-        function triggerWelcomeAnimation() {
-            setTimeout(() => {
-                if (giantMeteor) {
-                    giantMeteor.start();
-                }
-            }, 300);
-        }
-
-        // Initial Load
-        window.addEventListener('load', () => {
-            if (sessionStorage.getItem('isRecreating') === 'true') {
-                sessionStorage.removeItem('isRecreating');
-                const bb = document.createElement('div');
-                bb.style.cssText = 'position:fixed;inset:0;background:black;z-index:9999';
-                document.body.appendChild(bb);
-                
-                const s = document.createElement('div');
-                s.style.cssText = 'position:fixed;top:50%;left:50%;width:1px;height:1px;background:white;border-radius:50%;transform:translate(-50%,-50%);transition:all 0.5s ease-in';
-                bb.appendChild(s);
-                
-                setTimeout(() => {
-                    s.style.width = s.style.height = `${Math.max(window.innerWidth, window.innerHeight) * 3}px`;
-                }, 50);
-
-                setTimeout(() => {
-                    bb.style.transition = 'opacity 1s ease-out';
-                    bb.style.opacity = '0';
-                    document.body.classList.remove('opacity-0');
-                    triggerWelcomeAnimation();
-                }, 550);
-
-                setTimeout(() => bb.remove(), 1550);
-            } else {
-                document.body.classList.remove('opacity-0');
-                triggerWelcomeAnimation();
-            }
-        });
-    </script>
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
 

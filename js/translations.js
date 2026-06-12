@@ -1,0 +1,144 @@
+﻿        // --- TRANSLATION SCRIPT ---
+        const translations = {
+            es: {
+                navAbout: "Sobre Mí", navServices: "Servicios", navProjects: "Proyectos", navContact: "Contáctame", navAR: "Tarjeta AR ⚡",
+                navAboutMobile: "Sobre Mí", navServicesMobile: "Servicios", navProjectsMobile: "Proyectos", navContactMobile: "Contáctame", navARMobile: "Tarjeta AR ⚡",
+                langEN: "EN", langES: "ES",
+                heroBtnAR: "Tarjeta AR ⚡",
+                
+                heroTitle: 'Hola, soy <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">Ignacio Aguayo</span>',
+                heroSubtitle: "Creative Technologist. Construyo experiencias interactivas que conectan el mundo digital y el físico.",
+                heroBtnProjects: "Ver mis Proyectos", heroBtnContact: "Hablemos",
+                
+                aboutTitle: "Sobre Mí",
+                aboutBio: "Soy un tecnólogo creativo radicado en Concepción, Chile, apasionado por la intersección del arte y el código. Mi enfoque es la creación de experiencias inmersivas e interactivas que desafían la percepción y conectan con las personas a un nivel más profundo.",
+                aboutBtnPersonalText: "Más allá del código... ⚡",
+                
+                persTitle: "Más Allá del Código",
+                persSubtitle: "Las pasiones que construyen mi disciplina y compromiso",
+                persCard1Title: "<span class='text-red-500'>🚒</span> Bombero Voluntario",
+                persCard1Desc: "El servicio como bombero voluntario representa mi compromiso con la comunidad, el trabajo en equipo bajo presión extrema y la resiliencia en situaciones críticas.",
+                persCard2Title: "<span class='text-blue-500'>🏃</span> Running & Disciplina",
+                persCard2Desc: "El running me enseña perseverancia, constancia y superación. Correr largas distancias entrena la mente para no rendirse y perseguir metas grandes y ambiciosas paso a paso.",
+                persCard3Title: "<span class='text-emerald-500'>🏔️</span> Trekking & Naturaleza",
+                persCard3Desc: "Explorar senderos y subir cumbres me conecta con la naturaleza. Me enseña adaptabilidad ante entornos cambiantes y me ayuda a mantener la claridad mental y el equilibrio.",
+                
+                servicesTitle: "Servicios Creativos",
+                servicesSubtitle: "Soluciones interactivas a medida que conectan el arte digital con el espacio físico.",
+                srv1Title: "Instalaciones Interactivas",
+                srv1Desc: "Desarrollo en TouchDesigner para mapping proyectado, visuales reactivos en vivo, integración de sensores corporales y espaciales (Kinect, hand tracking) para museos, marcas y eventos.",
+                srv2Title: "Desarrollo VR/AR inmersivo",
+                srv2Desc: "Aplicaciones de Realidad Virtual y Aumentada en Unity para Meta Quest y dispositivos móviles. Simuladores interactivos, recorridos virtuales en 3D y juegos experimentales para capacitación y marketing.",
+                srv3Title: "Aplicaciones Móviles e Interactivas",
+                srv3Desc: "Diseño y programación de aplicaciones móviles de alto rendimiento en Unity o desarrollo nativo. Integración de lógicas gamificadas, manuales interactivos 3D y juegos multijugador locales.",
+                srv4Title: "Modelado y Animación 3D",
+                srv4Desc: "Modelado de assets optimizados para tiempo real, animaciones personalizadas en After Effects o Blender, y deconstrucción procedural de objetos 3D.",
+                
+                skillsTitle: "Mis Habilidades", skillUnity: "Unity", skillVrAr: "Desarrollo VR/AR", skillMobile: "Mobile Apps", skillTouchdesigner: "TouchDesigner", skillUiUx: "UX/UI Design", skillInteractive: "Experiencias Interactivas", skillShaders: "Shaders & Visuales Generativos", skillCreativeCoding: "Creative Coding",
+                
+                projectsTitle: "Proyectos Destacados", projectsSubtitle: "Una selección de mis mejores trabajos.", pBtnDetails: "Ver Detalles",
+                p1Title: "Galería Circular Interactiva", p1Desc: "Experiencia en TouchDesigner con una galería circular controlada por hand tracking espacial.",
+                p2Title: "Armonías Gestuales: IA Visual", p2Desc: "Aplicación en TouchDesigner que genera imágenes con Inteligencia Artificial a partir de gestos.",
+                p3Title: "Deconstrucción 3D Interactiva", p3Desc: "Experiencia interactiva que deconstruye modelos 3D en tiempo real usando hand tracking.",
+                p4Title: "Galería VR Fotográfica", p4Desc: "App de galería virtual inmersiva en VR para Meta Quest 2, diseñada para eventos.",
+                p5Title: "App Móvil para Bomberos", p5Desc: "Diseño de app móvil para ubicar material y consultar procedimientos en carros bomba.",
+                p6Title: "PalCarrete App", p6Desc: "Aplicación móvil lúdica con sistema dinámico de retos, castigos y tarjetas.",
+                
+                modalChallenge: "El Desafío", modalProcess: "Mi Proceso", modalTech: "Tecnologías Utilizadas",
+                p1mTitle: "Galería Circular Interactiva", p1mSubtitle: "Navegación Inmersiva con TouchDesigner", p1mChallenge: "El desafío fue crear una forma innovadora de presentar imágenes, buscando una experiencia que superara la visualización estática y fomentara una interacción más profunda.", p1mProcess: "Para lograr una interacción intuitiva, opté por el hand tracking como método de control. El principal reto técnico fue combinar la galería esférica con la precisión del seguimiento de manos, lo que requirió un diseño gestual cuidadoso y optimización para asegurar una experiencia fluida.",
+                p2mTitle: "Armonías Gestuales: IA Visual Interactiva", p2mSubtitle: "Creación de Contenido con Gestos y Algoritmos", p2mChallenge: "El reto era desarrollar una experiencia que permitiera generar visuales a través del movimiento de las manos, fusionando la expresión física con la generación algorítmica de imágenes.", p2mProcess: "Implementé el seguimiento de manos en tiempo real a través de TouchDesigner para capturar y traducir los movimientos a parámetros que alimentaran una red neuronal generativa. El principal desafío fue optimizar la respuesta de la IA para que las imágenes se generaran de forma fluida y coherente con la intención gestual.",
+                p3mTitle: "Deconstrucción 3D Interactiva", p3mSubtitle: "Exhibición y Manipulación de Modelos 3D con Gestos", p3mChallenge: "El principal desafío fue crear una forma innovadora y atractiva de exhibir modelos 3D, permitiendo a los usuarios interactuar con ellos de manera divertida y significativa, como controlando su deconstrucción o cambiando los modelos con las manos.", p3mProcess: "Desarrollé esta experiencia en TouchDesigner, enfocándose en la integración del hand tracking para una manipulación intuitiva. Lo más complejo fue diseñar los algoritmos de deconstrucción y el sistema de reconocimiento gestual que permitiera a los usuarios controlar los modelos 3D en tiempo real, ofreciendo una interacción fluida y reactiva con los objetos virtuales.",
+                p4mTitle: "Galería VR para Fotógrafos", p4mSubtitle: "Exhibición Virtual Inmersiva en Concepción", p4mChallenge: "El reto era diseñar una galería virtual inmersiva para un evento de fotógrafos en Concepción, que permitiera exhibir sus obras de una manera innovadora y envolvente utilizando la realidad virtual.", p4mProcess: "Trabajé en Unity, diseñando la arquitectura virtual de la galería y la disposición de los cuadros. La decoración y la ambientación se realizaron a medida según los requerimientos del evento, buscando crear un espacio que realzara las obras fotográficas. La implementación se optimizó para funcionar fluidamente en dispositivos Meta Quest 2.",
+                p5mTitle: "App Móvil para Bomberos", p5mSubtitle: "Herramienta de Entrenamiento para Emergencias", p5mChallenge: "El principal desafío fue crear una herramienta de entrenamiento digital para bomberos, que les permitiera aprender y repasar la ubicación del material en el carro bomba, así como consultar procedimientos vitales, de una forma cómoda e intuitiva.", p5mProcess: "Desarrollé la aplicación en Unity, enfocándose en la creación de modelos 3D detallados de las herramientas y el carro. La interfaz fue diseñada como una herramienta de estudio eficaz, con un sistema de navegación optimizado para el aprendizaje y la consulta rápida de procedimientos clave, como el manual IFTA, fortaleciendo así su preparación para emergencias reales.",
+                p6mTitle: "PalCarrete App", p6mSubtitle: "Juego Móvil Dinámico para Eventos Sociales", p6mChallenge: "El reto fue desarrollar un juego de beber móvil que fuera gratuito, entretenido y que ofreciera una experiencia dinámica para evitar la monotonía, a diferencia de otras opciones existentes en el mercado.", p6mProcess: "El desarrollo se centró en Unity. Lo más complejo fue diseñar e implementar el sistema de jugadores y la asignación aleatoria y justa de cartas. Se creó una arquitectura modular para los retos, permitiendo su dinamismo y el cambio constante del orden de aparición para asegurar la rejugabilidad.",
+                
+                mpTitle: "Más Proyectos & Eventos", mpSubtitle: "Otros trabajos, eventos y exploraciones creativas.", mpFilterAll: "Todos", mpFilterTouch: "TouchDesigner", mpFilterUnity: "Unity", mpFilterModelado: "Modelado", mpFilterAnimacion: "Animación", mpFilterEventos: "Eventos", mpSelectTitle: "Selecciona un proyecto o evento", mpSelectDesc: "Elige un ítem de la lista a la izquierda para ver su demostración.",
+                mp: {
+                    mp1: { title: "Partículas Interactivas", desc: "Exploración de sistemas de partículas en TouchDesigner respondiento a la interacción.", category: "touchdesigner", videoId: "BrF5mKbddZE" },
+                    mp2: { title: "Texto Interactivo", desc: "Visuales generativas creando tipografía que reacciona en tiempo real.", category: "touchdesigner", videoId: "d-ucKBghC5s" },
+                    mp3: { title: "Revelación de Imagen Interactiva", desc: "Efecto de shader que revela una imagen basado en el movimiento.", category: "touchdesigner", videoId: "D4bLje0H558" },
+                    mp4: { title: "Fragnesia VR", desc: "Juego de terror psicológico en Realidad Virtual desarrollado en Unity.", category: "unity", videoId: "PLvrUPV4Qsg" },
+                    mp5: { title: "Cuna de Prat AR", desc: "Simulación histórica de la Casa Prat en Realidad Aumentada para dispositivos móviles.", category: "unity", videoId: "SoqMsK8s3WQ" },
+                    mp6: { title: "Espada de Aatrox", desc: "Modelado 3D de alta fidelidad y texturizado de la espada del personaje 'Aatrox'.", category: "modelado", videoId: "Ixkim4BBWHE" },
+                    mp7: { title: "Poema Visual: Eterno Retorno", desc: "Corto de animación 3D basado en un poema, explorando conceptos de repetición.", category: "animacion", videoId: "y-mD6fsNElw" },
+                    mp8: { title: "REC: Obstáculos en Tiempo Real", desc: "Diseño y desarrollo de una experiencia interactiva en Unity con body tracking corporal expuesta en el stand de la Universidad San Sebastián en el festival REC (Rock en Conce). Los usuarios debían esquivar obstáculos físicos mediante movimientos corporales.", category: "eventos", images: ["assets/eventos/rec_1.jpg", "assets/eventos/rec_2.jpg"] },
+                    mp9: { title: "Exhibición VR - Biblioteca Municipal", desc: "Instalación y soporte de una galería virtual inmersiva en Meta Quest 2 para la comunidad de fotógrafos de Concepción (Afoconce), realizada en la Biblioteca Municipal. Permitió a los asistentes interactuar con las obras en un entorno tridimensional.", category: "eventos", images: ["assets/eventos/afoconce_1.jpg", "assets/eventos/afoconce_2.jpg", "assets/eventos/afoconce_3.jpg"] },
+                    mp10: { title: "Taller: Anima tu dibujo con IA", desc: "Ayudante técnico y facilitador en actividades de co-creación infantil. Los niños realizaban dibujos analógicos en papel que luego eran procesados con la IA de Google para animar los personajes y subidos a Spatial para su visualización interactiva en entornos VR.", category: "eventos", images: ["assets/eventos/animacion_1.jpg", "assets/eventos/animacion_2.jpg"] },
+                    mp11: { title: "Taller: Chocolate (IA & 3D Reconstrucción)", desc: "Facilitador en actividades creativas basadas en inteligencia artificial generativa 3D. El flujo consistió en plasmar ideas de los niños en papel, procesarlas con Gemini para generar bocetos 3D, reconstruir la malla con Tripo 3D y cargarlas en Oculus VR a través de Sketchfab.", category: "eventos", images: ["assets/eventos/chocolate_1.jpg", "assets/eventos/chocolate_2.jpg", "assets/eventos/chocolate_3.jpg", "assets/eventos/chocolate_4.jpg", "assets/eventos/chocolate_5.jpg"] }
+                },
+                
+                contactTitle: "Hablemos", contactSubtitle: "¿Tienes un proyecto en mente o una oportunidad para mí? ¡No dudes en contactarme!", contactBtnCopy: "Copiar", contactBtnSend: "Escribir", contactCopyFeedback: "¡Copiado!", contactBtnCV: "Descargar CV", contactBtnGitHub: "Ver mi GitHub",
+                footerRights: "&copy; 2026 Ignacio Aguayo. Todos los derechos reservados.", footerBtnDestroy: "¡Destruir Página!",
+                resetTitle: "¿Qué has hecho? ¡Mi portafolio! :c", resetBtn: "Reconstruir Sistema"
+            },
+            en: {
+                navAbout: "About Me", navServices: "Services", navProjects: "Projects", navContact: "Contact Me", navAR: "AR Card ⚡",
+                navAboutMobile: "About Me", navServicesMobile: "Services", navProjectsMobile: "Projects", navContactMobile: "Contact Me", navARMobile: "AR Card ⚡",
+                langEN: "EN", langES: "ES",
+                heroBtnAR: "AR Card ⚡",
+                
+                heroTitle: 'Hi, I\'m <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">Ignacio Aguayo</span>',
+                heroSubtitle: "Creative Technologist. I build interactive experiences that connect the digital and physical worlds.",
+                heroBtnProjects: "View My Projects", heroBtnContact: "Let's Talk",
+                
+                aboutTitle: "About Me",
+                aboutBio: "I am a creative technologist based in Concepción, Chile, passionate about the intersection of art and code. My focus is on creating immersive and interactive experiences that challenge perception and connect with people on a deeper level.",
+                aboutBtnPersonalText: "Beyond the code... ⚡",
+                
+                persTitle: "Beyond the Code",
+                persSubtitle: "Passions that build my discipline and commitment",
+                persCard1Title: "<span class='text-red-500'>🚒</span> Volunteer Firefighter",
+                persCard1Desc: "Serving as a volunteer firefighter represents my commitment to the community, teamwork under extreme pressure, and resilience in critical situations.",
+                persCard2Title: "<span class='text-blue-500'>🏃</span> Running & Discipline",
+                persCard2Desc: "Running teaches me perseverance, consistency, and self-improvement. Long-distance running trains the mind to persist and chase large, ambitious goals step by step.",
+                persCard3Title: "<span class='text-emerald-500'>🏔️</span> Trekking & Nature",
+                persCard3Desc: "Exploring trails and climbing peaks connects me with nature. It teaches adaptability to changing environments and helps maintain mental clarity and balance.",
+                
+                servicesTitle: "Creative Services",
+                servicesSubtitle: "Custom interactive solutions connecting digital art with physical spaces.",
+                srv1Title: "Interactive Installations",
+                srv1Desc: "TouchDesigner development for projection mapping, live reactive visuals, body and spatial sensor integration (Kinect, hand tracking) for museums, brands, and events.",
+                srv2Title: "Immersive VR/AR Development",
+                srv2Desc: "Virtual and Augmented Reality applications in Unity for Meta Quest and mobile devices. Interactive simulators, 3D virtual walkthroughs, and experimental games for training and marketing.",
+                srv3Title: "Mobile & Interactive Apps",
+                srv3Desc: "Design and programming of high-performance mobile apps in Unity or native development. Integration of gamified logic, 3D interactive manuals, and local multiplayer games.",
+                srv4Title: "3D Modeling & Animation",
+                srv4Desc: "Modeling of real-time optimized assets, custom animations in After Effects or Blender, and procedural 3D deconstruction.",
+                
+                skillsTitle: "My Skills", skillUnity: "Unity", skillVrAr: "VR/AR Development", skillMobile: "Mobile Apps", skillTouchdesigner: "TouchDesigner", skillUiUx: "UX/UI Design", skillInteractive: "Interactive Experiences", skillShaders: "Shaders & Generative Visuals", skillCreativeCoding: "Creative Coding",
+                
+                projectsTitle: "Featured Projects", projectsSubtitle: "A selection of my best work.", pBtnDetails: "View Details",
+                p1Title: "Interactive Circular Gallery", p1Desc: "A TouchDesigner experience with a circular gallery controlled by spatial hand tracking.",
+                p2Title: "Gestural Harmonies: Visual AI", p2Desc: "A TouchDesigner application that generates images with AI based on hand gestures.",
+                p3Title: "Interactive 3D Deconstruction", p3Desc: "An interactive experience that deconstructs 3D models using hand tracking in real-time.",
+                p4Title: "VR Photo Gallery", p4Desc: "A virtual immersive gallery app in VR for Meta Quest 2, designed for events.",
+                p5Title: "Mobile App for Firefighters", p5Desc: "Mobile app designed to locate equipment and consult procedures on fire trucks.",
+                p6Title: "PalCarrete App", p6Desc: "A mobile drinking game with a dynamic system of challenges, punishments, and cards.",
+                
+                modalChallenge: "The Challenge", modalProcess: "My Process", modalTech: "Technologies Used",
+                p1mTitle: "Interactive Circular Gallery", p1mSubtitle: "Immersive Navigation with TouchDesigner", p1mChallenge: "The challenge was to create an innovative way to present images, seeking an experience that went beyond static viewing and fostered deeper user interaction.", p1mProcess: "To achieve intuitive interaction, I chose hand tracking as the control method. The main technical challenge was combining the spherical gallery with the precision of hand tracking, which required careful gestural design and optimization for a fluid experience.",
+                p2mTitle: "Gestural Harmonies: Interactive Visual AI", p2mSubtitle: "Content Creation with Gestures and Algorithms", p2mChallenge: "The challenge was to develop an experience that allowed users to generate visuals through hand movements, merging physical expression with algorithmic image generation.", p2mProcess: "I implemented real-time hand tracking via TouchDesigner to capture and translate movements into parameters that fed a generative neural network. The main challenge was optimizing the AI's response time to ensure images were generated smoothly and coherently with the user's gestural intent.",
+                p3mTitle: "Interactive 3D Deconstruction", p3mSubtitle: "Exhibition and Manipulation of 3D Models with Gestures", p3mChallenge: "The main challenge was to create an innovative and engaging way to display 3D models, allowing users to interact with them in a fun and meaningful way, such as controlling their deconstruction or changing models with their hands.", p3mProcess: "I developed this experience in TouchDesigner, focusing on integrating hand tracking for intuitive manipulation. The most complex part was designing the deconstruction algorithms and the gesture recognition system that allowed users to control the 3D models in real-time, providing a fluid and reactive interaction with the virtual objects.",
+                p4mTitle: "VR Gallery for Photographers", p4mSubtitle: "Immersive Virtual Exhibition in Concepción", p4mChallenge: "The challenge was to design an immersive virtual gallery for a photographers' event in Concepción, allowing them to exhibit their work in an innovative and engaging way using virtual reality.", p4mProcess: "I worked in Unity, designing the gallery's virtual architecture and the layout of the artworks. The decoration and atmosphere were customized according to the event's requirements, aiming to create a space that enhanced the photographic works. The implementation was optimized to run smoothly on Meta Quest 2 devices.",
+                p5mTitle: "Mobile App for Firefighters", p5mSubtitle: "Emergency Training Tool", p5mChallenge: "The main challenge was to create a digital training tool for firefighters that would allow them to learn and review the location of equipment on the fire truck, as well as consult vital procedures, in a comfortable and intuitive way.", p5mProcess: "I developed the application in Unity, focusing on creating detailed 3D models of the tools and the fire truck. The user interface was designed as an effective study tool, with a navigation system optimized for learning and quick reference of key procedures, such as the IFTA manual, thereby strengthening their preparation for real emergencies.",
+                p6mTitle: "PalCarrete App", p6mSubtitle: "Dynamic Mobile Game for Social Events", p6mChallenge: "The challenge was to develop a mobile drinking game that was free, entertaining, and offered a dynamic experience to avoid monotony, unlike other options on the market.", p6mProcess: "Development was centered in Unity. The most complex part was designing and implementing the player system and the random and fair card assignment. A modular architecture was created for the challenges, allowing for dynamism and a constantly changing order of appearance to ensure replayability.",
+                
+                mpTitle: "More Projects & Events", mpSubtitle: "Other works, events, and creative explorations.", mpFilterAll: "All", mpFilterTouch: "TouchDesigner", mpFilterUnity: "Unity", mpFilterModelado: "3D Modeling", mpFilterAnimacion: "Animation", mpFilterEventos: "Events", mpSelectTitle: "Select a project or event", mpSelectDesc: "Choose an item from the left list to see the demonstration.",
+                mp: {
+                    mp1: { title: "Interactive Particles", desc: "Exploration of particle systems in TouchDesigner responding to interaction.", category: "touchdesigner", videoId: "BrF5mKbddZE" },
+                    mp2: { title: "Interactive Text", desc: "Generative visuals creating typography that reacts in real-time.", category: "touchdesigner", videoId: "d-ucKBghC5s" },
+                    mp3: { title: "Interactive Image Reveal", desc: "Shader effect that reveals an image based on movement.", category: "touchdesigner", videoId: "D4bLje0H558" },
+                    mp4: { title: "Fragnesia VR", desc: "Psychological horror game in Virtual Reality developed in Unity.", category: "unity", videoId: "PLvrUPV4Qsg" },
+                    mp5: { title: "Cuna de Prat AR", desc: "Historical simulation of 'Casa Prat' in Augmented Reality for mobile devices.", category: "unity", videoId: "SoqMsK8s3WQ" },
+                    mp6: { title: "Aatrox's Sword", desc: "High-fidelity 3D modeling and texturing of the 'Aatrox' character's sword.", category: "modelado", videoId: "Ixkim4BBWHE" },
+                    mp7: { title: "Visual Poem: Eterno Retorno", desc: "3D animation short based on a poem, exploring concepts of repetition.", category: "animacion", videoId: "y-mD6fsNElw" },
+                    mp8: { title: "REC: Real-time Obstacles", desc: "Design and development of an interactive body-tracking experience in Unity, exhibited at the Universidad San Sebastián stand during the REC festival. Users dodged physical obstacles in real-time using body movements.", category: "eventos", images: ["assets/eventos/rec_1.jpg", "assets/eventos/rec_2.jpg"] },
+                    mp9: { title: "VR Exhibition - Municipal Library", desc: "Installation and support of an immersive virtual gallery on Meta Quest 2 for the Concepción photographer community (Afoconce), hosted at the Municipal Library. It allowed attendees to interact with the works in a 3D space.", category: "eventos", images: ["assets/eventos/afoconce_1.jpg", "assets/eventos/afoconce_2.jpg", "assets/eventos/afoconce_3.jpg"] },
+                    mp10: { title: "Workshop: Animate your drawing with AI", desc: "Technical assistant and facilitator in children's co-creation activities. Kids made analog drawings on paper that were processed with Google AI to animate the characters, then uploaded to Spatial for interactive viewing in VR.", category: "eventos", images: ["assets/eventos/animacion_1.jpg", "assets/eventos/animacion_2.jpg"] },
+                    mp11: { title: "Workshop: Chocolate (AI & 3D Reconstruction)", desc: "Facilitator in creative activities based on generative 3D AI. The workflow involved putting children's ideas on paper, processing them with Gemini for 3D sketching, reconstructing the mesh with Tripo 3D, and uploading to Sketchfab to view them in Oculus VR headsets.", category: "eventos", images: ["assets/eventos/chocolate_1.jpg", "assets/eventos/chocolate_2.jpg", "assets/eventos/chocolate_3.jpg", "assets/eventos/chocolate_4.jpg", "assets/eventos/chocolate_5.jpg"] }
+                },
+                contactTitle: "Let's Talk", contactSubtitle: "Got a project in mind or an opportunity for me? Don't hesitate to reach out!", contactBtnCopy: "Copy", contactBtnSend: "Email", contactCopyFeedback: "Copied!", contactBtnCV: "Download CV", contactBtnGitHub: "View my GitHub",
+                footerRights: "&copy; 2026 Ignacio Aguayo. All rights reserved.", footerBtnDestroy: "Destroy Page!",
+                resetTitle: "What have you done? My portfolio! :c", resetBtn: "Rebuild System"
+            }
+        };

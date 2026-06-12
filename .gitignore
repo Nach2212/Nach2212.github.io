@@ -1,0 +1,7 @@
+node_modules/
+package-lock.json
+
+# Videos muy pesados para GitHub (quedan solo en local/Drive)
+assets/eventos/rec_video*.mp4
+.DS_Store
+Thumbs.db
