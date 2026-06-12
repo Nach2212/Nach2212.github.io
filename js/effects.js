@@ -19,7 +19,7 @@
 
     // --- 2. SCROLLSPY (resaltar sección activa en el nav) ---
     // mas-proyectos cuenta como "Proyectos" para el nav
-    const spyMap = { 'sobre-mi': '#sobre-mi', 'servicios': '#servicios', 'proyectos': '#proyectos', 'mas-proyectos': '#proyectos' };
+    const spyMap = { 'sobre-mi': '#sobre-mi', 'proyectos': '#proyectos', 'mas-proyectos': '#proyectos', 'eventos': '#eventos', 'servicios': '#servicios' };
     const navLinks = document.querySelectorAll('header .nav-link[href^="#"]');
     if ('IntersectionObserver' in window && navLinks.length) {
         const spy = new IntersectionObserver(function (entries) {

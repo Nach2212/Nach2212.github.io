@@ -52,7 +52,7 @@
                 p5mTitle: "App Móvil para Bomberos", p5mSubtitle: "Herramienta de Entrenamiento para Emergencias", p5mChallenge: "El principal desafío fue crear una herramienta de entrenamiento digital para bomberos, que les permitiera aprender y repasar la ubicación del material en el carro bomba, así como consultar procedimientos vitales, de una forma cómoda e intuitiva.", p5mProcess: "Desarrollé la aplicación en Unity, enfocándose en la creación de modelos 3D detallados de las herramientas y el carro. La interfaz fue diseñada como una herramienta de estudio eficaz, con un sistema de navegación optimizado para el aprendizaje y la consulta rápida de procedimientos clave, como el manual IFTA, fortaleciendo así su preparación para emergencias reales.",
                 p6mTitle: "PalCarrete App", p6mSubtitle: "Juego Móvil Dinámico para Eventos Sociales", p6mChallenge: "El reto fue desarrollar un juego de beber móvil que fuera gratuito, entretenido y que ofreciera una experiencia dinámica para evitar la monotonía, a diferencia de otras opciones existentes en el mercado.", p6mProcess: "El desarrollo se centró en Unity. Lo más complejo fue diseñar e implementar el sistema de jugadores y la asignación aleatoria y justa de cartas. Se creó una arquitectura modular para los retos, permitiendo su dinamismo y el cambio constante del orden de aparición para asegurar la rejugabilidad.",
                 
-                mpTitle: "Más Proyectos & Eventos", mpSubtitle: "Otros trabajos, eventos y exploraciones creativas.", mpFilterAll: "Todos", mpFilterTouch: "TouchDesigner", mpFilterUnity: "Unity", mpFilterModelado: "Modelado", mpFilterAnimacion: "Animación", mpFilterEventos: "Eventos", mpSelectTitle: "Selecciona un proyecto o evento", mpSelectDesc: "Elige un ítem de la lista a la izquierda para ver su demostración.",
+                mpTitle: "Más Proyectos", mpSubtitle: "Otros trabajos y exploraciones creativas.", mpFilterAll: "Todos", mpFilterTouch: "TouchDesigner", mpFilterUnity: "Unity", mpFilterModelado: "Modelado", mpFilterAnimacion: "Animación", mpSelectTitle: "Selecciona un proyecto", mpSelectDesc: "Elige un ítem de la lista a la izquierda para ver su demostración.",
                 mp: {
                     mp1: { title: "Partículas Interactivas", desc: "Exploración de sistemas de partículas en TouchDesigner respondiento a la interacción.", category: "touchdesigner", videoId: "BrF5mKbddZE" },
                     mp2: { title: "Texto Interactivo", desc: "Visuales generativas creando tipografía que reacciona en tiempo real.", category: "touchdesigner", videoId: "d-ucKBghC5s" },
@@ -60,12 +60,24 @@
                     mp4: { title: "Fragnesia VR", desc: "Juego de terror psicológico en Realidad Virtual desarrollado en Unity.", category: "unity", videoId: "PLvrUPV4Qsg" },
                     mp5: { title: "Cuna de Prat AR", desc: "Simulación histórica de la Casa Prat en Realidad Aumentada para dispositivos móviles.", category: "unity", videoId: "SoqMsK8s3WQ" },
                     mp6: { title: "Espada de Aatrox", desc: "Modelado 3D de alta fidelidad y texturizado de la espada del personaje 'Aatrox'.", category: "modelado", videoId: "Ixkim4BBWHE" },
-                    mp7: { title: "Poema Visual: Eterno Retorno", desc: "Corto de animación 3D basado en un poema, explorando conceptos de repetición.", category: "animacion", videoId: "y-mD6fsNElw" },
-                    mp8: { title: "REC: Obstáculos en Tiempo Real", desc: "Diseño y desarrollo de una experiencia interactiva en Unity con body tracking corporal expuesta en el stand de la Universidad San Sebastián en el festival REC (Rock en Conce). Los usuarios debían esquivar obstáculos físicos mediante movimientos corporales.", category: "eventos", images: ["assets/eventos/rec_1.jpg", "assets/eventos/rec_2.jpg"] },
-                    mp9: { title: "Exhibición VR - Biblioteca Municipal", desc: "Instalación y soporte de una galería virtual inmersiva en Meta Quest 2 para la comunidad de fotógrafos de Concepción (Afoconce), realizada en la Biblioteca Municipal. Permitió a los asistentes interactuar con las obras en un entorno tridimensional.", category: "eventos", images: ["assets/eventos/afoconce_1.jpg", "assets/eventos/afoconce_2.jpg", "assets/eventos/afoconce_3.jpg"] },
-                    mp10: { title: "Taller: Anima tu dibujo con IA", desc: "Ayudante técnico y facilitador en actividades de co-creación infantil. Los niños realizaban dibujos analógicos en papel que luego eran procesados con la IA de Google para animar los personajes y subidos a Spatial para su visualización interactiva en entornos VR.", category: "eventos", images: ["assets/eventos/animacion_1.jpg", "assets/eventos/animacion_2.jpg"] },
-                    mp11: { title: "Taller: Chocolate (IA & 3D Reconstrucción)", desc: "Facilitador en actividades creativas basadas en inteligencia artificial generativa 3D. El flujo consistió en plasmar ideas de los niños en papel, procesarlas con Gemini para generar bocetos 3D, reconstruir la malla con Tripo 3D y cargarlas en Oculus VR a través de Sketchfab.", category: "eventos", images: ["assets/eventos/chocolate_1.jpg", "assets/eventos/chocolate_2.jpg", "assets/eventos/chocolate_3.jpg", "assets/eventos/chocolate_4.jpg", "assets/eventos/chocolate_5.jpg"] }
+                    mp7: { title: "Poema Visual: Eterno Retorno", desc: "Corto de animación 3D basado en un poema, explorando conceptos de repetición.", category: "animacion", videoId: "y-mD6fsNElw" }
                 },
+
+                navEvents: "Eventos", navEventsMobile: "Eventos",
+                evTitle: "Eventos & Exhibiciones",
+                evSubtitle: "Experiencias interactivas que he llevado a espacios y públicos reales.",
+                ev1Title: "REC: Obstáculos en Tiempo Real",
+                ev1Desc: "Experiencia interactiva en Unity con body tracking, expuesta en el stand de la Universidad San Sebastián en el festival REC (Rock en Conce). Los asistentes esquivaban obstáculos con movimientos corporales.",
+                ev1Badge: "Festival",
+                ev2Title: "Exhibición VR — Biblioteca Municipal",
+                ev2Desc: "Instalación y soporte de una galería virtual inmersiva en Meta Quest 2 para la comunidad de fotógrafos de Concepción (Afoconce). Los asistentes recorrieron las obras en un entorno tridimensional.",
+                ev2Badge: "Exhibición VR",
+                ev3Title: "Taller: Anima tu Dibujo con IA",
+                ev3Desc: "Facilitador en co-creación infantil: dibujos en papel procesados con IA de Google para animar los personajes, y subidos a Spatial para verlos de forma interactiva en entornos VR.",
+                ev3Badge: "Taller",
+                ev4Title: "Taller: Chocolate (IA & Reconstrucción 3D)",
+                ev4Desc: "Facilitador en actividades creativas con IA generativa 3D: ideas de los niños en papel, bocetos 3D con Gemini, reconstrucción de malla con Tripo 3D y visualización en visores VR vía Sketchfab.",
+                ev4Badge: "Taller",
                 
                 contactTitle: "Hablemos", contactSubtitle: "¿Tienes un proyecto en mente o una oportunidad para mí? ¡No dudes en contactarme!", contactBtnCopy: "Copiar", contactBtnSend: "Escribir", contactCopyFeedback: "¡Copiado!", contactBtnCV: "Descargar CV", contactBtnGitHub: "Ver mi GitHub",
                 footerRights: "&copy; 2026 Ignacio Aguayo. Todos los derechos reservados.", footerBtnDestroy: "¡Destruir Página!",
@@ -123,7 +135,7 @@
                 p5mTitle: "Mobile App for Firefighters", p5mSubtitle: "Emergency Training Tool", p5mChallenge: "The main challenge was to create a digital training tool for firefighters that would allow them to learn and review the location of equipment on the fire truck, as well as consult vital procedures, in a comfortable and intuitive way.", p5mProcess: "I developed the application in Unity, focusing on creating detailed 3D models of the tools and the fire truck. The user interface was designed as an effective study tool, with a navigation system optimized for learning and quick reference of key procedures, such as the IFTA manual, thereby strengthening their preparation for real emergencies.",
                 p6mTitle: "PalCarrete App", p6mSubtitle: "Dynamic Mobile Game for Social Events", p6mChallenge: "The challenge was to develop a mobile drinking game that was free, entertaining, and offered a dynamic experience to avoid monotony, unlike other options on the market.", p6mProcess: "Development was centered in Unity. The most complex part was designing and implementing the player system and the random and fair card assignment. A modular architecture was created for the challenges, allowing for dynamism and a constantly changing order of appearance to ensure replayability.",
                 
-                mpTitle: "More Projects & Events", mpSubtitle: "Other works, events, and creative explorations.", mpFilterAll: "All", mpFilterTouch: "TouchDesigner", mpFilterUnity: "Unity", mpFilterModelado: "3D Modeling", mpFilterAnimacion: "Animation", mpFilterEventos: "Events", mpSelectTitle: "Select a project or event", mpSelectDesc: "Choose an item from the left list to see the demonstration.",
+                mpTitle: "More Projects", mpSubtitle: "Other works and creative explorations.", mpFilterAll: "All", mpFilterTouch: "TouchDesigner", mpFilterUnity: "Unity", mpFilterModelado: "3D Modeling", mpFilterAnimacion: "Animation", mpSelectTitle: "Select a project", mpSelectDesc: "Choose an item from the left list to see the demonstration.",
                 mp: {
                     mp1: { title: "Interactive Particles", desc: "Exploration of particle systems in TouchDesigner responding to interaction.", category: "touchdesigner", videoId: "BrF5mKbddZE" },
                     mp2: { title: "Interactive Text", desc: "Generative visuals creating typography that reacts in real-time.", category: "touchdesigner", videoId: "d-ucKBghC5s" },
@@ -131,12 +143,24 @@
                     mp4: { title: "Fragnesia VR", desc: "Psychological horror game in Virtual Reality developed in Unity.", category: "unity", videoId: "PLvrUPV4Qsg" },
                     mp5: { title: "Cuna de Prat AR", desc: "Historical simulation of 'Casa Prat' in Augmented Reality for mobile devices.", category: "unity", videoId: "SoqMsK8s3WQ" },
                     mp6: { title: "Aatrox's Sword", desc: "High-fidelity 3D modeling and texturing of the 'Aatrox' character's sword.", category: "modelado", videoId: "Ixkim4BBWHE" },
-                    mp7: { title: "Visual Poem: Eterno Retorno", desc: "3D animation short based on a poem, exploring concepts of repetition.", category: "animacion", videoId: "y-mD6fsNElw" },
-                    mp8: { title: "REC: Real-time Obstacles", desc: "Design and development of an interactive body-tracking experience in Unity, exhibited at the Universidad San Sebastián stand during the REC festival. Users dodged physical obstacles in real-time using body movements.", category: "eventos", images: ["assets/eventos/rec_1.jpg", "assets/eventos/rec_2.jpg"] },
-                    mp9: { title: "VR Exhibition - Municipal Library", desc: "Installation and support of an immersive virtual gallery on Meta Quest 2 for the Concepción photographer community (Afoconce), hosted at the Municipal Library. It allowed attendees to interact with the works in a 3D space.", category: "eventos", images: ["assets/eventos/afoconce_1.jpg", "assets/eventos/afoconce_2.jpg", "assets/eventos/afoconce_3.jpg"] },
-                    mp10: { title: "Workshop: Animate your drawing with AI", desc: "Technical assistant and facilitator in children's co-creation activities. Kids made analog drawings on paper that were processed with Google AI to animate the characters, then uploaded to Spatial for interactive viewing in VR.", category: "eventos", images: ["assets/eventos/animacion_1.jpg", "assets/eventos/animacion_2.jpg"] },
-                    mp11: { title: "Workshop: Chocolate (AI & 3D Reconstruction)", desc: "Facilitator in creative activities based on generative 3D AI. The workflow involved putting children's ideas on paper, processing them with Gemini for 3D sketching, reconstructing the mesh with Tripo 3D, and uploading to Sketchfab to view them in Oculus VR headsets.", category: "eventos", images: ["assets/eventos/chocolate_1.jpg", "assets/eventos/chocolate_2.jpg", "assets/eventos/chocolate_3.jpg", "assets/eventos/chocolate_4.jpg", "assets/eventos/chocolate_5.jpg"] }
+                    mp7: { title: "Visual Poem: Eterno Retorno", desc: "3D animation short based on a poem, exploring concepts of repetition.", category: "animacion", videoId: "y-mD6fsNElw" }
                 },
+
+                navEvents: "Events", navEventsMobile: "Events",
+                evTitle: "Events & Exhibitions",
+                evSubtitle: "Interactive experiences I've brought to real venues and audiences.",
+                ev1Title: "REC: Real-time Obstacles",
+                ev1Desc: "Interactive body-tracking experience built in Unity, exhibited at the Universidad San Sebastián stand during the REC festival (Rock en Conce). Attendees dodged obstacles using body movements.",
+                ev1Badge: "Festival",
+                ev2Title: "VR Exhibition — Municipal Library",
+                ev2Desc: "Installation and support of an immersive virtual gallery on Meta Quest 2 for the Concepción photographer community (Afoconce). Attendees explored the works in a 3D space.",
+                ev2Badge: "VR Exhibition",
+                ev3Title: "Workshop: Animate your Drawing with AI",
+                ev3Desc: "Facilitator in children's co-creation: paper drawings processed with Google AI to animate the characters, then uploaded to Spatial for interactive viewing in VR.",
+                ev3Badge: "Workshop",
+                ev4Title: "Workshop: Chocolate (AI & 3D Reconstruction)",
+                ev4Desc: "Facilitator in creative activities with generative 3D AI: kids' ideas on paper, 3D sketches with Gemini, mesh reconstruction with Tripo 3D, and viewing in VR headsets via Sketchfab.",
+                ev4Badge: "Workshop",
                 contactTitle: "Let's Talk", contactSubtitle: "Got a project in mind or an opportunity for me? Don't hesitate to reach out!", contactBtnCopy: "Copy", contactBtnSend: "Email", contactCopyFeedback: "Copied!", contactBtnCV: "Download CV", contactBtnGitHub: "View my GitHub",
                 footerRights: "&copy; 2026 Ignacio Aguayo. All rights reserved.", footerBtnDestroy: "Destroy Page!",
                 resetTitle: "What have you done? My portfolio! :c", resetBtn: "Rebuild System"
