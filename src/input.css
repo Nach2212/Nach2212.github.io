@@ -116,6 +116,55 @@ h1, h2, h3, .font-display {
     100% { transform: scale(1); opacity: 0.8; }
 }
 
+/* ====== Efectos visuales (js/effects.js) ====== */
+
+/* Las secciones ancladas no quedan ocultas bajo el header sticky */
+html { scroll-padding-top: 96px; }
+
+/* Barra de progreso de scroll */
+#scroll-progress {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 3px;
+    transform: scaleX(0); transform-origin: 0 50%;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+    z-index: 60; pointer-events: none;
+}
+
+/* Scrollspy: sección activa en el nav */
+.nav-link.active { color: #fff; }
+.nav-link.active::after { width: 100%; }
+
+/* Tilt 3D en tarjetas de proyecto */
+.tilt-card {
+    transition: transform 0.18s ease-out, border-color 0.3s, box-shadow 0.3s !important;
+    will-change: transform;
+}
+
+/* Botones magnéticos del hero */
+#inicio a { transition-property: transform, background-color, box-shadow, opacity; }
+
+/* Aura que sigue al cursor (solo desktop) */
+#cursor-glow {
+    position: fixed; left: 0; top: 0;
+    width: 420px; height: 420px;
+    margin: -210px 0 0 -210px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    background: radial-gradient(circle, rgba(59,130,246,0.14) 0%, rgba(139,92,246,0.07) 40%, transparent 70%);
+    mix-blend-mode: screen;
+}
+
+/* Gradiente animado en el nombre del hero */
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+#inicio h1 span {
+    background-size: 200% 200%;
+    animation: gradientShift 6s ease-in-out infinite;
+}
+
 /* ====== Accesibilidad ====== */
 a:focus-visible, button:focus-visible {
     outline: 2px solid #3b82f6;
@@ -129,7 +178,7 @@ a:focus-visible, button:focus-visible {
         transform: none;
         transition: none;
     }
-    #supernova-core, .glow-ring {
+    #supernova-core, .glow-ring, #inicio h1 span {
         animation: none;
     }
 }
