@@ -13,7 +13,7 @@
     <meta name="theme-color" content="#030712">
     <meta property="og:type" content="website">
     <!-- Tailwind CSS compilado (ver src/input.css + tailwind.config.js) -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css?v=20260612b">
     <!-- Google Fonts: Inter & Space Grotesk -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,14 +32,14 @@
                      <img src="assets/Logo.png" alt="" class="h-12 md:h-16 rounded-full hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='https://placehold.co/96x96/0a0f1e/3b82f6?text=IA';">
                 </a>
                 <!-- Language Toggle -->
-                <div class="hidden md:flex items-center space-x-2">
+                <div class="hidden lg:flex items-center space-x-2">
                     <span class="font-semibold text-xs text-gray-500 tracking-wider" data-lang-key="langEN">EN</span>
                     <input type="checkbox" id="lang-toggle" class="lang-toggle hidden" aria-label="Cambiar idioma">
                     <label for="lang-toggle" class="lang-toggle-label relative bg-slate-800 rounded-full cursor-pointer shadow-inner border border-slate-700/50"></label>
                     <span class="font-semibold text-xs text-gray-300 tracking-wider" data-lang-key="langES">ES</span>
                 </div>
             </div>
-            <div class="hidden md:flex items-center space-x-4 lg:space-x-7">
+            <div class="hidden lg:flex items-center space-x-7 xl:space-x-9">
                 <a href="#sobre-mi" class="nav-link whitespace-nowrap text-sm font-medium tracking-wide text-gray-300 hover:text-white transition duration-300" data-lang-key="navAbout">Sobre Mí</a>
                 <a href="#proyectos" class="nav-link whitespace-nowrap text-sm font-medium tracking-wide text-gray-300 hover:text-white transition duration-300" data-lang-key="navProjects">Proyectos</a>
                 <a href="#eventos" class="nav-link whitespace-nowrap text-sm font-medium tracking-wide text-gray-300 hover:text-white transition duration-300" data-lang-key="navEvents">Eventos</a>
@@ -48,14 +48,14 @@
                 <a href="#contacto" class="whitespace-nowrap bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold tracking-wide px-5 py-2.5 rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 transition-all duration-300" data-lang-key="navContact">Contáctame</a>
             </div>
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white transition-colors" aria-label="Abrir menú">
+            <button id="mobile-menu-btn" class="lg:hidden text-gray-300 hover:text-white transition-colors" aria-label="Abrir menú">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
             </button>
         </nav>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-6 space-y-4 bg-cyber-dark/95 backdrop-blur-xl border-b border-slate-800/80 absolute w-full left-0">
+        <div id="mobile-menu" class="hidden lg:hidden px-6 pt-2 pb-6 space-y-4 bg-cyber-dark/95 backdrop-blur-xl border-b border-slate-800/80 absolute w-full left-0">
             <div class="flex items-center space-x-2 mb-4">
                 <span class="font-semibold text-xs text-gray-400" data-lang-key="langEN">EN</span>
                 <input type="checkbox" id="lang-toggle-mobile" class="lang-toggle hidden">
@@ -366,69 +366,68 @@
         <!-- ========== EVENTS SECTION ========== -->
         <section id="eventos" class="py-24 text-center reveal">
             <h2 class="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight" data-lang-key="evTitle">Eventos & Exhibiciones</h2>
-            <p class="text-lg text-gray-400 mb-16 max-w-2xl mx-auto" data-lang-key="evSubtitle">Experiencias interactivas que he llevado a espacios y públicos reales.</p>
-            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <p class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto" data-lang-key="evSubtitle">Experiencias interactivas que he llevado a espacios y públicos reales.</p>
+            <div class="grid lg:grid-cols-2 gap-5 max-w-6xl mx-auto">
 
-                <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-3xl overflow-hidden group hover:border-blue-500/30 transition-all duration-300 shadow-xl flex flex-col">
-                    <div class="h-56 overflow-hidden relative">
-                        <img src="assets/eventos/rec_1.jpg" alt="Stand del juego de esquivar obstáculos en el festival REC" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent opacity-70"></div>
-                        <span class="absolute top-4 left-4 bg-blue-600/90 text-white text-xs font-bold px-3 py-1.5 rounded-lg uppercase tracking-wider" data-lang-key="ev1Badge">Festival</span>
+                <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-2xl overflow-hidden flex group hover:border-blue-500/30 transition-all duration-300 shadow-lg min-h-[11rem]">
+                    <div class="w-36 sm:w-44 flex-shrink-0 relative overflow-hidden">
+                        <img src="assets/eventos/rec_1.jpg" alt="Stand del juego de esquivar obstáculos en el festival REC" loading="lazy" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40"></div>
                     </div>
-                    <div class="p-6 flex flex-col gap-3 flex-grow text-left">
-                        <h3 class="text-xl font-bold text-white" data-lang-key="ev1Title">REC: Obstáculos en Tiempo Real</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed" data-lang-key="ev1Desc">Experiencia interactiva en Unity con body tracking, expuesta en el stand de la Universidad San Sebastián en el festival REC (Rock en Conce). Los asistentes esquivaban obstáculos con movimientos corporales.</p>
-                        <div class="flex gap-2 mt-auto pt-2 overflow-x-auto scrollbar-thin">
-                            <img src="assets/eventos/rec_2.jpg" alt="Stand del juego de esquivar obstáculos en el festival REC" loading="lazy" class="h-16 w-24 object-cover rounded-lg border border-slate-800 flex-shrink-0 hover:scale-105 transition-transform">
+                    <div class="p-4 sm:p-5 text-left flex flex-col gap-1.5 flex-grow">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-blue-400" data-lang-key="ev1Badge">Festival</span>
+                        <h3 class="text-base sm:text-lg font-bold text-white leading-snug" data-lang-key="ev1Title">REC: Obstáculos en Tiempo Real</h3>
+                        <p class="text-gray-400 text-xs sm:text-[13px] leading-relaxed" data-lang-key="ev1Desc">Experiencia interactiva en Unity con body tracking, expuesta en el stand de la Universidad San Sebastián en el festival REC (Rock en Conce). Los asistentes esquivaban obstáculos con movimientos corporales.</p>
+                        <div class="flex gap-1.5 mt-auto pt-2">
+                            <img src="assets/eventos/rec_2.jpg" alt="Stand del juego de esquivar obstáculos en el festival REC" loading="lazy" class="h-10 w-14 object-cover rounded-md border border-slate-800 flex-shrink-0 hover:scale-110 transition-transform">
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-3xl overflow-hidden group hover:border-purple-500/30 transition-all duration-300 shadow-xl flex flex-col">
-                    <div class="h-56 overflow-hidden relative">
-                        <img src="assets/eventos/afoconce_1.jpg" alt="Exhibición de galería VR en la Biblioteca Municipal de Concepción" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent opacity-70"></div>
-                        <span class="absolute top-4 left-4 bg-purple-600/90 text-white text-xs font-bold px-3 py-1.5 rounded-lg uppercase tracking-wider" data-lang-key="ev2Badge">Exhibición VR</span>
+                <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-2xl overflow-hidden flex group hover:border-purple-500/30 transition-all duration-300 shadow-lg min-h-[11rem]">
+                    <div class="w-36 sm:w-44 flex-shrink-0 relative overflow-hidden">
+                        <img src="assets/eventos/afoconce_1.jpg" alt="Exhibición de galería VR en la Biblioteca Municipal de Concepción" loading="lazy" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40"></div>
                     </div>
-                    <div class="p-6 flex flex-col gap-3 flex-grow text-left">
-                        <h3 class="text-xl font-bold text-white" data-lang-key="ev2Title">Exhibición VR — Biblioteca Municipal</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed" data-lang-key="ev2Desc">Instalación y soporte de una galería virtual inmersiva en Meta Quest 2 para la comunidad de fotógrafos de Concepción (Afoconce). Los asistentes recorrieron las obras en un entorno tridimensional.</p>
-                        <div class="flex gap-2 mt-auto pt-2 overflow-x-auto scrollbar-thin">
-                            <img src="assets/eventos/afoconce_2.jpg" alt="Exhibición de galería VR en la Biblioteca Municipal de Concepción" loading="lazy" class="h-16 w-24 object-cover rounded-lg border border-slate-800 flex-shrink-0 hover:scale-105 transition-transform">
-                            <img src="assets/eventos/afoconce_3.jpg" alt="Exhibición de galería VR en la Biblioteca Municipal de Concepción" loading="lazy" class="h-16 w-24 object-cover rounded-lg border border-slate-800 flex-shrink-0 hover:scale-105 transition-transform">
+                    <div class="p-4 sm:p-5 text-left flex flex-col gap-1.5 flex-grow">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-purple-400" data-lang-key="ev2Badge">Exhibición VR</span>
+                        <h3 class="text-base sm:text-lg font-bold text-white leading-snug" data-lang-key="ev2Title">Exhibición VR — Biblioteca Municipal</h3>
+                        <p class="text-gray-400 text-xs sm:text-[13px] leading-relaxed" data-lang-key="ev2Desc">Instalación y soporte de una galería virtual inmersiva en Meta Quest 2 para la comunidad de fotógrafos de Concepción (Afoconce). Los asistentes recorrieron las obras en un entorno tridimensional.</p>
+                        <div class="flex gap-1.5 mt-auto pt-2">
+                            <img src="assets/eventos/afoconce_2.jpg" alt="Exhibición de galería VR en la Biblioteca Municipal de Concepción" loading="lazy" class="h-10 w-14 object-cover rounded-md border border-slate-800 flex-shrink-0 hover:scale-110 transition-transform">
+                            <img src="assets/eventos/afoconce_3.jpg" alt="Exhibición de galería VR en la Biblioteca Municipal de Concepción" loading="lazy" class="h-10 w-14 object-cover rounded-md border border-slate-800 flex-shrink-0 hover:scale-110 transition-transform">
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-3xl overflow-hidden group hover:border-pink-500/30 transition-all duration-300 shadow-xl flex flex-col">
-                    <div class="h-56 overflow-hidden relative">
-                        <img src="assets/eventos/animacion_1.jpg" alt="Taller infantil de animación de dibujos con IA" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent opacity-70"></div>
-                        <span class="absolute top-4 left-4 bg-pink-600/90 text-white text-xs font-bold px-3 py-1.5 rounded-lg uppercase tracking-wider" data-lang-key="ev3Badge">Taller</span>
+                <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-2xl overflow-hidden flex group hover:border-pink-500/30 transition-all duration-300 shadow-lg min-h-[11rem]">
+                    <div class="w-36 sm:w-44 flex-shrink-0 relative overflow-hidden">
+                        <img src="assets/eventos/animacion_1.jpg" alt="Taller infantil de animación de dibujos con IA" loading="lazy" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40"></div>
                     </div>
-                    <div class="p-6 flex flex-col gap-3 flex-grow text-left">
-                        <h3 class="text-xl font-bold text-white" data-lang-key="ev3Title">Taller: Anima tu Dibujo con IA</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed" data-lang-key="ev3Desc">Facilitador en co-creación infantil: dibujos en papel procesados con IA de Google para animar los personajes, y subidos a Spatial para verlos de forma interactiva en entornos VR.</p>
-                        <div class="flex gap-2 mt-auto pt-2 overflow-x-auto scrollbar-thin">
-                            <img src="assets/eventos/animacion_2.jpg" alt="Taller infantil de animación de dibujos con IA" loading="lazy" class="h-16 w-24 object-cover rounded-lg border border-slate-800 flex-shrink-0 hover:scale-105 transition-transform">
+                    <div class="p-4 sm:p-5 text-left flex flex-col gap-1.5 flex-grow">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-pink-400" data-lang-key="ev3Badge">Taller</span>
+                        <h3 class="text-base sm:text-lg font-bold text-white leading-snug" data-lang-key="ev3Title">Taller: Anima tu Dibujo con IA</h3>
+                        <p class="text-gray-400 text-xs sm:text-[13px] leading-relaxed" data-lang-key="ev3Desc">Facilitador en co-creación infantil: dibujos en papel procesados con IA de Google para animar los personajes, y subidos a Spatial para verlos de forma interactiva en entornos VR.</p>
+                        <div class="flex gap-1.5 mt-auto pt-2">
+                            <img src="assets/eventos/animacion_2.jpg" alt="Taller infantil de animación de dibujos con IA" loading="lazy" class="h-10 w-14 object-cover rounded-md border border-slate-800 flex-shrink-0 hover:scale-110 transition-transform">
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-3xl overflow-hidden group hover:border-emerald-500/30 transition-all duration-300 shadow-xl flex flex-col">
-                    <div class="h-56 overflow-hidden relative">
-                        <img src="assets/eventos/chocolate_1.jpg" alt="Taller infantil de reconstrucción 3D con IA generativa" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent opacity-70"></div>
-                        <span class="absolute top-4 left-4 bg-emerald-600/90 text-white text-xs font-bold px-3 py-1.5 rounded-lg uppercase tracking-wider" data-lang-key="ev4Badge">Taller</span>
+                <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-2xl overflow-hidden flex group hover:border-emerald-500/30 transition-all duration-300 shadow-lg min-h-[11rem]">
+                    <div class="w-36 sm:w-44 flex-shrink-0 relative overflow-hidden">
+                        <img src="assets/eventos/chocolate_1.jpg" alt="Taller infantil de reconstrucción 3D con IA generativa" loading="lazy" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40"></div>
                     </div>
-                    <div class="p-6 flex flex-col gap-3 flex-grow text-left">
-                        <h3 class="text-xl font-bold text-white" data-lang-key="ev4Title">Taller: Chocolate (IA & Reconstrucción 3D)</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed" data-lang-key="ev4Desc">Facilitador en actividades creativas con IA generativa 3D: ideas de los niños en papel, bocetos 3D con Gemini, reconstrucción de malla con Tripo 3D y visualización en visores VR vía Sketchfab.</p>
-                        <div class="flex gap-2 mt-auto pt-2 overflow-x-auto scrollbar-thin">
-                            <img src="assets/eventos/chocolate_2.jpg" alt="Taller infantil de reconstrucción 3D con IA generativa" loading="lazy" class="h-16 w-24 object-cover rounded-lg border border-slate-800 flex-shrink-0 hover:scale-105 transition-transform">
-                            <img src="assets/eventos/chocolate_3.jpg" alt="Taller infantil de reconstrucción 3D con IA generativa" loading="lazy" class="h-16 w-24 object-cover rounded-lg border border-slate-800 flex-shrink-0 hover:scale-105 transition-transform">
-                            <img src="assets/eventos/chocolate_4.jpg" alt="Taller infantil de reconstrucción 3D con IA generativa" loading="lazy" class="h-16 w-24 object-cover rounded-lg border border-slate-800 flex-shrink-0 hover:scale-105 transition-transform">
-                            <img src="assets/eventos/chocolate_5.jpg" alt="Taller infantil de reconstrucción 3D con IA generativa" loading="lazy" class="h-16 w-24 object-cover rounded-lg border border-slate-800 flex-shrink-0 hover:scale-105 transition-transform">
+                    <div class="p-4 sm:p-5 text-left flex flex-col gap-1.5 flex-grow">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-400" data-lang-key="ev4Badge">Taller</span>
+                        <h3 class="text-base sm:text-lg font-bold text-white leading-snug" data-lang-key="ev4Title">Taller: Chocolate (IA & Reconstrucción 3D)</h3>
+                        <p class="text-gray-400 text-xs sm:text-[13px] leading-relaxed" data-lang-key="ev4Desc">Facilitador en actividades creativas con IA generativa 3D: ideas de los niños en papel, bocetos 3D con Gemini, reconstrucción de malla con Tripo 3D y visualización en visores VR vía Sketchfab.</p>
+                        <div class="flex gap-1.5 mt-auto pt-2">
+                            <img src="assets/eventos/chocolate_2.jpg" alt="Taller infantil de reconstrucción 3D con IA generativa" loading="lazy" class="h-10 w-14 object-cover rounded-md border border-slate-800 flex-shrink-0 hover:scale-110 transition-transform">
+                            <img src="assets/eventos/chocolate_3.jpg" alt="Taller infantil de reconstrucción 3D con IA generativa" loading="lazy" class="h-10 w-14 object-cover rounded-md border border-slate-800 flex-shrink-0 hover:scale-110 transition-transform">
+                            <img src="assets/eventos/chocolate_4.jpg" alt="Taller infantil de reconstrucción 3D con IA generativa" loading="lazy" class="h-10 w-14 object-cover rounded-md border border-slate-800 flex-shrink-0 hover:scale-110 transition-transform">
                         </div>
                     </div>
                 </div>
@@ -702,9 +701,9 @@
     </div>
 
 
-    <script src="js/translations.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/effects.js"></script>
+    <script src="js/translations.js?v=20260612b"></script>
+    <script src="js/main.js?v=20260612b"></script>
+    <script src="js/effects.js?v=20260612b"></script>
 </body>
 </html>
 

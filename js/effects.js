@@ -17,6 +17,22 @@
     window.addEventListener('scroll', updateBar, { passive: true });
     updateBar();
 
+    // --- 1b. HEADER AUTO-OCULTABLE (se esconde al bajar, vuelve al subir) ---
+    const header = document.querySelector('header');
+    if (header) {
+        let lastY = window.scrollY;
+        window.addEventListener('scroll', function () {
+            const y = window.scrollY;
+            const menuOpen = document.getElementById('mobile-menu') && !document.getElementById('mobile-menu').classList.contains('hidden');
+            if (!menuOpen && y > 140 && y > lastY + 4) {
+                header.classList.add('header-hidden');
+            } else if (y < lastY - 4 || y <= 140) {
+                header.classList.remove('header-hidden');
+            }
+            lastY = y;
+        }, { passive: true });
+    }
+
     // --- 2. SCROLLSPY (resaltar sección activa en el nav) ---
     // mas-proyectos cuenta como "Proyectos" para el nav
     const spyMap = { 'sobre-mi': '#sobre-mi', 'proyectos': '#proyectos', 'mas-proyectos': '#proyectos', 'eventos': '#eventos', 'servicios': '#servicios' };

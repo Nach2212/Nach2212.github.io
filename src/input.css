@@ -121,6 +121,14 @@ h1, h2, h3, .font-display {
 /* Las secciones ancladas no quedan ocultas bajo el header sticky */
 html { scroll-padding-top: 96px; }
 
+/* Header auto-ocultable: se esconde al bajar, reaparece al subir */
+header {
+    transition: transform 0.35s ease;
+}
+header.header-hidden {
+    transform: translateY(-100%);
+}
+
 /* Barra de progreso de scroll */
 #scroll-progress {
     position: fixed; top: 0; left: 0;
