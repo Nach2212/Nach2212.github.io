@@ -1,4 +1,4 @@
-﻿        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         // --- SCROLL REVEAL (NEW) ---
         function reveal() {
@@ -331,12 +331,32 @@
             }
 
             class Star {
-                constructor(x, y, speedX, speedY, size, color) {
-                    this.x = x; this.y = y; this.speedX = speedX; this.speedY = speedY; this.size = size; this.color = color;
+                constructor(x, y, speedX, speedY, size, rgb, baseOpacity) {
+                    this.x = x; this.y = y; this.speedX = speedX; this.speedY = speedY; this.size = size;
+                    this.rgb = rgb; // array: [r, g, b]
+                    this.baseOpacity = baseOpacity;
                     this.baseX = x; this.baseY = y; this.density = (Math.random() * 20) + 1;
+                    
+                    // Centelleo dinámico (Twinkle effect) - más suave y lento
+                    this.twinkleSpeed = Math.random() * 0.015 + 0.005;
+                    this.twinklePhase = Math.random() * Math.PI * 2;
                 }
                 draw() {
-                    ctx.fillStyle = this.color; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+                    this.twinklePhase += this.twinkleSpeed;
+                    // Oscila suavemente la opacidad alrededor de su base (rango reducido a 0.14 para centelleo sutil)
+                    let opacity = this.baseOpacity + Math.sin(this.twinklePhase) * 0.14;
+                    if (opacity < 0.2) opacity = 0.2;
+                    if (opacity > 0.85) opacity = 0.85;
+
+                    const color = `rgba(${this.rgb[0]}, ${this.rgb[1]}, ${this.rgb[2]}, ${opacity.toFixed(2)})`;
+                    
+                    // Halo muy suave para que las estrellas más grandes resalten levemente
+                    if (this.size > 1.4) {
+                        ctx.shadowBlur = 4;
+                        ctx.shadowColor = `rgba(${this.rgb[0]}, ${this.rgb[1]}, ${this.rgb[2]}, ${opacity * 0.4})`;
+                    }
+                    ctx.fillStyle = color; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+                    ctx.shadowBlur = 0;
                 }
                 update() {
                     let dx = mouse.x - this.x; let dy = mouse.y - this.y;
@@ -364,7 +384,8 @@
                 reset() {
                     this.x = Math.random() * canvas.width; this.y = 0; this.len = (Math.random() * 60) + 10;
                     this.speed = (Math.random() * 8) + 4; this.size = (Math.random() * 1) + 0.5;
-                    this.waitTime = Date.now() + (Math.random() * 6000) + 1000; this.active = false;
+                    // Frecuencia aumentada (espera de 0.5s a 3.5s en lugar de 1s a 7s)
+                    this.waitTime = Date.now() + (Math.random() * 3000) + 500; this.active = false;
                 }
                 update() {
                     if (this.active) {
@@ -386,13 +407,40 @@
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
                 stars = []; shootingStars = [];
-                let numStars = (canvas.height * canvas.width) / 12000; // Optimal density for constellations
+                // Densidad equilibrada (divisor 8000)
+                let numStars = (canvas.height * canvas.width) / 8000; 
                 for (let i = 0; i < numStars; i++) {
-                    stars.push(new Star(Math.random() * canvas.width, Math.random() * canvas.height, (Math.random() * 0.2) - 0.1, (Math.random() * 0.2) - 0.1, Math.random() * 1.5 + 0.5, 'rgba(59, 130, 246, ' + (Math.random() * 0.6 + 0.2) + ')'));
+                    const rand = Math.random();
+                    let rgb, baseOpacity;
+                    if (rand < 0.4) {
+                        // Blanco-azulado suave
+                        rgb = [191, 219, 254];
+                        baseOpacity = Math.random() * 0.25 + 0.45; // [0.45, 0.70]
+                    } else if (rand < 0.85) {
+                        // Azul suave
+                        rgb = [96, 165, 250];
+                        baseOpacity = Math.random() * 0.25 + 0.4; // [0.4, 0.65]
+                    } else {
+                        // Violeta/Púrpura muy suave
+                        rgb = [168, 85, 247];
+                        baseOpacity = Math.random() * 0.25 + 0.35; // [0.35, 0.60]
+                    }
+                    
+                    // Tamaños corregidos un poco más pequeños [0.6, 2.1]
+                    const size = Math.random() * 1.5 + 0.6;
+                    stars.push(new Star(
+                        Math.random() * canvas.width, 
+                        Math.random() * canvas.height, 
+                        (Math.random() * 0.2) - 0.1, 
+                        (Math.random() * 0.2) - 0.1, 
+                        size, 
+                        rgb, 
+                        baseOpacity
+                    ));
                 }
-                for (let i = 0; i < 2; i++) shootingStars.push(new ShootingStar()); // Reduced for better perf
+                // Más estrellas fugaces simultáneas (4 en vez de 2)
+                for (let i = 0; i < 4; i++) shootingStars.push(new ShootingStar());
                 
-                // Initialize the giant meteor welcome effect
                 giantMeteor = new GiantMeteor(canvas);
                 maxGlowRadius = Math.max(canvas.width, canvas.height) * 0.6;
             }
@@ -401,19 +449,37 @@
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 for(let i=0; i<stars.length; i++) stars[i].update();
                 
-                // Draw constellation links
+                // Dibujar constelaciones (líneas entre estrellas cercanas)
                 for (let i = 0; i < stars.length; i++) {
                     for (let j = i + 1; j < stars.length; j++) {
                         let dx = stars[i].x - stars[j].x;
                         let dy = stars[i].y - stars[j].y;
                         let distance = Math.sqrt(dx * dx + dy * dy);
-                        if (distance < 85) {
-                            let alpha = (1 - (distance / 85)) * 0.12;
-                            ctx.strokeStyle = `rgba(59, 130, 246, ${alpha})`;
+                        if (distance < 95) {
+                            let alpha = (1 - (distance / 95)) * 0.24;
+                            ctx.strokeStyle = `rgba(96, 165, 250, ${alpha})`;
                             ctx.lineWidth = 0.5;
                             ctx.beginPath();
                             ctx.moveTo(stars[i].x, stars[i].y);
                             ctx.lineTo(stars[j].x, stars[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                // NUEVO: Dibujar constelación sutil conectada al cursor
+                if (mouse.x !== undefined && mouse.y !== undefined) {
+                    for (let i = 0; i < stars.length; i++) {
+                        let dx = stars[i].x - mouse.x;
+                        let dy = stars[i].y - mouse.y;
+                        let distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < mouse.radius) {
+                            let alpha = (1 - (distance / mouse.radius)) * 0.38;
+                            ctx.strokeStyle = `rgba(96, 165, 250, ${alpha})`;
+                            ctx.lineWidth = 0.6;
+                            ctx.beginPath();
+                            ctx.moveTo(stars[i].x, stars[i].y);
+                            ctx.lineTo(mouse.x, mouse.y);
                             ctx.stroke();
                         }
                     }

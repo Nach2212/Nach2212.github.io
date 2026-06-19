@@ -7,7 +7,7 @@
 body {
     font-family: 'Inter', sans-serif;
     background-color: #030712;
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 /* La página AR bloquea todo el scroll */
@@ -79,12 +79,24 @@ h1, h2, h3, .font-display {
 }
 
 /* Nav link hover effect */
-.nav-link { position: relative; padding-bottom: 4px; }
-.nav-link::after {
-    content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-    width: 0; height: 2px; background-color: #3b82f6; transition: width 0.3s ease-in-out;
+.nav-link {
+    position: relative;
+    padding: 6px 14px;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.nav-link:hover::after { width: 100%; }
+.nav-link::after {
+    content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+    width: 0; height: 2px; background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    box-shadow: 0 0 8px #3b82f6;
+    transition: width 0.3s ease-in-out;
+}
+.nav-link:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
+    background-color: rgba(59, 130, 246, 0.08);
+}
+.nav-link:hover::after { width: 60%; }
 
 /* Language Toggle Switch */
 .lang-toggle-label { width: 50px; height: 26px; }
@@ -121,14 +133,6 @@ h1, h2, h3, .font-display {
 /* Las secciones ancladas no quedan ocultas bajo el header sticky */
 html { scroll-padding-top: 96px; }
 
-/* Header auto-ocultable: se esconde al bajar, reaparece al subir */
-header {
-    transition: transform 0.35s ease;
-}
-header.header-hidden {
-    transform: translateY(-100%);
-}
-
 /* Barra de progreso de scroll */
 #scroll-progress {
     position: fixed; top: 0; left: 0;
@@ -139,8 +143,13 @@ header.header-hidden {
 }
 
 /* Scrollspy: sección activa en el nav */
-.nav-link.active { color: #fff; }
-.nav-link.active::after { width: 100%; }
+.nav-link.active {
+    color: #fff;
+    background-color: rgba(59, 130, 246, 0.12);
+    box-shadow: inset 0 0 10px rgba(59, 130, 246, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+}
+.nav-link.active::after { width: 45%; }
 
 /* Tilt 3D en tarjetas de proyecto */
 .tilt-card {

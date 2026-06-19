@@ -5,6 +5,61 @@
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const finePointer = window.matchMedia('(pointer: fine)').matches;
 
+    // --- 0. LIGHTBOX PARA IMÁGENES DE EVENTOS ---
+    (function () {
+        const lb = document.getElementById('lightbox');
+        if (!lb) return;
+        const lbImg = document.getElementById('lightbox-img');
+        const lbCounter = document.getElementById('lightbox-counter');
+        const btnClose = document.getElementById('lightbox-close');
+        const btnPrev = document.getElementById('lightbox-prev');
+        const btnNext = document.getElementById('lightbox-next');
+        let gallery = [];
+        let index = 0;
+
+        function render() {
+            lbImg.src = gallery[index];
+            lbCounter.textContent = (index + 1) + ' / ' + gallery.length;
+            btnPrev.style.display = btnNext.style.display = gallery.length > 1 ? '' : 'none';
+        }
+        function open(imgs, start) {
+            gallery = imgs;
+            index = start;
+            render();
+            lb.classList.remove('opacity-0', 'pointer-events-none');
+            document.body.style.overflow = 'hidden';
+        }
+        function close() {
+            lb.classList.add('opacity-0', 'pointer-events-none');
+            document.body.style.overflow = '';
+        }
+        function step(d) {
+            index = (index + d + gallery.length) % gallery.length;
+            render();
+        }
+
+        // Agrupar imágenes por tarjeta de evento
+        document.querySelectorAll('#eventos .grid > div').forEach(function (card) {
+            const imgs = Array.from(card.querySelectorAll('img'));
+            const srcs = imgs.map(function (i) { return i.getAttribute('src'); });
+            imgs.forEach(function (img, i) {
+                img.style.cursor = 'zoom-in';
+                img.addEventListener('click', function () { open(srcs, i); });
+            });
+        });
+
+        btnClose.addEventListener('click', close);
+        btnNext.addEventListener('click', function () { step(1); });
+        btnPrev.addEventListener('click', function () { step(-1); });
+        lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+        document.addEventListener('keydown', function (e) {
+            if (lb.classList.contains('pointer-events-none')) return;
+            if (e.key === 'Escape') close();
+            else if (e.key === 'ArrowRight') step(1);
+            else if (e.key === 'ArrowLeft') step(-1);
+        });
+    })();
+
     // --- 1. BARRA DE PROGRESO DE SCROLL ---
     const bar = document.createElement('div');
     bar.id = 'scroll-progress';
@@ -16,22 +71,6 @@
     }
     window.addEventListener('scroll', updateBar, { passive: true });
     updateBar();
-
-    // --- 1b. HEADER AUTO-OCULTABLE (se esconde al bajar, vuelve al subir) ---
-    const header = document.querySelector('header');
-    if (header) {
-        let lastY = window.scrollY;
-        window.addEventListener('scroll', function () {
-            const y = window.scrollY;
-            const menuOpen = document.getElementById('mobile-menu') && !document.getElementById('mobile-menu').classList.contains('hidden');
-            if (!menuOpen && y > 140 && y > lastY + 4) {
-                header.classList.add('header-hidden');
-            } else if (y < lastY - 4 || y <= 140) {
-                header.classList.remove('header-hidden');
-            }
-            lastY = y;
-        }, { passive: true });
-    }
 
     // --- 2. SCROLLSPY (resaltar sección activa en el nav) ---
     // mas-proyectos cuenta como "Proyectos" para el nav
