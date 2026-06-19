@@ -210,6 +210,7 @@
 
         if (canvas && !prefersReducedMotion) {
             const ctx = canvas.getContext('2d');
+            const parallaxFactor = 0.5;
             let stars = [];
             let shootingStars = [];
             let animationFrameId;
@@ -341,7 +342,7 @@
                     this.twinkleSpeed = Math.random() * 0.015 + 0.005;
                     this.twinklePhase = Math.random() * Math.PI * 2;
                 }
-                draw() {
+                draw(screenY) {
                     this.twinklePhase += this.twinkleSpeed;
                     // Oscila suavemente la opacidad alrededor de su base (rango reducido a 0.14 para centelleo sutil)
                     let opacity = this.baseOpacity + Math.sin(this.twinklePhase) * 0.14;
@@ -355,11 +356,17 @@
                         ctx.shadowBlur = 4;
                         ctx.shadowColor = `rgba(${this.rgb[0]}, ${this.rgb[1]}, ${this.rgb[2]}, ${opacity * 0.4})`;
                     }
-                    ctx.fillStyle = color; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+                    ctx.fillStyle = color; ctx.beginPath(); ctx.arc(this.x, screenY, this.size, 0, Math.PI * 2); ctx.fill();
                     ctx.shadowBlur = 0;
                 }
                 update() {
-                    let dx = mouse.x - this.x; let dy = mouse.y - this.y;
+                    let totalHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+                    let maxScrollY = totalHeight - window.innerHeight;
+                    let maxY = maxScrollY * parallaxFactor + canvas.height;
+
+                    let screenY = this.y - window.scrollY * parallaxFactor;
+                    let dx = mouse.x - this.x; 
+                    let dy = mouse.y - screenY;
                     let distance = Math.sqrt(dx * dx + dy * dy);
                     
                     if (distance < mouse.radius) {
@@ -371,11 +378,18 @@
                         if (this.y !== this.baseY) this.y -= (this.y - this.baseY) * 0.05;
                     }
                     this.x += this.speedX; this.y += this.speedY;
+                    
+                    // Wrapping en límites virtuales
                     if (this.x > canvas.width) { this.x = 0; this.baseX = 0; }
                     if (this.x < 0) { this.x = canvas.width; this.baseX = canvas.width; }
-                    if (this.y > canvas.height) { this.y = 0; this.baseY = 0; }
-                    if (this.y < 0) { this.y = canvas.height; this.baseY = canvas.height; }
-                    this.draw();
+                    if (this.y > maxY) { this.y = 0; this.baseY = 0; }
+                    if (this.y < 0) { this.y = maxY; this.baseY = maxY; }
+                    
+                    // Solo dibujar estrellas que están dentro del viewport (frustum culling)
+                    let screenYDraw = this.y - window.scrollY * parallaxFactor;
+                    if (screenYDraw >= -50 && screenYDraw <= canvas.height + 50) {
+                        this.draw(screenYDraw);
+                    }
                 }
             }
 
@@ -407,8 +421,13 @@
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
                 stars = []; shootingStars = [];
-                // Densidad equilibrada (divisor 8000)
-                let numStars = (canvas.height * canvas.width) / 8000; 
+                
+                let totalHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+                let maxScrollY = totalHeight - window.innerHeight;
+                let maxY = maxScrollY * parallaxFactor + canvas.height;
+                
+                // Densidad equilibrada basada en la altura total de scrolling
+                let numStars = (maxY * canvas.width) / 8000; 
                 for (let i = 0; i < numStars; i++) {
                     const rand = Math.random();
                     let rgb, baseOpacity;
@@ -430,7 +449,7 @@
                     const size = Math.random() * 1.5 + 0.6;
                     stars.push(new Star(
                         Math.random() * canvas.width, 
-                        Math.random() * canvas.height, 
+                        Math.random() * maxY, 
                         (Math.random() * 0.2) - 0.1, 
                         (Math.random() * 0.2) - 0.1, 
                         size, 
@@ -449,19 +468,25 @@
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 for(let i=0; i<stars.length; i++) stars[i].update();
                 
-                // Dibujar constelaciones (líneas entre estrellas cercanas)
+                // Dibujar constelaciones (líneas entre estrellas cercanas en espacio de pantalla)
                 for (let i = 0; i < stars.length; i++) {
+                    let screenYi = stars[i].y - window.scrollY * parallaxFactor;
+                    if (screenYi < -50 || screenYi > canvas.height + 50) continue;
+
                     for (let j = i + 1; j < stars.length; j++) {
+                        let screenYj = stars[j].y - window.scrollY * parallaxFactor;
+                        if (screenYj < -50 || screenYj > canvas.height + 50) continue;
+
                         let dx = stars[i].x - stars[j].x;
-                        let dy = stars[i].y - stars[j].y;
+                        let dy = screenYi - screenYj;
                         let distance = Math.sqrt(dx * dx + dy * dy);
                         if (distance < 95) {
                             let alpha = (1 - (distance / 95)) * 0.24;
                             ctx.strokeStyle = `rgba(96, 165, 250, ${alpha})`;
                             ctx.lineWidth = 0.5;
                             ctx.beginPath();
-                            ctx.moveTo(stars[i].x, stars[i].y);
-                            ctx.lineTo(stars[j].x, stars[j].y);
+                            ctx.moveTo(stars[i].x, screenYi);
+                            ctx.lineTo(stars[j].x, screenYj);
                             ctx.stroke();
                         }
                     }
@@ -470,15 +495,18 @@
                 // NUEVO: Dibujar constelación sutil conectada al cursor
                 if (mouse.x !== undefined && mouse.y !== undefined) {
                     for (let i = 0; i < stars.length; i++) {
+                        let screenYi = stars[i].y - window.scrollY * parallaxFactor;
+                        if (screenYi < -50 || screenYi > canvas.height + 50) continue;
+
                         let dx = stars[i].x - mouse.x;
-                        let dy = stars[i].y - mouse.y;
+                        let dy = screenYi - mouse.y;
                         let distance = Math.sqrt(dx * dx + dy * dy);
                         if (distance < mouse.radius) {
                             let alpha = (1 - (distance / mouse.radius)) * 0.38;
                             ctx.strokeStyle = `rgba(96, 165, 250, ${alpha})`;
                             ctx.lineWidth = 0.6;
                             ctx.beginPath();
-                            ctx.moveTo(stars[i].x, stars[i].y);
+                            ctx.moveTo(stars[i].x, screenYi);
                             ctx.lineTo(mouse.x, mouse.y);
                             ctx.stroke();
                         }
