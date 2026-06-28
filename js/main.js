@@ -572,7 +572,7 @@
             if (docWrapper && docLink) {
                 if (data.docUrl) {
                     docLink.href = data.docUrl;
-                    if (docText) docText.textContent = data.docLabel || 'Ver Biblia de Desarrollo (GDD)';
+                    if (docText) docText.textContent = data.docLabel || 'Ver Web del Proyecto';
                     docWrapper.classList.remove('hidden');
                 } else {
                     docWrapper.classList.add('hidden');
