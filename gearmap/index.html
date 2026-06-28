@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GearMap — Gemelo Digital 3D de Entrenamiento y Emergencias</title>
+    <meta name="description" content="GearMap es la plataforma móvil 3D de entrenamiento y gestión operativa para bomberos y equipos de respuesta a emergencias.">
+    <link rel="icon" href="assets/logo.png" type="image/png">
+    <meta name="theme-color" content="#030712">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            red: '#ef4444',
+                            darkRed: '#991b1b',
+                            cyan: '#06b6d4',
+                            slate: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .glass-card:hover { border-color: rgba(239, 68, 68, 0.4); box-shadow: 0 0 30px rgba(239, 68, 68, 0.15); }
+        .glow-red { box-shadow: 0 0 40px rgba(239, 68, 68, 0.25); }
+    </style>
+</head>
+<body class="bg-[#030712] text-gray-200 font-sans antialiased selection:bg-red-500 selection:text-white">
+
+    <!-- HEADER / NAVBAR -->
+    <header class="sticky top-0 z-50 bg-[#030712]/80 backdrop-blur-md border-b border-slate-800/80">
+        <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-3 group">
+                <img src="assets/logo.png" alt="Logo de GearMap" class="w-10 h-10 object-contain transform group-hover:scale-110 transition duration-300">
+                <div class="flex flex-col">
+                    <span class="font-bold text-xl text-white font-display tracking-wider group-hover:text-red-400 transition">GearMap</span>
+                    <span class="text-[10px] text-red-500 font-mono tracking-widest uppercase font-semibold">Digital Twin 3D</span>
+                </div>
+            </a>
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300">
+                <a href="#problema" class="hover:text-white transition">El Desafío</a>
+                <a href="#solucion" class="hover:text-white transition">Gemelo Digital 3D</a>
+                <a href="#respaldo" class="hover:text-white transition">Innovación & Alianzas</a>
+                <a href="#equipo" class="hover:text-white transition">Equipo</a>
+                <a href="../" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 border border-slate-700">
+                    ➔ Volver al Portafolio
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- HERO SECTION -->
+        <section class="relative min-h-[90vh] flex flex-col justify-center items-center text-center px-6 py-20 overflow-hidden">
+            <div class="absolute -z-10 w-[600px] h-[600px] bg-red-600/10 rounded-full blur-[140px] pointer-events-none"></div>
+            <div class="absolute -z-10 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[120px] translate-x-32 translate-y-32 pointer-events-none"></div>
+
+            <div class="max-w-4xl mx-auto flex flex-col items-center">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-red-500/30 bg-red-950/40 text-red-400 font-mono text-xs font-semibold tracking-widest uppercase mb-6 shadow-lg shadow-red-500/10">
+                    <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                    PLATAFORMA MÓVIL 3D PARA BRIGADAS DE EMERGENCIA
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6 font-display tracking-tight">
+                    GearMap: El Gemelo Digital 3D de Primera Respuesta
+                </h1>
+                
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mb-10 leading-relaxed font-light">
+                    Mientras otros entran a la emergencia intentando recordar manuales en papel, <strong class="text-white font-semibold">GearMap</strong> despliega un camión de bomberos 3D interactivo en tu smartphone. Cero estrés operativo, máxima precisión en segundos.
+                </p>
+
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <a href="#solucion" class="bg-red-600 hover:bg-red-500 text-white px-8 py-4 rounded-2xl font-bold text-base shadow-lg shadow-red-600/30 hover:shadow-red-600/50 transform hover:-translate-y-1 transition duration-300">
+                        Explorar Gemelo Digital 3D 🚒
+                    </a>
+                    <a href="#respaldo" class="glass-card text-gray-200 px-8 py-4 rounded-2xl font-bold text-base hover:text-white transform hover:-translate-y-1 transition duration-300">
+                        Ver Reconocimientos & Bases
+                    </a>
+                </div>
+            </div>
+
+            <!-- METRIC BADGES -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl w-full mt-16 px-6">
+                <div class="glass-card p-6 rounded-2xl text-center">
+                    <span class="block text-3xl font-extrabold text-white font-display mb-1">+100</span>
+                    <span class="text-xs text-gray-400 font-mono uppercase tracking-wider">Herramientas en 3D</span>
+                </div>
+                <div class="glass-card p-6 rounded-2xl text-center">
+                    <span class="block text-3xl font-extrabold text-cyan-400 font-display mb-1">0.0s</span>
+                    <span class="text-xs text-gray-400 font-mono uppercase tracking-wider">Estrés Operativo</span>
+                </div>
+                <div class="glass-card p-6 rounded-2xl text-center">
+                    <span class="block text-3xl font-extrabold text-red-400 font-display mb-1">100%</span>
+                    <span class="text-xs text-gray-400 font-mono uppercase tracking-wider">Subsidio Social RSE</span>
+                </div>
+                <div class="glass-card p-6 rounded-2xl text-center">
+                    <span class="block text-3xl font-extrabold text-white font-display mb-1">Unity 3D</span>
+                    <span class="text-xs text-gray-400 font-mono uppercase tracking-wider">Motor Móvil Native</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- EL PROBLEMA VS LA SOLUCIÓN -->
+        <section id="problema" class="py-24 px-6 bg-slate-950/50 border-y border-slate-800/80">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-white font-display mb-4">El Cerebro Humano Bajo Estrés Real</h2>
+                    <p class="text-gray-400 text-base leading-relaxed">En un incendio o rescate vehicular, los segundos determinan vidas. La memoria no puede procesar carpetas físicas ni manuales extensos en medio de la emergencia.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Antes -->
+                    <div class="glass-card p-8 md:p-10 rounded-3xl border-red-500/20">
+                        <div class="w-12 h-12 rounded-2xl bg-red-950/60 border border-red-500/40 flex items-center justify-center text-red-400 font-bold text-xl mb-6">✕</div>
+                        <h3 class="text-2xl font-bold text-white font-display mb-4">El Método Tradicional (Análogo)</h3>
+                        <ul class="space-y-4 text-gray-300 text-sm leading-relaxed">
+                            <li class="flex items-start gap-3"><span class="text-red-500 mt-1">●</span> Manuales en papel inaccesibles dentro del carro bomba en movimiento.</li>
+                            <li class="flex items-start gap-3"><span class="text-red-500 mt-1">●</span> Dificultad para nuevos voluntarios en memorizar la distribución exacta de gavetas.</li>
+                            <li class="flex items-start gap-3"><span class="text-red-500 mt-1">●</span> Desgaste innecesario de equipamiento real durante sesiones de entrenamiento repetitivas.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Con GearMap -->
+                    <div class="glass-card p-8 md:p-10 rounded-3xl border-cyan-500/30 glow-red">
+                        <div class="w-12 h-12 rounded-2xl bg-cyan-950/60 border border-cyan-500/40 flex items-center justify-center text-cyan-400 font-bold text-xl mb-6">✓</div>
+                        <h3 class="text-2xl font-bold text-white font-display mb-4">La Solución GearMap (Gemelo Digital 3D)</h3>
+                        <ul class="space-y-4 text-gray-300 text-sm leading-relaxed">
+                            <li class="flex items-start gap-3"><span class="text-cyan-400 mt-1">●</span> Recreación 3D exacta del carro bomba y sus herramientas en smartphones de primera respuesta.</li>
+                            <li class="flex items-start gap-3"><span class="text-cyan-400 mt-1">●</span> Simulación táctil de apertura de compartimentos y visualización espacial inmediata.</li>
+                            <li class="flex items-start gap-3"><span class="text-cyan-400 mt-1">●</span> Módulos de entrenamiento gamificado y consulta instantánea de procedimientos IFTA.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MOCKUP DEL SHOWCASE 3D -->
+        <section id="solucion" class="py-24 px-6 max-w-7xl mx-auto text-center">
+            <div class="max-w-3xl mx-auto mb-12">
+                <span class="text-red-500 font-mono text-xs font-semibold tracking-widest uppercase block mb-2">ARQUITECTURA DE SOFTWARE</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white font-display mb-4">Simulación 3D e Inventario Táctil</h2>
+                <p class="text-gray-400 text-base">Desarrollado en Unity 3D optimizado para alto rendimiento móvil, sincronizado con base de datos en tiempo real.</p>
+            </div>
+
+            <div class="glass-card p-6 md:p-10 rounded-3xl max-w-4xl mx-auto shadow-2xl relative overflow-hidden">
+                <img src="assets/Bomberos.png" alt="GearMap 3D App Showcase" class="w-full rounded-2xl shadow-2xl object-cover max-h-[500px]">
+                <div class="mt-6 flex flex-wrap gap-4 justify-center text-xs font-mono text-gray-400">
+                    <span class="bg-slate-900 px-4 py-2 rounded-xl border border-slate-800">Unity 3D URP</span>
+                    <span class="bg-slate-900 px-4 py-2 rounded-xl border border-slate-800">Modelado Inorgánico Maya</span>
+                    <span class="bg-slate-900 px-4 py-2 rounded-xl border border-slate-800">Firebase Sync</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- RECONOCIMIENTOS & POSTULACIONES -->
+        <section id="respaldo" class="py-24 px-6 bg-slate-950/60 border-t border-slate-800">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-white font-display mb-4">Innovación Validada & Alianzas</h2>
+                    <p class="text-gray-400 text-base">GearMap ha sido presentado y respaldado en las principales convocatorias de innovación tecnológica y defensa del país.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass-card p-8 rounded-3xl">
+                        <span class="text-red-400 font-mono text-xs font-bold block mb-2">DESAFÍO FUTURO 2026</span>
+                        <h3 class="text-xl font-bold text-white font-display mb-3">Copec Avonni 2026</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Postulación en la categoría Bienestar y Calidad de Vida para escalamiento industrial y comunitario.</p>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-3xl">
+                        <span class="text-cyan-400 font-mono text-xs font-bold block mb-2">SANTANDER X AWARD</span>
+                        <h3 class="text-xl font-bold text-white font-display mb-3">Santander X Chile 2026</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Categoría University. Presentación de modelo de negocios B2B y sustentabilidad financiera RSE.</p>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-3xl">
+                        <span class="text-purple-400 font-mono text-xs font-bold block mb-2">CONVOCATORIA PITCH XR</span>
+                        <h3 class="text-xl font-bold text-white font-display mb-3">Mediamorfosis XR 2026</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Selección de tecnología inmersiva latinoamericana para entrenamiento en emergencias.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EQUIPO -->
+        <section id="equipo" class="py-24 px-6 max-w-7xl mx-auto text-center">
+            <div class="max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-white font-display mb-4">Equipo Fundador</h2>
+                <p class="text-gray-400 text-base">Combinando arquitectura de software en tiempo real con modelado 3D de alta precisión.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="glass-card p-8 rounded-3xl text-left flex items-center gap-6">
+                    <div class="w-16 h-16 rounded-2xl bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-2xl font-bold text-blue-400">IA</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white font-display">Ignacio Aguayo</h3>
+                        <span class="text-xs text-blue-400 font-mono block mb-2">Líder del Proyecto & Desarrollo Software 3D</span>
+                        <p class="text-gray-400 text-xs leading-relaxed">Arquitectura de software en Unity 3D, lógica C# e integración en tiempo real.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 rounded-3xl text-left flex items-center gap-6">
+                    <div class="w-16 h-16 rounded-2xl bg-purple-600/20 border border-purple-500/40 flex items-center justify-center text-2xl font-bold text-purple-400">CQ</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white font-display">Constanza Quilapi</h3>
+                        <span class="text-xs text-purple-400 font-mono block mb-2">Líder de Desarrollo 3D</span>
+                        <p class="text-gray-400 text-xs leading-relaxed">Especialista en modelado inorgánico, optimización de mallas y texturizado.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 border-t border-slate-800 py-12 px-6 text-center">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center space-x-3">
+                <img src="assets/logo.png" alt="Logo GearMap" class="w-8 h-8 object-contain">
+                <span class="font-bold text-white font-display">GearMap © 2026</span>
+            </div>
+            <p class="text-gray-500 text-xs font-mono">Plataforma Móvil 3D de Primera Respuesta para Bomberos y Brigadas Industriales.</p>
+            <a href="../" class="text-xs font-bold text-red-400 hover:underline">Volver al Portafolio ➔</a>
+        </div>
+    </footer>
+
+</body>
+</html>
