@@ -103,7 +103,7 @@
     let targetCameraZ = 16, targetCameraY = 0, targetCameraRotZ = 0;
 
     function initThreeDysonEngine() {
-        const canvas = document.getElementById('starfield-canvas') || document.getElementById('dyson-canvas');
+        const canvas = document.getElementById('dyson-canvas');
         if (!canvas || typeof THREE === 'undefined') return;
 
         // Renderer
