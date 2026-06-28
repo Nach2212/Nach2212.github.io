@@ -1,5 +1,6 @@
-/* ====== DYSON SWARM & STAR CODES: 3D WEBGL & SCROLLYTELLING ENGINE (PROPUESTA TEST) ======
- * Libraries used: Three.js, GSAP, ScrollTrigger
+/* ====== INTERPLANETARY 3D SCROLLYTELLING ENGINE (PROPUESTA AVANZADA) ======
+ * Developed for Ignacio Aguayo - Creative Technologist Portfolio
+ * Features: Solar System Travel, Procedural Planets with Rings, Orbital Satellites & Smooth Camera Flight
  */
 
 (function () {
@@ -96,129 +97,126 @@
         });
     }
 
-    // --- 2. THREE.JS DYSON SPHERE & STAR CORE ENGINE (ULTRA VIBRANT) ---
+    // --- 2. THREE.JS INTERPLANETARY ENGINE & PROCEDURAL PLANETS ---
     let scene, camera, renderer;
-    let starCore, innerDysonRing, outerDysonGroup, particleSystem;
+    let sunMesh, planet1Group, planet2Group, planet3Group, planet4Group;
+    let particleSystem;
     let mouseX = 0, mouseY = 0;
-    let targetCameraZ = 16, targetCameraY = 0, targetCameraRotZ = 0;
+    
+    // Coordenadas objetivo de cámara por scroll
+    let targetCamPos = { x: 0, y: 0, z: 18 };
+    let targetCamLook = { x: 0, y: 0, z: 0 };
 
-    function initThreeDysonEngine() {
+    function initInterplanetaryEngine() {
         const canvas = document.getElementById('dyson-canvas');
         if (!canvas || typeof THREE === 'undefined') return;
 
-        // Renderer
         renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // Scene & Camera
         scene = new THREE.Scene();
         camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.set(0, 0, 16);
+        camera.position.set(0, 0, 18);
 
-        // Lights
-        const ambientLight = new THREE.AmbientLight(0x1e1b4b, 2.5);
+        // Iluminación Cósmica
+        const ambientLight = new THREE.AmbientLight(0x0f172a, 2.0);
         scene.add(ambientLight);
 
-        const starPointLight = new THREE.PointLight(0x06b6d4, 8, 80);
-        starPointLight.position.set(0, 0, 0);
-        scene.add(starPointLight);
+        const sunLight = new THREE.PointLight(0x3b82f6, 10, 120);
+        sunLight.position.set(0, 0, 0);
+        scene.add(sunLight);
 
-        const secondaryLight = new THREE.PointLight(0xa855f7, 6, 60);
-        secondaryLight.position.set(8, 8, 8);
-        scene.add(secondaryLight);
+        const fillLight = new THREE.DirectionalLight(0x8b5cf6, 1.5);
+        fillLight.position.set(20, 20, 20);
+        scene.add(fillLight);
 
-        // A. STAR CORE (Grande y Brillante)
-        const starGeo = new THREE.SphereGeometry(3.5, 32, 32);
-        const starMat = new THREE.MeshBasicMaterial({
-            color: 0x06b6d4,
-            wireframe: true,
-            transparent: true,
-            opacity: 0.55
-        });
-        starCore = new THREE.Mesh(starGeo, starMat);
-        scene.add(starCore);
+        // A. SOL CENTRAL (Hero)
+        const sunGeo = new THREE.SphereGeometry(3.5, 32, 32);
+        const sunMat = new THREE.MeshBasicMaterial({ color: 0x3b82f6, wireframe: true, transparent: true, opacity: 0.7 });
+        sunMesh = new THREE.Mesh(sunGeo, sunMat);
+        scene.add(sunMesh);
 
-        // Interior Solid Glow Core
-        const innerGlowGeo = new THREE.SphereGeometry(2.8, 32, 32);
-        const innerGlowMat = new THREE.MeshBasicMaterial({
-            color: 0x3b82f6,
-            transparent: true,
-            opacity: 0.75
-        });
-        const innerGlow = new THREE.Mesh(innerGlowGeo, innerGlowMat);
-        starCore.add(innerGlow);
+        const sunCoreGeo = new THREE.SphereGeometry(2.8, 32, 32);
+        const sunCoreMat = new THREE.MeshBasicMaterial({ color: 0x60a5fa, transparent: true, opacity: 0.85 });
+        sunMesh.add(new THREE.Mesh(sunCoreGeo, sunCoreMat));
 
-        // B. INNER DYSON RING (Anillos Neón)
-        const ringGeo = new THREE.TorusGeometry(5.8, 0.12, 16, 100);
-        const ringMat = new THREE.MeshStandardMaterial({
-            color: 0xa855f7,
-            metalness: 0.9,
-            roughness: 0.1,
-            emissive: 0x06b6d4,
-            emissiveIntensity: 0.8,
-            wireframe: true
-        });
-        innerDysonRing = new THREE.Mesh(ringGeo, ringMat);
-        innerDysonRing.rotation.x = Math.PI / 3;
-        scene.add(innerDysonRing);
+        // B. PLANETA 1: "NEXO DE IDENTIDAD" (Sobre Mí) - Cyan Tech
+        planet1Group = new THREE.Group();
+        planet1Group.position.set(-14, 6, -18);
+        
+        const p1Geo = new THREE.SphereGeometry(3.2, 32, 32);
+        const p1Mat = new THREE.MeshStandardMaterial({ color: 0x06b6d4, metalness: 0.8, roughness: 0.2, wireframe: true });
+        const p1Mesh = new THREE.Mesh(p1Geo, p1Mat);
+        planet1Group.add(p1Mesh);
 
-        const ringGeo2 = new THREE.TorusGeometry(7.8, 0.08, 16, 100);
-        const ringMat2 = new THREE.MeshStandardMaterial({
-            color: 0xec4899,
-            wireframe: true,
-            transparent: true,
-            opacity: 0.6
-        });
-        const innerDysonRing2 = new THREE.Mesh(ringGeo2, ringMat2);
-        innerDysonRing2.rotation.y = Math.PI / 4;
-        scene.add(innerDysonRing2);
+        const p1AtmGeo = new THREE.TorusGeometry(4.8, 0.08, 16, 100);
+        const p1AtmMat = new THREE.MeshBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: 0.6 });
+        const p1Ring = new THREE.Mesh(p1AtmGeo, p1AtmMat);
+        p1Ring.rotation.x = Math.PI / 3;
+        planet1Group.add(p1Ring);
+        scene.add(planet1Group);
 
-        // C. OUTER DYSON SWARM (Paneles Colectores Grandes)
-        outerDysonGroup = new THREE.Group();
-        const panelGeo = new THREE.BoxGeometry(0.7, 1.2, 0.08);
-        const panelMat = new THREE.MeshStandardMaterial({
-            color: 0x0f172a,
-            metalness: 0.95,
-            roughness: 0.05,
-            emissive: 0x3b82f6,
-            emissiveIntensity: 0.7
-        });
+        // C. PLANETA 2: "NODO DE CREACIÓN" (Proyectos) - Gigante Gaseoso Púrpura con Anillos
+        planet2Group = new THREE.Group();
+        planet2Group.position.set(18, -10, -38);
 
-        const numPanels = 160;
-        for (let i = 0; i < numPanels; i++) {
-            const panel = new THREE.Mesh(panelGeo, panelMat);
-            const radius = 8.5 + Math.random() * 6.5;
-            const theta = Math.random() * Math.PI * 2;
-            const phi = (Math.random() - 0.5) * Math.PI;
+        const p2Geo = new THREE.SphereGeometry(5.0, 32, 32);
+        const p2Mat = new THREE.MeshStandardMaterial({ color: 0x8b5cf6, metalness: 0.5, roughness: 0.3 });
+        const p2Mesh = new THREE.Mesh(p2Geo, p2Mat);
+        planet2Group.add(p2Mesh);
 
-            panel.position.x = radius * Math.sin(theta) * Math.cos(phi);
-            panel.position.y = radius * Math.sin(theta) * Math.sin(phi);
-            panel.position.z = radius * Math.cos(theta);
+        // Anillos saturnianos grandes
+        const p2RingGeo = new THREE.TorusGeometry(8.5, 0.6, 2, 100);
+        const p2RingMat = new THREE.MeshBasicMaterial({ color: 0xec4899, wireframe: true, transparent: true, opacity: 0.7 });
+        const p2Ring = new THREE.Mesh(p2RingGeo, p2RingMat);
+        p2Ring.rotation.x = Math.PI / 2.4;
+        planet2Group.add(p2Ring);
 
-            panel.lookAt(0, 0, 0);
-            outerDysonGroup.add(panel);
+        // Satélites interactivos alrededor del gigante
+        const satGeo = new THREE.BoxGeometry(0.6, 0.6, 0.6);
+        const satMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, emissive: 0x0284c7 });
+        for (let i = 0; i < 6; i++) {
+            const sat = new THREE.Mesh(satGeo, satMat);
+            const angle = (i / 6) * Math.PI * 2;
+            sat.position.set(Math.cos(angle) * 11, Math.sin(angle) * 3, Math.sin(angle) * 11);
+            planet2Group.add(sat);
         }
-        scene.add(outerDysonGroup);
+        scene.add(planet2Group);
 
-        // D. COSMIC PARTICLES (Vórtice Gigante de Partículas)
-        const particleCount = 3000;
+        // D. PLANETA 3: "ÓRBITA SOCIAL" (Eventos) - Terrestre Dorado
+        planet3Group = new THREE.Group();
+        planet3Group.position.set(-16, -24, -58);
+
+        const p3Geo = new THREE.SphereGeometry(4.0, 32, 32);
+        const p3Mat = new THREE.MeshStandardMaterial({ color: 0xeab308, metalness: 0.7, roughness: 0.2, wireframe: true });
+        const p3Mesh = new THREE.Mesh(p3Geo, p3Mat);
+        planet3Group.add(p3Mesh);
+        scene.add(planet3Group);
+
+        // E. PLANETA 4: "FARO CÓSMICO" (Contacto) - Cristal Magenta
+        planet4Group = new THREE.Group();
+        planet4Group.position.set(0, -38, -78);
+
+        const p4Geo = new THREE.OctahedronGeometry(4.5, 2);
+        const p4Mat = new THREE.MeshStandardMaterial({ color: 0xf43f5e, metalness: 0.9, roughness: 0.1, wireframe: true });
+        const p4Mesh = new THREE.Mesh(p4Geo, p4Mat);
+        planet4Group.add(p4Mesh);
+        scene.add(planet4Group);
+
+        // F. VÓRTICE DE POLVO ESTELAR
+        const particleCount = 3500;
         const particleGeo = new THREE.BufferGeometry();
         const positions = new Float32Array(particleCount * 3);
         const colors = new Float32Array(particleCount * 3);
-
-        const colorOptions = [new THREE.Color(0x06b6d4), new THREE.Color(0x3b82f6), new THREE.Color(0xa855f7), new THREE.Color(0xec4899)];
+        const colorOpts = [new THREE.Color(0x3b82f6), new THREE.Color(0x8b5cf6), new THREE.Color(0x06b6d4), new THREE.Color(0xec4899)];
 
         for (let i = 0; i < particleCount; i++) {
-            const r = 4 + Math.random() * 32;
-            const theta = Math.random() * Math.PI * 2;
-            const phi = (Math.random() - 0.5) * Math.PI;
+            positions[i * 3] = (Math.random() - 0.5) * 120;
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 160;
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 120;
 
-            positions[i * 3] = r * Math.sin(theta) * Math.cos(phi);
-            positions[i * 3 + 1] = r * Math.sin(theta) * Math.sin(phi);
-            positions[i * 3 + 2] = r * Math.cos(theta);
-
-            const c = colorOptions[Math.floor(Math.random() * colorOptions.length)];
+            const c = colorOpts[Math.floor(Math.random() * colorOpts.length)];
             colors[i * 3] = c.r;
             colors[i * 3 + 1] = c.g;
             colors[i * 3 + 2] = c.b;
@@ -227,14 +225,7 @@
         particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
         particleGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
-        const particleMat = new THREE.PointsMaterial({
-            size: 0.28,
-            vertexColors: true,
-            transparent: true,
-            opacity: 0.85,
-            blending: THREE.AdditiveBlending
-        });
-
+        const particleMat = new THREE.PointsMaterial({ size: 0.25, vertexColors: true, transparent: true, opacity: 0.7, blending: THREE.AdditiveBlending });
         particleSystem = new THREE.Points(particleGeo, particleMat);
         scene.add(particleSystem);
 
@@ -250,37 +241,32 @@
 
     let clock = typeof THREE !== 'undefined' ? new THREE.Clock() : null;
 
-    function animateThreeDyson() {
-        requestAnimationFrame(animateThreeDyson);
+    function animateInterplanetary() {
+        requestAnimationFrame(animateInterplanetary);
         if (!renderer || !scene || !camera) return;
 
         const elapsedTime = clock ? clock.getElapsedTime() : 0;
 
-        if (starCore) {
-            starCore.rotation.y = elapsedTime * 0.25;
-            starCore.rotation.x = elapsedTime * 0.12;
-            const scale = 1 + Math.sin(elapsedTime * 1.8) * 0.08;
-            starCore.scale.set(scale, scale, scale);
+        // Rotaciones planetarias independientes
+        if (sunMesh) sunMesh.rotation.y = elapsedTime * 0.15;
+        if (planet1Group) planet1Group.rotation.y = elapsedTime * 0.25;
+        if (planet2Group) {
+            planet2Group.rotation.y = elapsedTime * 0.12;
+            planet2Group.rotation.z = Math.sin(elapsedTime * 0.5) * 0.05;
         }
-
-        if (innerDysonRing) {
-            innerDysonRing.rotation.z = elapsedTime * 0.35;
-            innerDysonRing.rotation.y = elapsedTime * 0.18;
+        if (planet3Group) planet3Group.rotation.y = elapsedTime * 0.2;
+        if (planet4Group) {
+            planet4Group.rotation.y = elapsedTime * 0.3;
+            planet4Group.rotation.x = elapsedTime * 0.15;
         }
+        if (particleSystem) particleSystem.rotation.y = elapsedTime * 0.02;
 
-        if (outerDysonGroup) {
-            outerDysonGroup.rotation.y = elapsedTime * 0.1;
-            outerDysonGroup.rotation.x = elapsedTime * 0.05;
-        }
+        // Vuelo suave de cámara entre planetas acoplado al scroll
+        camera.position.x += (targetCamPos.x + (mouseX * 0.8) - camera.position.x) * 0.04;
+        camera.position.y += (targetCamPos.y + (mouseY * 0.8) - camera.position.y) * 0.04;
+        camera.position.z += (targetCamPos.z - camera.position.z) * 0.04;
 
-        if (particleSystem) {
-            particleSystem.rotation.y = elapsedTime * 0.04;
-        }
-
-        camera.position.z += (targetCameraZ - camera.position.z) * 0.05;
-        camera.position.y += (targetCameraY + (mouseY * 0.6) - camera.position.y) * 0.05;
-        camera.position.x += ((mouseX * 0.6) - camera.position.x) * 0.05;
-        camera.rotation.z += (targetCameraRotZ - camera.rotation.z) * 0.05;
+        camera.lookAt(targetCamLook.x, targetCamLook.y, targetCamLook.z);
 
         renderer.render(scene, camera);
     }
@@ -292,24 +278,25 @@
         });
     }
 
-    // --- 3. GSAP SCROLLTRIGGER ORCHESTRATION ---
-    function initScrollTriggerOrchestration() {
+    // --- 3. GSAP SCROLLTRIGGER INTERPLANETARY TRAVEL ---
+    function initScrollTriggerTravel() {
         if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined' || reducedMotion) return;
 
         gsap.registerPlugin(ScrollTrigger);
 
-        const sections = [
-            { id: '#inicio', z: 16, y: 0, rotZ: 0 },
-            { id: '#sobre-mi', z: 12, y: 2, rotZ: 0.15 },
-            { id: '#proyectos', z: 9, y: -1.5, rotZ: -0.2 },
-            { id: '#mas-proyectos', z: 11, y: 1, rotZ: 0.1 },
-            { id: '#eventos', z: 13, y: -2, rotZ: 0.25 },
-            { id: '#servicios', z: 10, y: 1.5, rotZ: -0.15 },
-            { id: '#contacto', z: 7, y: 0, rotZ: 0 }
+        // Rutas de vuelo espacial entre planetas por sección
+        const planetaryWaypoints = [
+            { id: '#inicio', pos: { x: 0, y: 0, z: 18 }, look: { x: 0, y: 0, z: 0 } },
+            { id: '#sobre-mi', pos: { x: -7, y: 6, z: -8 }, look: { x: -14, y: 6, z: -18 } },
+            { id: '#proyectos', pos: { x: 8, y: -10, z: -24 }, look: { x: 18, y: -10, z: -38 } },
+            { id: '#mas-proyectos', pos: { x: 12, y: -8, z: -28 }, look: { x: 18, y: -10, z: -38 } },
+            { id: '#eventos', pos: { x: -8, y: -24, z: -46 }, look: { x: -16, y: -24, z: -58 } },
+            { id: '#servicios', pos: { x: -4, y: -30, z: -62 }, look: { x: 0, y: -38, z: -78 } },
+            { id: '#contacto', pos: { x: 0, y: -32, z: -64 }, look: { x: 0, y: -38, z: -78 } }
         ];
 
-        sections.forEach(function (sec) {
-            const el = document.querySelector(sec.id);
+        planetaryWaypoints.forEach(function (wp) {
+            const el = document.querySelector(wp.id);
             if (!el) return;
 
             ScrollTrigger.create({
@@ -317,25 +304,24 @@
                 start: 'top center',
                 end: 'bottom center',
                 onEnter: function () {
-                    targetCameraZ = sec.z;
-                    targetCameraY = sec.y;
-                    targetCameraRotZ = sec.rotZ;
+                    targetCamPos = wp.pos;
+                    targetCamLook = wp.look;
                 },
                 onEnterBack: function () {
-                    targetCameraZ = sec.z;
-                    targetCameraY = sec.y;
-                    targetCameraRotZ = sec.rotZ;
+                    targetCamPos = wp.pos;
+                    targetCamLook = wp.look;
                 }
             });
         });
 
         gsap.utils.toArray('.reveal').forEach(function (elem) {
             gsap.fromTo(elem, 
-                { opacity: 0, y: 50 },
+                { opacity: 0, y: 60, scale: 0.95 },
                 {
                     opacity: 1,
                     y: 0,
-                    duration: 1,
+                    scale: 1,
+                    duration: 1.2,
                     ease: 'power3.out',
                     scrollTrigger: {
                         trigger: elem,
@@ -359,7 +345,7 @@
         }
     }
 
-    // --- 4. SECUNDARY ANIMATIONS ---
+    // --- 4. SECUNDARY INTERACTIVE EFFECTS ---
     function initSecondaryEffects() {
         if (reducedMotion || !finePointer) return;
 
@@ -383,7 +369,7 @@
                 const r = card.getBoundingClientRect();
                 const x = (e.clientX - r.left) / r.width - 0.5;
                 const y = (e.clientY - r.top) / r.height - 0.5;
-                card.style.transform = 'perspective(900px) rotateY(' + (x * 10).toFixed(2) + 'deg) rotateX(' + (-y * 10).toFixed(2) + 'deg) translateY(-8px)';
+                card.style.transform = 'perspective(900px) rotateY(' + (x * 12).toFixed(2) + 'deg) rotateX(' + (-y * 12).toFixed(2) + 'deg) translateY(-8px)';
             });
             card.addEventListener('mouseleave', function () {
                 card.style.transform = '';
@@ -392,9 +378,9 @@
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        initThreeDysonEngine();
-        animateThreeDyson();
-        initScrollTriggerOrchestration();
+        initInterplanetaryEngine();
+        animateInterplanetary();
+        initScrollTriggerTravel();
         initSecondaryEffects();
     });
 
