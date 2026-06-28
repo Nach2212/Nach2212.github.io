@@ -1,5 +1,4 @@
-/* ====== DYSON SWARM & STAR CODES: 3D WEBGL & SCROLLYTELLING ENGINE ======
- * Developed for Ignacio Aguayo - Creative Technologist Portfolio
+/* ====== DYSON SWARM & STAR CODES: 3D WEBGL & SCROLLYTELLING ENGINE (PROPUESTA TEST) ======
  * Libraries used: Three.js, GSAP, ScrollTrigger
  */
 
@@ -97,11 +96,11 @@
         });
     }
 
-    // --- 2. THREE.JS DYSON SPHERE & STAR CORE ENGINE ---
+    // --- 2. THREE.JS DYSON SPHERE & STAR CORE ENGINE (ULTRA VIBRANT) ---
     let scene, camera, renderer;
     let starCore, innerDysonRing, outerDysonGroup, particleSystem;
     let mouseX = 0, mouseY = 0;
-    let targetCameraZ = 18, targetCameraY = 0, targetCameraRotZ = 0;
+    let targetCameraZ = 16, targetCameraY = 0, targetCameraRotZ = 0;
 
     function initThreeDysonEngine() {
         const canvas = document.getElementById('starfield-canvas') || document.getElementById('dyson-canvas');
@@ -115,81 +114,81 @@
         // Scene & Camera
         scene = new THREE.Scene();
         camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.set(0, 0, 18);
+        camera.position.set(0, 0, 16);
 
         // Lights
-        const ambientLight = new THREE.AmbientLight(0x0f172a, 1.5);
+        const ambientLight = new THREE.AmbientLight(0x1e1b4b, 2.5);
         scene.add(ambientLight);
 
-        const starPointLight = new THREE.PointLight(0x3b82f6, 4, 50);
+        const starPointLight = new THREE.PointLight(0x06b6d4, 8, 80);
         starPointLight.position.set(0, 0, 0);
         scene.add(starPointLight);
 
-        const secondaryLight = new THREE.PointLight(0x8b5cf6, 3, 40);
-        secondaryLight.position.set(5, 5, 5);
+        const secondaryLight = new THREE.PointLight(0xa855f7, 6, 60);
+        secondaryLight.position.set(8, 8, 8);
         scene.add(secondaryLight);
 
-        // A. STAR CORE (Estrella Central de Energía)
-        const starGeo = new THREE.SphereGeometry(2.5, 32, 32);
+        // A. STAR CORE (Grande y Brillante)
+        const starGeo = new THREE.SphereGeometry(3.5, 32, 32);
         const starMat = new THREE.MeshBasicMaterial({
-            color: 0x3b82f6,
+            color: 0x06b6d4,
             wireframe: true,
             transparent: true,
-            opacity: 0.35
+            opacity: 0.55
         });
         starCore = new THREE.Mesh(starGeo, starMat);
         scene.add(starCore);
 
         // Interior Solid Glow Core
-        const innerGlowGeo = new THREE.SphereGeometry(2.1, 32, 32);
+        const innerGlowGeo = new THREE.SphereGeometry(2.8, 32, 32);
         const innerGlowMat = new THREE.MeshBasicMaterial({
-            color: 0x60a5fa,
+            color: 0x3b82f6,
             transparent: true,
-            opacity: 0.6
+            opacity: 0.75
         });
         const innerGlow = new THREE.Mesh(innerGlowGeo, innerGlowMat);
         starCore.add(innerGlow);
 
-        // B. INNER DYSON RING (Anillo de Concentración de Energía)
-        const ringGeo = new THREE.TorusGeometry(4.2, 0.08, 16, 100);
+        // B. INNER DYSON RING (Anillos Neón)
+        const ringGeo = new THREE.TorusGeometry(5.8, 0.12, 16, 100);
         const ringMat = new THREE.MeshStandardMaterial({
-            color: 0x8b5cf6,
-            metalness: 0.8,
-            roughness: 0.2,
-            emissive: 0x3b82f6,
-            emissiveIntensity: 0.5,
+            color: 0xa855f7,
+            metalness: 0.9,
+            roughness: 0.1,
+            emissive: 0x06b6d4,
+            emissiveIntensity: 0.8,
             wireframe: true
         });
         innerDysonRing = new THREE.Mesh(ringGeo, ringMat);
         innerDysonRing.rotation.x = Math.PI / 3;
         scene.add(innerDysonRing);
 
-        const ringGeo2 = new THREE.TorusGeometry(5.8, 0.04, 16, 100);
+        const ringGeo2 = new THREE.TorusGeometry(7.8, 0.08, 16, 100);
         const ringMat2 = new THREE.MeshStandardMaterial({
             color: 0xec4899,
             wireframe: true,
             transparent: true,
-            opacity: 0.4
+            opacity: 0.6
         });
         const innerDysonRing2 = new THREE.Mesh(ringGeo2, ringMat2);
         innerDysonRing2.rotation.y = Math.PI / 4;
         scene.add(innerDysonRing2);
 
-        // C. OUTER DYSON SWARM (Enjambre de Colectores Solares)
+        // C. OUTER DYSON SWARM (Paneles Colectores Grandes)
         outerDysonGroup = new THREE.Group();
-        const panelGeo = new THREE.BoxGeometry(0.35, 0.6, 0.04);
+        const panelGeo = new THREE.BoxGeometry(0.7, 1.2, 0.08);
         const panelMat = new THREE.MeshStandardMaterial({
-            color: 0x1e293b,
-            metalness: 0.9,
-            roughness: 0.1,
-            emissive: 0x2563eb,
-            emissiveIntensity: 0.4
+            color: 0x0f172a,
+            metalness: 0.95,
+            roughness: 0.05,
+            emissive: 0x3b82f6,
+            emissiveIntensity: 0.7
         });
 
-        const numPanels = 140;
+        const numPanels = 160;
         for (let i = 0; i < numPanels; i++) {
             const panel = new THREE.Mesh(panelGeo, panelMat);
-            const radius = 6.5 + Math.random() * 4.5;
+            const radius = 8.5 + Math.random() * 6.5;
             const theta = Math.random() * Math.PI * 2;
             const phi = (Math.random() - 0.5) * Math.PI;
 
@@ -202,16 +201,16 @@
         }
         scene.add(outerDysonGroup);
 
-        // D. COSMIC PARTICLES (Vórtice Estelar)
-        const particleCount = 2200;
+        // D. COSMIC PARTICLES (Vórtice Gigante de Partículas)
+        const particleCount = 3000;
         const particleGeo = new THREE.BufferGeometry();
         const positions = new Float32Array(particleCount * 3);
         const colors = new Float32Array(particleCount * 3);
 
-        const colorOptions = [new THREE.Color(0x3b82f6), new THREE.Color(0x8b5cf6), new THREE.Color(0xec4899), new THREE.Color(0x60a5fa)];
+        const colorOptions = [new THREE.Color(0x06b6d4), new THREE.Color(0x3b82f6), new THREE.Color(0xa855f7), new THREE.Color(0xec4899)];
 
         for (let i = 0; i < particleCount; i++) {
-            const r = 3 + Math.random() * 25;
+            const r = 4 + Math.random() * 32;
             const theta = Math.random() * Math.PI * 2;
             const phi = (Math.random() - 0.5) * Math.PI;
 
@@ -229,17 +228,16 @@
         particleGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
         const particleMat = new THREE.PointsMaterial({
-            size: 0.12,
+            size: 0.28,
             vertexColors: true,
             transparent: true,
-            opacity: 0.75,
+            opacity: 0.85,
             blending: THREE.AdditiveBlending
         });
 
         particleSystem = new THREE.Points(particleGeo, particleMat);
         scene.add(particleSystem);
 
-        // Resize handler
         window.addEventListener('resize', onWindowResize, false);
     }
 
@@ -250,7 +248,6 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
-    // Interactive Animation Loop
     let clock = typeof THREE !== 'undefined' ? new THREE.Clock() : null;
 
     function animateThreeDyson() {
@@ -259,38 +256,35 @@
 
         const elapsedTime = clock ? clock.getElapsedTime() : 0;
 
-        // Rotaciones del Enjambre y la Estrella
         if (starCore) {
-            starCore.rotation.y = elapsedTime * 0.2;
-            starCore.rotation.x = elapsedTime * 0.1;
-            const scale = 1 + Math.sin(elapsedTime * 1.5) * 0.05;
+            starCore.rotation.y = elapsedTime * 0.25;
+            starCore.rotation.x = elapsedTime * 0.12;
+            const scale = 1 + Math.sin(elapsedTime * 1.8) * 0.08;
             starCore.scale.set(scale, scale, scale);
         }
 
         if (innerDysonRing) {
-            innerDysonRing.rotation.z = elapsedTime * 0.3;
-            innerDysonRing.rotation.y = elapsedTime * 0.15;
+            innerDysonRing.rotation.z = elapsedTime * 0.35;
+            innerDysonRing.rotation.y = elapsedTime * 0.18;
         }
 
         if (outerDysonGroup) {
-            outerDysonGroup.rotation.y = elapsedTime * 0.08;
-            outerDysonGroup.rotation.x = elapsedTime * 0.04;
+            outerDysonGroup.rotation.y = elapsedTime * 0.1;
+            outerDysonGroup.rotation.x = elapsedTime * 0.05;
         }
 
         if (particleSystem) {
-            particleSystem.rotation.y = elapsedTime * 0.03;
+            particleSystem.rotation.y = elapsedTime * 0.04;
         }
 
-        // Camara e interactividad suave por mouse & scroll
         camera.position.z += (targetCameraZ - camera.position.z) * 0.05;
-        camera.position.y += (targetCameraY + (mouseY * 0.5) - camera.position.y) * 0.05;
-        camera.position.x += ((mouseX * 0.5) - camera.position.x) * 0.05;
+        camera.position.y += (targetCameraY + (mouseY * 0.6) - camera.position.y) * 0.05;
+        camera.position.x += ((mouseX * 0.6) - camera.position.x) * 0.05;
         camera.rotation.z += (targetCameraRotZ - camera.rotation.z) * 0.05;
 
         renderer.render(scene, camera);
     }
 
-    // Mouse Move listener for 3D parallax
     if (finePointer) {
         window.addEventListener('mousemove', function (e) {
             mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
@@ -304,15 +298,14 @@
 
         gsap.registerPlugin(ScrollTrigger);
 
-        // A. Transformación del Canvas 3D por Secciones
         const sections = [
-            { id: '#inicio', z: 18, y: 0, rotZ: 0 },
-            { id: '#sobre-mi', z: 14, y: 1.5, rotZ: 0.1 },
-            { id: '#proyectos', z: 11, y: -1, rotZ: -0.15 },
-            { id: '#mas-proyectos', z: 13, y: 0.5, rotZ: 0.05 },
-            { id: '#eventos', z: 15, y: -1.5, rotZ: 0.2 },
-            { id: '#servicios', z: 12, y: 1, rotZ: -0.1 },
-            { id: '#contacto', z: 9, y: 0, rotZ: 0 }
+            { id: '#inicio', z: 16, y: 0, rotZ: 0 },
+            { id: '#sobre-mi', z: 12, y: 2, rotZ: 0.15 },
+            { id: '#proyectos', z: 9, y: -1.5, rotZ: -0.2 },
+            { id: '#mas-proyectos', z: 11, y: 1, rotZ: 0.1 },
+            { id: '#eventos', z: 13, y: -2, rotZ: 0.25 },
+            { id: '#servicios', z: 10, y: 1.5, rotZ: -0.15 },
+            { id: '#contacto', z: 7, y: 0, rotZ: 0 }
         ];
 
         sections.forEach(function (sec) {
@@ -336,10 +329,9 @@
             });
         });
 
-        // B. Animaciones de Entrada Stagger por Sección
         gsap.utils.toArray('.reveal').forEach(function (elem) {
             gsap.fromTo(elem, 
-                { opacity: 0, y: 40 },
+                { opacity: 0, y: 50 },
                 {
                     opacity: 1,
                     y: 0,
@@ -354,7 +346,6 @@
             );
         });
 
-        // C. Animación especial de Hero Content
         const heroWrapper = document.getElementById('hero-content-wrapper');
         if (heroWrapper) {
             gsap.to(heroWrapper, {
@@ -368,11 +359,10 @@
         }
     }
 
-    // --- 4. SECUNDARY ANIMATIONS: CURSOR GLOW & TELEMETRY ---
+    // --- 4. SECUNDARY ANIMATIONS ---
     function initSecondaryEffects() {
         if (reducedMotion || !finePointer) return;
 
-        // Aura de Cursor
         const glow = document.createElement('div');
         glow.id = 'cursor-glow';
         document.body.appendChild(glow);
@@ -387,35 +377,20 @@
             requestAnimationFrame(loopGlow);
         })();
 
-        // Tilt 3D en tarjetas de proyecto
         document.querySelectorAll('[data-modal-trigger]').forEach(function (card) {
             card.classList.add('tilt-card');
             card.addEventListener('mousemove', function (e) {
                 const r = card.getBoundingClientRect();
                 const x = (e.clientX - r.left) / r.width - 0.5;
                 const y = (e.clientY - r.top) / r.height - 0.5;
-                card.style.transform = 'perspective(900px) rotateY(' + (x * 8).toFixed(2) + 'deg) rotateX(' + (-y * 8).toFixed(2) + 'deg) translateY(-6px)';
+                card.style.transform = 'perspective(900px) rotateY(' + (x * 10).toFixed(2) + 'deg) rotateX(' + (-y * 10).toFixed(2) + 'deg) translateY(-8px)';
             });
             card.addEventListener('mouseleave', function () {
                 card.style.transform = '';
             });
         });
-
-        // Botones Magnéticos
-        document.querySelectorAll('#inicio a, header a.bg-blue-600').forEach(function (btn) {
-            btn.addEventListener('mousemove', function (e) {
-                const r = btn.getBoundingClientRect();
-                const x = e.clientX - r.left - r.width / 2;
-                const y = e.clientY - r.top - r.height / 2;
-                btn.style.transform = 'translate(' + (x * 0.2).toFixed(1) + 'px, ' + (y * 0.35).toFixed(1) + 'px)';
-            });
-            btn.addEventListener('mouseleave', function () {
-                btn.style.transform = '';
-            });
-        });
     }
 
-    // DOM Ready Initialization
     document.addEventListener('DOMContentLoaded', function () {
         initThreeDysonEngine();
         animateThreeDyson();
