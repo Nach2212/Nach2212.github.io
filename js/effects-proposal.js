@@ -1,6 +1,6 @@
-/* ====== INTERPLANETARY 3D SCROLLYTELLING ENGINE (PROPUESTA AVANZADA) ======
+/* ====== AWWWARDS-LEVEL 3D & GSAP SCROLLYTELLING ENGINE (PROPUESTA RESTRUCTURADA 3.0) ======
+ * Powered by: Three.js, GSAP 3, ScrollTrigger, SplitType, Lenis Smooth Scroll
  * Developed for Ignacio Aguayo - Creative Technologist Portfolio
- * Features: Solar System Travel, Procedural Planets with Rings, Orbital Satellites & Smooth Camera Flight
  */
 
 (function () {
@@ -9,7 +9,36 @@
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const finePointer = window.matchMedia('(pointer: fine)').matches;
 
-    // --- 0. LIGHTBOX GALERÍA DE EVENTOS ---
+    // --- 0. LENIS SMOOTH SCROLL ENGINE ---
+    let lenis;
+    function initLenisSmoothScroll() {
+        if (typeof Lenis === 'undefined' || reducedMotion) return;
+        
+        lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,
+            wheelMultiplier: 1.0,
+            touchMultiplier: 1.5
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Sincronización con GSAP ScrollTrigger
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            lenis.on('scroll', ScrollTrigger.update);
+            gsap.ticker.add((time) => {
+                lenis.raf(time * 1000);
+            });
+            gsap.ticker.lagSmoothing(0);
+        }
+    }
+
+    // --- 1. LIGHTBOX GALERÍA DE EVENTOS ---
     (function initLightbox() {
         const lb = document.getElementById('lightbox');
         if (!lb) return;
@@ -42,7 +71,7 @@
             render();
         }
 
-        document.querySelectorAll('#eventos .grid > div').forEach(function (card) {
+        document.querySelectorAll('#eventos .grid > div, .event-card').forEach(function (card) {
             const imgs = Array.from(card.querySelectorAll('img'));
             const srcs = imgs.map(function (i) { return i.getAttribute('src'); });
             imgs.forEach(function (img, i) {
@@ -66,44 +95,12 @@
         });
     })();
 
-    // --- 1. BARRA DE PROGRESO & SCROLLSPY ---
-    const progressBar = document.createElement('div');
-    progressBar.id = 'scroll-progress';
-    document.body.appendChild(progressBar);
-
-    function updateProgressBar() {
-        const h = document.documentElement;
-        const max = h.scrollHeight - h.clientHeight;
-        progressBar.style.transform = 'scaleX(' + (max > 0 ? h.scrollTop / max : 0) + ')';
-    }
-    window.addEventListener('scroll', updateProgressBar, { passive: true });
-    updateProgressBar();
-
-    const spyMap = { 'sobre-mi': '#sobre-mi', 'proyectos': '#proyectos', 'mas-proyectos': '#proyectos', 'eventos': '#eventos', 'servicios': '#servicios' };
-    const navLinks = document.querySelectorAll('header .nav-link[href^="#"]');
-    if ('IntersectionObserver' in window && navLinks.length) {
-        const spy = new IntersectionObserver(function (entries) {
-            entries.forEach(function (e) {
-                if (!e.isIntersecting) return;
-                const target = spyMap[e.target.id];
-                navLinks.forEach(function (l) {
-                    l.classList.toggle('active', l.getAttribute('href') === target);
-                });
-            });
-        }, { rootMargin: '-35% 0px -55% 0px' });
-        Object.keys(spyMap).forEach(function (id) {
-            const el = document.getElementById(id);
-            if (el) spy.observe(el);
-        });
-    }
-
-    // --- 2. THREE.JS INTERPLANETARY ENGINE & PROCEDURAL PLANETS ---
+    // --- 2. THREE.JS INTERPLANETARY ENGINE ---
     let scene, camera, renderer;
     let sunMesh, planet1Group, planet2Group, planet3Group, planet4Group;
     let particleSystem;
     let mouseX = 0, mouseY = 0;
     
-    // Coordenadas objetivo de cámara por scroll
     let targetCamPos = { x: 0, y: 0, z: 18 };
     let targetCamLook = { x: 0, y: 0, z: 0 };
 
@@ -119,102 +116,94 @@
         camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.set(0, 0, 18);
 
-        // Iluminación Cósmica
-        const ambientLight = new THREE.AmbientLight(0x0f172a, 2.0);
+        const ambientLight = new THREE.AmbientLight(0x0f172a, 2.5);
         scene.add(ambientLight);
 
-        const sunLight = new THREE.PointLight(0x3b82f6, 10, 120);
+        const sunLight = new THREE.PointLight(0x06b6d4, 12, 140);
         sunLight.position.set(0, 0, 0);
         scene.add(sunLight);
 
-        const fillLight = new THREE.DirectionalLight(0x8b5cf6, 1.5);
-        fillLight.position.set(20, 20, 20);
+        const fillLight = new THREE.DirectionalLight(0xa855f7, 2.0);
+        fillLight.position.set(25, 25, 25);
         scene.add(fillLight);
 
         // A. SOL CENTRAL (Hero)
-        const sunGeo = new THREE.SphereGeometry(3.5, 32, 32);
-        const sunMat = new THREE.MeshBasicMaterial({ color: 0x3b82f6, wireframe: true, transparent: true, opacity: 0.7 });
+        const sunGeo = new THREE.SphereGeometry(4.0, 32, 32);
+        const sunMat = new THREE.MeshBasicMaterial({ color: 0x06b6d4, wireframe: true, transparent: true, opacity: 0.75 });
         sunMesh = new THREE.Mesh(sunGeo, sunMat);
         scene.add(sunMesh);
 
-        const sunCoreGeo = new THREE.SphereGeometry(2.8, 32, 32);
-        const sunCoreMat = new THREE.MeshBasicMaterial({ color: 0x60a5fa, transparent: true, opacity: 0.85 });
+        const sunCoreGeo = new THREE.SphereGeometry(3.2, 32, 32);
+        const sunCoreMat = new THREE.MeshBasicMaterial({ color: 0x3b82f6, transparent: true, opacity: 0.85 });
         sunMesh.add(new THREE.Mesh(sunCoreGeo, sunCoreMat));
 
-        // B. PLANETA 1: "NEXO DE IDENTIDAD" (Sobre Mí) - Cyan Tech
+        // B. PLANETA 1: NEXO DE IDENTIDAD (Sobre Mí)
         planet1Group = new THREE.Group();
-        planet1Group.position.set(-14, 6, -18);
+        planet1Group.position.set(-15, 7, -20);
         
-        const p1Geo = new THREE.SphereGeometry(3.2, 32, 32);
-        const p1Mat = new THREE.MeshStandardMaterial({ color: 0x06b6d4, metalness: 0.8, roughness: 0.2, wireframe: true });
-        const p1Mesh = new THREE.Mesh(p1Geo, p1Mat);
-        planet1Group.add(p1Mesh);
+        const p1Geo = new THREE.SphereGeometry(3.6, 32, 32);
+        const p1Mat = new THREE.MeshStandardMaterial({ color: 0x06b6d4, metalness: 0.85, roughness: 0.15, wireframe: true });
+        planet1Group.add(new THREE.Mesh(p1Geo, p1Mat));
 
-        const p1AtmGeo = new THREE.TorusGeometry(4.8, 0.08, 16, 100);
-        const p1AtmMat = new THREE.MeshBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: 0.6 });
-        const p1Ring = new THREE.Mesh(p1AtmGeo, p1AtmMat);
+        const p1RingGeo = new THREE.TorusGeometry(5.4, 0.1, 16, 100);
+        const p1RingMat = new THREE.MeshBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: 0.7 });
+        const p1Ring = new THREE.Mesh(p1RingGeo, p1RingMat);
         p1Ring.rotation.x = Math.PI / 3;
         planet1Group.add(p1Ring);
         scene.add(planet1Group);
 
-        // C. PLANETA 2: "NODO DE CREACIÓN" (Proyectos) - Gigante Gaseoso Púrpura con Anillos
+        // C. PLANETA 2: NODO DE CREACIÓN (Proyectos - Gigante Gaseoso con Anillos)
         planet2Group = new THREE.Group();
-        planet2Group.position.set(18, -10, -38);
+        planet2Group.position.set(20, -12, -42);
 
-        const p2Geo = new THREE.SphereGeometry(5.0, 32, 32);
-        const p2Mat = new THREE.MeshStandardMaterial({ color: 0x8b5cf6, metalness: 0.5, roughness: 0.3 });
-        const p2Mesh = new THREE.Mesh(p2Geo, p2Mat);
-        planet2Group.add(p2Mesh);
+        const p2Geo = new THREE.SphereGeometry(5.8, 32, 32);
+        const p2Mat = new THREE.MeshStandardMaterial({ color: 0x8b5cf6, metalness: 0.6, roughness: 0.2 });
+        planet2Group.add(new THREE.Mesh(p2Geo, p2Mat));
 
-        // Anillos saturnianos grandes
-        const p2RingGeo = new THREE.TorusGeometry(8.5, 0.6, 2, 100);
-        const p2RingMat = new THREE.MeshBasicMaterial({ color: 0xec4899, wireframe: true, transparent: true, opacity: 0.7 });
+        const p2RingGeo = new THREE.TorusGeometry(9.8, 0.8, 2, 100);
+        const p2RingMat = new THREE.MeshBasicMaterial({ color: 0xec4899, wireframe: true, transparent: true, opacity: 0.8 });
         const p2Ring = new THREE.Mesh(p2RingGeo, p2RingMat);
-        p2Ring.rotation.x = Math.PI / 2.4;
+        p2Ring.rotation.x = Math.PI / 2.3;
         planet2Group.add(p2Ring);
 
-        // Satélites interactivos alrededor del gigante
-        const satGeo = new THREE.BoxGeometry(0.6, 0.6, 0.6);
+        // Satélites interactivos
+        const satGeo = new THREE.BoxGeometry(0.8, 0.8, 0.8);
         const satMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, emissive: 0x0284c7 });
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 8; i++) {
             const sat = new THREE.Mesh(satGeo, satMat);
-            const angle = (i / 6) * Math.PI * 2;
-            sat.position.set(Math.cos(angle) * 11, Math.sin(angle) * 3, Math.sin(angle) * 11);
+            const angle = (i / 8) * Math.PI * 2;
+            sat.position.set(Math.cos(angle) * 13, Math.sin(angle) * 4, Math.sin(angle) * 13);
             planet2Group.add(sat);
         }
         scene.add(planet2Group);
 
-        // D. PLANETA 3: "ÓRBITA SOCIAL" (Eventos) - Terrestre Dorado
+        // D. PLANETA 3: ÓRBITA SOCIAL (Eventos)
         planet3Group = new THREE.Group();
-        planet3Group.position.set(-16, -24, -58);
-
-        const p3Geo = new THREE.SphereGeometry(4.0, 32, 32);
-        const p3Mat = new THREE.MeshStandardMaterial({ color: 0xeab308, metalness: 0.7, roughness: 0.2, wireframe: true });
-        const p3Mesh = new THREE.Mesh(p3Geo, p3Mat);
-        planet3Group.add(p3Mesh);
+        planet3Group.position.set(-18, -28, -64);
+        const p3Geo = new THREE.SphereGeometry(4.5, 32, 32);
+        const p3Mat = new THREE.MeshStandardMaterial({ color: 0xeab308, metalness: 0.75, roughness: 0.25, wireframe: true });
+        planet3Group.add(new THREE.Mesh(p3Geo, p3Mat));
         scene.add(planet3Group);
 
-        // E. PLANETA 4: "FARO CÓSMICO" (Contacto) - Cristal Magenta
+        // E. PLANETA 4: FARO CÓSMICO (Contacto)
         planet4Group = new THREE.Group();
-        planet4Group.position.set(0, -38, -78);
-
-        const p4Geo = new THREE.OctahedronGeometry(4.5, 2);
-        const p4Mat = new THREE.MeshStandardMaterial({ color: 0xf43f5e, metalness: 0.9, roughness: 0.1, wireframe: true });
-        const p4Mesh = new THREE.Mesh(p4Geo, p4Mat);
-        planet4Group.add(p4Mesh);
+        planet4Group.position.set(0, -42, -85);
+        const p4Geo = new THREE.OctahedronGeometry(5.0, 2);
+        const p4Mat = new THREE.MeshStandardMaterial({ color: 0xf43f5e, metalness: 0.95, roughness: 0.05, wireframe: true });
+        planet4Group.add(new THREE.Mesh(p4Geo, p4Mat));
         scene.add(planet4Group);
 
         // F. VÓRTICE DE POLVO ESTELAR
-        const particleCount = 3500;
+        const particleCount = 4000;
         const particleGeo = new THREE.BufferGeometry();
         const positions = new Float32Array(particleCount * 3);
         const colors = new Float32Array(particleCount * 3);
-        const colorOpts = [new THREE.Color(0x3b82f6), new THREE.Color(0x8b5cf6), new THREE.Color(0x06b6d4), new THREE.Color(0xec4899)];
+        const colorOpts = [new THREE.Color(0x06b6d4), new THREE.Color(0x3b82f6), new THREE.Color(0xa855f7), new THREE.Color(0xec4899)];
 
         for (let i = 0; i < particleCount; i++) {
-            positions[i * 3] = (Math.random() - 0.5) * 120;
-            positions[i * 3 + 1] = (Math.random() - 0.5) * 160;
-            positions[i * 3 + 2] = (Math.random() - 0.5) * 120;
+            positions[i * 3] = (Math.random() - 0.5) * 140;
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 180;
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 140;
 
             const c = colorOpts[Math.floor(Math.random() * colorOpts.length)];
             colors[i * 3] = c.r;
@@ -225,7 +214,7 @@
         particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
         particleGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
-        const particleMat = new THREE.PointsMaterial({ size: 0.25, vertexColors: true, transparent: true, opacity: 0.7, blending: THREE.AdditiveBlending });
+        const particleMat = new THREE.PointsMaterial({ size: 0.28, vertexColors: true, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending });
         particleSystem = new THREE.Points(particleGeo, particleMat);
         scene.add(particleSystem);
 
@@ -247,24 +236,16 @@
 
         const elapsedTime = clock ? clock.getElapsedTime() : 0;
 
-        // Rotaciones planetarias independientes
-        if (sunMesh) sunMesh.rotation.y = elapsedTime * 0.15;
+        if (sunMesh) sunMesh.rotation.y = elapsedTime * 0.2;
         if (planet1Group) planet1Group.rotation.y = elapsedTime * 0.25;
-        if (planet2Group) {
-            planet2Group.rotation.y = elapsedTime * 0.12;
-            planet2Group.rotation.z = Math.sin(elapsedTime * 0.5) * 0.05;
-        }
-        if (planet3Group) planet3Group.rotation.y = elapsedTime * 0.2;
-        if (planet4Group) {
-            planet4Group.rotation.y = elapsedTime * 0.3;
-            planet4Group.rotation.x = elapsedTime * 0.15;
-        }
-        if (particleSystem) particleSystem.rotation.y = elapsedTime * 0.02;
+        if (planet2Group) planet2Group.rotation.y = elapsedTime * 0.15;
+        if (planet3Group) planet3Group.rotation.y = elapsedTime * 0.22;
+        if (planet4Group) planet4Group.rotation.y = elapsedTime * 0.35;
+        if (particleSystem) particleSystem.rotation.y = elapsedTime * 0.025;
 
-        // Vuelo suave de cámara entre planetas acoplado al scroll
-        camera.position.x += (targetCamPos.x + (mouseX * 0.8) - camera.position.x) * 0.04;
-        camera.position.y += (targetCamPos.y + (mouseY * 0.8) - camera.position.y) * 0.04;
-        camera.position.z += (targetCamPos.z - camera.position.z) * 0.04;
+        camera.position.x += (targetCamPos.x + (mouseX * 0.8) - camera.position.x) * 0.045;
+        camera.position.y += (targetCamPos.y + (mouseY * 0.8) - camera.position.y) * 0.045;
+        camera.position.z += (targetCamPos.z - camera.position.z) * 0.045;
 
         camera.lookAt(targetCamLook.x, targetCamLook.y, targetCamLook.z);
 
@@ -278,21 +259,20 @@
         });
     }
 
-    // --- 3. GSAP SCROLLTRIGGER INTERPLANETARY TRAVEL ---
-    function initScrollTriggerTravel() {
+    // --- 3. ADVANCED GSAP SCROLLTRIGGER & PINNED HORIZONTAL SCROLL ---
+    function initAdvancedGSAPOrchestration() {
         if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined' || reducedMotion) return;
 
         gsap.registerPlugin(ScrollTrigger);
 
-        // Rutas de vuelo espacial entre planetas por sección
+        // Waypoints de vuelo tridimensional
         const planetaryWaypoints = [
             { id: '#inicio', pos: { x: 0, y: 0, z: 18 }, look: { x: 0, y: 0, z: 0 } },
-            { id: '#sobre-mi', pos: { x: -7, y: 6, z: -8 }, look: { x: -14, y: 6, z: -18 } },
-            { id: '#proyectos', pos: { x: 8, y: -10, z: -24 }, look: { x: 18, y: -10, z: -38 } },
-            { id: '#mas-proyectos', pos: { x: 12, y: -8, z: -28 }, look: { x: 18, y: -10, z: -38 } },
-            { id: '#eventos', pos: { x: -8, y: -24, z: -46 }, look: { x: -16, y: -24, z: -58 } },
-            { id: '#servicios', pos: { x: -4, y: -30, z: -62 }, look: { x: 0, y: -38, z: -78 } },
-            { id: '#contacto', pos: { x: 0, y: -32, z: -64 }, look: { x: 0, y: -38, z: -78 } }
+            { id: '#sobre-mi', pos: { x: -7, y: 7, z: -10 }, look: { x: -15, y: 7, z: -20 } },
+            { id: '#proyectos-container', pos: { x: 9, y: -12, z: -26 }, look: { x: 20, y: -12, z: -42 } },
+            { id: '#eventos', pos: { x: -8, y: -28, z: -50 }, look: { x: -18, y: -28, z: -64 } },
+            { id: '#servicios', pos: { x: -4, y: -34, z: -68 }, look: { x: 0, y: -42, z: -85 } },
+            { id: '#contacto', pos: { x: 0, y: -36, z: -70 }, look: { x: 0, y: -42, z: -85 } }
         ];
 
         planetaryWaypoints.forEach(function (wp) {
@@ -314,38 +294,72 @@
             });
         });
 
+        // A. PINNED HORIZONTAL SCROLL EN SECCIÓN PROYECTOS
+        const projectsTrack = document.getElementById('projects-horizontal-track');
+        const projectsContainer = document.getElementById('proyectos-container');
+        if (projectsTrack && projectsContainer) {
+            const getScrollAmount = () => -(projectsTrack.scrollWidth - window.innerWidth + 120);
+            
+            gsap.to(projectsTrack, {
+                x: getScrollAmount,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: projectsContainer,
+                    start: 'top top',
+                    end: () => '+=' + (projectsTrack.scrollWidth - window.innerWidth + 400),
+                    pin: true,
+                    scrub: 1,
+                    invalidateOnRefresh: true
+                }
+            });
+        }
+
+        // B. SPLIT-TYPE TEXT REVEALS (Carácter por carácter)
+        if (typeof SplitType !== 'undefined') {
+            const splitTitles = document.querySelectorAll('.split-reveal');
+            splitTitles.forEach(function (title) {
+                const text = new SplitType(title, { types: 'chars, words' });
+                gsap.fromTo(text.chars,
+                    { opacity: 0, y: 30, rotateX: -90 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        rotateX: 0,
+                        duration: 0.8,
+                        stagger: 0.02,
+                        ease: 'back.out(1.7)',
+                        scrollTrigger: {
+                            trigger: title,
+                            start: 'top 85%',
+                            toggleActions: 'play none none reverse'
+                        }
+                    }
+                );
+            });
+        }
+
+        // C. Revelado suave de elementos de tarjeta
         gsap.utils.toArray('.reveal').forEach(function (elem) {
+            if (elem.classList.contains('split-reveal')) return;
             gsap.fromTo(elem, 
-                { opacity: 0, y: 60, scale: 0.95 },
+                { opacity: 0, y: 50, scale: 0.96 },
                 {
                     opacity: 1,
                     y: 0,
                     scale: 1,
-                    duration: 1.2,
+                    duration: 1.1,
                     ease: 'power3.out',
                     scrollTrigger: {
                         trigger: elem,
-                        start: 'top 85%',
+                        start: 'top 88%',
                         toggleActions: 'play none none reverse'
                     }
                 }
             );
         });
-
-        const heroWrapper = document.getElementById('hero-content-wrapper');
-        if (heroWrapper) {
-            gsap.to(heroWrapper, {
-                opacity: 1,
-                filter: 'blur(0px)',
-                scale: 1,
-                duration: 1.2,
-                ease: 'power2.out',
-                delay: 0.2
-            });
-        }
     }
 
-    // --- 4. SECUNDARY INTERACTIVE EFFECTS ---
+    // --- 4. MICRO-INTERACCIONES SECUNDARIAS ---
     function initSecondaryEffects() {
         if (reducedMotion || !finePointer) return;
 
@@ -363,13 +377,12 @@
             requestAnimationFrame(loopGlow);
         })();
 
-        document.querySelectorAll('[data-modal-trigger]').forEach(function (card) {
-            card.classList.add('tilt-card');
+        document.querySelectorAll('.tilt-card, [data-modal-trigger]').forEach(function (card) {
             card.addEventListener('mousemove', function (e) {
                 const r = card.getBoundingClientRect();
                 const x = (e.clientX - r.left) / r.width - 0.5;
                 const y = (e.clientY - r.top) / r.height - 0.5;
-                card.style.transform = 'perspective(900px) rotateY(' + (x * 12).toFixed(2) + 'deg) rotateX(' + (-y * 12).toFixed(2) + 'deg) translateY(-8px)';
+                card.style.transform = 'perspective(1000px) rotateY(' + (x * 14).toFixed(2) + 'deg) rotateX(' + (-y * 14).toFixed(2) + 'deg) translateY(-8px) scale(1.02)';
             });
             card.addEventListener('mouseleave', function () {
                 card.style.transform = '';
@@ -378,9 +391,10 @@
     }
 
     document.addEventListener('DOMContentLoaded', function () {
+        initLenisSmoothScroll();
         initInterplanetaryEngine();
         animateInterplanetary();
-        initScrollTriggerTravel();
+        initAdvancedGSAPOrchestration();
         initSecondaryEffects();
     });
 
