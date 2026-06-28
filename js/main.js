@@ -566,6 +566,19 @@
                 });
             }
 
+            const docWrapper = document.getElementById('modal-doc-wrapper');
+            const docLink = document.getElementById('modal-doc-link');
+            const docText = document.getElementById('modal-doc-text');
+            if (docWrapper && docLink) {
+                if (data.docUrl) {
+                    docLink.href = data.docUrl;
+                    if (docText) docText.textContent = data.docLabel || 'Ver Biblia de Desarrollo (GDD)';
+                    docWrapper.classList.remove('hidden');
+                } else {
+                    docWrapper.classList.add('hidden');
+                }
+            }
+
             modal.classList.remove('pointer-events-none', 'opacity-0');
             modalContent.classList.remove('scale-95');
             document.body.style.overflow = 'hidden';
