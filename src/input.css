@@ -199,3 +199,30 @@ a:focus-visible, button:focus-visible {
         animation: none;
     }
 }
+
+/* ====== DYSON SWARM HUD & SCROLLEYTELLING EXTRA STYLES ====== */
+.hud-badge {
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.15);
+}
+
+.hud-tag {
+    font-family: 'Space Grotesk', monospace;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.dyson-glow-card {
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dyson-glow-card:hover {
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 0 0 35px rgba(59, 130, 246, 0.2), inset 0 0 15px rgba(59, 130, 246, 0.1);
+}
+
