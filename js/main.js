@@ -543,7 +543,15 @@
             const data = trigger.dataset;
             document.getElementById('modal-title').textContent = data.title;
             document.getElementById('modal-subtitle').textContent = data.subtitle;
-            document.getElementById('modal-video').src = data.videoId ? `https://www.youtube.com/embed/${data.videoId}` : '';
+            const modalVideoEl = document.getElementById('modal-video');
+            const modalVideoContainer = modalVideoEl.closest('.video-container');
+            if (data.videoId) {
+                modalVideoEl.src = `https://www.youtube.com/embed/${data.videoId}`;
+                if (modalVideoContainer) modalVideoContainer.style.display = '';
+            } else {
+                modalVideoEl.src = '';
+                if (modalVideoContainer) modalVideoContainer.style.display = 'none';
+            }
             document.getElementById('modal-challenge').textContent = data.challenge;
             document.getElementById('modal-process').textContent = data.process;
             
