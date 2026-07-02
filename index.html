@@ -13,7 +13,7 @@
     <meta name="theme-color" content="#030712">
     <meta property="og:type" content="website">
     <!-- Tailwind CSS compilado (ver src/input.css + tailwind.config.js) -->
-    <link rel="stylesheet" href="css/styles.css?v=20260621">
+    <link rel="stylesheet" href="css/styles.css?v=20260702c">
     <!-- Google Fonts: Inter & Space Grotesk -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -290,24 +290,27 @@
                 <button class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-3xl shadow-xl overflow-hidden transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-500/40 transition-all duration-300 group w-full flex flex-col h-full text-left"
                         data-modal-trigger
                         data-lang-key-prefix="p6m"
-                        data-title="K-PLER Live"
-                        data-subtitle="Holograma Interactivo Controlado por Gestos"
+                        data-title="Redbital"
+                        data-subtitle="Sitio Web + App de Gestión Clínica (PWA)"
                         data-video-id=""
-                        data-challenge="El reto era fusionar tres mundos que rara vez se hablan —visión por computadora, gráficos 3D en tiempo real y una ilusión óptica física (Pepper's Ghost)— para crear un momento mágico, físico y compartido con tecnología accesible y latencia imperceptible."
-                        data-process="Diseñé una arquitectura desacoplada: un módulo de percepción en Python con MediaPipe detecta la mano y clasifica gestos, y los envía por OSC a Unity, donde K-PLER sigue la mano y reacciona (saluda, salta, gira). Todo corre localmente, sin nube. La comunicación se validó con tests automatizados, incluida una verificación de paridad Python↔Unity a nivel de bytes."
-                        data-tech='["Python", "MediaPipe", "Unity", "C#", "Visión por Computadora", "Holografía"]'>
+                        data-links='[{"url":"https://redbital.cl/","labelKey":"p6LinkWeb"},{"url":"https://redbital-app.web.app/","labelKey":"p6LinkApp"}]'
+                        data-extra-image="assets/RedbitalEquipo.jpg"
+                        data-extra-caption-key="p6ExtraCaption"
+                        data-challenge="Redbital, laboratorio veterinario de referencia en Concepción, necesitaba una presencia digital profesional para captar clientes y, en paralelo, una herramienta interna para que su equipo técnico interprete exámenes (hemogramas, bioquímica, uroanálisis) de forma rápida y estandarizada."
+                        data-process="Desarrollé la landing institucional con reserva de horas y portal de resultados, y una PWA instalable con guías interactivas de interpretación clínica para el equipo de laboratorio, respaldada por Firebase Hosting. Ambos productos están en producción y en uso real por el cliente."
+                        data-tech='["HTML5", "Tailwind CSS", "JavaScript", "PWA", "Service Worker", "Firebase"]'>
                     <div class="w-full h-52 relative overflow-hidden bg-slate-900">
-                        <span class="bg-blue-600/80 backdrop-blur border border-blue-400/20 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg absolute top-4 left-4 z-20 shadow-lg font-display">Python / Unity / IA</span>
-                        <img src="assets/KplerLive.png" alt="K-PLER Live, holograma interactivo" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/030712/3ea6ff?text=K-PLER+Live';">
+                        <span class="bg-emerald-600/80 backdrop-blur border border-emerald-400/20 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg absolute top-4 left-4 z-20 shadow-lg font-display">Web / PWA / Cliente Real</span>
+                        <img src="assets/Redbital.jpg" alt="Redbital, laboratorio veterinario, sitio web" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/030712/34d399?text=Redbital';">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 opacity-80"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow bg-slate-950/20">
-                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors" data-lang-key="p6Title">K-PLER Live</h3>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors" data-lang-key="p6Title">Redbital</h3>
                         <p class="text-gray-400 mb-6 flex-grow text-sm leading-relaxed" data-lang-key="p6Desc">
-                            Instalación holográfica donde un robot reacciona a tus gestos en tiempo real, sin contacto.
+                            Sitio web y app de gestión clínica (PWA) para un laboratorio de diagnóstico veterinario, en producción.
                         </p>
                         <div class="font-bold text-blue-500 group-hover:text-blue-300 transition-colors duration-300 flex items-center gap-2 mt-auto text-sm">
-                            <span data-lang-key="pBtnDetails">Ver Detalles</span> 
+                            <span data-lang-key="pBtnDetails">Ver Detalles</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                         </div>
                     </div>
@@ -625,6 +628,14 @@
                                 <span id="modal-doc-text">Ver Biblia de Desarrollo (GDD)</span>
                             </a>
                         </div>
+
+                        <!-- Extra evidence photo (opcional) -->
+                        <div id="modal-extra-wrapper" class="mt-8 flex justify-center hidden">
+                            <figure class="inline-flex flex-col items-center gap-2">
+                                <img id="modal-extra-img" src="" alt="" class="w-full max-w-xs rounded-2xl shadow-xl ring-1 ring-white/10 object-cover">
+                                <figcaption id="modal-extra-caption" class="text-xs text-gray-500 italic"></figcaption>
+                            </figure>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -748,9 +759,9 @@
         <div class="h-10"></div>
     </div>
 
-    <script src="js/translations.js?v=20260621"></script>
-    <script src="js/main.js?v=20260621"></script>
-    <script src="js/effects.js?v=20260621"></script>
+    <script src="js/translations.js?v=20260702c"></script>
+    <script src="js/main.js?v=20260702c"></script>
+    <script src="js/effects.js?v=20260702c"></script>
 </body>
 </html>
 
