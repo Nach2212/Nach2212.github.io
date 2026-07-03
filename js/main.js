@@ -566,33 +566,33 @@
                 });
             }
 
-            const docWrapper = document.getElementById('modal-doc-wrapper');
-            if (docWrapper) {
+            // Enlaces rápidos (sitio web, app, etc.) — se muestran arriba, junto al título
+            const linksTop = document.getElementById('modal-links-top');
+            if (linksTop) {
+                linksTop.innerHTML = '';
+                let linkList = [];
                 if (data.links) {
-                    // Varios enlaces (ej: sitio web + app) como botones lado a lado
-                    docWrapper.innerHTML = '';
-                    docWrapper.className = 'mt-8 flex flex-wrap justify-center gap-4';
-                    JSON.parse(data.links).forEach(link => {
+                    linkList = JSON.parse(data.links).map(link => ({
+                        url: link.url,
+                        label: (link.labelKey && translations[currentLang][link.labelKey]) || link.label || link.url
+                    }));
+                } else if (data.docUrl) {
+                    linkList = [{ url: data.docUrl, label: data.docLabel || 'Ver Web del Proyecto' }];
+                }
+                if (linkList.length) {
+                    linkList.forEach(link => {
                         const a = document.createElement('a');
                         a.href = link.url;
                         a.target = '_blank';
                         a.rel = 'noopener';
-                        a.className = 'bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-bold px-7 py-3.5 rounded-2xl shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transform hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-3 text-sm tracking-wide';
-                        a.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg><span></span>';
-                        const label = (link.labelKey && translations[currentLang][link.labelKey]) || link.label || link.url;
-                        a.querySelector('span').textContent = label;
-                        docWrapper.appendChild(a);
+                        a.className = 'inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-md shadow-blue-500/20 hover:shadow-blue-500/40 transform hover:-translate-y-0.5 transition-all duration-300';
+                        a.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg><span></span>';
+                        a.querySelector('span').textContent = link.label;
+                        linksTop.appendChild(a);
                     });
-                    docWrapper.classList.remove('hidden');
-                } else if (data.docUrl) {
-                    docWrapper.innerHTML = `<a id="modal-doc-link" href="" target="_blank" rel="noopener" class="bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-bold px-7 py-3.5 rounded-2xl shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transform hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-3 text-sm tracking-wide"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg><span id="modal-doc-text">Ver Biblia de Desarrollo (GDD)</span></a>`;
-                    docWrapper.className = 'mt-8 flex justify-center';
-                    const freshLink = document.getElementById('modal-doc-link');
-                    freshLink.href = data.docUrl;
-                    document.getElementById('modal-doc-text').textContent = data.docLabel || 'Ver Web del Proyecto';
-                    docWrapper.classList.remove('hidden');
+                    linksTop.classList.remove('hidden');
                 } else {
-                    docWrapper.classList.add('hidden');
+                    linksTop.classList.add('hidden');
                 }
             }
 
