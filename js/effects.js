@@ -104,9 +104,9 @@
 
     if (reduced || !finePointer) return; // lo siguiente es solo desktop + motion ok
 
-    // --- 3. TILT 3D SUTIL EN LA IMAGEN DE CADA FILA DE PROYECTO ---
-    // Las filas editoriales son muy anchas para un tilt completo: se aplica solo a la imagen.
-    document.querySelectorAll('.project-row .project-media').forEach(function (media) {
+    // --- 3. TILT 3D SUTIL EN LA IMAGEN DE CADA TARJETA DE PROYECTO ---
+    // Se aplica solo a la imagen para no desplazar el texto.
+    document.querySelectorAll('.project-card .project-media').forEach(function (media) {
         media.classList.add('tilt-card');
         media.addEventListener('mousemove', function (e) {
             const r = media.getBoundingClientRect();
