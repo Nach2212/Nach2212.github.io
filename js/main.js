@@ -726,6 +726,60 @@
             location.reload();
         });
 
+        // --- TYPEWRITER DEL HERO ---
+        // Escribe y borra en bucle las especialidades; lee translations[currentLang]
+        // en cada ciclo para que el cambio de idioma se refleje solo.
+        (function () {
+            const target = document.getElementById('hero-typewriter');
+            if (!target) return;
+            if (prefersReducedMotion) {
+                target.textContent = translations[currentLang].heroWords[0];
+                return;
+            }
+            let wordIndex = 0, charIndex = 0, deleting = false;
+            function tick() {
+                const words = translations[currentLang].heroWords;
+                const word = words[wordIndex % words.length];
+                if (!deleting) {
+                    charIndex++;
+                    target.textContent = word.slice(0, charIndex);
+                    if (charIndex === word.length) {
+                        deleting = true;
+                        setTimeout(tick, 2200); // pausa con la palabra completa
+                        return;
+                    }
+                    setTimeout(tick, 55);
+                } else {
+                    charIndex--;
+                    target.textContent = word.slice(0, Math.max(charIndex, 0));
+                    if (charIndex <= 0) {
+                        deleting = false;
+                        wordIndex++;
+                        setTimeout(tick, 400);
+                        return;
+                    }
+                    setTimeout(tick, 30);
+                }
+            }
+            setTimeout(tick, 1600); // arranca después de la revelación del hero
+        })();
+
+        // --- ACORDEÓN DE SERVICIOS ---
+        document.querySelectorAll('.service-item .service-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.closest('.service-item');
+                const wasOpen = item.classList.contains('open');
+                document.querySelectorAll('.service-item.open').forEach(open => {
+                    open.classList.remove('open');
+                    open.querySelector('.service-header').setAttribute('aria-expanded', 'false');
+                });
+                if (!wasOpen) {
+                    item.classList.add('open');
+                    header.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+
         // Function to trigger welcome animation (giant meteor crossing)
         function triggerWelcomeAnimation() {
             setTimeout(() => {

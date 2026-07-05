@@ -39,7 +39,7 @@
         }
 
         // Agrupar imágenes por tarjeta de evento
-        document.querySelectorAll('#eventos .grid > div').forEach(function (card) {
+        document.querySelectorAll('#eventos .events-carousel > div').forEach(function (card) {
             const imgs = Array.from(card.querySelectorAll('img'));
             const srcs = imgs.map(function (i) { return i.getAttribute('src'); });
             imgs.forEach(function (img, i) {
@@ -104,17 +104,18 @@
 
     if (reduced || !finePointer) return; // lo siguiente es solo desktop + motion ok
 
-    // --- 3. TILT 3D EN TARJETAS DE PROYECTO ---
-    document.querySelectorAll('[data-modal-trigger]').forEach(function (card) {
-        card.classList.add('tilt-card');
-        card.addEventListener('mousemove', function (e) {
-            const r = card.getBoundingClientRect();
+    // --- 3. TILT 3D SUTIL EN LA IMAGEN DE CADA FILA DE PROYECTO ---
+    // Las filas editoriales son muy anchas para un tilt completo: se aplica solo a la imagen.
+    document.querySelectorAll('.project-row .project-media').forEach(function (media) {
+        media.classList.add('tilt-card');
+        media.addEventListener('mousemove', function (e) {
+            const r = media.getBoundingClientRect();
             const x = (e.clientX - r.left) / r.width - 0.5;
             const y = (e.clientY - r.top) / r.height - 0.5;
-            card.style.transform = 'perspective(900px) rotateY(' + (x * 7).toFixed(2) + 'deg) rotateX(' + (-y * 7).toFixed(2) + 'deg) translateY(-6px)';
+            media.style.transform = 'perspective(1100px) rotateY(' + (x * 4).toFixed(2) + 'deg) rotateX(' + (-y * 4).toFixed(2) + 'deg)';
         });
-        card.addEventListener('mouseleave', function () {
-            card.style.transform = '';
+        media.addEventListener('mouseleave', function () {
+            media.style.transform = '';
         });
     });
 

@@ -13,7 +13,7 @@
     <meta name="theme-color" content="#030712">
     <meta property="og:type" content="website">
     <!-- Tailwind CSS compilado (ver src/input.css + tailwind.config.js) -->
-    <link rel="stylesheet" href="css/styles.css?v=20260702d">
+    <link rel="stylesheet" href="css/styles.css?v=20260705a">
     <!-- Google Fonts: Inter & Space Grotesk -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,11 +77,22 @@
         <section id="inicio" class="text-center min-h-[85vh] flex flex-col justify-center items-center reveal active relative">
             <div class="absolute -z-10 w-[70vw] h-[40vh] md:w-[600px] md:h-[600px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none"></div>
             <div class="absolute -z-10 w-[50vw] h-[30vh] md:w-[400px] md:h-[400px] bg-purple-500/5 rounded-full blur-[100px] translate-x-12 translate-y-12 pointer-events-none"></div>
-            
+
+            <!-- Esfera de Dyson: anillos orbitando el contenido del hero (identidad del logo) -->
+            <div class="dyson-sphere -z-10 w-[85vw] h-[85vw] max-w-[640px] max-h-[640px] opacity-60 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="perspective: 900px;">
+                <div class="dyson-ring r1"></div>
+                <div class="dyson-ring r2"></div>
+                <div class="dyson-ring r3"></div>
+                <div class="dyson-core"></div>
+            </div>
+
             <div id="hero-content-wrapper" class="flex flex-col items-center justify-center w-full transition-all duration-[1200ms] ease-out filter blur-md scale-95 opacity-0">
-                <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6 tracking-tight" data-lang-key="heroTitle">
+                <h1 class="text-5xl md:text-8xl font-extrabold text-white leading-tight mb-6 tracking-tight" data-lang-key="heroTitle">
                     Hola, soy <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">Ignacio Aguayo</span>
                 </h1>
+                <p class="font-display text-sm md:text-base text-blue-400 tracking-[0.25em] uppercase mb-6 h-6">
+                    <span class="text-gray-500">&gt;</span> <span id="hero-typewriter"></span><span id="hero-typewriter-caret"></span>
+                </p>
                 <p class="text-lg md:text-xl text-gray-400 max-w-2xl mb-12 leading-relaxed font-light" data-lang-key="heroSubtitle">
                     Creative Technologist. Construyo experiencias interactivas que conectan el mundo digital y el físico.
                 </p>
@@ -98,6 +109,11 @@
                     </a>
                 </div>
             </div>
+
+            <div class="scroll-indicator" aria-hidden="true">
+                <span>scroll</span>
+                <div class="line"></div>
+            </div>
         </section>
 
         <!-- ========== ABOUT ME SECTION ========== -->
@@ -111,7 +127,8 @@
                     </div>
                     <!-- About Me Text -->
                     <div class="w-full md:w-2/3 text-center md:text-left">
-                        <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight" data-lang-key="aboutTitle">Sobre Mí</h2>
+                        <div class="section-kicker justify-center md:justify-start"><span class="kicker-dot"></span><span>01</span></div>
+                        <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight" data-lang-key="aboutTitle">Sobre Mí</h2>
                         <p id="bio-paragraph" class="text-lg text-gray-400 leading-relaxed" data-lang-key="aboutBio">
                             Soy un tecnólogo creativo radicado en Concepción, Chile, apasionado por la intersección del arte y el código. Mi enfoque es la creación de experiencias inmersivas e interactivas que desafían la percepción y conectan con las personas a un nivel más profundo.
                         </p>
@@ -124,18 +141,29 @@
                     </div>
                 </div>
 
-                <!-- Skills -->
-                <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-8 md:p-10 rounded-3xl shadow-xl text-left mt-24">
+                <!-- Skills: marquee infinito (pausa al hover) -->
+                <div class="mt-24">
                     <h3 class="text-2xl font-bold text-white mb-8 text-center" data-lang-key="skillsTitle">Mis Habilidades</h3>
-                    <div id="skills-list" class="flex flex-wrap justify-center gap-3 md:gap-4">
-                        <span class="bg-blue-950/30 border border-blue-500/20 text-blue-300 px-5 py-2 rounded-xl font-medium hover:bg-blue-950/60 transition-colors" data-lang-key="skillUnity">Unity</span>
-                        <span class="bg-blue-950/30 border border-blue-500/20 text-blue-300 px-5 py-2 rounded-xl font-medium hover:bg-blue-950/60 transition-colors" data-lang-key="skillVrAr">Desarrollo VR/AR</span>
-                        <span class="bg-blue-950/30 border border-blue-500/20 text-blue-300 px-5 py-2 rounded-xl font-medium hover:bg-blue-950/60 transition-colors" data-lang-key="skillMobile">Mobile Apps</span>
-                        <span class="bg-blue-950/30 border border-blue-500/20 text-blue-300 px-5 py-2 rounded-xl font-medium hover:bg-blue-950/60 transition-colors" data-lang-key="skillTouchdesigner">TouchDesigner</span>
-                        <span class="bg-slate-800/50 border border-slate-700/50 text-slate-300 px-5 py-2 rounded-xl font-medium hover:bg-slate-800 transition-colors" data-lang-key="skillUiUx">UX/UI Design</span>
-                        <span class="bg-slate-800/50 border border-slate-700/50 text-slate-300 px-5 py-2 rounded-xl font-medium hover:bg-slate-800 transition-colors" data-lang-key="skillInteractive">Experiencias Interactivas</span>
-                        <span class="bg-slate-800/50 border border-slate-700/50 text-slate-300 px-5 py-2 rounded-xl font-medium hover:bg-slate-800 transition-colors" data-lang-key="skillShaders">Shaders & Generativos</span>
-                        <span class="bg-slate-800/50 border border-slate-700/50 text-slate-300 px-5 py-2 rounded-xl font-medium hover:bg-slate-800 transition-colors" data-lang-key="skillCreativeCoding">Creative Coding</span>
+                    <div class="skills-marquee">
+                        <div class="skills-track">
+                            <span class="whitespace-nowrap bg-blue-950/30 border border-blue-500/20 text-blue-300 px-5 py-2 rounded-xl font-medium" data-lang-key="skillUnity">Unity</span>
+                            <span class="whitespace-nowrap bg-blue-950/30 border border-blue-500/20 text-blue-300 px-5 py-2 rounded-xl font-medium" data-lang-key="skillVrAr">Desarrollo VR/AR</span>
+                            <span class="whitespace-nowrap bg-blue-950/30 border border-blue-500/20 text-blue-300 px-5 py-2 rounded-xl font-medium" data-lang-key="skillMobile">Mobile Apps</span>
+                            <span class="whitespace-nowrap bg-blue-950/30 border border-blue-500/20 text-blue-300 px-5 py-2 rounded-xl font-medium" data-lang-key="skillTouchdesigner">TouchDesigner</span>
+                            <span class="whitespace-nowrap bg-slate-800/50 border border-slate-700/50 text-slate-300 px-5 py-2 rounded-xl font-medium" data-lang-key="skillUiUx">UX/UI Design</span>
+                            <span class="whitespace-nowrap bg-slate-800/50 border border-slate-700/50 text-slate-300 px-5 py-2 rounded-xl font-medium" data-lang-key="skillInteractive">Experiencias Interactivas</span>
+                            <span class="whitespace-nowrap bg-slate-800/50 border border-slate-700/50 text-slate-300 px-5 py-2 rounded-xl font-medium" data-lang-key="skillShaders">Shaders & Generativos</span>
+                            <span class="whitespace-nowrap bg-slate-800/50 border border-slate-700/50 text-slate-300 px-5 py-2 rounded-xl font-medium" data-lang-key="skillCreativeCoding">Creative Coding</span>
+                            <!-- Duplicado para el loop continuo del marquee -->
+                            <span aria-hidden="true" class="whitespace-nowrap bg-blue-950/30 border border-blue-500/20 text-blue-300 px-5 py-2 rounded-xl font-medium" data-lang-key="skillUnity">Unity</span>
+                            <span aria-hidden="true" class="whitespace-nowrap bg-blue-950/30 border border-blue-500/20 text-blue-300 px-5 py-2 rounded-xl font-medium" data-lang-key="skillVrAr">Desarrollo VR/AR</span>
+                            <span aria-hidden="true" class="whitespace-nowrap bg-blue-950/30 border border-blue-500/20 text-blue-300 px-5 py-2 rounded-xl font-medium" data-lang-key="skillMobile">Mobile Apps</span>
+                            <span aria-hidden="true" class="whitespace-nowrap bg-blue-950/30 border border-blue-500/20 text-blue-300 px-5 py-2 rounded-xl font-medium" data-lang-key="skillTouchdesigner">TouchDesigner</span>
+                            <span aria-hidden="true" class="whitespace-nowrap bg-slate-800/50 border border-slate-700/50 text-slate-300 px-5 py-2 rounded-xl font-medium" data-lang-key="skillUiUx">UX/UI Design</span>
+                            <span aria-hidden="true" class="whitespace-nowrap bg-slate-800/50 border border-slate-700/50 text-slate-300 px-5 py-2 rounded-xl font-medium" data-lang-key="skillInteractive">Experiencias Interactivas</span>
+                            <span aria-hidden="true" class="whitespace-nowrap bg-slate-800/50 border border-slate-700/50 text-slate-300 px-5 py-2 rounded-xl font-medium" data-lang-key="skillShaders">Shaders & Generativos</span>
+                            <span aria-hidden="true" class="whitespace-nowrap bg-slate-800/50 border border-slate-700/50 text-slate-300 px-5 py-2 rounded-xl font-medium" data-lang-key="skillCreativeCoding">Creative Coding</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -143,15 +171,16 @@
 
 
         <!-- ========== PROJECTS SECTION ========== -->
-        <section id="proyectos" class="py-24 text-center reveal">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight" data-lang-key="projectsTitle">Proyectos Destacados</h2>
-            <p class="text-lg text-gray-400 mb-16" data-lang-key="projectsSubtitle">Una selección de mis mejores trabajos y exploraciones.</p>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+        <section id="proyectos" class="py-24 reveal">
+            <div class="section-kicker"><span class="kicker-dot"></span><span>02</span></div>
+            <h2 class="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight" data-lang-key="projectsTitle">Proyectos Destacados</h2>
+            <p class="text-lg text-gray-400 mb-20" data-lang-key="projectsSubtitle">Una selección de mis mejores trabajos y exploraciones.</p>
+
+            <div class="flex flex-col gap-20 md:gap-28 text-left">
                 
                 <!-- Project Card 1 -->
-                <button class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-3xl shadow-xl overflow-hidden transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-500/40 transition-all duration-300 group w-full flex flex-col h-full text-left"
-                        data-modal-trigger 
+                <button class="project-row group w-full flex flex-col md:flex-row items-center gap-8 md:gap-14 text-left"
+                        data-modal-trigger
                         data-lang-key-prefix="p1m"
                         data-title="Galería Circular Interactiva" 
                         data-subtitle="Navegación Inmersiva con TouchDesigner" 
@@ -159,25 +188,26 @@
                         data-challenge="El desafío fue crear una forma innovadora de presentar imágenes, buscando una experiencia que superara la visualización estática y fomentara una interacción más profunda."
                         data-process="Para lograr una interacción intuitiva, opté por el hand tracking como método de control. El principal reto técnico fue combinar la galería esférica con la precisión del seguimiento de manos, lo que requirió un diseño gestual cuidadoso y optimización para asegurar una experiencia fluida."
                         data-tech='["TouchDesigner", "Hand Tracking", "Visuales Generativos"]'>
-                    <div class="w-full h-52 relative overflow-hidden bg-slate-900">
-                        <span class="bg-blue-600/80 backdrop-blur border border-blue-400/20 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg absolute top-4 left-4 z-20 shadow-lg">TouchDesigner</span>
-                        <img src="assets/GaleriaCircular.png" alt="Galería circular interactiva en TouchDesigner" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+1';">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 opacity-80"></div>
+                    <div class="project-media w-full md:w-[55%] relative overflow-hidden rounded-3xl border border-slate-800/60 shadow-xl aspect-video bg-slate-900 group-hover:border-blue-500/40 group-hover:shadow-[0_0_40px_rgba(59,130,246,0.15)] transition-all duration-500">
+                        <img src="assets/GaleriaCircular.png" alt="Galería circular interactiva en TouchDesigner" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+1';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent pointer-events-none"></div>
                     </div>
-                    <div class="p-6 flex flex-col flex-grow bg-slate-950/20">
-                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors" data-lang-key="p1Title">Galería Circular Interactiva</h3>
-                        <p class="text-gray-400 mb-6 flex-grow text-sm leading-relaxed" data-lang-key="p1Desc">
+                    <div class="w-full md:w-[45%]">
+                        <p class="project-index mb-3">02.1</p>
+                        <span class="inline-block border border-blue-500/30 text-blue-300 text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg mb-4">TouchDesigner</span>
+                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-4 tracking-tight group-hover:text-blue-400 transition-colors" data-lang-key="p1Title">Galería Circular Interactiva</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed" data-lang-key="p1Desc">
                             Experiencia en TouchDesigner con una galería circular controlada por hand tracking espacial.
                         </p>
-                        <div class="font-bold text-blue-500 group-hover:text-blue-300 transition-colors duration-300 flex items-center gap-2 mt-auto text-sm">
-                            <span data-lang-key="pBtnDetails">Ver Detalles</span> 
+                        <div class="font-bold text-blue-500 group-hover:text-blue-300 transition-colors duration-300 flex items-center gap-2 text-sm">
+                            <span data-lang-key="pBtnDetails">Ver Detalles</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                         </div>
                     </div>
                 </button>
 
                 <!-- Project Card 2 -->
-                <button class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-3xl shadow-xl overflow-hidden transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-500/40 transition-all duration-300 group w-full flex flex-col h-full text-left"
+                <button class="project-row group w-full flex flex-col md:flex-row-reverse items-center gap-8 md:gap-14 text-left"
                         data-modal-trigger
                         data-lang-key-prefix="p2m"
                         data-title="Codex del Cosmos"
@@ -188,24 +218,25 @@
                         data-challenge="El reto era crear una experiencia contemplativa e inmersiva en Realidad Virtual sin controles físicos, permitiendo al usuario manipular la luz del universo y viajar en el tiempo para provocar el Overview Effect."
                         data-process="Desarrollado en Unity 2022 LTS utilizando Meta XR SDK para hand-tracking preciso. Implementé shaders en VFX Graph y una arquitectura desacoplada para la interacción con la IA guiadora K-PLER."
                         data-tech='["Unity", "VR / Meta Quest", "Hand Tracking", "VFX Graph"]'>
-                    <div class="w-full h-52 relative overflow-hidden bg-slate-900">
-                        <span class="bg-purple-600/80 backdrop-blur border border-purple-400/20 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg absolute top-4 left-4 z-20 shadow-lg">Unity / VR / Hand Tracking</span>
-                        <img src="assets/CodexDelCosmos.png" alt="Codex del Cosmos - Experiencia VR" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Codex+del+Cosmos';">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 opacity-80"></div>
+                    <div class="project-media w-full md:w-[55%] relative overflow-hidden rounded-3xl border border-slate-800/60 shadow-xl aspect-video bg-slate-900 group-hover:border-purple-500/40 group-hover:shadow-[0_0_40px_rgba(139,92,246,0.15)] transition-all duration-500">
+                        <img src="assets/CodexDelCosmos.png" alt="Codex del Cosmos - Experiencia VR" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Codex+del+Cosmos';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent pointer-events-none"></div>
                     </div>
-                    <div class="p-6 flex flex-col flex-grow bg-slate-950/20">
-                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors" data-lang-key="p2Title">Codex del Cosmos</h3>
-                        <p class="text-gray-400 mb-6 flex-grow text-sm leading-relaxed" data-lang-key="p2Desc">
+                    <div class="w-full md:w-[45%]">
+                        <p class="project-index mb-3">02.2</p>
+                        <span class="inline-block border border-purple-500/30 text-purple-300 text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg mb-4">Unity / VR / Hand Tracking</span>
+                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-4 tracking-tight group-hover:text-blue-400 transition-colors" data-lang-key="p2Title">Codex del Cosmos</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed" data-lang-key="p2Desc">
                             Experiencia contemplativa en VR para Meta Quest 2 donde manipulas la luz fósil del universo con tus manos.
                         </p>
-                        <div class="font-bold text-blue-500 group-hover:text-blue-300 transition-colors duration-300 flex items-center gap-2 mt-auto text-sm">
-                            <span data-lang-key="pBtnDetails">Ver Detalles</span> 
+                        <div class="font-bold text-blue-500 group-hover:text-blue-300 transition-colors duration-300 flex items-center gap-2 text-sm">
+                            <span data-lang-key="pBtnDetails">Ver Detalles</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                         </div>
                     </div>
                 </button>
-                                         <!-- Project Card 3 -->
-                 <button class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-3xl shadow-xl overflow-hidden transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-500/40 transition-all duration-300 group w-full flex flex-col h-full text-left"
+                <!-- Project Card 3 -->
+                <button class="project-row group w-full flex flex-col md:flex-row items-center gap-8 md:gap-14 text-left"
                         data-modal-trigger
                         data-lang-key-prefix="p3m"
                         data-title="Deconstrucción 3D Interactiva"
@@ -214,25 +245,26 @@
                         data-challenge="El principal desafío fue crear una forma innovadora y atractiva de exhibir modelos 3D, permitiendo a los usuarios interactuar con ellos de manera divertida y significativa, como controlando su deconstrucción o cambiando los modelos con las manos."
                         data-process="Desarrollé esta experiencia en TouchDesigner, enfocándome en la integración del hand tracking para una manipulación intuitiva. Lo más complejo fue diseñar los algoritmos de deconstrucción y el sistema de reconocimiento gestual que permitiera a los usuarios controlar los modelos 3D en tiempo real, ofreciendo una interacción fluida y reactiva con los objetos virtuales."
                         data-tech='["TouchDesigner", "Hand Tracking", "Diseño 3D"]'>
-                    <div class="w-full h-52 relative overflow-hidden bg-slate-900">
-                        <span class="bg-blue-600/80 backdrop-blur border border-blue-400/20 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg absolute top-4 left-4 z-20 shadow-lg">TouchDesigner / 3D</span>
-                        <img src="assets/Deconstruccion.png" alt="Deconstrucción 3D interactiva con hand tracking" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+3';">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 opacity-80"></div>
+                    <div class="project-media w-full md:w-[55%] relative overflow-hidden rounded-3xl border border-slate-800/60 shadow-xl aspect-video bg-slate-900 group-hover:border-blue-500/40 group-hover:shadow-[0_0_40px_rgba(59,130,246,0.15)] transition-all duration-500">
+                        <img src="assets/Deconstruccion.png" alt="Deconstrucción 3D interactiva con hand tracking" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+3';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent pointer-events-none"></div>
                     </div>
-                    <div class="p-6 flex flex-col flex-grow bg-slate-950/20">
-                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors" data-lang-key="p3Title">Deconstrucción 3D Interactiva</h3>
-                        <p class="text-gray-400 mb-6 flex-grow text-sm leading-relaxed" data-lang-key="p3Desc">
+                    <div class="w-full md:w-[45%]">
+                        <p class="project-index mb-3">02.3</p>
+                        <span class="inline-block border border-blue-500/30 text-blue-300 text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg mb-4">TouchDesigner / 3D</span>
+                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-4 tracking-tight group-hover:text-blue-400 transition-colors" data-lang-key="p3Title">Deconstrucción 3D Interactiva</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed" data-lang-key="p3Desc">
                             Experiencia interactiva que deconstruye modelos 3D en tiempo real usando hand tracking.
                         </p>
-                       <div class="font-bold text-blue-500 group-hover:text-blue-300 transition-colors duration-300 flex items-center gap-2 mt-auto text-sm">
-                           <span data-lang-key="pBtnDetails">Ver Detalles</span> 
-                           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                       </div>
+                        <div class="font-bold text-blue-500 group-hover:text-blue-300 transition-colors duration-300 flex items-center gap-2 text-sm">
+                            <span data-lang-key="pBtnDetails">Ver Detalles</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                        </div>
                     </div>
                 </button>
 
                 <!-- Project Card 4 -->
-                <button class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-3xl shadow-xl overflow-hidden transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-500/40 transition-all duration-300 group w-full flex flex-col h-full text-left"
+                <button class="project-row group w-full flex flex-col md:flex-row-reverse items-center gap-8 md:gap-14 text-left"
                         data-modal-trigger
                         data-lang-key-prefix="p4m"
                         data-title="Galería VR para Fotógrafos"
@@ -241,24 +273,25 @@
                         data-challenge="El reto era diseñar una galería virtual inmersiva para un evento de fotógrafos en Concepción, que permitiera exhibir sus obras de una manera innovadora y envolvente utilizando la realidad virtual."
                         data-process="Trabajé en Unity, diseñando la arquitectura virtual de la galería y la disposición de los cuadros. La decoración y la ambientación se realizaron a medida según los requerimientos del evento, buscando crear un espacio que realzara las obras fotográficas. La implementación se optimizó para funcionar fluidamente en dispositivos Meta Quest 2."
                         data-tech='["Unity", "Meta Quest 2", "Diseño 3D"]'>
-                    <div class="w-full h-52 relative overflow-hidden bg-slate-900">
-                        <span class="bg-indigo-600/80 backdrop-blur border border-indigo-400/20 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg absolute top-4 left-4 z-20 shadow-lg">Unity / VR</span>
-                        <img src="assets/galeriavr.png" alt="Galería VR para fotógrafos en Meta Quest 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+4';">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 opacity-80"></div>
+                    <div class="project-media w-full md:w-[55%] relative overflow-hidden rounded-3xl border border-slate-800/60 shadow-xl aspect-video bg-slate-900 group-hover:border-purple-500/40 group-hover:shadow-[0_0_40px_rgba(139,92,246,0.15)] transition-all duration-500">
+                        <img src="assets/galeriavr.png" alt="Galería VR para fotógrafos en Meta Quest 2" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=Proyecto+4';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent pointer-events-none"></div>
                     </div>
-                    <div class="p-6 flex flex-col flex-grow bg-slate-950/20">
-                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors" data-lang-key="p4Title">Galería VR Fotográfica</h3>
-                        <p class="text-gray-400 mb-6 flex-grow text-sm leading-relaxed" data-lang-key="p4Desc">
+                    <div class="w-full md:w-[45%]">
+                        <p class="project-index mb-3">02.4</p>
+                        <span class="inline-block border border-purple-500/30 text-purple-300 text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg mb-4">Unity / VR</span>
+                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-4 tracking-tight group-hover:text-blue-400 transition-colors" data-lang-key="p4Title">Galería VR Fotográfica</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed" data-lang-key="p4Desc">
                             App de galería virtual inmersiva en VR para Meta Quest 2, diseñada para eventos.
                         </p>
-                        <div class="font-bold text-blue-500 group-hover:text-blue-300 transition-colors duration-300 flex items-center gap-2 mt-auto text-sm">
-                            <span data-lang-key="pBtnDetails">Ver Detalles</span> 
+                        <div class="font-bold text-blue-500 group-hover:text-blue-300 transition-colors duration-300 flex items-center gap-2 text-sm">
+                            <span data-lang-key="pBtnDetails">Ver Detalles</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                         </div>
                     </div>
                 </button>
-                  <!-- Project Card 5 -->
-                <button class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-3xl shadow-xl overflow-hidden transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-500/40 transition-all duration-300 group w-full flex flex-col h-full text-left"
+                <!-- Project Card 5 -->
+                <button class="project-row group w-full flex flex-col md:flex-row items-center gap-8 md:gap-14 text-left"
                         data-modal-trigger
                         data-lang-key-prefix="p5m"
                         data-title="GearMap"
@@ -269,25 +302,26 @@
                         data-challenge="En situaciones de emergencia real, el tiempo de respuesta y la ubicación exacta de las herramientas son críticos. El desafío fue crear un Gemelo Digital 3D táctil e interactivo que reemplace los manuales estáticos y permita entrenar bajo estrés cero."
                         data-process="Desarrollé la arquitectura en Unity 3D integrando modelos tridimensionales detallados de carros bomba y herramientas de rescate, optimizados para dispositivos móviles de primera respuesta y respaldados por validaciones operativas."
                         data-tech='["Unity 3D", "Mobile Development", "Gemelo Digital", "Firebase"]'>
-                    <div class="w-full h-52 relative overflow-hidden bg-slate-900">
-                        <span class="bg-red-600/80 backdrop-blur border border-red-400/20 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg absolute top-4 left-4 z-20 shadow-lg">Unity / Gemelo Digital</span>
-                        <img src="assets/Bomberos.png" alt="GearMap - Gemelo Digital 3D para Bomberos" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=GearMap';">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 opacity-80"></div>
+                    <div class="project-media w-full md:w-[55%] relative overflow-hidden rounded-3xl border border-slate-800/60 shadow-xl aspect-video bg-slate-900 group-hover:border-blue-500/40 group-hover:shadow-[0_0_40px_rgba(59,130,246,0.15)] transition-all duration-500">
+                        <img src="assets/Bomberos.png" alt="GearMap - Gemelo Digital 3D para Bomberos" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/93c5fd?text=GearMap';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent pointer-events-none"></div>
                     </div>
-                    <div class="p-6 flex flex-col flex-grow bg-slate-950/20">
-                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors" data-lang-key="p5Title">GearMap</h3>
-                        <p class="text-gray-400 mb-6 flex-grow text-sm leading-relaxed" data-lang-key="p5Desc">
+                    <div class="w-full md:w-[45%]">
+                        <p class="project-index mb-3">02.5</p>
+                        <span class="inline-block border border-blue-500/30 text-blue-300 text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg mb-4">Unity / Gemelo Digital</span>
+                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-4 tracking-tight group-hover:text-blue-400 transition-colors" data-lang-key="p5Title">GearMap</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed" data-lang-key="p5Desc">
                             Gemelo Digital 3D e inventario interactivo para entrenamiento y gestión operativa de equipos de emergencia.
                         </p>
-                        <div class="font-bold text-blue-500 group-hover:text-blue-300 transition-colors duration-300 flex items-center gap-2 mt-auto text-sm">
-                            <span data-lang-key="pBtnDetails">Ver Detalles</span> 
+                        <div class="font-bold text-blue-500 group-hover:text-blue-300 transition-colors duration-300 flex items-center gap-2 text-sm">
+                            <span data-lang-key="pBtnDetails">Ver Detalles</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                         </div>
                     </div>
                 </button>
 
                 <!-- Project Card 6 -->
-                <button class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-3xl shadow-xl overflow-hidden transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-500/40 transition-all duration-300 group w-full flex flex-col h-full text-left"
+                <button class="project-row group w-full flex flex-col md:flex-row-reverse items-center gap-8 md:gap-14 text-left"
                         data-modal-trigger
                         data-lang-key-prefix="p6m"
                         data-title="Redbital"
@@ -299,17 +333,18 @@
                         data-challenge="Redbital, laboratorio veterinario de referencia en Concepción, necesitaba una presencia digital profesional para captar clientes y, en paralelo, una herramienta interna para que su equipo técnico interprete exámenes (hemogramas, bioquímica, uroanálisis) de forma rápida y estandarizada."
                         data-process="Desarrollé la landing institucional con reserva de horas y portal de resultados, y una PWA instalable con guías interactivas de interpretación clínica para el equipo de laboratorio, respaldada por Firebase Hosting. Ambos productos están en producción y en uso real por el cliente."
                         data-tech='["HTML5", "Tailwind CSS", "JavaScript", "PWA", "Service Worker", "Firebase"]'>
-                    <div class="w-full h-52 relative overflow-hidden bg-slate-900">
-                        <span class="bg-emerald-600/80 backdrop-blur border border-emerald-400/20 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg absolute top-4 left-4 z-20 shadow-lg font-display">Web / PWA</span>
-                        <img src="assets/Redbital.jpg" alt="Redbital, laboratorio veterinario, sitio web" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/400x300/030712/34d399?text=Redbital';">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 opacity-80"></div>
+                    <div class="project-media w-full md:w-[55%] relative overflow-hidden rounded-3xl border border-slate-800/60 shadow-xl aspect-video bg-slate-900 group-hover:border-blue-500/40 group-hover:shadow-[0_0_40px_rgba(59,130,246,0.15)] transition-all duration-500">
+                        <img src="assets/Redbital.jpg" alt="Redbital, laboratorio veterinario, sitio web" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/030712/34d399?text=Redbital';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent pointer-events-none"></div>
                     </div>
-                    <div class="p-6 flex flex-col flex-grow bg-slate-950/20">
-                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors" data-lang-key="p6Title">Redbital</h3>
-                        <p class="text-gray-400 mb-6 flex-grow text-sm leading-relaxed" data-lang-key="p6Desc">
+                    <div class="w-full md:w-[45%]">
+                        <p class="project-index mb-3">02.6</p>
+                        <span class="inline-block border border-blue-500/30 text-blue-300 text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-lg mb-4 font-display">Web / PWA</span>
+                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-4 tracking-tight group-hover:text-blue-400 transition-colors" data-lang-key="p6Title">Redbital</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed" data-lang-key="p6Desc">
                             Sitio web y app de gestión clínica (PWA) para un laboratorio de diagnóstico veterinario, en producción.
                         </p>
-                        <div class="font-bold text-blue-500 group-hover:text-blue-300 transition-colors duration-300 flex items-center gap-2 mt-auto text-sm">
+                        <div class="font-bold text-blue-500 group-hover:text-blue-300 transition-colors duration-300 flex items-center gap-2 text-sm">
                             <span data-lang-key="pBtnDetails">Ver Detalles</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                         </div>
@@ -320,7 +355,8 @@
         
         <!-- ========== MORE PROJECTS SECTION ========== -->
         <section id="mas-proyectos" class="py-24 reveal">
-            <h2 class="text-3xl md:text-5xl font-bold text-white mb-4 text-center tracking-tight" data-lang-key="mpTitle">Más Proyectos</h2>
+            <div class="section-kicker justify-center"><span class="kicker-dot"></span><span>03</span></div>
+            <h2 class="text-4xl md:text-6xl font-bold text-white mb-4 text-center tracking-tight" data-lang-key="mpTitle">Más Proyectos</h2>
             <p class="text-lg text-gray-400 mb-12 text-center" data-lang-key="mpSubtitle">Otros trabajos y exploraciones creativas.</p>
             
             <!-- Filters -->
@@ -372,11 +408,12 @@
 
         <!-- ========== EVENTS SECTION ========== -->
         <section id="eventos" class="py-24 text-center reveal">
-            <h2 class="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight" data-lang-key="evTitle">Eventos & Exhibiciones</h2>
+            <div class="section-kicker justify-center"><span class="kicker-dot"></span><span>04</span></div>
+            <h2 class="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight" data-lang-key="evTitle">Eventos & Exhibiciones</h2>
             <p class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto" data-lang-key="evSubtitle">Experiencias interactivas que he llevado a espacios y públicos reales.</p>
-            <div class="grid lg:grid-cols-2 gap-5 max-w-6xl mx-auto">
+            <div class="events-carousel max-w-6xl mx-auto">
 
-                <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-2xl overflow-hidden flex group hover:border-blue-500/30 transition-all duration-300 shadow-lg min-h-[11rem]">
+                <div class="flex-shrink-0 w-[85vw] sm:w-[520px] bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-2xl overflow-hidden flex group hover:border-blue-500/30 transition-all duration-300 shadow-lg min-h-[11rem]">
                     <div class="w-36 sm:w-44 flex-shrink-0 relative overflow-hidden">
                         <img src="assets/eventos/rec_1.jpg" alt="Stand del juego de esquivar obstáculos en el festival REC" loading="lazy" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40 pointer-events-none"></div>
@@ -391,7 +428,7 @@
                     </div>
                 </div>
 
-                <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-2xl overflow-hidden flex group hover:border-purple-500/30 transition-all duration-300 shadow-lg min-h-[11rem]">
+                <div class="flex-shrink-0 w-[85vw] sm:w-[520px] bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-2xl overflow-hidden flex group hover:border-purple-500/30 transition-all duration-300 shadow-lg min-h-[11rem]">
                     <div class="w-36 sm:w-44 flex-shrink-0 relative overflow-hidden">
                         <img src="assets/eventos/afoconce_1.jpg" alt="Exhibición de galería VR en la Biblioteca Municipal de Concepción" loading="lazy" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40 pointer-events-none"></div>
@@ -407,13 +444,13 @@
                     </div>
                 </div>
 
-                <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-2xl overflow-hidden flex group hover:border-pink-500/30 transition-all duration-300 shadow-lg min-h-[11rem]">
+                <div class="flex-shrink-0 w-[85vw] sm:w-[520px] bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-2xl overflow-hidden flex group hover:border-blue-500/30 transition-all duration-300 shadow-lg min-h-[11rem]">
                     <div class="w-36 sm:w-44 flex-shrink-0 relative overflow-hidden">
                         <img src="assets/eventos/animacion_1.jpg" alt="Taller infantil de animación de dibujos con IA" loading="lazy" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40 pointer-events-none"></div>
                     </div>
                     <div class="p-4 sm:p-5 text-left flex flex-col gap-1.5 flex-grow">
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-pink-400" data-lang-key="ev3Badge">Taller</span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-blue-400" data-lang-key="ev3Badge">Taller</span>
                         <h3 class="text-base sm:text-lg font-bold text-white leading-snug" data-lang-key="ev3Title">Taller: Anima tu Dibujo con IA</h3>
                         <p class="text-gray-400 text-xs sm:text-[13px] leading-relaxed" data-lang-key="ev3Desc">Facilitador en co-creación infantil: dibujos en papel procesados con IA de Google para animar los personajes, y subidos a Spatial para verlos de forma interactiva en entornos VR.</p>
                         <div class="flex gap-1.5 mt-auto pt-2">
@@ -422,13 +459,13 @@
                     </div>
                 </div>
 
-                <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-2xl overflow-hidden flex group hover:border-emerald-500/30 transition-all duration-300 shadow-lg min-h-[11rem]">
+                <div class="flex-shrink-0 w-[85vw] sm:w-[520px] bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-2xl overflow-hidden flex group hover:border-purple-500/30 transition-all duration-300 shadow-lg min-h-[11rem]">
                     <div class="w-36 sm:w-44 flex-shrink-0 relative overflow-hidden">
                         <img src="assets/eventos/chocolate_1.jpg" alt="Taller infantil de reconstrucción 3D con IA generativa" loading="lazy" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40 pointer-events-none"></div>
                     </div>
                     <div class="p-4 sm:p-5 text-left flex flex-col gap-1.5 flex-grow">
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-400" data-lang-key="ev4Badge">Taller</span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-purple-400" data-lang-key="ev4Badge">Taller</span>
                         <h3 class="text-base sm:text-lg font-bold text-white leading-snug" data-lang-key="ev4Title">Taller: Chocolate (IA & Reconstrucción 3D)</h3>
                         <p class="text-gray-400 text-xs sm:text-[13px] leading-relaxed" data-lang-key="ev4Desc">Facilitador en actividades creativas con IA generativa 3D: ideas de los niños en papel, bocetos 3D con Gemini, reconstrucción de malla con Tripo 3D y visualización en visores VR vía Sketchfab.</p>
                         <div class="flex gap-1.5 mt-auto pt-2">
@@ -443,61 +480,86 @@
 
         <!-- ========== SERVICES SECTION ========== -->
         <section id="servicios" class="py-24 reveal">
-            <div class="max-w-5xl mx-auto text-center">
-                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight" data-lang-key="servicesTitle">Servicios Creativos</h2>
-                <p class="text-lg text-gray-400 mb-16 max-w-2xl mx-auto" data-lang-key="servicesSubtitle">Soluciones interactivas a medida que conectan el arte digital con el espacio físico.</p>
-                
-                <div class="grid md:grid-cols-2 gap-8 text-left">
+            <div class="max-w-5xl mx-auto">
+                <div class="section-kicker"><span class="kicker-dot"></span><span>05</span></div>
+                <h2 class="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight" data-lang-key="servicesTitle">Servicios Creativos</h2>
+                <p class="text-lg text-gray-400 mb-16 max-w-2xl" data-lang-key="servicesSubtitle">Soluciones interactivas a medida que conectan el arte digital con el espacio físico.</p>
+
+                <div class="text-left">
                     <!-- Service 1 -->
-                    <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-8 rounded-3xl hover:border-blue-500/30 transition-all duration-300 shadow-xl group">
-                        <div class="w-12 h-12 rounded-2xl bg-blue-900/20 flex items-center justify-center mb-6 border border-blue-500/20 group-hover:scale-110 transition-transform">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div class="service-item open">
+                        <button class="service-header w-full flex items-center gap-6 py-7 px-2 text-left" aria-expanded="true">
+                            <span class="project-index w-14 flex-shrink-0">05.1</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
+                            <h3 class="service-header-title text-xl md:text-3xl font-bold text-gray-200 flex-grow transition-colors" data-lang-key="srv1Title">Instalaciones Interactivas</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="service-plus h-6 w-6 text-blue-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                        </button>
+                        <div class="service-body">
+                            <div>
+                                <p class="text-gray-400 leading-relaxed pb-7 pl-2 md:pl-[7.5rem] pr-2 max-w-3xl" data-lang-key="srv1Desc">
+                                    Desarrollo en TouchDesigner para mapping proyectado, visuales reactivos en vivo, integración de sensores corporales y espaciales (Kinect, hand tracking) para museos, marcas y eventos.
+                                </p>
+                            </div>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors" data-lang-key="srv1Title">Instalaciones Interactivas</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed" data-lang-key="srv1Desc">
-                            Desarrollo en TouchDesigner para mapping proyectado, visuales reactivos en vivo, integración de sensores corporales y espaciales (Kinect, hand tracking) para museos, marcas y eventos.
-                        </p>
                     </div>
 
                     <!-- Service 2 -->
-                    <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-8 rounded-3xl hover:border-purple-500/30 transition-all duration-300 shadow-xl group">
-                        <div class="w-12 h-12 rounded-2xl bg-purple-900/20 flex items-center justify-center mb-6 border border-purple-500/20 group-hover:scale-110 transition-transform">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div class="service-item">
+                        <button class="service-header w-full flex items-center gap-6 py-7 px-2 text-left" aria-expanded="false">
+                            <span class="project-index w-14 flex-shrink-0">05.2</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
                             </svg>
+                            <h3 class="service-header-title text-xl md:text-3xl font-bold text-gray-200 flex-grow transition-colors" data-lang-key="srv2Title">Desarrollo VR/AR inmersivo</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="service-plus h-6 w-6 text-blue-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                        </button>
+                        <div class="service-body">
+                            <div>
+                                <p class="text-gray-400 leading-relaxed pb-7 pl-2 md:pl-[7.5rem] pr-2 max-w-3xl" data-lang-key="srv2Desc">
+                                    Aplicaciones de Realidad Virtual y Aumentada en Unity para Meta Quest y dispositivos móviles. Simuladores interactivos, recorridos virtuales en 3D y juegos experimentales para capacitación y marketing.
+                                </p>
+                            </div>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors" data-lang-key="srv2Title">Desarrollo VR/AR inmersivo</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed" data-lang-key="srv2Desc">
-                            Aplicaciones de Realidad Virtual y Aumentada en Unity para Meta Quest y dispositivos móviles. Simuladores interactivos, recorridos virtuales en 3D y juegos experimentales para capacitación y marketing.
-                        </p>
                     </div>
 
                     <!-- Service 3 -->
-                    <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-8 rounded-3xl hover:border-pink-500/30 transition-all duration-300 shadow-xl group">
-                        <div class="w-12 h-12 rounded-2xl bg-pink-900/20 flex items-center justify-center mb-6 border border-pink-500/20 group-hover:scale-110 transition-transform">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div class="service-item">
+                        <button class="service-header w-full flex items-center gap-6 py-7 px-2 text-left" aria-expanded="false">
+                            <span class="project-index w-14 flex-shrink-0">05.3</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                             </svg>
+                            <h3 class="service-header-title text-xl md:text-3xl font-bold text-gray-200 flex-grow transition-colors" data-lang-key="srv3Title">Aplicaciones Móviles e Interactivas</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="service-plus h-6 w-6 text-blue-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                        </button>
+                        <div class="service-body">
+                            <div>
+                                <p class="text-gray-400 leading-relaxed pb-7 pl-2 md:pl-[7.5rem] pr-2 max-w-3xl" data-lang-key="srv3Desc">
+                                    Diseño y programación de aplicaciones móviles de alto rendimiento en Unity o desarrollo nativo. Integración de lógicas gamificadas, manuales interactivos 3D y juegos multijugador locales.
+                                </p>
+                            </div>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-pink-400 transition-colors" data-lang-key="srv3Title">Aplicaciones Móviles e Interactivas</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed" data-lang-key="srv3Desc">
-                            Diseño y programación de aplicaciones móviles de alto rendimiento en Unity o desarrollo nativo. Integración de lógicas gamificadas, manuales interactivos 3D y juegos multijugador locales.
-                        </p>
                     </div>
 
                     <!-- Service 4 -->
-                    <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-8 rounded-3xl hover:border-emerald-500/30 transition-all duration-300 shadow-xl group">
-                        <div class="w-12 h-12 rounded-2xl bg-emerald-900/20 flex items-center justify-center mb-6 border border-emerald-500/20 group-hover:scale-110 transition-transform">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div class="service-item">
+                        <button class="service-header w-full flex items-center gap-6 py-7 px-2 text-left" aria-expanded="false">
+                            <span class="project-index w-14 flex-shrink-0">05.4</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                             </svg>
+                            <h3 class="service-header-title text-xl md:text-3xl font-bold text-gray-200 flex-grow transition-colors" data-lang-key="srv4Title">Modelado y Animación 3D</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="service-plus h-6 w-6 text-blue-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                        </button>
+                        <div class="service-body">
+                            <div>
+                                <p class="text-gray-400 leading-relaxed pb-7 pl-2 md:pl-[7.5rem] pr-2 max-w-3xl" data-lang-key="srv4Desc">
+                                    Modelado de assets optimizados para tiempo real, animaciones personalizadas en After Effects o Blender, y deconstrucción procedural de objetos 3D.
+                                </p>
+                            </div>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors" data-lang-key="srv4Title">Modelado y Animación 3D</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed" data-lang-key="srv4Desc">
-                            Modelado de assets optimizados para tiempo real, animaciones personalizadas en After Effects o Blender, y deconstrucción procedural de objetos 3D.
-                        </p>
                     </div>
                 </div>
             </div>
@@ -507,8 +569,14 @@
         <section id="contacto" class="py-24 text-center reveal">
             <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 rounded-3xl shadow-xl p-10 md:p-16 max-w-4xl mx-auto relative overflow-hidden">
                 <div class="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-transparent pointer-events-none"></div>
-                
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight relative z-10" data-lang-key="contactTitle">Hablemos</h2>
+                <div class="dyson-sphere w-[420px] h-[420px] -top-52 left-1/2 -translate-x-1/2 opacity-40" style="perspective: 900px;">
+                    <div class="dyson-ring r1"></div>
+                    <div class="dyson-ring r2"></div>
+                    <div class="dyson-core"></div>
+                </div>
+
+                <div class="section-kicker justify-center relative z-10"><span class="kicker-dot"></span><span>06</span></div>
+                <h2 class="text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight relative z-10" data-lang-key="contactTitle">Hablemos</h2>
                 <p class="text-lg text-gray-400 mb-10 relative z-10 max-w-2xl mx-auto" data-lang-key="contactSubtitle">
                     ¿Tienes un proyecto en mente o una oportunidad para mí? ¡No dudes en contactarme!
                 </p>
@@ -754,9 +822,9 @@
         <div class="h-10"></div>
     </div>
 
-    <script src="js/translations.js?v=20260702d"></script>
-    <script src="js/main.js?v=20260702d"></script>
-    <script src="js/effects.js?v=20260702d"></script>
+    <script src="js/translations.js?v=20260705a"></script>
+    <script src="js/main.js?v=20260705a"></script>
+    <script src="js/effects.js?v=20260705a"></script>
 </body>
 </html>
 

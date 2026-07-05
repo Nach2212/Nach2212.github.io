@@ -9,6 +9,7 @@
                 heroTitle: 'Hola, soy <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">Ignacio Aguayo</span>',
                 heroSubtitle: "Creative Technologist. Construyo experiencias interactivas que conectan el mundo digital y el físico.",
                 heroBtnProjects: "Ver mis Proyectos", heroBtnContact: "Hablemos",
+                heroWords: ["instalaciones interactivas", "experiencias VR / AR", "hand tracking", "arte generativo", "gemelos digitales"],
                 
                 aboutTitle: "Sobre Mí",
                 aboutBio: "Soy un tecnólogo creativo radicado en Concepción, Chile, apasionado por la intersección del arte y el código. Mi enfoque es la creación de experiencias inmersivas e interactivas que desafían la percepción y conectan con las personas a un nivel más profundo.",
@@ -93,6 +94,7 @@
                 heroTitle: 'Hi, I\'m <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">Ignacio Aguayo</span>',
                 heroSubtitle: "Creative Technologist. I build interactive experiences that connect the digital and physical worlds.",
                 heroBtnProjects: "View My Projects", heroBtnContact: "Let's Talk",
+                heroWords: ["interactive installations", "VR / AR experiences", "hand tracking", "generative art", "digital twins"],
                 
                 aboutTitle: "About Me",
                 aboutBio: "I am a creative technologist based in Concepción, Chile, passionate about the intersection of art and code. My focus is on creating immersive and interactive experiences that challenge perception and connect with people on a deeper level.",
