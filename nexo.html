@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEXO — Sistema Nervioso Digital · Ignacio Aguayo</title>
+<style>
+  :root{
+    --bg:#05080f; --bg2:#0a0f1c; --panel:#0c1322cc; --line:#1b2740;
+    --ink:#e8f0f8; --dim:#7a8ba3; --cyan:#22d3ee; --mag:#e94fd8; --ok:#4ade80;
+    --disp:'Bahnschrift','Arial Narrow',system-ui,sans-serif;
+    --mono:'Cascadia Code',Consolas,'Courier New',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--disp);overflow-x:hidden}
+  #stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+  main{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 24px}
+  .label{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--cyan)}
+  .label.m{color:var(--mag)}
+
+  /* ---------- HERO ---------- */
+  header{min-height:92vh;display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center;padding:48px 0}
+  h1{font-size:clamp(52px,9vw,110px);line-height:.92;font-weight:700;letter-spacing:.02em;text-wrap:balance}
+  h1 .nx{color:var(--cyan);text-shadow:0 0 32px #22d3ee55}
+  .tag{margin-top:18px;font-size:clamp(16px,2vw,20px);color:var(--dim);max-width:46ch;line-height:1.5}
+  .tag b{color:var(--ink);font-weight:600}
+  .live{display:inline-flex;align-items:center;gap:8px;margin-top:26px;font-family:var(--mono);font-size:12px;color:var(--ok);border:1px solid #4ade8033;padding:7px 14px;border-radius:99px;background:#4ade800d}
+  .live i{width:8px;height:8px;border-radius:50%;background:var(--ok);animation:pulse 1.6s ease-in-out infinite}
+  @keyframes pulse{50%{opacity:.25}}
+  .orbwrap{position:relative;aspect-ratio:1;max-height:76vh}
+  #orbita{width:100%;height:100%;cursor:pointer}
+  .hint{position:absolute;bottom:2%;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.15em;white-space:nowrap}
+
+  /* panel de módulo */
+  #panel{position:absolute;top:4%;right:2%;width:min(300px,88%);background:var(--panel);backdrop-filter:blur(8px);
+    border:1px solid var(--line);border-top:2px solid var(--cyan);padding:18px;opacity:0;transform:translateY(-8px);
+    transition:opacity .3s,transform .3s;pointer-events:none}
+  #panel.on{opacity:1;transform:none}
+  #panel h3{font-size:20px;margin:6px 0 8px}
+  #panel p{font-size:14px;color:var(--dim);line-height:1.55}
+
+  section{margin-bottom:110px}
+  header{padding-bottom:100px}
+  h2{font-size:clamp(30px,4.5vw,46px);margin:10px 0 14px;text-wrap:balance}
+  .lead{color:var(--dim);max-width:62ch;line-height:1.6;font-size:17px}
+
+  /* ---------- 24 HORAS ---------- */
+  .dia{position:relative;margin-top:44px;padding-left:20px;border-left:1px solid var(--line)}
+  .evt{position:relative;padding:0 0 30px 26px}
+  .evt::before{content:"";position:absolute;left:-25px;top:5px;width:9px;height:9px;border-radius:50%;
+    background:var(--bg);border:2px solid var(--cyan);box-shadow:0 0 12px #22d3ee66}
+  .evt.m::before{border-color:var(--mag);box-shadow:0 0 12px #e94fd866}
+  .evt time{font-family:var(--mono);font-size:12px;color:var(--cyan);letter-spacing:.1em}
+  .evt.m time{color:var(--mag)}
+  .evt h4{font-size:19px;margin:3px 0 4px}
+  .evt p{font-size:14.5px;color:var(--dim);line-height:1.55;max-width:60ch}
+
+  /* ---------- CHAT DEMO ---------- */
+  .term{background:var(--bg2);border:1px solid var(--line);border-radius:10px;overflow:hidden;max-width:640px;margin-top:40px}
+  .tbar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--line)}
+  .tbar i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+  .tbar span{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.12em;margin-left:6px}
+  #chat{padding:20px 18px;min-height:300px;font-size:14.5px;line-height:1.5;display:flex;flex-direction:column;gap:12px}
+  .msg{max-width:85%;padding:9px 14px;border-radius:12px;white-space:pre-wrap}
+  .yo{align-self:flex-end;background:#22d3ee14;border:1px solid #22d3ee3a;border-bottom-right-radius:3px}
+  .nexo{align-self:flex-start;background:#e94fd80f;border:1px solid #e94fd833;border-bottom-left-radius:3px}
+  .nexo::before{content:"NEXO";display:block;font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--mag);margin-bottom:4px}
+  .sys{align-self:center;font-family:var(--mono);font-size:11px;color:var(--dim)}
+
+  /* ---------- STACK + CIERRE ---------- */
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .chip{font-family:var(--mono);font-size:12.5px;padding:8px 15px;border:1px solid var(--line);border-radius:99px;color:var(--dim)}
+  .chip:hover{border-color:var(--cyan);color:var(--cyan)}
+  footer{padding:60px 0 80px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+  footer p{color:var(--dim);font-size:14px;max-width:52ch;line-height:1.6}
+  .cta{font-family:var(--mono);font-size:13px;letter-spacing:.12em;color:var(--bg);background:var(--cyan);
+    padding:13px 26px;text-decoration:none;border-radius:4px;font-weight:700;box-shadow:0 0 28px #22d3ee44}
+  .cta:hover{background:var(--mag);box-shadow:0 0 28px #e94fd855}
+  a:focus-visible,#orbita:focus-visible{outline:2px solid var(--mag);outline-offset:3px}
+
+  @media (max-width:860px){
+    header{grid-template-columns:1fr;min-height:auto;padding-top:64px}
+    .orbwrap{max-height:60vh}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .live i{animation:none}
+  }
+</style>
+</head>
+<body>
+<canvas id="stars" aria-hidden="true"></canvas>
+<main>
+  <header>
+    <div>
+      <h1><span class="nx">NEXO</span><br>Sistema<br>nervioso<br>digital</h1>
+      <p class="tag">Un asistente estilo <b>J.A.R.V.I.S.</b> construido desde cero: orquesta LLMs, recuerda, ve, controla mi casa, cuida mi salud y <b>toma la iniciativa solo</b> — corriendo 24/7 sobre mi propia infraestructura.</p>
+      <span class="live"><i></i> EN LÍNEA — respondiendo por Telegram ahora mismo</span>
+    </div>
+    <div class="orbwrap">
+      <canvas id="orbita" tabindex="0" aria-label="Diagrama orbital de los módulos de Nexo. Toca un nodo para ver su descripción."></canvas>
+      <div id="panel" role="status"><span class="label m" id="p-tag"></span><h3 id="p-tit"></h3><p id="p-txt"></p></div>
+      <span class="hint">— toca un módulo en órbita —</span>
+    </div>
+  </header>
+
+  <section>
+    <span class="label">Proactividad</span>
+    <h2>Un día cualquiera, sin que yo pida nada</h2>
+    <p class="lead">La diferencia entre un chatbot y un asistente es la iniciativa. Nexo vive en el tiempo: cada rutina decide sola cuándo hablar — y cuándo guardar silencio.</p>
+    <div class="dia">
+      <div class="evt"><time>07:58</time><h4>Radar de agenda</h4><p>Mi próxima reunión tiene dirección: calcula el tráfico real desde donde estoy y me escribe "sal en 12 minutos".</p></div>
+      <div class="evt m"><time>09:00</time><h4>Parte del día</h4><p>Agenda, clima, correos, plan y pendientes — resumidos con criterio, no en bruto.</p></div>
+      <div class="evt"><time>10:00</time><h4>Guardián médico</h4><p>Vigila mi calendario: me recuerda la hora al traumatólogo y al día siguiente me pregunta qué me dijeron, y lo anota en mi historial.</p></div>
+      <div class="evt m"><time>15:47</time><h4>Geofence</h4><p>Detecta que llegué a casa y me recibe con lo que quedó pendiente. Si hace frío y vengo en camino, el calefactor ya está encendido.</p></div>
+      <div class="evt"><time>21:30</time><h4>Cierre del día</h4><p>Me pregunta cómo estuve — y como conoce mis patrones, sabe cuándo insistir y cuándo no.</p></div>
+      <div class="evt m"><time>23:00</time><h4>Reflexión nocturna</h4><p>Relee las conversaciones del día y <b>aprende solo</b>: consolida hechos, actualiza fichas de personas y detecta temas sin resolver para retomarlos después.</p></div>
+      <div class="evt"><time>LUN</time><h4>Laboratorio creativo</h4><p>Cada lunes me propone proyectos de arte interactivo para publicar — y le hace seguimiento semanal al que elijo.</p></div>
+      <div class="evt m"><time>DÍA 1</time><h4>Retrospectiva mensual</h4><p>Cruza salud, finanzas, proyectos y conversaciones del mes: qué avancé, qué patrón repetí, y una verdad cruda.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <span class="label m">Demo</span>
+    <h2>Así se siente conversar con él</h2>
+    <div class="term">
+      <div class="tbar"><i></i><i></i><i></i><span>TELEGRAM · @NEXO</span></div>
+      <div id="chat" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section>
+    <span class="label">Ingeniería</span>
+    <h2>Debajo del capó</h2>
+    <p class="lead">Node.js puro, sin frameworks de agentes. El bucle de herramientas es propio — más de sesenta funciones que el modelo decide usar solo — sobre una cascada de LLMs que, si un proveedor cae a mitad de una tarea, continúa con el siguiente <b>sin perder el progreso</b>. Memoria RAG con índice vectorial binario, escritura atómica resiliente para operar sobre Google Drive, y una suite de tests que protege cada cambio de un sistema que corre 24/7 y no puede detenerse.</p>
+    <div class="chips">
+      <span class="chip">Node.js</span><span class="chip">Telegram Bot + Mini App</span><span class="chip">Gemini · Llama (cascada)</span>
+      <span class="chip">RAG · embeddings binarios</span><span class="chip">Visión multimodal</span><span class="chip">Whisper STT</span>
+      <span class="chip">Tuya IoT</span><span class="chip">Google Calendar/Gmail/Health</span><span class="chip">Electron widgets</span>
+      <span class="chip">Puppeteer</span><span class="chip">OSRM geofencing</span><span class="chip">PM2 · 24/7</span>
+    </div>
+  </section>
+
+  <footer>
+    <p>Nexo es infraestructura personal real, no un demo: administra mi vault de conocimiento, mi domótica y mi salud desde 2026. Construido y operado por <b style="color:var(--ink)">Ignacio Aguayo</b> — Creative Technologist.</p>
+    <a class="cta" href="index.html">← VOLVER AL PORTAFOLIO</a>
+  </footer>
+</main>
+
+<script>
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ------- fondo constelación ------- */
+const bg = document.getElementById('stars'), bx = bg.getContext('2d');
+let stars = [];
+function bgSize(){ bg.width = innerWidth; bg.height = innerHeight;
+  stars = Array.from({length: Math.min(140, innerWidth/8)}, () => ({
+    x: Math.random()*bg.width, y: Math.random()*bg.height,
+    r: Math.random()*1.4+.3, s: Math.random()*.25+.05, o: Math.random()*.6+.2 }));
+}
+addEventListener('resize', bgSize); bgSize();
+(function bgTick(){
+  bx.clearRect(0,0,bg.width,bg.height);
+  for (const s of stars){
+    bx.globalAlpha = s.o; bx.fillStyle = '#8fb8d8';
+    bx.beginPath(); bx.arc(s.x, s.y, s.r, 0, 7); bx.fill();
+    if (!reduce){ s.y += s.s; if (s.y > bg.height) s.y = 0; }
+  }
+  bx.globalAlpha = 1;
+  if (!reduce) requestAnimationFrame(bgTick);
+})();
+
+/* ------- núcleo orbital ------- */
+const MODS = [
+  { n:'CEREBRO',  t:'Cascada de LLMs', d:'Groq, Gemini y modelos locales en cascada: si un proveedor cae a mitad de una tarea, otro la continúa sin repetir lo ya hecho.', c:'#22d3ee', o:1, a:0 },
+  { n:'MEMORIA',  t:'RAG + hechos', d:'Índice vectorial binario sobre todo mi vault. Aprende de noche, consolida cada mes y olvida lo redundante — como una memoria de verdad.', c:'#e94fd8', o:1, a:2.1 },
+  { n:'PROACTIVO',t:'17 rutinas', d:'Briefings, guardianes, radares y retrospectivas con catch-up: si el PC estaba apagado a su hora, corren al arrancar.', c:'#22d3ee', o:1, a:4.2 },
+  { n:'CASA',     t:'Domótica', d:'Luces, calefactor y parlantes. Verifica el estado físico real del aparato antes de confirmar — nunca miente.', c:'#e94fd8', o:2, a:1 },
+  { n:'SALUD',    t:'Google Health', d:'Importa mis reportes semanales, detecta tendencias ("dormiste 1h menos") y genera un informe mensual en PDF con consejos.', c:'#22d3ee', o:2, a:2.6 },
+  { n:'VISIÓN',   t:'Multimodal', d:'Ve las fotos que le mando (y las archiva donde corresponde), analiza páginas web con captura + visión, y busca imágenes.', c:'#e94fd8', o:2, a:4.3 },
+  { n:'UBICACIÓN',t:'Geofencing', d:'Sabe si estoy en casa, la U o el cuartel. Calcula rutas reales y me avisa cuándo salir para llegar a tiempo.', c:'#22d3ee', o:2, a:5.6 },
+  { n:'VOZ',      t:'STT / TTS', d:'Notas de voz por Whisper, respuestas habladas por los parlantes de la casa.', c:'#e94fd8', o:1, a:5.3 },
+];
+const cv = document.getElementById('orbita'), cx = cv.getContext('2d');
+const panel = document.getElementById('panel');
+let W, H, C, R1, R2, t0 = 0, sel = -1, nodes = [];
+function orbSize(){ const r = cv.parentElement.getBoundingClientRect();
+  cv.width = W = r.width * devicePixelRatio; cv.height = H = Math.min(r.width, r.height||r.width) * devicePixelRatio;
+  cv.style.height = (H/devicePixelRatio)+'px';
+  C = { x: W/2, y: H/2 }; R1 = W*0.26; R2 = W*0.42;
+}
+addEventListener('resize', orbSize); orbSize();
+function draw(ts){
+  const t = reduce ? 0 : ts/1000;
+  cx.clearRect(0,0,W,H);
+  // órbitas
+  cx.strokeStyle = '#1b2740'; cx.lineWidth = 1;
+  for (const r of [R1, R2]){ cx.beginPath(); cx.arc(C.x, C.y, r, 0, 7); cx.stroke(); }
+  // núcleo
+  const pulso = 1 + (reduce ? 0 : Math.sin(t*2)*0.06);
+  const g = cx.createRadialGradient(C.x, C.y, 0, C.x, C.y, W*0.12*pulso);
+  g.addColorStop(0, '#22d3ee'); g.addColorStop(.5, '#22d3ee33'); g.addColorStop(1, 'transparent');
+  cx.fillStyle = g; cx.beginPath(); cx.arc(C.x, C.y, W*0.12*pulso, 0, 7); cx.fill();
+  cx.fillStyle = '#05080f'; cx.beginPath(); cx.arc(C.x, C.y, W*0.055, 0, 7); cx.fill();
+  cx.strokeStyle = '#22d3ee'; cx.lineWidth = 2; cx.beginPath(); cx.arc(C.x, C.y, W*0.055, 0, 7); cx.stroke();
+  cx.fillStyle = '#e8f0f8'; cx.font = `700 ${W*0.028}px Bahnschrift, sans-serif`;
+  cx.textAlign = 'center'; cx.textBaseline = 'middle'; cx.fillText('NEXO', C.x, C.y);
+  // nodos
+  nodes = [];
+  MODS.forEach((m, i) => {
+    const r = m.o === 1 ? R1 : R2;
+    const vel = m.o === 1 ? 0.12 : -0.07;
+    const a = m.a + t*vel;
+    const x = C.x + Math.cos(a)*r, y = C.y + Math.sin(a)*r;
+    nodes.push({x, y, i});
+    // línea al núcleo (solo la seleccionada)
+    if (i === sel){ cx.strokeStyle = m.c; cx.globalAlpha = .5; cx.beginPath(); cx.moveTo(C.x, C.y); cx.lineTo(x, y); cx.stroke(); cx.globalAlpha = 1; }
+    cx.fillStyle = '#05080f'; cx.beginPath(); cx.arc(x, y, W*0.028, 0, 7); cx.fill();
+    cx.strokeStyle = m.c; cx.lineWidth = i === sel ? 3 : 1.5;
+    cx.beginPath(); cx.arc(x, y, W*0.028, 0, 7); cx.stroke();
+    cx.fillStyle = i === sel ? m.c : '#7a8ba3';
+    cx.font = `${W*0.016}px Cascadia Code, Consolas, monospace`;
+    cx.fillText(m.n, x, y + W*0.05);
+  });
+  if (!reduce) requestAnimationFrame(draw);
+}
+requestAnimationFrame(draw);
+if (reduce) setTimeout(() => draw(0), 50);
+function pick(ev){
+  const r = cv.getBoundingClientRect();
+  const px = (ev.clientX - r.left) * devicePixelRatio, py = (ev.clientY - r.top) * devicePixelRatio;
+  let best = -1, bd = 1e9;
+  nodes.forEach(n => { const d = (n.x-px)**2 + (n.y-py)**2; if (d < bd){ bd = d; best = n.i; } });
+  if (bd < (W*0.06)**2){ sel = best; const m = MODS[sel];
+    document.getElementById('p-tag').textContent = m.t;
+    document.getElementById('p-tit').textContent = m.n;
+    document.getElementById('p-txt').textContent = m.d;
+    panel.classList.add('on');
+    if (reduce) draw(0);
+  } else { sel = -1; panel.classList.remove('on'); if (reduce) draw(0); }
+}
+cv.addEventListener('click', pick);
+cv.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault();
+  sel = (sel+1) % MODS.length; const m = MODS[sel];
+  document.getElementById('p-tag').textContent = m.t; document.getElementById('p-tit').textContent = m.n;
+  document.getElementById('p-txt').textContent = m.d; panel.classList.add('on'); if (reduce) draw(0); }});
+
+/* ------- chat demo ------- */
+const GUION = [
+  ['yo',   'nexo, recuérdame apagar el calefactor en 2 horas'],
+  ['nexo', 'Listo ⏰ Programado para las 19:45 — y no solo te aviso: lo apago yo mismo a esa hora.'],
+  ['yo',   '¿cómo dormí esta semana?'],
+  ['nexo', 'Según tu reporte de Google Health: 6.5 h promedio, media hora menos que la semana pasada 😴 Ojo, tu columna se repara durmiendo.'],
+  ['sys',  '— 3 horas después, sin que nadie pregunte —'],
+  ['nexo', '🚗 Tu reunión en la ACHS es a las 11:00. Desde la U el viaje toma ~20 min: sal en 8 minutos.'],
+];
+const chat = document.getElementById('chat');
+async function esperar(ms){ return new Promise(r => setTimeout(r, ms)); }
+async function playChat(){
+  chat.innerHTML = '';
+  for (const [rol, txt] of GUION){
+    const el = document.createElement('div');
+    el.className = rol === 'sys' ? 'sys msg' : 'msg ' + rol;
+    chat.appendChild(el);
+    if (reduce){ el.textContent = txt; continue; }
+    for (let i = 1; i <= txt.length; i++){ el.textContent = txt.slice(0, i); await esperar(14); }
+    await esperar(rol === 'yo' ? 500 : 1100);
+  }
+  if (!reduce){ await esperar(6000); playChat(); }
+}
+let played = false;
+new IntersectionObserver(es => { if (es[0].isIntersecting && !played){ played = true; playChat(); } }).observe(chat);
+</script>
+</body>
+</html>
