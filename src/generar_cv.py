@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """Genera el CV en PDF de Ignacio Aguayo (assets/cv/CV_Ignacio_Aguayo.pdf).
 
-Diseño: encabezado oscuro estilo "cyber" (a juego con el portafolio) y cuerpo
-claro para que imprima bien. Una sola página A4.
+Enfoque: perfil de tecnólogo creativo orientado a ARTE LUMÍNICO, EXPERIENCIAS
+INMERSIVAS y MEDIACIÓN ARTÍSTICA (colectivos de new media art, centros
+culturales, festivales). Diseño: encabezado oscuro estilo "cyber" (a juego
+con el portafolio) y cuerpo claro para que imprima bien. Una página A4.
 Regenerar con:  python src/generar_cv.py  (desde la raíz del repo)
 """
 import os
@@ -18,7 +20,6 @@ LOGO = os.path.join(ROOT, "assets", "Logo.png")
 
 W, H = A4
 DARK = HexColor("#030712")
-SLATE = HexColor("#0f172a")
 BLUE = HexColor("#3b82f6")
 PURPLE = HexColor("#8b5cf6")
 GRAY = HexColor("#475569")
@@ -26,20 +27,18 @@ LIGHTGRAY = HexColor("#64748b")
 TEXT = HexColor("#1e293b")
 
 c = canvas.Canvas(OUT, pagesize=A4)
-c.setTitle("CV Ignacio Aguayo - Creative Technologist")
+c.setTitle("CV Ignacio Aguayo - Creative Technologist · Arte Lumínico e Inmersivo")
 c.setAuthor("Ignacio Aguayo")
 
 # ---------- Encabezado oscuro ----------
 HEADER_H = 52 * mm
 c.setFillColor(DARK)
 c.rect(0, H - HEADER_H, W, HEADER_H, stroke=0, fill=1)
-# franja de acento degradada (simulada con dos bloques)
 c.setFillColor(BLUE)
 c.rect(0, H - HEADER_H, W / 2, 1.6 * mm, stroke=0, fill=1)
 c.setFillColor(PURPLE)
 c.rect(W / 2, H - HEADER_H, W / 2, 1.6 * mm, stroke=0, fill=1)
 
-# logo
 try:
     logo = ImageReader(LOGO)
     size = 26 * mm
@@ -52,8 +51,8 @@ c.setFillColor(white)
 c.setFont("Helvetica-Bold", 27)
 c.drawString(x0, H - 22 * mm, "IGNACIO AGUAYO")
 c.setFillColor(BLUE)
-c.setFont("Helvetica-Bold", 13)
-c.drawString(x0, H - 29.5 * mm, "CREATIVE TECHNOLOGIST")
+c.setFont("Helvetica-Bold", 12)
+c.drawString(x0, H - 29.5 * mm, "CREATIVE TECHNOLOGIST  ·  ARTE LUMÍNICO E INTERACTIVO")
 c.setFillColor(HexColor("#94a3b8"))
 c.setFont("Helvetica", 9)
 c.drawString(x0, H - 36.5 * mm, "Concepción, Chile   ·   i.aguayo2212@gmail.com")
@@ -62,10 +61,10 @@ c.drawString(x0, H - 41.5 * mm, "nach2212.github.io   ·   github.com/Nach2212")
 c.setFillColor(HexColor("#cbd5e1"))
 c.setFont("Helvetica-Oblique", 9.5)
 c.drawString(18 * mm, H - 48.5 * mm,
-             "Construyo experiencias interactivas que conectan el mundo digital y el físico.")
+             "Instalaciones lumínicas, experiencias inmersivas y mediación artística: arte y código al servicio de la comunidad.")
 
 # ---------- utilidades ----------
-y = H - HEADER_H - 16 * mm
+y = H - HEADER_H - 11 * mm
 LM, RM = 18 * mm, W - 18 * mm
 
 def section(title):
@@ -73,11 +72,11 @@ def section(title):
     c.setFillColor(BLUE)
     c.rect(LM, y - 1, 8 * mm, 2.2, stroke=0, fill=1)
     c.setFillColor(DARK)
-    c.setFont("Helvetica-Bold", 12.5)
+    c.setFont("Helvetica-Bold", 12)
     c.drawString(LM + 10 * mm, y - 2, title.upper())
-    y -= 9.5 * mm
+    y -= 9 * mm
 
-def bullet(bold, rest, size=9.8, gap=6.2):
+def bullet(bold, rest, size=9.4, gap=5.8):
     global y
     c.setFillColor(PURPLE)
     c.circle(LM + 1.5 * mm, y + 1.2, 1.1, stroke=0, fill=1)
@@ -90,9 +89,9 @@ def bullet(bold, rest, size=9.8, gap=6.2):
     c.drawString(LM + 4 * mm + bw, y, rest)
     y -= gap * mm
 
-def para(text, size=9.8, leading=5.2, color=GRAY, max_w=None):
+def para(text, size=9.6, leading=5.0, color=GRAY, max_w=None, indent=0):
     global y
-    max_w = max_w or (RM - LM)
+    max_w = max_w or (RM - LM - indent)
     c.setFont("Helvetica", size)
     c.setFillColor(color)
     words, line = text.split(), ""
@@ -101,90 +100,100 @@ def para(text, size=9.8, leading=5.2, color=GRAY, max_w=None):
         if c.stringWidth(t, "Helvetica", size) <= max_w:
             line = t
         else:
-            c.drawString(LM, y, line)
+            c.drawString(LM + indent, y, line)
             y -= leading * mm
             line = w_
     if line:
-        c.drawString(LM, y, line)
+        c.drawString(LM + indent, y, line)
         y -= leading * mm
+
+def proyecto(title, tech, desc):
+    global y
+    c.setFillColor(DARK)
+    c.setFont("Helvetica-Bold", 10.6)
+    c.drawString(LM, y, title)
+    c.setFillColor(PURPLE)
+    c.setFont("Helvetica-Bold", 8.2)
+    c.drawString(LM + c.stringWidth(title, "Helvetica-Bold", 10.6) + 3 * mm, y, tech)
+    y -= 4.9 * mm
+    para(desc, size=9.2, leading=4.6)
+    y -= 2.2 * mm
 
 # ---------- Perfil ----------
 section("Perfil")
-para("Tecnólogo creativo apasionado por la intersección del arte y el código. Diseño y desarrollo "
-     "instalaciones interactivas, aplicaciones de realidad virtual y aumentada, y experiencias "
-     "inmersivas que desafían la percepción y conectan con las personas a un nivel más profundo.")
-y -= 6 * mm
+para("Tecnólogo creativo enfocado en la intersección entre arte, luz y código. Creo instalaciones "
+     "interactivas que responden al cuerpo y al gesto, experiencias inmersivas en realidad virtual "
+     "y espacios de aprendizaje donde comunidades y niños co-crean con tecnología. Me mueve llevar "
+     "el arte digital a públicos reales: la calle, la escuela, la biblioteca y el festival.")
+y -= 3.5 * mm
+
+# ---------- Obra y experiencia ----------
+section("Obra y Experiencia")
+proyecto("Instalaciones interactivas con luz y gesto", "TouchDesigner · Hand Tracking · Visuales generativos",
+         "Serie de obras controladas con las manos en el espacio: galería circular inmersiva, "
+         "deconstrucción de objetos 3D en tiempo real y visuales reactivos al movimiento y al sonido.")
+proyecto("Codex del Cosmos", "Unity · VR Meta Quest · Fondo Audiovisual",
+         "Obra contemplativa en realidad virtual: el visitante manipula la luz fósil del universo con sus "
+         "manos, sin controles, para provocar asombro y conexión con el paisaje cósmico.")
+proyecto("Mediación artística: talleres de co-creación con IA", "Facilitador · IA generativa · VR",
+         "Diseño y facilitación de talleres infantiles: dibujos en papel animados con IA y reconstruidos "
+         "en 3D para verlos en visores VR. Los niños viven el puente entre su imaginación y la tecnología.")
+proyecto("Exhibiciones en espacio público", "Festival REC · Biblioteca Municipal de Concepción",
+         "Montaje y operación de obras ante audiencias masivas: juego de esquive con body tracking en el "
+         "festival REC y galería VR para la comunidad fotográfica Afoconce (Meta Quest 2).")
+proyecto("GearMap", "Unity · Móvil · Gemelo digital 3D",
+         "App de entrenamiento con modelos 3D interactivos para equipos de emergencia; postulada a fondos "
+         "públicos (Sercotec, Jump Chile). Tecnología con propósito social.")
+y -= 2.5 * mm
 
 # ---------- Habilidades ----------
-section("Habilidades Técnicas")
-skills = ["Unity / C#", "Desarrollo VR/AR (Meta Quest)", "TouchDesigner", "Hand & Body Tracking",
-          "Apps Móviles", "Modelado y Animación 3D", "Blender / After Effects", "UX/UI",
-          "Shaders y Visuales Generativos", "IA Generativa", "Creative Coding"]
+section("Herramientas y Lenguajes")
+skills = ["TouchDesigner", "Projection / Mapping", "Unity / C#", "VR · Meta Quest", "AR Móvil",
+          "Hand & Body Tracking", "Kinect / Sensores", "Shaders y Visuales Generativos",
+          "Blender / Maya", "After Effects", "IA Generativa", "Creative Coding"]
 cx, cy = LM, y
-c.setFont("Helvetica-Bold", 9)
+c.setFont("Helvetica-Bold", 8.6)
 for s in skills:
-    wpx = c.stringWidth(s, "Helvetica-Bold", 9) + 8 * mm
+    wpx = c.stringWidth(s, "Helvetica-Bold", 8.6) + 7 * mm
     if cx + wpx > RM:
         cx = LM
-        cy -= 8.8 * mm
+        cy -= 8.2 * mm
     c.setFillColor(HexColor("#eff6ff"))
     c.setStrokeColor(HexColor("#bfdbfe"))
-    c.roundRect(cx, cy - 2 * mm, wpx, 6.6 * mm, 3 * mm, stroke=1, fill=1)
+    c.roundRect(cx, cy - 2 * mm, wpx, 6.2 * mm, 3 * mm, stroke=1, fill=1)
     c.setFillColor(HexColor("#1d4ed8"))
-    c.drawString(cx + 4 * mm, cy, s)
-    cx += wpx + 3 * mm
-y = cy - 12 * mm
+    c.drawString(cx + 3.5 * mm, cy, s)
+    cx += wpx + 2.6 * mm
+y = cy - 9.5 * mm
 
-# ---------- Proyectos ----------
-section("Proyectos Destacados")
-projects = [
-    ("Galería VR para Fotógrafos", "Unity · Meta Quest 2",
-     "Galería virtual inmersiva exhibida en la Biblioteca Municipal de Concepción junto a la comunidad Afoconce."),
-    ("App de Entrenamiento para Bomberos", "Unity · Mobile · 3D",
-     "Herramienta de estudio para ubicar material del carro bomba y consultar procedimientos de emergencia."),
-    ("Instalaciones Interactivas con Hand Tracking", "TouchDesigner · IA",
-     "Galería circular, deconstrucción 3D en tiempo real y visuales generados por IA controlados con gestos."),
-    ("REC — Obstáculos en Tiempo Real", "Unity · Body Tracking",
-     "Experiencia de esquivar obstáculos con el cuerpo, exhibida en el stand de la U. San Sebastián en el festival REC."),
-    ("Talleres de IA y 3D para Niños", "Facilitador · Gemini · VR",
-     "Co-creación infantil: dibujos animados con IA y reconstrucción 3D visualizada en visores VR."),
-]
-for title, tech, desc in projects:
-    c.setFillColor(DARK)
-    c.setFont("Helvetica-Bold", 11)
-    c.drawString(LM, y, title)
-    c.setFillColor(PURPLE)
-    c.setFont("Helvetica-Bold", 8.5)
-    c.drawString(LM + c.stringWidth(title, "Helvetica-Bold", 11) + 3 * mm, y, tech)
-    y -= 5.2 * mm
-    para(desc, size=9.4, leading=4.8)
-    y -= 3.4 * mm
-
-y -= 3 * mm
-
-# ---------- Formación ----------
-section("Formación")
+# ---------- Formación y certificaciones ----------
+section("Formación y Certificaciones")
 c.setFillColor(DARK)
-c.setFont("Helvetica-Bold", 11)
-c.drawString(LM, y, "Animación Digital")
+c.setFont("Helvetica-Bold", 10.6)
+c.drawString(LM, y, "Animación Digital — Universidad San Sebastián")
 c.setFillColor(PURPLE)
-c.setFont("Helvetica-Bold", 8.5)
-c.drawString(LM + c.stringWidth("Animación Digital", "Helvetica-Bold", 11) + 3 * mm, y,
-             "2022 – presente · 4º año")
-y -= 5.2 * mm
-para("Universidad San Sebastián, Concepción.", size=9.4, leading=4.8)
-y -= 5 * mm
+c.setFont("Helvetica-Bold", 8.2)
+c.drawString(LM + c.stringWidth("Animación Digital — Universidad San Sebastián", "Helvetica-Bold", 10.6) + 3 * mm,
+             y, "4º año · New Media Lab")
+y -= 4.9 * mm
+para("Grado académico de Bachiller en Animación. Vinculado al laboratorio de nuevos medios de la USS.",
+     size=9.2, leading=4.6)
+y -= 2.2 * mm
+bullet("Comunicación escénica:", "certificación en hablar en público con técnicas teatrales.")
+bullet("Trabajo seguro con públicos:", "primeros auxilios psicológicos y reanimación cardiopulmonar (RCP).")
+bullet("Gestión:", "certificaciones en diseño de modelos de negocio, gestión financiera y negociación.")
+y -= 2 * mm
 
 # ---------- Más allá del código ----------
 section("Más Allá del Código")
-bullet("Bombero Voluntario.", "Compromiso con la comunidad y trabajo en equipo bajo presión.")
-bullet("Running de larga distancia.", "Disciplina, constancia y metas ambiciosas paso a paso.")
-bullet("Trekking.", "Adaptabilidad, claridad mental y conexión con la naturaleza.")
+bullet("Bombero voluntario (8ª Cía. de Concepción).", "Servicio comunitario, montaje seguro y calma bajo presión.")
+bullet("Trekking y montaña.", "La naturaleza y el paisaje como fuente creativa y de equilibrio.")
+bullet("Corredor de larga distancia.", "Disciplina y constancia para proyectos de largo aliento.")
 
 # ---------- pie ----------
 c.setFillColor(LIGHTGRAY)
 c.setFont("Helvetica-Oblique", 7.5)
-c.drawCentredString(W / 2, 10 * mm, "Portafolio completo con demos en video: nach2212.github.io")
+c.drawCentredString(W / 2, 5.5 * mm, "Portafolio completo con demos en video: nach2212.github.io")
 
 c.save()
 print("OK ->", OUT)
