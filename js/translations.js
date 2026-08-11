@@ -34,7 +34,7 @@
                 srv4Title: "Modelado y Animación 3D",
                 srv4Desc: "Modelado de assets optimizados para tiempo real, animaciones personalizadas en After Effects o Blender, y deconstrucción procedural de objetos 3D.",
                 
-                skillsTitle: "Mis Habilidades", skillUnity: "Unity", skillVrAr: "Desarrollo VR/AR", skillMobile: "Mobile Apps", skillTouchdesigner: "TouchDesigner", skillUiUx: "UX/UI Design", skillInteractive: "Experiencias Interactivas", skillShaders: "Shaders & Visuales Generativos", skillCreativeCoding: "Creative Coding",
+                skillsTitle: "Mis Habilidades", skillUnity: "Unity", skillVrAr: "Desarrollo VR/AR", skillMobile: "Mobile Apps", skillTouchdesigner: "TouchDesigner", skillUiUx: "UX/UI Design", skillInteractive: "Experiencias Interactivas", skillShaders: "Shaders & Visuales Generativos", skillCreativeCoding: "Creative Coding", skillLevelExpert: "Experto", skillLevelProficient: "Competente",
                 
                 projectsTitle: "Proyectos Destacados", projectsSubtitle: "Una selección de mis mejores trabajos.", pBtnDetails: "Ver Detalles",
                 p1Title: "Nexo — Asistente Personal IA", p1Desc: "Sistema tipo J.A.R.V.I.S. construido desde cero: orquesta LLMs, ve, controla mi casa y toma la iniciativa solo, 24/7.",
@@ -119,7 +119,7 @@
                 srv4Title: "3D Modeling & Animation",
                 srv4Desc: "Modeling of real-time optimized assets, custom animations in After Effects or Blender, and procedural 3D deconstruction.",
                 
-                skillsTitle: "My Skills", skillUnity: "Unity", skillVrAr: "VR/AR Development", skillMobile: "Mobile Apps", skillTouchdesigner: "TouchDesigner", skillUiUx: "UX/UI Design", skillInteractive: "Interactive Experiences", skillShaders: "Shaders & Generative Visuals", skillCreativeCoding: "Creative Coding",
+                skillsTitle: "My Skills", skillUnity: "Unity", skillVrAr: "VR/AR Development", skillMobile: "Mobile Apps", skillTouchdesigner: "TouchDesigner", skillUiUx: "UX/UI Design", skillInteractive: "Interactive Experiences", skillShaders: "Shaders & Generative Visuals", skillCreativeCoding: "Creative Coding", skillLevelExpert: "Expert", skillLevelProficient: "Proficient",
                 
                 projectsTitle: "Featured Projects", projectsSubtitle: "A selection of my best work.", pBtnDetails: "View Details",
                 p1Title: "Nexo — AI Personal Assistant", p1Desc: "A J.A.R.V.I.S.-style system built from scratch: orchestrates LLMs, sees, controls my home, and takes initiative on its own, 24/7.",
