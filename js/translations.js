@@ -81,6 +81,11 @@
                 ev4Title: "Taller: Chocolate (IA & Reconstrucción 3D)",
                 ev4Desc: "Facilitador en actividades creativas con IA generativa 3D: ideas de los niños en papel, bocetos 3D con Gemini, reconstrucción de malla con Tripo 3D y visualización en visores VR vía Sketchfab.",
                 ev4Badge: "Taller",
+                ev5Badge: "Selección oficial · Lab XR",
+                ev5Title: "Simbiosis Inmersiva Lab — 33° FICValdivia",
+                ev5Desc: "Seleccionado con Codex del Cosmos para el laboratorio XR de Encuentros Australes, en el Festival Internacional de Cine de Valdivia (9–12 oct 2026). En 4 días, en equipo con Sofía, Cami y Diego, desarrollamos un prototipo VR arqueológico en Unity: grabación 360 y fotogrametría en terreno, objetos agarrables y un pudú guía que enseña qué hacer al encontrar un hallazgo arqueológico. Cerramos con pitch ante mentores de la industria.",
+                ev5Tag2: "Video 360",
+                ev5Tag3: "Fotogrametría",
                 
                 contactTitle: "Hablemos", contactSubtitle: "¿Tienes un proyecto en mente o una oportunidad para mí? ¡No dudes en contactarme!", contactBtnCopy: "Copiar", contactBtnSend: "Escribir", contactCopyFeedback: "¡Copiado!", contactBtnCV: "Descargar CV", contactBtnGitHub: "Ver mi GitHub", contactBtnInstagram: "Instagram",
                 footerRights: "&copy; 2026 Ignacio Aguayo. Todos los derechos reservados.", footerBtnDestroy: "¡Destruir Página!",
@@ -167,6 +172,11 @@
                 ev4Title: "Workshop: Chocolate (AI & 3D Reconstruction)",
                 ev4Desc: "Facilitator in creative activities with generative 3D AI: kids' ideas on paper, 3D sketches with Gemini, mesh reconstruction with Tripo 3D, and viewing in VR headsets via Sketchfab.",
                 ev4Badge: "Workshop",
+                ev5Badge: "Official selection · XR Lab",
+                ev5Title: "Simbiosis Inmersiva Lab — 33rd FICValdivia",
+                ev5Desc: "Selected with Codex del Cosmos for the Encuentros Australes XR lab at the Valdivia International Film Festival (Oct 9–12, 2026). In 4 days, together with Sofía, Cami and Diego, we built an archaeological VR prototype in Unity: on-site 360 filming and photogrammetry, grabbable artifacts and a pudú guide that teaches what to do when you find an archaeological object. We closed with a pitch to industry mentors.",
+                ev5Tag2: "360 Video",
+                ev5Tag3: "Photogrammetry",
                 contactTitle: "Let's Talk", contactSubtitle: "Got a project in mind or an opportunity for me? Don't hesitate to reach out!", contactBtnCopy: "Copy", contactBtnSend: "Email", contactCopyFeedback: "Copied!", contactBtnCV: "Download CV", contactBtnGitHub: "View my GitHub", contactBtnInstagram: "Instagram",
                 footerRights: "&copy; 2026 Ignacio Aguayo. All rights reserved.", footerBtnDestroy: "Destroy Page!",
                 resetTitle: "What have you done? My portfolio! :c", resetBtn: "Rebuild System"
