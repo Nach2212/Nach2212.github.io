@@ -176,3 +176,8 @@ dialog#visor::backdrop { background: rgba(3, 10, 16, .82); }
 .visor-media img, .visor-media video { width: 100%; max-height: 64vh; object-fit: contain; border-radius: 12px; background: #000; }
 .visor-actions { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
 .visor-actions .btn { flex: 1 1 auto; }
+
+.sub{margin:36px 0 12px;font:700 18px/1.2 var(--body);display:flex;flex-wrap:wrap;align-items:baseline;gap:10px}
+.sub span{font:500 12px/1 var(--mono);color:var(--mist);letter-spacing:.06em;text-transform:uppercase}
+.tile.new{outline:2px solid var(--glow);outline-offset:2px}
+.live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--glow);margin-right:8px;animation:pulse 1.6s infinite;vertical-align:1px}

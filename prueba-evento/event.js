@@ -11,6 +11,15 @@ export const EVENTO = {
   // Texto de la marca de agua de las fotos y videos
   marcaDeAgua: 'PRUEBA DE EVENTO · MAPPING AR',
 
+  // Galería compartida (Supabase). Pega aquí los datos de tu proyecto:
+  // Supabase → Project Settings → API → "Project URL" y la clave "anon public".
+  // Mientras estén vacíos, las fotos solo se guardan en el teléfono de cada persona.
+  galeria: {
+    supabaseUrl: '',
+    supabaseAnonKey: '',
+    bucket: 'galeria',
+  },
+
   funciones: [
     {
       inicio: '2026-10-19T18:00',

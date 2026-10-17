@@ -47,17 +47,8 @@
     <p id="hint" class="hint">Toca para foto · cambia a 🎥 para grabar</p>
   </div>
 
-  <!-- Vista previa de captura -->
-  <section id="preview" class="sheet" hidden>
-    <div class="preview-card">
-      <div id="previewMedia"></div>
-      <div class="row">
-        <button id="btnShare" class="btn primary">Guardar / Compartir</button>
-        <button id="btnClose" class="btn">Otra más</button>
-      </div>
-      <p id="savedNote" class="saved" hidden>Guardada en <a href="../#galeria">tu galería</a> ✓</p>
-    </div>
-  </section>
+  <!-- Miniaturas de lo que se va capturando (no bloquean la cámara) -->
+  <div id="snaps" class="snaps" aria-live="polite"></div>
 
   <div id="flash"></div>
   <div id="loading" class="sheet" hidden><div class="spinner"></div><p>Cargando AR…</p></div>

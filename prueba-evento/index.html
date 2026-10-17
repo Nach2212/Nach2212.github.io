@@ -88,19 +88,22 @@
       <div class="wrap">
         <header class="block-head row">
           <div>
-            <h2>Tu galería</h2>
-            <p>Las fotos y videos se guardan solo en este teléfono.</p>
+            <h2>Galería del evento</h2>
+            <p id="nubeInfo">Lo que va capturando la gente durante las funciones.</p>
           </div>
-          <label class="btn small" for="subir">Agregar archivo</label>
+          <label class="btn small" for="subir">Subir foto o video</label>
           <input id="subir" type="file" accept="image/*,video/*" multiple hidden />
         </header>
-        <div class="grid" id="grid"></div>
-        <div class="empty" id="vacio">
-          <p><b>Todavía no hay capturas.</b></p>
-          <p>Abre la cámara AR durante una función y saca tu primera foto. También puedes subir una que ya tengas.</p>
+        <div class="grid" id="gridNube"></div>
+        <div class="empty" id="vacioNube">
+          <p><b id="vacioNubeTit">Todavía no hay fotos del evento.</b></p>
+          <p id="vacioNubeTxt">Abre la cámara AR durante una función y saca la primera.</p>
           <a class="btn small primary" href="ar/">Abrir cámara AR</a>
         </div>
-        <p class="note">Próximamente: galería compartida del evento, donde todos podrán ver lo que suben los demás.</p>
+
+        <h3 class="sub">Mis capturas <span>solo en este teléfono</span></h3>
+        <div class="grid" id="grid"></div>
+        <p class="note" id="vacio">Aquí aparecen las fotos y videos que sacas con tu teléfono.</p>
       </div>
     </section>
 

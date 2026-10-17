@@ -1,5 +1,6 @@
 import { EVENTO } from './event.js'
 import { listar, guardar, borrar } from './assets/galeria.js'
+import { conectada, subir, listarNube } from './assets/nube.js'
 
 const $ = (id) => document.getElementById(id)
 const pad = (n) => String(n).padStart(2, '0')
@@ -86,7 +87,42 @@ function tick() {
 tick()
 setInterval(tick, 1000)
 
-/* ───────── Galería ───────── */
+/* ───────── Galería del evento (compartida) ───────── */
+const gridNube = $('gridNube'), vacioNube = $('vacioNube')
+let vistos = new Set()
+
+if (conectada()) {
+  $('nubeInfo').innerHTML = '<span class="live-dot" aria-hidden="true"></span>Lo que va capturando la gente durante las funciones. Se actualiza solo.'
+} else {
+  $('nubeInfo').textContent = 'La galería compartida todavía no está conectada. Por ahora cada persona ve solo sus capturas.'
+  $('vacioNubeTit').textContent = 'Galería compartida sin conectar'
+  $('vacioNubeTxt').textContent = 'Cuando se configure, aquí aparecerán las fotos de todos los asistentes.'
+}
+
+async function pintarNube() {
+  if (!conectada()) { gridNube.hidden = true; vacioNube.hidden = false; return }
+  let items = []
+  try { items = await listarNube(60) } catch (e) { console.warn(e); return }
+  vacioNube.hidden = items.length > 0
+  gridNube.hidden = items.length === 0
+  const primera = vistos.size === 0
+  gridNube.innerHTML = ''
+  for (const it of items) {
+    const b = document.createElement('button')
+    b.className = 'tile' + (!primera && !vistos.has(it.url) ? ' new' : ''); b.type = 'button'
+    b.setAttribute('aria-label', `${it.tipo === 'video' ? 'Video' : 'Foto'} del evento`)
+    b.innerHTML = it.tipo === 'video'
+      ? `<video src="${it.url}#t=0.1" muted playsinline preload="metadata"></video><span class="tag">Video</span>`
+      : `<img src="${it.url}" alt="" loading="lazy">`
+    b.onclick = () => abrir({ tipo: it.tipo, url: it.url, remoto: true })
+    gridNube.appendChild(b)
+    vistos.add(it.url)
+  }
+}
+pintarNube()
+setInterval(() => { if (!document.hidden) pintarNube() }, 15000)
+
+/* ───────── Mis capturas (locales) ───────── */
 const grid = $('grid'), vacio = $('vacio')
 let urls = []
 let items = []
@@ -105,29 +141,34 @@ async function pintarGaleria() {
     b.innerHTML = it.tipo === 'video'
       ? `<video src="${u}#t=0.1" muted playsinline preload="metadata"></video><span class="tag">Video</span>`
       : `<img src="${u}" alt="" loading="lazy"><span class="tag">${it.origen === 'ar' ? 'AR' : 'Foto'}</span>`
-    b.onclick = () => abrir(it, u)
+    b.onclick = () => abrir({ ...it, url: u })
     grid.appendChild(b)
   }
 }
 
 $('subir').addEventListener('change', async (e) => {
   const files = [...e.target.files]
+  const label = document.querySelector('label[for="subir"]')
+  label.textContent = 'Subiendo…'
   for (const f of files) {
     const tipo = f.type.startsWith('video') ? 'video' : 'foto'
     try { await guardar(f, tipo, 'subida') } catch (err) { console.warn(err) }
+    if (conectada()) { try { await subir(f) } catch (err) { console.warn(err) } }
   }
+  label.textContent = 'Subir foto o video'
   e.target.value = ''
-  pintarGaleria()
+  pintarGaleria(); pintarNube()
 })
 
 /* Visor */
 const visor = $('visor')
 let actual = null
-function abrir(it, url) {
-  actual = { it, url }
+function abrir(it) {
+  actual = { it, url: it.url }
   $('visorMedia').innerHTML = it.tipo === 'video'
-    ? `<video src="${url}" controls playsinline autoplay loop></video>`
-    : `<img src="${url}" alt="Captura">`
+    ? `<video src="${it.url}" controls playsinline autoplay loop></video>`
+    : `<img src="${it.url}" alt="Captura">`
+  $('vDelete').hidden = Boolean(it.remoto)
   visor.showModal()
 }
 $('vClose').onclick = () => visor.close()
@@ -136,8 +177,10 @@ $('vDelete').onclick = async () => { if (!actual) return; await borrar(actual.it
 $('vShare').onclick = async () => {
   if (!actual) return
   const { it, url } = actual
-  const ext = it.tipo === 'video' ? (it.mime?.includes('mp4') ? 'mp4' : 'webm') : 'jpg'
-  const file = new File([it.blob], `prueba-evento-${it.fecha}.${ext}`, { type: it.mime || it.blob.type })
+  let blob = it.blob
+  if (!blob) { try { blob = await (await fetch(url)).blob() } catch { window.open(url, '_blank'); return } }
+  const ext = it.tipo === 'video' ? ((it.mime || blob.type).includes('mp4') ? 'mp4' : 'webm') : 'jpg'
+  const file = new File([blob], `prueba-evento-${Date.now()}.${ext}`, { type: it.mime || blob.type })
   try {
     if (navigator.canShare?.({ files: [file] })) { await navigator.share({ files: [file], title: EVENTO.nombre }); return }
   } catch (err) { if (err?.name === 'AbortError') return }
@@ -145,7 +188,7 @@ $('vShare').onclick = async () => {
 }
 
 pintarGaleria()
-window.addEventListener('pageshow', pintarGaleria) // al volver desde la cámara
+window.addEventListener('pageshow', () => { pintarGaleria(); pintarNube() }) // al volver desde la cámara
 
 /* ───────── Pestaña activa según scroll ───────── */
 const tabs = [...document.querySelectorAll('.tabbar a[data-sec]')]

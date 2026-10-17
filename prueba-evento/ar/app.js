@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { MindARThree } from 'mindar-image-three';
 import { buildWhale, buildJellies, buildCalib } from './scenes.js';
 import { guardar } from '../assets/galeria.js';
+import { subir, conectada } from '../assets/nube.js';
 import { EVENTO } from '../event.js';
 
 /* ───────── Config (se puede ajustar por URL: ?cf=0.0001&beta=0.001&miss=5&warm=5&wm=Texto) ───────── */
@@ -36,7 +37,7 @@ const container = $('ar');
 const ui = {
   intro: $('intro'), hud: $('hud'), status: $('status'), debug: $('debug'), loading: $('loading'),
   shutter: $('btnShutter'), mode: $('btnMode'), dbgBtn: $('btnDebug'), hint: $('hint'), rec: $('recTimer'),
-  preview: $('preview'), media: $('previewMedia'), share: $('btnShare'), close: $('btnClose'), flash: $('flash'), saved: $('savedNote'),
+  flash: $('flash'), snaps: $('snaps'),
 };
 
 let mindar, renderer, scene, camera;
@@ -132,7 +133,7 @@ function afterRender(dt) {
   if (pendingPhoto) {
     pendingPhoto = false;
     sizeCapture(); composite();
-    cap.toBlob((b) => showPreview(b, 'image'), 'image/jpeg', 0.92);
+    cap.toBlob((b) => capturaLista(b, 'image'), 'image/jpeg', 0.9);
   }
   if (recording) {
     composite();
@@ -160,7 +161,7 @@ function startRecording() {
   recorder.ondataavailable = (e) => e.data.size && recChunks.push(e.data);
   recorder.onstop = () => {
     const type = recorder.mimeType || mimeType || 'video/webm';
-    showPreview(new Blob(recChunks, { type }), 'video');
+    capturaLista(new Blob(recChunks, { type }), 'video');
     stream.getTracks().forEach((t) => t.stop());
   };
   recorder.start(250);
@@ -190,39 +191,35 @@ ui.mode.addEventListener('click', () => {
   ui.hint.textContent = mode === 'photo' ? 'Toca para foto · cambia a 🎥 para grabar' : `Toca para grabar (máx ${MAX_REC_S}s) · toca otra vez para parar`;
 });
 
-/* ───────── Vista previa + compartir ───────── */
-let currentFile = null, currentURL = null;
-
-function showPreview(blob, kind) {
+/* ───────── Captura sin interrumpir la experiencia ─────────
+   La foto o el video se guarda en el teléfono y se sube a la galería del evento.
+   No se abre ninguna ventana: solo aparece una miniatura en la esquina y la animación sigue. */
+function capturaLista(blob, kind) {
   if (!blob) return;
-  const ext = kind === 'image' ? 'jpg' : (blob.type.includes('mp4') ? 'mp4' : 'webm');
-  const stamp = new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-');
-  currentFile = new File([blob], `mapping-ar-${stamp}.${ext}`, { type: blob.type });
-  if (currentURL) URL.revokeObjectURL(currentURL);
-  currentURL = URL.createObjectURL(blob);
-  ui.media.innerHTML = kind === 'image'
-    ? `<img src="${currentURL}" alt="Foto con AR">`
-    : `<video src="${currentURL}" controls playsinline autoplay loop muted></video>`;
-  ui.preview.hidden = false;
-  // se guarda solo en la galería del teléfono (IndexedDB), visible en la página principal
-  guardar(blob, kind === 'image' ? 'foto' : 'video', 'ar')
-    .then(() => { ui.saved.hidden = false; })
-    .catch((e) => console.warn('No se pudo guardar en la galería', e));
+  const tipo = kind === 'image' ? 'foto' : 'video';
+  const url = URL.createObjectURL(blob);
+  const toast = document.createElement('a');
+  toast.className = 'snap';
+  toast.href = '../#galeria';
+  toast.setAttribute('aria-label', 'Ver en la galería');
+  toast.innerHTML = (kind === 'image' ? `<img src="${url}" alt="">` : `<video src="${url}" muted playsinline autoplay loop></video>`)
+    + `<span class="snap-txt">Guardando…</span>`;
+  ui.snaps.prepend(toast);
+  // máximo 3 miniaturas a la vista
+  [...ui.snaps.children].slice(3).forEach((n) => n.remove());
+  const txt = toast.querySelector('.snap-txt');
+
+  const local = guardar(blob, tipo, 'ar').catch((e) => { console.warn(e); return null; });
+  const nube = conectada() ? subir(blob).then(() => true).catch((e) => { console.warn(e); return false; }) : Promise.resolve(null);
+  if (conectada()) txt.textContent = 'Subiendo…';
+
+  Promise.all([local, nube]).then(([okLocal, okNube]) => {
+    if (okNube === true) { txt.textContent = 'En la galería ✓'; toast.classList.add('ok'); }
+    else if (okNube === false) { txt.textContent = 'Guardada en tu teléfono'; toast.classList.add('warn'); }
+    else { txt.textContent = okLocal !== null ? 'Guardada ✓' : 'No se pudo guardar'; toast.classList.add(okLocal !== null ? 'ok' : 'warn'); }
+    setTimeout(() => { toast.classList.add('out'); setTimeout(() => { toast.remove(); URL.revokeObjectURL(url); }, 400); }, 4000);
+  });
 }
-
-ui.share.addEventListener('click', async () => {
-  if (!currentFile) return;
-  try {
-    if (navigator.canShare?.({ files: [currentFile] })) {
-      await navigator.share({ files: [currentFile], title: 'Mapping AR' });
-      return;
-    }
-  } catch (e) { if (e.name === 'AbortError') return; }
-  const a = document.createElement('a');
-  a.href = currentURL; a.download = currentFile.name; document.body.appendChild(a); a.click(); a.remove();
-});
-
-ui.close.addEventListener('click', () => { ui.preview.hidden = true; ui.media.innerHTML = ''; ui.saved.hidden = true; });
 
 /* ───────── Panel de debug (FPS + temblor del tracking) ───────── */
 let dbgOn = q.has('debug'), frames = 0, acc = 0, fps = 0;
