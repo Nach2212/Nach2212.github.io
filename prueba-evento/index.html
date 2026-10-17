@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Prueba de Evento</title>
+  <meta name="description" content="Mapping AR desde tu celular: horarios de las funciones, cámara AR y galería de tus fotos y videos." />
+  <meta name="theme-color" content="#071826" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="assets/icon-192.png" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" />
+  <link rel="stylesheet" href="site.css" />
+</head>
+<body>
+  <!-- Sonar de fondo (decorativo) -->
+  <canvas id="sonar" aria-hidden="true"></canvas>
+
+  <main id="top">
+    <!-- ───────── INICIO ───────── -->
+    <section class="hero" id="inicio">
+      <div class="wrap">
+        <p class="eyebrow"><span id="bajada">Mapping AR · Proyecto de título</span></p>
+        <h1 id="nombre">Prueba de Evento</h1>
+        <p class="meta"><span id="fecha">—</span><span id="lugar">—</span></p>
+
+        <div class="countdown" aria-live="polite">
+          <p class="cd-label" id="cdLabel">Próxima función</p>
+          <p class="cd-title" id="cdTitle">—</p>
+          <div class="cd-digits" id="cdDigits">
+            <div><span id="cdH">00</span><small>horas</small></div>
+            <div><span id="cdM">00</span><small>min</small></div>
+            <div><span id="cdS">00</span><small>seg</small></div>
+          </div>
+        </div>
+
+        <div class="cta">
+          <a class="btn primary" href="ar/">Abrir cámara AR</a>
+          <a class="btn ghost" href="#funciones">Ver horarios</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────── FUNCIONES ───────── -->
+    <section class="block" id="funciones">
+      <div class="wrap">
+        <header class="block-head">
+          <h2>Funciones</h2>
+          <p>Cada función baja a una zona distinta del océano. La cámara funciona en todas.</p>
+        </header>
+        <ol class="dive" id="listaFunciones"></ol>
+      </div>
+    </section>
+
+    <!-- ───────── CÓMO FUNCIONA ───────── -->
+    <section class="block alt" id="como">
+      <div class="wrap">
+        <header class="block-head">
+          <h2>Cómo funciona</h2>
+          <p>No hay que instalar nada. Funciona en el navegador del celular.</p>
+        </header>
+        <ol class="steps">
+          <li>
+            <h3>Abre la cámara AR</h3>
+            <p>Toca <b>Abrir cámara AR</b> y acepta el permiso de cámara. Funciona mejor en Chrome (Android) y Safari (iPhone).</p>
+          </li>
+          <li>
+            <h3>Apunta a la proyección</h3>
+            <p>Encuadra la imagen proyectada completa, a 2 o 4 metros. Cuando la reconoce, arriba aparece el nombre de la escena.</p>
+          </li>
+          <li>
+            <h3>Captura el momento</h3>
+            <p>Toca el botón blanco para sacar una foto, o cambia a 🎥 para grabar hasta 30 segundos. El AR queda incluido.</p>
+          </li>
+          <li>
+            <h3>Guárdala o compártela</h3>
+            <p>Cada captura queda en tu <a href="#galeria">galería</a>. Desde ahí la guardas en el teléfono o la compartes.</p>
+          </li>
+        </ol>
+        <p class="tip">Si la escena tiembla o no aparece, acércate un poco y evita tapar la proyección con la mano o la cabeza de alguien.</p>
+      </div>
+    </section>
+
+    <!-- ───────── GALERÍA ───────── -->
+    <section class="block" id="galeria">
+      <div class="wrap">
+        <header class="block-head row">
+          <div>
+            <h2>Tu galería</h2>
+            <p>Las fotos y videos se guardan solo en este teléfono.</p>
+          </div>
+          <label class="btn small" for="subir">Agregar archivo</label>
+          <input id="subir" type="file" accept="image/*,video/*" multiple hidden />
+        </header>
+        <div class="grid" id="grid"></div>
+        <div class="empty" id="vacio">
+          <p><b>Todavía no hay capturas.</b></p>
+          <p>Abre la cámara AR durante una función y saca tu primera foto. También puedes subir una que ya tengas.</p>
+          <a class="btn small primary" href="ar/">Abrir cámara AR</a>
+        </div>
+        <p class="note">Próximamente: galería compartida del evento, donde todos podrán ver lo que suben los demás.</p>
+      </div>
+    </section>
+
+    <!-- ───────── REGISTRO (próximamente) ───────── -->
+    <section class="block alt" id="registro">
+      <div class="wrap narrow">
+        <header class="block-head">
+          <h2>Registro de asistencia</h2>
+          <p>Esto todavía no está activo. Así se verá cuando lo conectemos.</p>
+        </header>
+        <form class="form" id="formRegistro">
+          <fieldset disabled>
+            <label for="regNombre">Nombre</label>
+            <input id="regNombre" type="text" placeholder="Tu nombre" />
+            <label for="regCorreo">Correo</label>
+            <input id="regCorreo" type="email" placeholder="tu@correo.cl" />
+            <label for="regFuncion">Función</label>
+            <select id="regFuncion"></select>
+            <button class="btn primary" type="submit">Registrarme</button>
+          </fieldset>
+          <span class="badge">Próximamente</span>
+        </form>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <div class="wrap">
+        <p>Prototipo · Proyecto de título · <a href="proyector.html">Pantalla del proyector</a></p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Navegación tipo app -->
+  <nav class="tabbar" aria-label="Secciones">
+    <a href="#inicio" data-sec="inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7v9h-6v-6H9v6H3z"/></svg>Inicio</a>
+    <a href="#funciones" data-sec="funciones"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke-width="2"/><path d="M12 7v5.5l3.5 2" fill="none" stroke-width="2"/></svg>Horarios</a>
+    <a href="ar/" class="cam" aria-label="Abrir cámara AR"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.6" class="lens"/></svg></a>
+    <a href="#como" data-sec="como"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke-width="2"/><path d="M12 11v6M12 7.5v.5" fill="none" stroke-width="2.2" stroke-linecap="round"/></svg>Ayuda</a>
+    <a href="#galeria" data-sec="galeria"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2" fill="none" stroke-width="2"/><path d="m6 17 4.5-5 3 3 2-2 3 4z"/></svg>Galería</a>
+  </nav>
+
+  <!-- Visor de captura -->
+  <dialog id="visor">
+    <div class="visor-media" id="visorMedia"></div>
+    <div class="visor-actions">
+      <button class="btn primary" id="vShare" type="button">Guardar / Compartir</button>
+      <button class="btn ghost" id="vDelete" type="button">Borrar</button>
+      <button class="btn ghost" id="vClose" type="button">Cerrar</button>
+    </div>
+  </dialog>
+
+  <script type="module" src="site.js"></script>
+</body>
+</html>

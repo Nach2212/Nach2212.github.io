@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Proyector · marcadores</title>
+<style>
+  html,body{margin:0;height:100%;background:#000;overflow:hidden;font-family:system-ui,sans-serif;color:#fff;cursor:none}
+  #wrap{position:fixed;inset:0;display:grid;place-items:center}
+  img{max-width:100%;max-height:100%;object-fit:contain;transform:scale(var(--s,1));transition:transform .2s}
+  #help{position:fixed;left:16px;bottom:14px;font-size:13px;opacity:.55;cursor:default;line-height:1.5}
+  #help.hide{opacity:0}
+</style>
+</head>
+<body>
+<div id="wrap"><img id="m" alt="Marcador" /></div>
+<div id="help">← → cambiar marcador · F pantalla completa · + / − tamaño · B fondo blanco/negro · H ocultar ayuda</div>
+<script>
+  const files = ['fondos/01-abismo.png','fondos/02-arrecife.png','fondos/03-carta.png','marcadores-impresos/01-ballena.png','marcadores-impresos/02-medusas.png','marcadores-impresos/03-calibracion.png'];
+  let i = 0, s = 1, white = false;
+  const img = document.getElementById('m'), help = document.getElementById('help');
+  const show = () => { img.src = files[i]; document.documentElement.style.setProperty('--s', s); };
+  addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') i = (i + 1) % files.length;
+    if (e.key === 'ArrowLeft') i = (i - 1 + files.length) % files.length;
+    if (e.key === '+' || e.key === '=') s = Math.min(1, s + 0.04);
+    if (e.key === '-') s = Math.max(0.3, s - 0.04);
+    if (e.key.toLowerCase() === 'f') document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+    if (e.key.toLowerCase() === 'b') { white = !white; document.body.style.background = white ? '#fff' : '#000'; }
+    if (e.key.toLowerCase() === 'h') help.classList.toggle('hide');
+    show();
+  });
+  addEventListener('click', () => { i = (i + 1) % files.length; show(); });
+  show();
+</script>
+</body>
+</html>

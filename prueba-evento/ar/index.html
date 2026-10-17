@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#0B1F33" />
+  <title>Cámara AR · Prueba de Evento</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/",
+      "mindar-image-three": "https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="ar"></div>
+
+  <!-- Pantalla de inicio -->
+  <section id="intro" class="sheet">
+    <div class="intro-card">
+      <p class="eyebrow">prueba de mapping AR</p>
+      <h1>Apunta tu cámara<br>a la proyección</h1>
+      <p class="muted">Cuando aparezca la magia, saca una foto o graba un video. Todo queda guardado con el AR incluido.</p>
+      <button id="btnStart" class="btn primary">Abrir cámara</button>
+      <p class="tiny">Necesita permiso de cámara · funciona mejor en Chrome (Android) y Safari (iPhone)</p>
+      <a class="back" href="../">← Volver al evento</a>
+    </div>
+  </section>
+
+  <!-- HUD -->
+  <div id="hud" hidden>
+    <div id="status" class="pill">Buscando marcador…</div>
+    <div id="debug" class="debug" hidden></div>
+    <div id="recTimer" class="rec" hidden>● 00:00</div>
+
+    <div class="bar">
+      <a class="icon home" href="../" aria-label="Volver al evento">←</a>
+      <button id="btnShutter" class="shutter" aria-label="Capturar">
+        <span class="ring"></span><span class="dot"></span>
+      </button>
+      <button id="btnMode" class="icon" aria-label="Cambiar a video">🎥</button>
+    </div>
+    <p id="hint" class="hint">Toca para foto · cambia a 🎥 para grabar</p>
+  </div>
+
+  <!-- Vista previa de captura -->
+  <section id="preview" class="sheet" hidden>
+    <div class="preview-card">
+      <div id="previewMedia"></div>
+      <div class="row">
+        <button id="btnShare" class="btn primary">Guardar / Compartir</button>
+        <button id="btnClose" class="btn">Otra más</button>
+      </div>
+      <p id="savedNote" class="saved" hidden>Guardada en <a href="../#galeria">tu galería</a> ✓</p>
+    </div>
+  </section>
+
+  <div id="flash"></div>
+  <div id="loading" class="sheet" hidden><div class="spinner"></div><p>Cargando AR…</p></div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
