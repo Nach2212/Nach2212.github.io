@@ -778,6 +778,7 @@
                 setTimeout(() => bb.remove(), 1550);
             } else {
                 document.body.classList.remove('opacity-0');
-                triggerWelcomeAnimation();
+                // Espera a que termine la intro del logo (js/intro.js), si la hay
+                (window.__logoIntro || Promise.resolve()).then(triggerWelcomeAnimation);
             }
         });
