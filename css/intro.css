@@ -1,0 +1,90 @@
+/* Intro: armado del logo "Globo orbitado" (una vez por sesión) */
+#ia-intro {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: #030712;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity .7s ease, visibility .7s ease;
+}
+#ia-intro.ia-intro--out { opacity: 0; visibility: hidden; }
+#ia-intro .ia-lockup { display: flex; align-items: center; transition: transform .7s ease; }
+#ia-intro.ia-intro--out .ia-lockup { transform: scale(1.05); }
+
+#ia-intro .ia-mark { width: clamp(104px, 17vw, 176px); height: auto; overflow: visible; flex: none; }
+
+#ia-intro .ia-words {
+    display: flex;
+    flex-direction: column;
+    gap: .6em;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 0;
+    margin-left: 0;
+    opacity: 0;
+    animation: ia-words .9s cubic-bezier(.65, 0, .35, 1) 2.05s forwards;
+}
+#ia-intro .ia-name {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(20px, 4.4vw, 46px);
+    letter-spacing: .04em;
+    line-height: 1;
+    color: #f8fafc;
+}
+#ia-intro .ia-tag {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-weight: 500;
+    font-size: clamp(8px, 1.35vw, 14px);
+    letter-spacing: .3em;
+    color: #22d3ee;
+    opacity: 0;
+    animation: ia-track 1.1s ease 2.45s forwards;
+}
+#ia-intro .ia-skip {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: .25em;
+    color: #4b5563;
+    opacity: 0;
+    animation: ia-fade .6s ease 1s forwards;
+}
+
+/* Partes del isotipo */
+#ia-intro .ia-draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+#ia-intro .ia-globe    { animation: ia-draw .9s cubic-bezier(.65, 0, .35, 1) .35s forwards; }
+#ia-intro .ia-meridian { animation: ia-draw .7s cubic-bezier(.65, 0, .35, 1) .7s forwards; }
+#ia-intro .ia-front,
+#ia-intro .ia-gap      { animation: ia-draw .65s cubic-bezier(.55, 0, .45, 1) 1.1s forwards; }
+#ia-intro .ia-back     { animation: ia-draw .5s cubic-bezier(.35, 0, .45, 1) 1.75s forwards; }
+#ia-intro .ia-core {
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: scale(0);
+    animation: ia-pop .65s cubic-bezier(.34, 1.56, .64, 1) .1s forwards;
+}
+#ia-intro .ia-glow { opacity: 0; animation: ia-glow 2.2s ease .25s forwards; }
+#ia-intro .ia-sat {
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: scale(0);
+    animation: ia-pop .45s cubic-bezier(.34, 1.56, .64, 1) 1.7s forwards;
+}
+
+@keyframes ia-draw  { to { stroke-dashoffset: 0; } }
+@keyframes ia-pop   { to { transform: scale(1); } }
+@keyframes ia-fade  { to { opacity: 1; } }
+@keyframes ia-glow  { 0% { opacity: 0; } 35% { opacity: 1; } 100% { opacity: .75; } }
+@keyframes ia-words { to { max-width: 640px; opacity: 1; margin-left: clamp(14px, 3vw, 36px); } }
+@keyframes ia-track { from { letter-spacing: .02em; opacity: 0; } to { letter-spacing: .3em; opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+    #ia-intro { display: none; }
+}
